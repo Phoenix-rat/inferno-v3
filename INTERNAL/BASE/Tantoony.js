@@ -1,4 +1,4 @@
-const { Client } = require('discord.js');
+const { Client, Collection } = require('discord.js');
 const FileSync = require('lowdb/adapters/FileSync');
 const events = require('events');
 class Tantoony extends Client {
