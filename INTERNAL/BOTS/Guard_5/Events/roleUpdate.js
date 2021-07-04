@@ -45,7 +45,7 @@ class RoleUpdate {
             position: data.rawPosition,
             permissions: new Discord.Permissions(data.bitfield)
         });
-        client.extention.emit('Logger', 'KDE', entry.executor.id, "ROLE_UPDATE", `${oldRole} isimli rolü yeniledi`);
+        client.extention.emit('Logger', 'KDE', entry.executor.id, "ROLE_UPDATE", `${oldRole.name} isimli rolü yeniledi`);
 
     }
 }
