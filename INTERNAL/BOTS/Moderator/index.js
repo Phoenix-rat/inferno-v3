@@ -38,7 +38,7 @@ client.fetchApplication().then((app) => {
     const creator = new SlashCreator({
         applicationID: app.id,
         publicKey: process.env.publicKey,
-        token: process.env.token,
+        token: process.env.token_4,
         allowedMentions: {
             everyone: false,
             roles: false,
