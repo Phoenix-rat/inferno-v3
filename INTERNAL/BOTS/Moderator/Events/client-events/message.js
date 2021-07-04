@@ -1,6 +1,6 @@
 const low = require('lowdb');
 const Discord = require("discord.js");
-
+const afkdata = require('../../../../MODELS/Temprorary/AfkData');
 module.exports = class {
     constructor(client) {
         this.client = client;

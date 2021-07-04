@@ -14,7 +14,7 @@ client.on('ready', async () => {
     await client.user.setPresence({
         status: "idle",
         activity: {
-            name: "Saving the Pasific",
+            name: "Saving the Hell",
             type: "PLAYING"
         }
     });
