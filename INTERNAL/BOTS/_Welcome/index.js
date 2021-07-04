@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-require('dotenv').config({ path: __dirname + '../../../.env' });
+require('dotenv').config({ path: __dirname + '/../../../.env' });
 const tokens = [
     process.env.ses1,
     process.env.ses2,
@@ -8,32 +8,33 @@ const tokens = [
     process.env.ses5
 ];
 const chnls = [
-    "853669808137699359",
-    "853669810156470272",
-    "853669820889169920",
-    "853669823375867945",
-    "854975801930153984"
+    "857657860452122674",
+    "857657892474978374",
+    "857657917444718633",
+    "857657943875911740",
+    "857657999577055244"
 ];
 const myTokens = [
-    config.Assistant,
-    config.Chief,
-    config.Manager,
-    config.Moderator,
-    config.Organizer
+    process.env.token_1,
+    process.env.token_2,
+    process.env.token_3,
+    process.env.token_4,
+    process.env.token_5,
+    process.env.token_6
 ];
 for (let tokenim = 0; tokenim < myTokens.length; tokenim++) {
     const tokeni = myTokens[tokenim];
     const client = new Discord.Client();
     client.login(tokeni);
     client.on("ready", async () => {
-        await client.channels.cache.get("853669827289022495").join();
+        await client.channels.cache.get("860909021406036031").join();
         await client.user.setPresence({activity: {
             name: "Tantoony 🤍 INFEЯИO",
             type: "LISTENING"
         }});
     });
     client.on('voiceStateUpdate', async (prev, cur) => {
-        if (cur.member.id === client.user.id) concon = await client.channels.cache.get("853669827289022495").join();
+        if (cur.member.id === client.user.id) concon = await client.channels.cache.get("860909021406036031").join();
     });
 }
 const selamlı = [];
@@ -63,15 +64,15 @@ for (let index = 0; index < tokens.length; index++) {
         if (cur.member.user.bot) return;
         if (cur.channel && (cur.channel.id === chnls[index])) {
             if (cur.channelID === prev.channelID) return;
-            if (selamlı.includes(cur.member.id) && (cur.member.roles.highest.rawPosition <= cur.guild.roles.cache.get("853669661727129630").rawPosition)) {
+            if (selamlı.includes(cur.member.id) && (cur.member.roles.highest.rawPosition <= cur.guild.roles.cache.get("857386814791483412").rawPosition)) {
                 //console.log(selamlı);
                 ses = await concon.play('./ses_tekrardan.mp3', options);
                 return;
             }
-            if ((cur.member.roles.highest.rawPosition <= cur.guild.roles.cache.get("853669661727129630").rawPosition)) {
+            if ((cur.member.roles.highest.rawPosition <= cur.guild.roles.cache.get("857386814791483412").rawPosition)) {
                 ses = await concon.play('./ses_merhaba.mp3', options);
                 selamlı.push(cur.member.user.id);
-            } else if ((cur.member.roles.highest.rawPosition >= cur.guild.roles.cache.get('853669661727129630').rawPosition) && cur.channel.members.filter(m => m.roles.highest.rawPosition >= prev.guild.roles.cache.get('853669661727129630').rawPosition).size < 2) {
+            } else if ((cur.member.roles.highest.rawPosition >= cur.guild.roles.cache.get('857386814791483412').rawPosition) && cur.channel.members.filter(m => m.roles.highest.rawPosition >= prev.guild.roles.cache.get('857386814791483412').rawPosition).size < 2) {
                 ses = await concon.play('./ses_yetkili.mp3', options);
                 selamlı.push(cur.member.user.id);
             }
