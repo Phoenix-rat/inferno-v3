@@ -63,7 +63,7 @@ class Tantoony extends Client {
         try {
             if (!creator.commands.has('global:' + cmd.split('.')[0])) {
                 this.logger.log(`Loading Command: ${cmd}. 🔗`, "load");
-                await creator.registerCommand(require(`../Commands/slash-commands/${dirname}/${cmd}`));
+                await creator.registerCommand(require(`../BOTS/Moderator/Commands/slash-commands/${dirname}/${cmd}`));
                 await creator.syncCommands({
                     deleteCommands: true,
                     skipGuildErrors: false,
@@ -71,7 +71,7 @@ class Tantoony extends Client {
                     syncPermissions: true
                 });
             } else {
-                await creator.unregisterCommand(require(`../Commands/slash-commands/${dirname}/${cmd}`));
+                await creator.unregisterCommand(require(`../BOTS/Moderator/Commands/slash-commands/${dirname}/${cmd}`));
                 await creator.syncCommands({
                     deleteCommands: true,
                     skipGuildErrors: false,
@@ -79,7 +79,7 @@ class Tantoony extends Client {
                     syncPermissions: true
                 });
                 this.logger.log(`Loading Command: ${cmd}. ⌛`, "load");
-                await creator.registerCommand(require(`../Commands/slash-commands/${dirname}/${cmd}`));
+                await creator.registerCommand(require(`../BOTS/Moderator/Commands/slash-commands/${dirname}/${cmd}`));
                 await creator.syncCommands({
                     deleteCommands: true,
                     skipGuildErrors: false,
