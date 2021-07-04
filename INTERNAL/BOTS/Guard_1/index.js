@@ -23,7 +23,7 @@ const client = new Tantoony({
     },
     fetchAllMembers: true,
 });
-client.login(process.env.token_1);
+client.login(process.env.token_3);
 client.handler.mongoLogin();
 client.handler.events('/../../EVENTS', __dirname);
 client.on("error", (e) => client.logger.log(e, "error"));
