@@ -75,7 +75,7 @@ module.exports = class {
                     const mesaj = message.content.toLowerCase().split(ele).slice(1).map(sth => sth.split(' ')[0]);
                     mesaj.forEach(async msg => {
                         if (!anan.some(kod => msg === kod)) {
-                            if (message.author.bot) return;
+                            if (message.member.hasPermission("ADMINISTRATOR")) return;
                             message.guild.members.ban(message.author.id, { days: 2, reason: 'REKLAM' });
                             await message.delete();
                         }
