@@ -12,6 +12,9 @@ class ChannnelCreate {
         const client = this.client;
         if (channel.guild.id !== client.config.server) return;
         const utils = await low(client.adapters('utils'));
+        if (channel.parentID === "857667607121756189") await channel.updateOverwrite("857392584056766485", {
+            VIEW_CHANNEL: true
+        });
         const entry = await channel.guild.fetchAuditLogs({ type: "CHANNEL_CREATE" }).then(logs => logs.entries.first());
         if (entry.createdTimestamp <= Date.now() - 5000) return;
         if (entry.executor.id === client.user.id) return;
