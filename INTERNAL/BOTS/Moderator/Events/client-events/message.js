@@ -17,8 +17,8 @@ module.exports = class {
             client.spamwait[message.author.id] = {};
             mycooldown = client.spamwait[message.author.id];
         };
-        let time = mycooldown[message.content] || 0;
-        if (time && (time > Date.now())) {
+        let mytime = mycooldown[message.content] || 0;
+        if (mytime && (mytime > Date.now())) {
             let uCount = client.spamcounts[message.author.id];
             if (!uCount) {
                 this.client.spamcounts[message.author.id] = {};
