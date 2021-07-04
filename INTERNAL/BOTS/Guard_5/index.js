@@ -1,4 +1,4 @@
-require('dotenv').config({ path: __dirname + '../../../.env' });
+require('dotenv').config({ path: __dirname + '/../../../.env' });
 const { Intents } = require('discord.js');
 const Tantoony = require('./../../BASE/Tantoony');
 const client = new Tantoony({

@@ -2,7 +2,7 @@ const Tantoony = require('../../BASE/Tantoony');
 const client = new Tantoony({
     fetchAllMembers: true
 });
-require('dotenv').config(__dirname + '../../../.env')
+require('dotenv').config({ path: __dirname + '/../../../.env' });
 client.login(process.env.cd2);
 client.handler.mongoLogin();
 const Members = require("../../MODELS/Datalake/MemberRoles");

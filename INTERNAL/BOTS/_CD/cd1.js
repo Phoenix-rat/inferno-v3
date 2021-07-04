@@ -2,7 +2,7 @@ const Tantoony = require('../../BASE/Tantoony');
 const client = new Tantoony({
     fetchAllMembers: true
 });
-require('dotenv').config(__dirname + '../../../.env')
+require('dotenv').config({ path: __dirname + '/../../../.env' });
 client.login(process.env.cd1);
 client.handler.mongoLogin();
 const Members = require("../../MODELS/Datalake/MemberRoles");
@@ -14,7 +14,7 @@ client.on('ready', async () => {
     await client.user.setPresence({
         status: "idle",
         activity: {
-            name: "Saving the Pasific",
+            name: "Saving the Hell",
             type: "PLAYING"
         }
     });
