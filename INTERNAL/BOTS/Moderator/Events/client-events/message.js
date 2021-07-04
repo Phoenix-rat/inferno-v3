@@ -12,12 +12,12 @@ module.exports = class {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        let uCooldown = client.spamwait[message.author.id];
-        if (!uCooldown) {
+        let mycooldown = client.spamwait[message.author.id];
+        if (!mycooldown) {
             client.spamwait[message.author.id] = {};
-            uCooldown = client.spamwait[message.author.id];
+            mycooldown = client.spamwait[message.author.id];
         };
-        let time = uCooldown[message.content] || 0;
+        let time = mycooldown[message.content] || 0;
         if (time && (time > Date.now())) {
             let uCount = client.spamcounts[message.author.id];
             if (!uCount) {

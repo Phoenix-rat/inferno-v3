@@ -95,7 +95,7 @@ class Tantoony extends Client {
 
     loadCommand(commandPath, commandName) {
         try {
-            const props = new (require(`../${commandPath}${path.sep}${commandName}`))(this);
+            const props = new (require(`../${commandPath}/${commandName}`))(this);
             this.logger.log(`Loading Command: ${props.info.name}. 👌`, "load");
             props.config.location = commandPath;
             if (props.init) {
@@ -124,7 +124,7 @@ class Tantoony extends Client {
         if (command.shutdown) {
             await command.shutdown(this);
         }
-        delete require.cache[require.resolve(`../${commandPath}${path.sep}${commandName}.js`)];
+        delete require.cache[require.resolve(`../${commandPath}/${commandName}.js`)];
         return false;
     }
 }
