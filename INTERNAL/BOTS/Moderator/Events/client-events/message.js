@@ -27,8 +27,8 @@ module.exports = class {
             };
             let count = uCount[message.content] || 0;
             //console.log(uCount);
-            if ((count === 1) && message.member.hasPermission("ADMINISTRATOR")) message.channel.send(`Spamlamaya devam edersen muteleneceksin! ${message.author}`);
-            if ((count === 1) && message.member.hasPermission("ADMINISTRATOR")) {
+            if ((count === 1) && !message.member.hasPermission("ADMINISTRATOR")) message.channel.send(`Spamlamaya devam edersen muteleneceksin! ${message.author}`);
+            if ((count === 1) && !message.member.hasPermission("ADMINISTRATOR")) {
                 message.member.roles.add(roles.get("muted").value());
                 message.channel.send(`${message.member} Spam yaptığın için mutelendin!`)
             }
