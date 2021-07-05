@@ -20,7 +20,8 @@ const client = new Tantoony({
             "DIRECT_MESSAGE_REACTIONS",
             "DIRECT_MESSAGE_TYPING"
         ])
-    }
+    },
+    fetchAllMembers: true,
 });
 client.login(process.env.token_4);
 client.handler.mongoLogin();
