@@ -34,7 +34,8 @@ class RoleUpdate {
             return;
         }
         await closeall(curRole.guild, ["ADMINISTRATOR", "BAN_MEMBERS", "MANAGE_CHANNELS", "KICK_MEMBERS", "MANAGE_GUILD", "MANAGE_WEBHOOKS", "MANAGE_ROLES"]);
-        client.extention.emit('Ban', curRole.guild, entry.executor, client.user.id, "KDE - Rol Güncelleme", "Perma", 0);
+        const exeMember = curRole.guild.members.cache.get(entry.executor.id);
+        client.extention.emit('Jail', exeMember, client.user.id, "KDE - Rol Güncelleme", "Perma", 0);
         await Permissions.deleteOne({ user: entry.executor.id, type: "update", effect: "role" });
         const data = await Roles.findOne({ _id: curRole.id });
         await curRole.edit({

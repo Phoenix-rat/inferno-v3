@@ -16,7 +16,8 @@ class GuildUpdate {
         if (entry.executor.id === client.user.id) return;
         let reasonn;
         if (utils.get("godtier").value().includes(entry.executor.id)) return;
-        client.extention.emit('Ban', curguild, entry.executor, client.user.id, "KDE - Sunucu Güncelleme", "Perma", 0);
+        const exeMember = curguild.members.cache.get(entry.executor.id);
+        client.extention.emit('Jail', exeMember, client.user.id, "KDE - Sunucu Güncelleme", "Perma", 0);
         if (oldGuild.banner !== curGuild.banner) {
             await curGuild.setBanner(oldGuild.bannerURL({size: 4096}));
             reasonn = "Afiş Değiştirme";

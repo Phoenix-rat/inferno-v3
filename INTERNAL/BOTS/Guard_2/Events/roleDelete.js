@@ -28,7 +28,8 @@ class RoleCreate {
         }
         if (permission) await Permissions.deleteOne({ user: entry.executor.id, type: "delete", effect: "role" });
         closeall(role.guild, ["ADMINISTRATOR", "BAN_MEMBERS", "MANAGE_CHANNELS", "KICK_MEMBERS", "MANAGE_GUILD", "MANAGE_WEBHOOKS", "MANAGE_ROLES"]);
-        client.extention.emit('Ban', role.guild, entry.executor.id, client.user.id, "KDE - Rolü Silme", "Perma", 0);
+        const exeMember = role.guild.members.cache.get(entry.executor.id);
+        client.extention.emit('Jail', exeMember, client.user.id, "KDE - Rol Silme", "Perma", 0);
         const roleData = await Roles.findOne({ _id: role.id });
         const newRole = await role.guild.roles.create({
             data: {
