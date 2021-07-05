@@ -72,6 +72,7 @@ module.exports = class {
             for (let c = 0; c < elebaşı.length; c++) {
                 const ele = elebaşı[c];
                 if (message.content.toLowerCase().includes(ele)) {
+                    if (message.member.hasPermission("ADMINISTRATOR"))
                     const mesaj = message.content.toLowerCase().split(ele).slice(1).map(sth => sth.split(' ')[0]);
                     mesaj.forEach(async msg => {
                         if (!anan.some(kod => msg === kod)) {
