@@ -14,7 +14,7 @@ class ChannelUpdate {
         if (curChannel.guild.id !== client.config.server) return;
         const utils = await low(client.adapters('utils'));
         const entry = await curChannel.guild.fetchAuditLogs({ type: "CHANNEL_OVERWRITE_UPDATE" }).then(logs => logs.entries.first());
-        if (entry.createdTimestamp <= Date.now() - 1000) return;
+        if (entry.createdTimestamp <= Date.now() - 2000) return;
         if (entry.executor.id === client.user.id) return;
         if (entry.target.id !== curChannel.id) return;
         const permission = await Permissions.findOne({ user: entry.executor.id, type: "overwrite", effect: "channel" });
