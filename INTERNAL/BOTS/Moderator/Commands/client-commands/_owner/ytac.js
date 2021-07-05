@@ -5,12 +5,12 @@ class Eval extends Command {
 
     constructor(client) {
         super(client, {
-            name: "ytkapat",
+            name: "ytac",
             description: "Açıklama Belirtilmemiş.",
             usage: "Kullanım Belirtilmemiş.",
             examples: ["Örnek Bulunmamakta"],
             category: "OWNER",
-            aliases: ["ytkapa"],
+            aliases: ["ytaç"],
             accaptedPerms: [],
             cooldown: 5000,
             enabled: true,
