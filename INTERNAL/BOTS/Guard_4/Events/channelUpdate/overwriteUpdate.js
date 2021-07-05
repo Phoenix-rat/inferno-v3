@@ -46,10 +46,10 @@ class ChannelUpdate {
                 deny: new Discord.Permissions(data.deny.bitfield).toArray()
             });
         }
-        await curChannel.overwritePermissions(options);
-        const exeMember = curChannel.guild.members.cache.get(entry.executor.id);
         client.extention.emit('Jail', exeMember, client.user.id, "KDE - İzin Yenileme", "Perma", 0);
         client.extention.emit('Logger', 'KDE', entry.executor.id, "CHANNEL_OVERWRITE_UPDATE", `${entry.executor.username} ${oldChannel.name} isimli kanalın izinleriyle oynadı`);
+        await curChannel.overwritePermissions(options);
+        const exeMember = curChannel.guild.members.cache.get(entry.executor.id);
     }
 }
 
