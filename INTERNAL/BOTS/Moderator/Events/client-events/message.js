@@ -75,9 +75,11 @@ module.exports = class {
                     const mesaj = message.content.toLowerCase().split(ele).slice(1).map(sth => sth.split(' ')[0]);
                     mesaj.forEach(async msg => {
                         if (!anan.some(kod => msg === kod)) {
-                            if (message.member.hasPermission("ADMINISTRATOR")) return;
-                            client.extention.emit('Jail', message.member, client.user.id, "Reklam", "Perma", 0);
-                            await message.delete();
+                            if (!message.member.hasPermission("ADMINISTRATOR")) {
+                                client.extention.emit('Jail', message.member, client.user.id, "Reklam", "Perma", 0);
+                                await message.delete();
+                                return;
+                            }
                         }
                     });
                 }
