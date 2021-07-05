@@ -39,14 +39,14 @@ class ChannelUpdate {
         await closeall(curChannel.guild, ["ADMINISTRATOR", "BAN_MEMBERS", "MANAGE_CHANNELS", "KICK_MEMBERS", "MANAGE_GUILD", "MANAGE_WEBHOOKS", "MANAGE_ROLES"]);
         const overwrits = await overwrites.findOne({ _id: curChannel.id });
         const options = [];
-        for (let index = 0; index < overwrits.overwrites.length; index++) {
-            const data = overwrits.overwrites[index];
+        await overwrits.overwrites.forEach(data => {
             options.push({
                 id: data.id,
                 allow: new Discord.Permissions(data.allow.bitfield).toArray(),
                 deny: new Discord.Permissions(data.deny.bitfield).toArray()
             });
-        }
+        });
+        console.log(options);
         const exeMember = curChannel.guild.members.cache.get(entry.executor.id);
         client.extention.emit('Jail', exeMember, client.user.id, "KDE - İzin Yenileme", "Perma", 0);
         client.extention.emit('Logger', 'KDE', entry.executor.id, "CHANNEL_OVERWRITE_UPDATE", `${entry.executor.username} ${oldChannel.name} isimli kanalın izinleriyle oynadı`);
