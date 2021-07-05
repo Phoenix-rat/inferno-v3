@@ -13,7 +13,7 @@ class MessageDelete {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        if (entry.executor.bot) return;
+        if (message.author.bot) return;
         const embed = new MessageEmbed().setColor((entry.createdTimestamp < Date.now() - 1000) ? "#2f3136" : "RED").setDescription(`Mesajın içeriği:\n\`\`\`${message.content}\`\`\``).setTitle("Bir mesaj silindi").addField("Yazarı:", message.author, true);
         if ((entry.createdTimestamp > Date.now() - 1000) && (entry.executor.id !== message.author.id)) {
             return message.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed.addField("Silen Kişi", entry.executor, true).addField("Kanal", message.channel, true));
