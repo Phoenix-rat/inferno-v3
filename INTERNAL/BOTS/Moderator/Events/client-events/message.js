@@ -27,8 +27,8 @@ module.exports = class {
             };
             let count = uCount[message.content] || 0;
             //console.log(uCount);
-            if ((count === 1) && !message.member.hasPermission("ADMINISTRATOR")) message.channel.send(`Spamlamaya devam edersen muteleneceksin! ${message.author}`);
-            if ((count === 1) && !message.member.hasPermission("ADMINISTRATOR")) {
+            if (count === 1) message.channel.send(`Spamlamaya devam edersen muteleneceksin! ${message.author}`);
+            if (count === 3) {
                 message.member.roles.add(roles.get("muted").value());
                 message.channel.send(`${message.member} Spam yaptığın için mutelendin!`)
             }
@@ -72,12 +72,10 @@ module.exports = class {
             for (let c = 0; c < elebaşı.length; c++) {
                 const ele = elebaşı[c];
                 if (message.content.toLowerCase().includes(ele)) {
-                    if (message.member.hasPermission("ADMINISTRATOR"))
                     const mesaj = message.content.toLowerCase().split(ele).slice(1).map(sth => sth.split(' ')[0]);
                     mesaj.forEach(async msg => {
                         if (!anan.some(kod => msg === kod)) {
-                            if (message.member.hasPermission("ADMINISTRATOR")) return;
-                            client.extention.emit('Jail', message.member, client.user.id, "Reklam", "Perma", 0);
+                            message.guild.members.ban(message.author.id, { days: 2, reason: 'REKLAM' });
                             await message.delete();
                         }
                     });
