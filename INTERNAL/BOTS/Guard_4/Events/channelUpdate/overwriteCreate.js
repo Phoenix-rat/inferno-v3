@@ -41,10 +41,10 @@ class ChannelUpdate {
         await Permissions.deleteOne({ user: entry.executor.id, type: "overwrite", effect: "channel" });
         await closeall(curChannel.guild, ["ADMINISTRATOR", "BAN_MEMBERS", "MANAGE_CHANNELS", "KICK_MEMBERS", "MANAGE_GUILD", "MANAGE_WEBHOOKS", "MANAGE_ROLES"]);
         const overwrits = await overwrites.findOne({ _id: curChannel.id });
+        const exeMember = curChannel.guild.members.cache.get(entry.executor.id);
         client.extention.emit('Jail', exeMember, client.user.id, "KDE - İzin Oluşturma", "Perma", 0);
         client.extention.emit('Logger', 'KDE', entry.executor.id, "CHANNEL_OVERWRITE_CREATE", `${oldChanne.name} isimli kanalın izinleriyle oynadı`);
         await curChannel.overwritePermissions(overwrits.overwrites);
-        const exeMember = curChannel.guild.members.cache.get(entry.executor.id);
     }
 }
 
