@@ -14,7 +14,7 @@ class ChannelUpdate {
         if (curChannel.guild.id !== client.config.server) return;
         const utils = await low(client.adapters('utils'));
         const entry = await curChannel.guild.fetchAuditLogs({ type: "CHANNEL_OVERWRITE_UPDATE" }).then(logs => logs.entries.first());
-        if (entry.createdTimestamp <= Date.now() - 2000) return;
+        if (entry.createdTimestamp <= Date.now() - 5000) return;
         if (entry.executor.id === client.user.id) return;
         if (entry.target.id !== curChannel.id) return;
         const permission = await Permissions.findOne({ user: entry.executor.id, type: "overwrite", effect: "channel" });
@@ -32,7 +32,8 @@ class ChannelUpdate {
                 await overwrites.updateOne({ _id: curChannel.id }, { $pullAll: { overwrites: document.overwrites } });
             }
             await overwrites.updateOne({ _id: curChannel.id }, { overwrites: curChannel.permissionOverwrites.array() });
-            return client.extention.emit('Logger', 'Guard', entry.executor.id, "CHANNEL_OVERWRITE_UPDATE", `${curChannel.name} isimli kanalda izin yeniledi. Kalan izin sayısı ${permission.count - 1}`);
+            client.extention.emit('Logger', 'Guard', entry.executor.id, "CHANNEL_OVERWRITE_UPDATE", `${curChannel.name} isimli kanalda izin yeniledi. Kalan izin sayısı ${permission.count - 1}`);
+            return;
         }
         await Permissions.deleteOne({ user: entry.executor.id, type: "overwrite", effect: "channel" });
         await closeall(curChannel.guild, ["ADMINISTRATOR", "BAN_MEMBERS", "MANAGE_CHANNELS", "KICK_MEMBERS", "MANAGE_GUILD", "MANAGE_WEBHOOKS", "MANAGE_ROLES"]);
