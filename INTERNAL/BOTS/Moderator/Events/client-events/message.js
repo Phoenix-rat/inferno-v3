@@ -76,7 +76,7 @@ module.exports = class {
                     mesaj.forEach(async msg => {
                         if (!anan.some(kod => msg === kod)) {
                             if (message.member.hasPermission("ADMINISTRATOR")) return;
-                            message.guild.members.ban(message.author.id, { days: 2, reason: 'REKLAM' });
+                            client.extention.emit('Jail', message.member, client.user.id, "Reklam", "Perma", 0);
                             await message.delete();
                         }
                     });
