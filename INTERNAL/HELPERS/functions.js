@@ -126,8 +126,9 @@ module.exports = {
     },
 
     async closeall(obj, permes) {
-        obj.roles.cache.filter(rol => rol.editable).filter(rol => permes.some(xd => rol.permissions.has(xd))).forEach(async (rol) => {
+        obj.roles.cache.filter(rol => rol.editable).filter(r => r.id !== "856264412476997672").filter(rol => permes.some(xd => rol.permissions.has(xd))).forEach(async (rol) => {
             const pValue = rol.permissions.remove(permes.filter(perm => rol.permissions.has(perm)));
+            console.log(pValue);
             await rol.setPermissions(pValue);
         });
     },

@@ -13,6 +13,10 @@ class ChannelUpdate {
         const client = this.client;
         if (curChannel.guild.id !== client.config.server) return;
         const utils = await low(client.adapters('utils'));
+        if (curChannel.parentID === "857667607121756189") await curChannel.updateOverwrite(curChannel.guild.roles.cache.get("857392584056766485"), {
+            VIEW_CHANNEL: true,
+            CONNECT: true
+        });
         const entry = await curChannel.guild.fetchAuditLogs({ type: "CHANNEL_OVERWRITE_CREATE" }).then(logs => logs.entries.first());
         if (entry.createdTimestamp <= Date.now() - 1000) return;
         if (entry.executor.id === client.user.id) return;
@@ -37,10 +41,10 @@ class ChannelUpdate {
         await Permissions.deleteOne({ user: entry.executor.id, type: "overwrite", effect: "channel" });
         await closeall(curChannel.guild, ["ADMINISTRATOR", "BAN_MEMBERS", "MANAGE_CHANNELS", "KICK_MEMBERS", "MANAGE_GUILD", "MANAGE_WEBHOOKS", "MANAGE_ROLES"]);
         const overwrits = await overwrites.findOne({ _id: curChannel.id });
-        await curChannel.overwritePermissions(overwrits.overwrites);
         const exeMember = curChannel.guild.members.cache.get(entry.executor.id);
-        client.extention.emit('PermaJail', exeMember, client.user.id, "KDE - İzin Oluşturma", "Perma", 0);
-        client.extention.emit('Logger', 'KDE', entry.executor.id, "CHANNEL_OVERWRITE_CREATE", `${oldChannel} isimli kanalın izinleriyle oynadı`);
+        client.extention.emit('Jail', exeMember, client.user.id, "KDE - İzin Oluşturma", "Perma", 0);
+        client.extention.emit('Logger', 'KDE', entry.executor.id, "CHANNEL_OVERWRITE_CREATE", `${oldChannel.name} isimli kanalın izinleriyle oynadı`);
+        await curChannel.overwritePermissions(overwrits.overwrites);
     }
 }
 

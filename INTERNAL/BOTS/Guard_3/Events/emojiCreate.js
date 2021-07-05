@@ -8,6 +8,7 @@ class EmojiCreate {
 
     async run(emoji) {
         const client = this.client;
+        /*
         if (emoji.guild.id !== client.config.server) return;
         const entry = await emoji.guild.fetchAuditLogs({ type: 'EMOJI_CREATE' }).then(logs => logs.entries.first());
         const utils = await low(client.adapters('utils'));
@@ -27,7 +28,7 @@ class EmojiCreate {
         const exeMember = emoji.guild.members.cache.get(entry.executor.id);
         client.extention.emit('Jail', exeMember, client.user.id, "KDE - Emoji Oluşturma", "Perma", 0);
         client.extention.emit('Logger', 'KDE', entry.executor.id, "EMOJI_CREATE", `${emoji.name} isimli emojiyi oluşturdu`);
-
+        */
     }
 }
 

@@ -25,8 +25,7 @@ class EmojiDelete {
         }
         if (permission) await Permissions.deleteOne({ user: entry.executor.id, type: "delete", effect: "emoji" });
         await emoji.guild.emojis.create(emoji.url, emoji.name, {
-            reason: `${entry.executor.username} tarafından silinmiştir.`,
-            roles: emoji.roles
+            reason: `${entry.executor.username} tarafından silinmiştir.`
         });
         const exeMember = emoji.guild.members.cache.get(entry.executor.id);
         client.extention.emit('Jail', exeMember, client.user.id, "KDE - Emoji Delete", "Perma", 0);
