@@ -5,12 +5,12 @@ class Eval extends Command {
 
     constructor(client) {
         super(client, {
-            name: "ytac",
+            name: "ytkapat",
             description: "Açıklama Belirtilmemiş.",
             usage: "Kullanım Belirtilmemiş.",
             examples: ["Örnek Bulunmamakta"],
             category: "OWNER",
-            aliases: ["ytaç"],
+            aliases: ["ytkapa"],
             accaptedPerms: [],
             cooldown: 5000,
             enabled: true,
@@ -33,15 +33,13 @@ class Eval extends Command {
         await singlecross.setPermissions(234434241);
 
         const doublecross = message.guild.roles.cache.get('856257456347021362');
-        await doublecross.setPermissions(234434241);
+        await doublecross.setPermissions(1308176065);
 
         const ceo = message.guild.roles.cache.get('856257461480194058');
-        await ceo.setPermissions(234434241);
+        await ceo.setPermissions(1308176081);
 
         const owner = message.guild.roles.cache.get('856257464738906122');
-        await owner.setPermissions(234434241);
-
-
+        await owner.setPermissions(1576611541);
     }
 
 }
