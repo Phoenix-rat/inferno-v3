@@ -126,10 +126,7 @@ module.exports = class {
         client.logger.log(`[(${message.author.id})] ${message.author.username} ran command [${cmd.info.name}]`, "cmd");
 
         try {
-            const response = await cmd.run(client, message, args);
-            if (!response) {
-
-            }
+            await cmd.run(client, message, args);
         } catch (e) {
             console.log(e);
             return message.channel.send(`${emojis.get("error").value()} | Sanırım bir hata oluştu...`);
