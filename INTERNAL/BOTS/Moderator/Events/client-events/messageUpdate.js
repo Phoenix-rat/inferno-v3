@@ -14,7 +14,6 @@ class MessageDelete {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        if (message.author.bot) return;
         const embed = new MessageEmbed().setColor("#2f3136").setDescription(`Eski Mesaj:\n\`\`\`${oldmsg.content}\`\`\`\nYeni Mesaj:\n\`\`\`${curmsg.content}\`\`\`\n[Mesaja erişmek için tıkla](${curmsg.url})`).setTitle("Bir mesaj yeniledi").addField("Yazarı:", curmsg.author, true);
         await curmsg.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed.addField("Kanal", curmsg.channel, true));
         const elebaşı = ["discord.gg/", "discord.com/invite/", "discordapp.com/invite/", "discord.me/"];
