@@ -104,7 +104,7 @@ module.exports = class {
             const requiredRoles = cmd.info.accaptedPerms || [];
             let allowedRoles = [];
             await requiredRoles.forEach(rolValue => {
-                allowedRoles.push(message.guild.roles.cache.get(roles.get(rolValue).value()))
+                allowedRoles.push(message.guild.roles.cache.get(roles.get(rolValue).value()));
             });
             let deyim = `Bu komutu kullanabilmek için ${allowedRoles[0]} rolüne sahip olmalısın!`;
             if (allowedRoles.length > 1) deyim = `Bu komutu kollanabilmek için aşağıdaki rollerden birisine sahip olmalısın:\n${allowedRoles.join(`\n`)}`;
