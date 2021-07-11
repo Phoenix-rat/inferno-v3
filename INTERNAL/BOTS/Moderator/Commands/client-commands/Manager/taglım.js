@@ -30,49 +30,21 @@ class CountByRole extends Command {
         if (mentioned.user.id === message.member.user.id) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("pando1").value()} Kendi kendini etiketleme..`).setColor('#2f3136'));
         const TagData = await Tagli.findOne({ _id: mentioned.user.id, claimed: "false" });
         if (!TagData || checkSecs(TagData.created) > 300) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} En erken 5 dakika öncesine kadar tag almış biri için bu komutu kuanabilirsin!`));
-
-
-        const embed = new Discord.MessageEmbed().setDescription(stripIndent`
-        Merhaba ${mentioned}!
-        ${message.member} sana tag aldırdığını iddia ediyor, bu doğru mu?
-        `);
-        try {
-            var embedMsg = await message.channel.send(embed);
-            await embedMsg.react("✔️");
-            await embedMsg.react("❌");
-        } catch (error) {
-            console.error(error);
-        }
-        const filter = (reaction, user) => user.id !== message.client.user.id;
-        const collector = embedMsg.createReactionCollector(filter, {
-            time: 120000
+        await message.react(emojis.get("loading").value().split(':')[2].replace('>', ''));
+        const filter = (msg) => msg.author.id !== client.user.id;
+        const collector = new Discord.MessageCollector(embedMsg.channel, filter, {
+            time: 300000
         });
-        collector.on("collect", async (reaction, user) => {
-            if (user.id !== mentioned.user.id) return reaction.users.remove(user);
-            switch (reaction.emoji.name) {
-                case "✔️":
-                    await Tagli.updateOne({ _id: mentioned.user.id }, { $set: { claimed: message.author.id } });
-                    collector.stop("accepted");
-                    await embedMsg.edit(cagirembed.setDescription(`Ailemizi büyülttüğün için teşekkürler ${message.member}!`));
-                    break;
-                case "❌":
-                    await embedMsg.edit(cagirembed.setDescription(`İddia reddedildi ${message.member}.`));
-                    collector.stop("denied");
-                    break;
-                default:
-                    break;
+        collector.on("collect", async (msg) => {
+            if (msg.content === 'onay') return collector.stop("finished");
+        });
+        collector.on("end", async (collected, reason) => {
+            if (reason === "finished") {
+                await Tagli.updateOne({ _id: mentioned.user.id }, { $set: { claimed: message.author.id } });
+                return;
             }
+
         });
-        collector.on("end", async () => {
-            await embedMsg.reactions.removeAll();
-            await embedMsg.edit(cagirembed.setDescription(`${message.member} kullanıcısı başarıyla ${mentioned} kullanıcısının olduğu **${kanal.name}** isimli kanala taşınmıştır.`).setThumbnail(message.guild.iconURL()));
-        });
-
-
-        await Tagli.updateOne({ _id: mentioned.user.id }, { claimed: true });
-
-
-
 
 
     }
