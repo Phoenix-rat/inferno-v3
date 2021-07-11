@@ -4,7 +4,7 @@ const afkdata = require('../../../../MODELS/Temprorary/AfkData');
 const Points_config = require('../../../../MODELS/Economy/Points_config');
 const Points_profile = require('../../../../MODELS/Economy/Points_profile');
 const tagged = require('../../../../MODELS/Temprorary/tagged');
-const { comparedate } = require('../../../../HELPERS/functions');
+const { comparedate, checkMins } = require('../../../../HELPERS/functions');
 const Tagli = require('../../../../MODELS/Datalake/Tagli');
 module.exports = class {
     constructor(client) {
@@ -98,11 +98,13 @@ module.exports = class {
             const tagData = await tagged.find({ target: message.author.id });
             if (tagData.length !== 0) {
                 const myTagData = tagData.sort((a, b) => comparedate(b.created) - comparedate(a.created))[0];
-                await Tagli.updateOne({ _id: message.author.id }, { $set: { claimed: myTagData.executor } });
-                const msgTagged = await message.guild.channels.cache.get(myTagData.channelID).messages.fetch(myTagData._id);
-                await msgTagged.reactions.removeAll();
-                await message.react(emojis.get("loading").value().split(':')[2].replace('>', ''));
-                await msgTagged.react(emojis.get("loading").value().split(':')[2].replace('>', ''));
+                if (checkMins(myTagData.created) < 3) {
+                    await Tagli.updateOne({ _id: message.author.id }, { $set: { claimed: myTagData.executor } });
+                    const msgTagged = await message.guild.channels.cache.get(myTagData.channelID).messages.fetch(myTagData._id);
+                    await msgTagged.reactions.removeAll();
+                    await message.react(emojis.get("loading").value().split(':')[2].replace('>', ''));
+                    await msgTagged.react(emojis.get("loading").value().split(':')[2].replace('>', ''));
+                }
             }
         }
         /*
