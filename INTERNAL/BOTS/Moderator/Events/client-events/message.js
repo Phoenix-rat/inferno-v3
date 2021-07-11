@@ -85,10 +85,12 @@ module.exports = class {
             }
         }
         const pointData = await Points_profile.findOne({ _id: message.author.id });
-        const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
-        if (pointData) await Points_profile.updateOne({ _id: message.author.id }, {
-            $inc: { msgPoints: pointConfig.message }
-        });
+        if (pointData) {
+            const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
+            if (pointData) await Points_profile.updateOne({ _id: message.author.id }, {
+                $inc: { msgPoints: pointConfig.message }
+            });
+        }
         /*
         if (!message.content.startsWith(client.config.prefix)) return;
         if (message.author.bot) return;
