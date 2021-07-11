@@ -73,7 +73,7 @@ module.exports = class JailCommand extends SlashCommand {
       embeds: [embedd]
     });
     await mentioned.roles.add(Data.roles.map(rname => guild.roles.cache.find(role => role.name === rname)));
-    await mentioned.roles.remove([roles.get("prisoner").value(), roles.get("denied").value()]);
+    await mentioned.roles.remove(roles.get("prisoner").value());
     await Jails.deleteOne({ _id: mentioned.user.id });
     const responseEmbed = new Discord.MessageEmbed().setDescription(`kullanıcısı başarıyla jailden kurtarıldı!`);
     await ctx.send({
