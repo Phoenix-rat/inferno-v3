@@ -3,6 +3,9 @@ const Discord = require("discord.js");
 const afkdata = require('../../../../MODELS/Temprorary/AfkData');
 const Points_config = require('../../../../MODELS/Economy/Points_config');
 const Points_profile = require('../../../../MODELS/Economy/Points_profile');
+const tagged = require('../../../../MODELS/Temprorary/tagged');
+const { comparedate } = require('../../../../HELPERS/functions');
+const Tagli = require('../../../../MODELS/Datalake/Tagli');
 module.exports = class {
     constructor(client) {
         this.client = client;
@@ -90,6 +93,17 @@ module.exports = class {
             if (pointData) await Points_profile.updateOne({ _id: message.author.id }, {
                 $inc: { msgPoints: pointConfig.message }
             });
+        }
+        if (message.content === 'onay') {
+            const tagData = await tagged.find({ target: message.author.id });
+            if (tagData.length !== 0) {
+                const myTagData = tagData.sort((a, b) => comparedate(b.created) - comparedate(a.created))[0];
+                await Tagli.updateOne({ _id: message.author.id }, { $set: { claimed: myTagData.executor } });
+                const msgTagged = await message.guild.channels.cache.get(myTagData.channelID).messages.fetch(myTagData._id);
+                await msgTagged.reactions.removeAll();
+                await message.react(emojis.get("loading").value().split(':')[2].replace('>', ''));
+                await msgTagged.react(emojis.get("loading").value().split(':')[2].replace('>', ''));
+            }
         }
         /*
         if (!message.content.startsWith(client.config.prefix)) return;

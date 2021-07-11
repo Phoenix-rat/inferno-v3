@@ -1,9 +1,9 @@
 const Command = require("../../../Base/Command");
 const Discord = require("discord.js");
 const low = require('lowdb');
-const Tagli = require("../../../../../MODELS/Datalake/Tagli");
 const { checkSecs } = require("../../../../../HELPERS/functions");
 const { stripIndent } = require("common-tags");
+const tagged = require("../../../../../MODELS/Temprorary/tagged");
 
 class CountByRole extends Command {
 
@@ -31,19 +31,12 @@ class CountByRole extends Command {
         const TagData = await Tagli.findOne({ _id: mentioned.user.id, claimed: "false" });
         if (!TagData || checkSecs(TagData.created) > 300) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} En erken 5 dakika öncesine kadar tag almış biri için bu komutu kuanabilirsin!`));
         await message.react(emojis.get("loading").value().split(':')[2].replace('>', ''));
-        const filter = (msg) => msg.author.id !== client.user.id;
-        const collector = new Discord.MessageCollector(embedMsg.channel, filter, {
-            time: 300000
-        });
-        collector.on("collect", async (msg) => {
-            if (msg.content === 'onay') return collector.stop("finished");
-        });
-        collector.on("end", async (collected, reason) => {
-            if (reason === "finished") {
-                await Tagli.updateOne({ _id: mentioned.user.id }, { $set: { claimed: message.author.id } });
-                return;
-            }
-
+        await tagged.create({
+            _id: message.id,
+            executor: message.author.id,
+            target: mentioned.user.id,
+            channelID: message.channel.id,
+            creadet: new Date()
         });
 
 
