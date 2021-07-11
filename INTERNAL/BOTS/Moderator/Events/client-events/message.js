@@ -1,6 +1,8 @@
 const low = require('lowdb');
 const Discord = require("discord.js");
 const afkdata = require('../../../../MODELS/Temprorary/AfkData');
+const Points_config = require('../../../../MODELS/Economy/Points_config');
+const Points_profile = require('../../../../MODELS/Economy/Points_profile');
 module.exports = class {
     constructor(client) {
         this.client = client;
@@ -82,6 +84,12 @@ module.exports = class {
                 }
             }
         }
+        const pointData = await Points_profile.findOne({ _id: ctx.user.id });
+        const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
+        if (pointData) await Points_profile.updateOne({ _id: message.author.id }, {
+            $inc: { msgPoints: pointConfig.message }
+        });
+        /*
         if (!message.content.startsWith(client.config.prefix)) return;
         if (message.author.bot) return;
         let command = message.content.split(' ')[0].slice(client.config.prefix.length);
@@ -128,6 +136,6 @@ module.exports = class {
             console.log(e);
             return message.channel.send(`${emojis.get("error").value()} | Sanırım bir hata oluştu...`);
         }
-
+        */
     }
 }

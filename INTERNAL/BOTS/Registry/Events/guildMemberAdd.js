@@ -7,6 +7,8 @@ const { checkDays, rain, comparedate } = require('../../../HELPERS/functions');
 const { stripIndents } = require('common-tags');
 const Task_current = require('../../../MODELS/Economy/Task_current');
 const Task_done = require('../../../MODELS/Economy/Task_done');
+const Points_config = require('../../../MODELS/Economy/Points_config');
+const Points_profile = require('../../../MODELS/Economy/Points_profile');
 class GuildMemberAdd {
 
     constructor(client) {
@@ -79,7 +81,17 @@ class GuildMemberAdd {
                     }
                 }
 
-                
+                const pointData = await Points_profile.findOne({ _id: davetçi.id });
+                const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
+                if (pointData && !pointData.points.filter(point => point.type === "invite").find(point => point.invited === member.user.id)) await Points_profile.updateOne({ _id: daveçi.id }, {
+                    $push: {
+                        points: {
+                            type: "invite",
+                            points: pointConfig.invite,
+                            invited: member.user.id
+                        }
+                    }
+                });
 
 
             }

@@ -8,8 +8,8 @@ module.exports = mongoose.model('Points_config', new mongoose.Schema({
     tagged: Number,
     authorized: Number,
     message: Number,
-    voicePublic: Number,
-    voiceOther: Number,
+    voicePublicPerMinute: Number,
+    voiceOtherPerMinute: Number,
     bonus: Number,
     charge: Number
 }, { _id: false }));

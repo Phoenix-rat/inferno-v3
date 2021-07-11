@@ -6,6 +6,8 @@ const { sayi, comparedate } = require('../../../../../HELPERS/functions');
 const IDS = require('../../../../../BASE/personels.json');
 const Task_current = require('../../../../../MODELS/Economy/Task_current');
 const Task_done = require('../../../../../MODELS/Economy/Task_done');
+const Points_profile = require('../../../../../MODELS/Economy/Points_profile');
+const Points_config = require('../../../../../MODELS/Economy/Points_config');
 
 module.exports = class RegistryCommand extends SlashCommand {
     constructor(creator) {
@@ -154,5 +156,16 @@ module.exports = class RegistryCommand extends SlashCommand {
                 }
             }
         }
+        const pointData = await Points_profile.findOne({ _id: ctx.user.id });
+        const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
+        if (pointData && !pointData.points.filter(point => point.type === "registry").find(point => point.registered === mentioned.user.id)) await Points_profile.updateOne({ _id: ctx.user.id }, {
+            $push: {
+                points: {
+                    type: "registry",
+                    points: pointConfig.registry,
+                    registered: mentioned.user.id
+                }
+            }
+        });
     }
 }
