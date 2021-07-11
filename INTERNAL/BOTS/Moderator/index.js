@@ -23,7 +23,7 @@ const client = new Tantoony({
     },
     fetchAllMembers: true
 });
-client.login(process.env.token_moderator);
+client.login(process.env.token_6);
 client.handler.mongoLogin();
 client.handler.events('/../../EVENTS', __dirname);
 client.on("error", (e) => client.logger.log(e, "error"));
@@ -40,7 +40,7 @@ client.fetchApplication().then((app) => {
     const creator = new SlashCreator({
         applicationID: app.id,
         publicKey: process.env.publicKey,
-        token: process.env.token_moderator,
+        token: process.env.token_6,
         allowedMentions: {
             everyone: false,
             roles: false,

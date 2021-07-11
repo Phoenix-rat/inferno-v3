@@ -2,8 +2,10 @@ const { SlashCommand, CommandOptionType, ApplicationCommandPermissionType } = re
 const low = require('lowdb');
 const Discord = require('discord.js');
 const nameData = require('../../../../../MODELS/Datalake/Registered');
-const { sayi } = require('../../../../../HELPERS/functions');
+const { sayi, comparedate } = require('../../../../../HELPERS/functions');
 const IDS = require('../../../../../BASE/personels.json');
+const Task_current = require('../../../../../MODELS/Economy/Task_current');
+const Task_done = require('../../../../../MODELS/Economy/Task_done');
 
 module.exports = class RegistryCommand extends SlashCommand {
     constructor(creator) {
@@ -141,5 +143,16 @@ module.exports = class RegistryCommand extends SlashCommand {
         await ctx.send({
             embeds: [myEmbed]
         });
+        const TaskData = await Task_current.findOne({ _id: ctx.user.id });
+        if (TaskData) {
+            const regTask = TaskData.tasks.find(task => task.type === "registry");
+            if (regTask) {
+                const currentRegs = registryDatas.filter(data => comparedate(data.created) <= comparedate(regTask.created));
+                if (currentRegs.length >= regTask.count) {
+                    await Task_current.updateOne({ _id: ctx.user.id }, { $pull: { task: regTask } });
+                    await Task_done.updateOne({ _id: ctx.user.id }, { $push: { task: regTask } });
+                }
+            }
+        }
     }
 }

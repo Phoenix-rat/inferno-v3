@@ -3,8 +3,10 @@ const cmutes = require('../../../MODELS/Moderation/ChatMuted');
 const Jails = require('../../../MODELS/Moderation/Jails');
 const regData = require('../../../MODELS/Datalake/Registered');
 const low = require("lowdb");
-const { checkDays, rain } = require('../../../HELPERS/functions');
+const { checkDays, rain, comparedate } = require('../../../HELPERS/functions');
 const { stripIndents } = require('common-tags');
+const Task_current = require('../../../MODELS/Economy/Task_current');
+const Task_done = require('../../../MODELS/Economy/Task_done');
 class GuildMemberAdd {
 
     constructor(client) {
@@ -64,6 +66,19 @@ class GuildMemberAdd {
                 const dosyam = await systeminv.get('records');
                 if (!dosyam.some(entry => entry.user === member.user.id)) await model.updateOne({ _id: davetci.id }, { $push: { records: obj } });
                 count = dosyam.length + 1 || 1;
+                const currentTasks = await Task_current.findOne({ _id: davetçi.id });
+                if (currentTasks) {
+                    const invTask = currentTasks.tasks.find(task => task.type === "invite");
+                    const inviteData = await model.findOne({ _id: davetçi.id });
+                    if (invTask) {
+                        const comparedInvites = inviteData.invites.filter(invlog => comparedate(invlog.created) <= comparedate(invTask.created));
+                        if (comparedInvites >= invTask.count) {
+                            await Task_current.updateOne({ _id: davetçi.id }, { $pull: { tasks: invTask } });
+                            await Task_done.updateOne({ _id: davetçi.id }, { $push: { tasks: invTask } });
+                        }
+                    }
+                }
+
             }
         });
         /*
