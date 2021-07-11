@@ -66,6 +66,21 @@ class Initialize {
             });
         });
     };
+    
+    async buttons(path) {
+        let directories = await readdir(path);
+        this.client.logger.log(`Loading a total of ${directories.length} categories.`, "category");
+        await directories.forEach((dir) => {
+            readdir(path + dir + "/").then((buttons) => {
+                buttons.filter((btn) => btn.split(".").pop() === "js").forEach((btn) => {
+                    const response = this.client.loadButton(path + dir, btn);
+                    if (response) {
+                        this.client.logger.log(response, "error");
+                    }
+                });
+            });
+        });
+    };
 
     async slashCommands(path, creator) {
         let directories = await readdir(path);
@@ -86,6 +101,7 @@ class Initialize {
             syncGuilds: true,
             syncPermissions: true
         });
+        await creator.syncCommandPermissions();
     };
 
     async mongoLogin() {
