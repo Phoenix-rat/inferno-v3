@@ -70,7 +70,7 @@ class VoiceStateUpdate {
                         duration: comparedate(entry.created),
                         enter: entry.created,
                         exit: new Date(),
-                        channelID: entry.ChannelID,
+                        channelID: entry.channelID,
                         selfMute: entry.selfMute,
                         serverMute: entry.serverMute,
                         selfDeaf: entry.selfDeaf,

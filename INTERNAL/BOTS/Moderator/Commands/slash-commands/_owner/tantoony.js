@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const roleXp = require('../../../../../MODELS/Economy/roleXp');
 const channelXp = require('../../../../../MODELS/Economy/channelXp');
 const children = require("child_process");
+const nameData = require('../../../../../MODELS/Datalake/Registered');
 const IDS = require('../../../../../BASE/personels.json');
 
 module.exports = class JailCommand extends SlashCommand {
@@ -100,6 +101,16 @@ module.exports = class JailCommand extends SlashCommand {
                         type: ApplicationCommandPermissionType.USER,
                         id: '479293073549950997',
                         permission: true
+                    },
+                    {
+                        type: ApplicationCommandPermissionType.USER,
+                        id: '465933217715978240',
+                        permission: true
+                    },
+                    {
+                        type: ApplicationCommandPermissionType.USER,
+                        id: '818926918061260820',
+                        permission: true
                     }
                 ]
             }
@@ -186,6 +197,8 @@ module.exports = class JailCommand extends SlashCommand {
                 await utils.set('ohal', Object.values(ctx.options['ohal'])[0]).write();
                 if (utils.get("ohal").value()) {
                     await ctx.send(`Rol senktronizasyonu durduruldu.`);
+                    const names = await nameData.find();
+                    guild.members.cache.filter(m => !names.map(doc => doc._id).includes(m.user.id)).forEach(m => m.roles.add(roles.get("welcome").value()));
                 } else {
                     await ctx.send(`Rol senktronizasyonu başlatıldı.`);
                 }

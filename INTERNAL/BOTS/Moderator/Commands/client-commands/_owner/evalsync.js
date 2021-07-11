@@ -18,9 +18,9 @@ class EvalSync extends Command {
             cooldown: 5000,
             enabled: true,
             adminOnly: false,
-            ownerOnly: false,
+            ownerOnly: true,
             onTest: false,
-            rootOnly: true,
+            rootOnly: false,
             dmCmd: false
         });
     }

@@ -8,7 +8,7 @@ const client = new Tantoony({
             //"GUILD_MEMBERS",
             "GUILD_BANS",
             "GUILD_EMOJIS",
-            "GUILD_INTEGRATIONS",
+            //"GUILD_INTEGRATIONS",
             "GUILD_WEBHOOKS",
             "GUILD_INVITES",
             //"GUILD_VOICE_STATES",
@@ -21,9 +21,9 @@ const client = new Tantoony({
             "DIRECT_MESSAGE_TYPING"
         ])
     },
-    fetchAllMembers: true,
+    fetchAllMembers: true
 });
-client.login(process.env.token_6);
+client.login(process.env.token_moderator);
 client.handler.mongoLogin();
 client.handler.events('/../../EVENTS', __dirname);
 client.on("error", (e) => client.logger.log(e, "error"));
@@ -33,12 +33,14 @@ process.on("warning", (warn) => client.logger.log(warn, "varn"));
 process.on("beforeExit", () => console.log('Bitiriliyor...'));
 client.handler.events('/Events', __dirname, 'client-events');
 client.handler.dotCommands('./Commands/client-commands/');
-const { SlashCreator, GatewayServer } = require("slash-create");
+client.handler.buttons('./Commands/components/');
+const { SlashCreator } = require("slash-create");
+const { GatewayServer } = require("slash-create");
 client.fetchApplication().then((app) => {
     const creator = new SlashCreator({
         applicationID: app.id,
         publicKey: process.env.publicKey,
-        token: process.env.token_6,
+        token: process.env.token_moderator,
         allowedMentions: {
             everyone: false,
             roles: false,

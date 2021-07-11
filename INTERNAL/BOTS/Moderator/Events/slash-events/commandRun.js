@@ -6,7 +6,7 @@ module.exports = class {
 
     async run(command, promise, ctx) {
 
-        this.client.logger.log(`Unregistered Command: ${command.commandName}`, "cmd");
+        this.client.logger.log(`Runned Command: ${command.commandName}`, "cmd");
 
     }
 }

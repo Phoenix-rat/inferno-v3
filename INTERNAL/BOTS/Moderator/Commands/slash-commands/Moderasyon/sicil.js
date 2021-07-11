@@ -39,7 +39,17 @@ module.exports = class HelloCommand extends SlashCommand {
                 [IDS.guild]: [
                     {
                         type: ApplicationCommandPermissionType.ROLE,
+                        id: IDS.commands,
+                        permission: true
+                    },
+                    {
+                        type: ApplicationCommandPermissionType.ROLE,
                         id: IDS.all,
+                        permission: true
+                    },
+                    {
+                        type: ApplicationCommandPermissionType.ROLE,
+                        id: IDS.ceo,
                         permission: true
                     },
                     {
@@ -72,6 +82,7 @@ module.exports = class HelloCommand extends SlashCommand {
         if (!mentioned) return await ctx.send({
             embeds: [errEmbed]
         });
+        const DefaultEmbed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`\`\`\`md\n${embeddoc}\`\`\``).setTitle('SİCİL KONTROL');
         const doc = await sicil.findOne({ _id: mentioned.user.id });
         if (!doc) return await ctx.send(`Dosya bulunamadı!`);
         const scl = await doc.get("records").reverse().slice(20 * (Object.values(ctx.options)[1] - 1), 20 * Object.values(ctx.options)[1]);
@@ -88,7 +99,6 @@ module.exports = class HelloCommand extends SlashCommand {
         const embeddoc = stringTable.create(asdf, {
             headers: ['no', 'tür', 'gün']
         });
-        const DefaultEmbed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`\`\`\`md\n${embeddoc}\`\`\``).setTitle('SİCİL KONTROL');
         if (!Object.values(ctx.options)[2]) return await ctx.send({
             embeds: [DefaultEmbed]
         });

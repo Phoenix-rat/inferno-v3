@@ -12,23 +12,23 @@ module.exports = class {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        let mycooldown = client.spamwait[message.author.id];
-        if (!mycooldown) {
+        let myCooldown = client.spamwait[message.author.id];
+        if (!myCooldown) {
             client.spamwait[message.author.id] = {};
-            mycooldown = client.spamwait[message.author.id];
+            myCooldown = client.spamwait[message.author.id];
         };
-        let mytime = mycooldown[message.content] || 0;
-        if (mytime && (mytime > Date.now())) {
-            let uCount = client.spamcounts[message.author.id];
-            if (!uCount) {
+        let mytime = myCooldown[message.content] || 0;
+        if (mytime && (mytime > Date.now()) && !message.member.permissions.has("ADMINISTRATOR") && (message.channel.id !== '863118599026638868')) {
+            let myCount = client.spamcounts[message.author.id];
+            if (!myCount) {
                 this.client.spamcounts[message.author.id] = {};
-                uCount = this.client.spamcounts[message.author.id];
+                myCount = this.client.spamcounts[message.author.id];
                 //console.log(uCount);
             };
-            let count = uCount[message.content] || 0;
+            let count = myCount[message.content] || 0;
             //console.log(uCount);
-            if ((count === 1) && !message.member.hasPermission("ADMINISTRATOR")) message.channel.send(`Spamlamaya devam edersen muteleneceksin! ${message.author}`);
-            if ((count === 1) && !message.member.hasPermission("ADMINISTRATOR")) {
+            if (count === 1) message.channel.send(`Spamlamaya devam edersen muteleneceksin! ${message.author}`);
+            if (count === 3) {
                 message.member.roles.add(roles.get("muted").value());
                 message.channel.send(`${message.member} Spam yaptığın için mutelendin!`)
             }
@@ -60,7 +60,7 @@ module.exports = class {
             }
         }
         const elebaşı = ["discord.gg/", "discord.com/invite/", "discordapp.com/invite/", "discord.me/"];
-        if (message.guild && elebaşı.some(link => message.content.toLowerCase().includes(link))) {
+        if (message.guild && elebaşı.some(link => message.content.includes(link))) {
             let anan = [];
             await message.guild.fetchInvites().then(async (invs) => {
                 invs.forEach(async (inv) => {
@@ -71,15 +71,12 @@ module.exports = class {
             });
             for (let c = 0; c < elebaşı.length; c++) {
                 const ele = elebaşı[c];
-                if (message.content.toLowerCase().includes(ele)) {
-                    const mesaj = message.content.toLowerCase().split(ele).slice(1).map(sth => sth.split(' ')[0]);
+                if (message.content.includes(ele)) {
+                    const mesaj = message.content.split(ele).slice(1).map(sth => sth.split(' ')[0]);
                     mesaj.forEach(async msg => {
                         if (!anan.some(kod => msg === kod)) {
-                            if (!message.member.hasPermission("ADMINISTRATOR")) {
-                                client.extention.emit('Jail', message.member, client.user.id, "Reklam", "Perma", 0);
-                                await message.delete();
-                                return;
-                            }
+                            message.guild.members.ban(message.author.id, { days: 2, reason: 'REKLAM' });
+                            await message.delete();
                         }
                     });
                 }
@@ -124,11 +121,12 @@ module.exports = class {
         if (time && (time > Date.now())) return message.channel.send(`${emojis.get("dmcmd").value()} Komutu tekrar kullanabilmek için lütfen **${Math.ceil((time - Date.now()) / 1000)}** saniye bekle!`);
 
         client.logger.log(`[(${message.author.id})] ${message.author.username} ran command [${cmd.info.name}]`, "cmd");
-
+        if ((message.channel.id === "862185380207394846") && !message.member.permissions.has("MANAGE_ROLES")) return;
         try {
             cmd.run(client, message, args);
         } catch (e) {
             console.log(e);
+            return message.channel.send(`${emojis.get("error").value()} | Sanırım bir hata oluştu...`);
         }
 
     }

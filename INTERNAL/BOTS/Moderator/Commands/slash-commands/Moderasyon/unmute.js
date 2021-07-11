@@ -41,6 +41,21 @@ module.exports = class MuteCommand extends SlashCommand {
                 [IDS.guild]: [
                     {
                         type: ApplicationCommandPermissionType.ROLE,
+                        id: IDS.mute,
+                        permission: true
+                    },
+                    {
+                        type: ApplicationCommandPermissionType.ROLE,
+                        id: IDS.all,
+                        permission: true
+                    },
+                    {
+                        type: ApplicationCommandPermissionType.ROLE,
+                        id: IDS.ceo,
+                        permission: true
+                    },
+                    {
+                        type: ApplicationCommandPermissionType.ROLE,
                         id: IDS.owner,
                         permission: true
                     },
@@ -94,6 +109,7 @@ module.exports = class MuteCommand extends SlashCommand {
                 if (guild.members.cache.get(vData.executor).roles.highest.rawPosition > guild.members.cache.get(ctx.user.id).roles.highest.rawPosition) return await ctx.send({
                     embeds: [vErr]
                 });
+                await vMute.deleteOne({ _id: mentioned.user.id });
                 if (mentioned.voice && mentioned.voice.channel) await mentioned.voice.setMute(false);
                 break;
 
