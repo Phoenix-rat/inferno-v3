@@ -12,6 +12,7 @@ class Perm extends Command {
             category: "Perm",
             aliases: ["rolver"],
             accaptedPerms: ["cmd-ceo"],
+            enabled: false
         });
     }
     async run(client, message, args, data) {
