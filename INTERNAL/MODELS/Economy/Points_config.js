@@ -9,7 +9,5 @@ module.exports = mongoose.model('Points_config', new mongoose.Schema({
     authorized: Number,
     message: Number,
     voicePublicPerMinute: Number,
-    voiceOtherPerMinute: Number,
-    bonus: Number,
-    charge: Number
+    voiceOtherPerMinute: Number
 }, { _id: false }));
