@@ -41,7 +41,7 @@ class Call extends Command {
         ●▬▬▬▬▬▬▬▬▬●
 
         `);
-        await message.channel.send(embed.setColor('#2f3136').setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true }), "https://pandomeme.com/"));
+        await message.channel.send(embed.setColor('#2f3136').setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true }), "https://tantoony.net/"));
     }
 }
 

@@ -30,7 +30,7 @@ class Anonim extends Command {
         \`Oluşturma Tarihi:\` ${rain(client, checkDays(mentioned.user.createdAt))} **Gün Önce**
         \`Ayırıcı Rolü:\` ${mentioned.roles.cache.array().filter(r => r.hoist).sort((a, b) => b.rawPosition - a.rawPosition)[0]}
         \`Durumu:\` ${mentioned.user.presence.activities.find(a => a.type === "CUSTOM_STATUS") ? mentioned.user.presence.activities.find(a => a.type === "CUSTOM_STATUS").state : "Bulunamadı"}
-        `).setThumbnail(mentioned.user.displayAvatarURL()).setColor(mentioned.displayHexColor).setTitle("P A S I F I C");
+        `).setThumbnail(mentioned.user.displayAvatarURL()).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
         await message.channel.send(embedd);
     }
 }
