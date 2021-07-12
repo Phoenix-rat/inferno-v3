@@ -96,25 +96,27 @@ module.exports = class {
         }
         if (message.content === 'onay') {
             const tagData = await tagged.find({ target: message.author.id });
-            if (tagData.length !== 0) {
+            if (tagData && (tagData.length !== 0)) {
                 const myTagData = tagData.sort((a, b) => comparedate(b.created) - comparedate(a.created))[0];
-                if (checkMins(myTagData.created) < 3) {
+                if (myTagData && (checkMins(myTagData.created) < 3)) {
                     await Tagli.updateOne({ _id: message.author.id }, { $set: { claimed: myTagData.executor } });
                     const msgTagged = await message.guild.channels.cache.get(myTagData.channelID).messages.fetch(myTagData._id);
                     await msgTagged.reactions.removeAll();
                     await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
                     await msgTagged.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
                     const pointData = await Points_profile.findOne({ _id: myTagData.executor });
-                    const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
-                    if (pointData && !pointData.points.filter(point => point.type === "tagget").find(point => point.target === message.author.id)) await Points_profile.updateOne({ _id: myTagData.executor }, {
-                        $push: {
-                            points: {
-                                type: "tagget",
-                                points: pointConfig.tagget,
-                                target: message.author.id
+                    if (pointData) {
+                        const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
+                        if (pointData && !pointData.points.filter(point => point.type === "tagget").find(point => point.target === message.author.id)) await Points_profile.updateOne({ _id: myTagData.executor }, {
+                            $push: {
+                                points: {
+                                    type: "tagget",
+                                    points: pointConfig.tagget,
+                                    target: message.author.id
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             }
         }
