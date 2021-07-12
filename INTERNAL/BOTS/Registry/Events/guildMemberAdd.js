@@ -143,6 +143,7 @@ class GuildMemberAdd {
         }
         await member.roles.add(roles.get("welcome").value());
         const yetkili = member.guild.roles.cache.get(roles.get("cmd-registry").value());
+        const rules = member.guild.channels.cache.get(channels.get("rules").value());
         const channel = member.guild.channels.cache.filter(c => (c.parentID === channels.get("st_registry").value()) && (c.type === "voice")).find(c => c.members.array().filter(m => m.roles.cache.has(yetkili.id)).length > 0);
         const embed = stripIndents`
         ${emojis.get("pando1").value()} Aramıza hoş geldin ${member}. Biz de seni bekliyorduk, seninle beraber **${member.guild.memberCount}** kişi olduk! ${emojis.get("pando1").value()}
