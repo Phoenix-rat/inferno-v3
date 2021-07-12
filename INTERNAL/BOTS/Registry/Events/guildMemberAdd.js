@@ -101,7 +101,7 @@ class GuildMemberAdd {
         let pointed = '⸸';
         if (member.user.username.includes(client.config.tag)) {
             pointed = client.config.tag;
-            await member.roles.add(roles.get("taglı").value());
+            await member.roles.add(roles.get("crew").value());
         }
         let mute = await cmutes.findOne({ _id: member.user.id });
         if (mute) {
