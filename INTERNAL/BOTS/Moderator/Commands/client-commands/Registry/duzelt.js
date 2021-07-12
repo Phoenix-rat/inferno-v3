@@ -14,7 +14,8 @@ class Duzelt extends Command {
             aliases: ["dzlt", "düzelt"],
             cmdChannel: "exe-registry",
             accaptedPerms: ["cmd-registry", "cmd-all","cmd-manager","cmd-rhode","cmd-authority","cmd-staff"],
-            cooldown: 10000
+            cooldown: 10000,
+            enabled: false
         });
     };
     async run(client, message, args) {

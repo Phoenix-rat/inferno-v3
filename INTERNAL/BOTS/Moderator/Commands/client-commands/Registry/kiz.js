@@ -14,7 +14,7 @@ class Kiz extends Command {
             category: "Kayıt",
             aliases: ["k", "kız"],
             cmdChannel: "exe-registry",
-            accaptedPerms: ["cmd-registry", "cmd-all", "cmd-manager", "cmd-rhode", "cmd-authority", "cmd-staff"],
+            accaptedPerms: ["cmd-registry", "cmd-all"],
             cooldown: 1000
         });
     };

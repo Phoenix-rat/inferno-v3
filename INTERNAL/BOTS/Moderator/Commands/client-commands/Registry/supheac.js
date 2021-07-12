@@ -13,7 +13,7 @@ class Supheac extends Command {
             category: "Kayıt",
             aliases: ["şüpheaç", "şüphemyok", "suphemyok"],
             cmdChannel: "suspicious",
-            accaptedPerms: ["cmd-registry", "cmd-all","cmd-manager","cmd-rhode","cmd-authority","cmd-staff"],
+            accaptedPerms: ["cmd-registry", "cmd-all"],
             cooldown: 10000
         });
     };
