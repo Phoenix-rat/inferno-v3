@@ -12,7 +12,7 @@ class KayitSil extends Command {
             category: "Kayıt",
             aliases: ["kayıtsil", "kayıtsız", "kayitsiz"],
             //cmdChannel: "suspicious",
-            accaptedPerms: ["oluozan","oluozan2","cmd-all"],
+            accaptedPerms: ["oluozan", "oluozan2", "cmd-all"],
             cooldown: 10000
         });
     };
