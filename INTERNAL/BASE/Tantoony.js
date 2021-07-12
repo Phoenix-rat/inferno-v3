@@ -128,7 +128,7 @@ class Tantoony extends Client {
         delete require.cache[require.resolve(`../BOTS/Moderator/${commandPath}/${commandName}.js`)];
         return false;
     }
-    
+
     loadButton(commandPath, commandName) {
         try {
             const props = new (require(`../BOTS/Moderator/${commandPath}/${commandName}`))(this);
@@ -137,7 +137,7 @@ class Tantoony extends Client {
             if (props.init) {
                 props.init(this);
             }
-            this.commands.set(props.info.name, props);
+            this.buttons.set(props.info.name, props);
             return false;
         } catch (e) {
             return `Unable to load button ${commandName}: ${e}`;
@@ -146,8 +146,8 @@ class Tantoony extends Client {
 
     async unloadButton(commandPath, commandName) {
         let command;
-        if (this.commands.has(commandName)) {
-            command = this.commands.get(commandName);
+        if (this.buttons.has(commandName)) {
+            command = this.buttons.get(commandName);
         }
         if (!command) {
             return `The button \`${commandName}\` doesn't seem to exist, nor is it an alias. Try again!`;
