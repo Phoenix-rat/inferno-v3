@@ -15,8 +15,10 @@ class VoiceStateUpdate {
         const channel = client.guild.channels.cache.get(channels.get("oda_olustur").value());
         if (prev && prev.channel && (prev.channel.parentID === channel.parentID) && (prev.channel.id !== channel.id)) {
             const syncChannel = client.guild.channels.cache.get(prev.channel.id);
-            if (syncChannel.members.size === 0) await syncChannel.delete();
-            await private_channels.deleteOne({ _id: syncChannel.id });
+            if (syncChannel.members.size === 0) {
+                await syncChannel.delete();
+                await private_channels.deleteOne({ _id: syncChannel.id });
+            }
         }
         if (cur && cur.channel && (cur.channel.id === channel.id)) {
             const nueva = await channel.clone({
