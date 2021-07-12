@@ -20,7 +20,8 @@ const myTokens = [
     process.env.token_3,
     process.env.token_4,
     process.env.token_5,
-    process.env.token_6
+    process.env.token_6,
+    process.env.token_7
 ];
 for (let tokenim = 0; tokenim < myTokens.length; tokenim++) {
     const tokeni = myTokens[tokenim];
