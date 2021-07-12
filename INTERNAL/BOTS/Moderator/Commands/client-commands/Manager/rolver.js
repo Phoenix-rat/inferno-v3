@@ -7,7 +7,7 @@ class Perm extends Command {
             name: "rolver",
             description: "Sunucuda bulunan yetkililere perm vermek için kullanılır",
             usage: "rolver etiket/id -roladı",
-            examples: ["rolver @Cofteey#0046 -jail"],
+            examples: ["rolver @Cofteey#0046 -ability"],
             cooldown: 3600000,
             category: "Perm",
             aliases: ["rolver"],
@@ -39,8 +39,24 @@ class Perm extends Command {
             })
         }
         for (let [k, v]of map){
-            metin = metin + `${emojis.get("ok").value()} \`${k}` - ${v.filter(x => x !== "857386603373395999","857386627219193856").map(x => `<@&${x}>`)}\n`
+            metin = metin + `${emojis.get("ok").value()} \`${k}\` - ${v.filter(x => x !== "857386603373395999","857386627219193856").map(x => `<@&${x}>`)}\n`
         }
+        let values = args[1]
+        embed.setDescription(`${emojis.get("ok").value()} Belirttiğin rol geçerli değil. Lütfen aşağıda belirtmiş olduğumuz kullanım kılavuzuna bakarak doğru komutu kullanabilirsin.\n\n───────────────────────────────────────────\n\n${emojis.get("ok").value()} \`-jail\` - <@&857386603373395999>\n${emojis.get("ok").value()} \`-registry\` - <@&857386814791483412>\n${emojis.get("ok").value()} \`-mute\` - <@&857386624383975474>\n${emojis.get("ok").value()} \`-ability\` - <@&857386627219193856>\n───────────────────────────────────────────\n\n${emojis.get("ok").value()} Komutun Kullanım Örneği: \`.yetkiver @Cofteey#0046 -ability\``)
+        if (!values) return message.channel.send(embed)
+        const roller = map.get(values)
+        await user.roles.add(roller)
+        let arrx = arr.filter(function (item, pos) {
+            return arr.indexOf(item) == pos;
+        })
+        arrx.map(async (x) =>{
+            if (user.roles.cache.has(x)) {
+                if (roller.includes(x)) return
+                await user.roles.remove(x)
+            }
+        })
+        embed.setDescription(`${user} kullanıcısına <@${roller[0]}> yetkisi verildi`)
+        message.channel.send(embed)
     }
 }
 
