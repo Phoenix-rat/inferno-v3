@@ -46,12 +46,14 @@ class UserUpdate {
                 const trc = new Tagli({ _id: newUser.id, created: new Date(), claimed: "false" });
                 await trc.dave();
             }
+            await member.setNickname(client.config.tag + member.displayName.slice(1));
             await member.roles.add(roles.get("crew").value());
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag aldı`);
         }
         if (client.config.tag.some(tag => oldUser.username.includes(tag)) && !client.config.tag.some(tag => newUser.username.includes(tag))) {
             const tagrecord = await Tagli.findOne({ _id: newUser.id });
             if (tagrecord) await Tagli.deleteOne({ _id: newUser.id });
+            await member.setNickname(`⸸` + member.displayName.slice(1));
             await member.roles.remove(roles.get("crew").value());
             if (utils.get("taglıAlım").value() && !member.roles.cache.has(roles.get("vip").value() && !member.roles.cache.has(roles.get("booster").value()))) {
                 await member.roles.remove(member.roles.cache.filter(r => r.editable).array());
