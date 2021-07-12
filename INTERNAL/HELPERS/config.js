@@ -10,5 +10,5 @@ module.exports = {
         name: "Tantoony 🤍 INFEЯИO",
         type: "LISTENING"
     },
-    tag: '†'
+    tag: ['†']
 }

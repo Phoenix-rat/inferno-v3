@@ -68,22 +68,22 @@ class GuildMemberAdd {
                 const dosyam = await systeminv.get('records');
                 if (!dosyam.some(entry => entry.user === member.user.id)) await model.updateOne({ _id: davetci.id }, { $push: { records: obj } });
                 count = dosyam.length + 1 || 1;
-                const currentTasks = await Task_current.findOne({ _id: davetçi.id });
+                const currentTasks = await Task_current.findOne({ _id: davetci.id });
                 if (currentTasks) {
                     const invTask = currentTasks.tasks.find(task => task.type === "invite");
-                    const inviteData = await model.findOne({ _id: davetçi.id });
+                    const inviteData = await model.findOne({ _id: davetci.id });
                     if (invTask) {
                         const comparedInvites = inviteData.invites.filter(invlog => comparedate(invlog.created) <= comparedate(invTask.created));
                         if (comparedInvites >= invTask.count) {
-                            await Task_current.updateOne({ _id: davetçi.id }, { $pull: { tasks: invTask } });
-                            await Task_done.updateOne({ _id: davetçi.id }, { $push: { tasks: invTask } });
+                            await Task_current.updateOne({ _id: davetci.id }, { $pull: { tasks: invTask } });
+                            await Task_done.updateOne({ _id: davetci.id }, { $push: { tasks: invTask } });
                         }
                     }
                 }
 
-                const pointData = await Points_profile.findOne({ _id: davetçi.id });
+                const pointData = await Points_profile.findOne({ _id: davetci.id });
                 const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
-                if (pointData && !pointData.points.filter(point => point.type === "invite").find(point => point.invited === member.user.id)) await Points_profile.updateOne({ _id: daveçi.id }, {
+                if (pointData && !pointData.points.filter(point => point.type === "invite").find(point => point.invited === member.user.id)) await Points_profile.updateOne({ _id: davetci.id }, {
                     $push: {
                         points: {
                             type: "invite",
