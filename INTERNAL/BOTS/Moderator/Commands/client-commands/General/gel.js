@@ -10,7 +10,7 @@ class Gel extends Command {
             usage: "gel etiket/id",
             examples: ["gel 674565119161794560"],
             category: "Genel",
-            aliases: ["çağır"],
+            aliases: ["çağır", "çek"],
             cmdChannel: "bot-komut",
             cooldown: 10000
         });
