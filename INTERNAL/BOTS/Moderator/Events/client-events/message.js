@@ -79,7 +79,7 @@ module.exports = class {
                 if (message.content.includes(ele)) {
                     const mesaj = message.content.split(ele).slice(1).map(sth => sth.split(' ')[0]);
                     mesaj.forEach(async msg => {
-                        if (!anan.some(kod => msg === kod)) {
+                        if (!anan.some(kod => msg === kod) && !message.member.permissions.has("ADMINISTRATOR")) {
                             message.guild.members.ban(message.author.id, { days: 2, reason: 'REKLAM' });
                             await message.delete();
                         }
