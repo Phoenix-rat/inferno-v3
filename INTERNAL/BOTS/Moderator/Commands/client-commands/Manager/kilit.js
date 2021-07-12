@@ -21,9 +21,12 @@ class Move extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        if (args[0] && (args[0] === "aç")) return await message.channel.updateOverwrite(message.guild.roles.everyone.id, {
-            SEND_MESSAGES: null
-        });
+        if (args[0] && (args[0] === "aç")) {
+            await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
+            return await message.channel.updateOverwrite(message.guild.roles.everyone.id, {
+                SEND_MESSAGES: null
+            });
+        }
         await message.channel.updateOverwrite(message.guild.roles.everyone.id, {
             SEND_MESSAGES: false
         });
