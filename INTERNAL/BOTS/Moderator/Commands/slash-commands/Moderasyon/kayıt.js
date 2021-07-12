@@ -157,15 +157,17 @@ module.exports = class RegistryCommand extends SlashCommand {
             }
         }
         const pointData = await Points_profile.findOne({ _id: ctx.user.id });
-        const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
-        if (pointData && !pointData.points.filter(point => point.type === "registry").find(point => point.registered === mentioned.user.id)) await Points_profile.updateOne({ _id: ctx.user.id }, {
-            $push: {
-                points: {
-                    type: "registry",
-                    points: pointConfig.registry,
-                    registered: mentioned.user.id
+        if (pointData) {
+            const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
+            if (pointData && !pointData.points.filter(point => point.type === "registry").find(point => point.registered === mentioned.user.id)) await Points_profile.updateOne({ _id: ctx.user.id }, {
+                $push: {
+                    points: {
+                        type: "registry",
+                        points: pointConfig.registry,
+                        registered: mentioned.user.id
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 }
