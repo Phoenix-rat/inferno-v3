@@ -120,7 +120,6 @@ module.exports = class {
                 }
             }
         }
-        /*
         if (!message.content.startsWith(client.config.prefix)) return;
         if (message.author.bot) return;
         let command = message.content.split(' ')[0].slice(client.config.prefix.length);
@@ -167,6 +166,5 @@ module.exports = class {
             console.log(e);
             return message.channel.send(`${emojis.get("error").value()} | Sanırım bir hata oluştu...`);
         }
-        */
     }
 }

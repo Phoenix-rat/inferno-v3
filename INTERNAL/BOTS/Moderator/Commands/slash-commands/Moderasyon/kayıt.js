@@ -123,7 +123,7 @@ module.exports = class RegistryCommand extends SlashCommand {
         await mentioned.roles.remove(roles.get("welcome").value());
         let point = '•';
         if (client.config.tag.some(tag => mentioned.user.username.includes(tag))) {
-            await mentioned.roles.add(roles.get("th-taglı").value());
+            await mentioned.roles.add(roles.get("crew").value());
             point = client.config.tag[0];
         }
         await mentioned.setNickname(`${point} ${nameFixed} | ${age}`);
