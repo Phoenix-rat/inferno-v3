@@ -14,7 +14,7 @@ class Sicil extends Command {
             examples: ["sicil 674565119161794560 2-1"],
             category: "Sorgu",
             aliases: [],
-            accaptedPerms: ["cmd-databaser", "cmd-all"],
+            accaptedPerms: ["cmd-crew", "cmd-all"],
             cooldown: 60000,
         });
     }

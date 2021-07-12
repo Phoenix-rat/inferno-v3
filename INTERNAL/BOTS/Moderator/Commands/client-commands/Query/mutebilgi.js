@@ -13,7 +13,7 @@ class MuteSorgu extends Command {
             examples: ["mutebilgi 674565119161794560"],
             category: "Sorgu",
             aliases: ["mbilgi"],
-            accaptedPerms: ["cmd-databaser", "cmd-all"],
+            accaptedPerms: ["cmd-crew", "cmd-all"],
             cooldown: 10000
         })
     }

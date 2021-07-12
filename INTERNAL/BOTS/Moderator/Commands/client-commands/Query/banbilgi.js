@@ -13,7 +13,7 @@ class BanSorgu extends Command {
             examples: ["banbilgi 674565119161794560"],
             category: "Sorgu",
             aliases: ["bbilgi"],
-            accaptedPerms: ["cmd-databaser", "cmd-all"],
+            accaptedPerms: ["cmd-crew", "cmd-all"],
             cooldown: 10000
         })
     }

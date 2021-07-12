@@ -11,7 +11,7 @@ class Jail extends Command {
             examples: ["jail 674565119161794560 10 gün botları kötü yapıyor"],
             category: "Moderasyon",
             aliases: ["hapis", "zindan"],
-            accaptedPerms: ["cmd-jail","cmd-all","cmd-manager","cmd-rhode","cmd-authority","cmd-staff"],
+            accaptedPerms: ["cmd-jail", "cmd-all"],
             cooldown: 10000
         })
     }

@@ -11,7 +11,7 @@ class vMute extends Command {
             examples: ["vmute 674565119161794560 10 botları kötü yapıyor"],
             category: "Moderasyon",
             aliases: ["yargı", "infaz"],
-            accaptedPerms: ["cmd-vmute","cmd-all","cmd-manager","cmd-rhode","cmd-authority","cmd-staff"],
+            accaptedPerms: ["cmd-mute", "cmd-all"],
             cooldown: 10000
         })
     }
