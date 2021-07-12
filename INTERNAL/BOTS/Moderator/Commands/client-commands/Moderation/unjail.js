@@ -24,7 +24,7 @@ class unJail extends Command {
         const Data = await Jails.findOne({ _id: mentioned.user.id });
         if (!Data) return message.channel.send(new MessageEmbed().setDescription(`${emojis.get("notfound").value()} Kayt Bulunamadı!`));
         await mentioned.roles.add(Data.roles.map(rname => message.guild.roles.cache.find(role => role.name === rname)));
-        await mentioned.roles.remove([roles.get("prisoner").value(), roles.get("denied").value()]);
+        await mentioned.roles.remove(roles.get("prisoner").value());
         await Jails.deleteOne({ _id: mentioned.user.id });
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         this.client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
