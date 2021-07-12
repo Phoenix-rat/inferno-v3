@@ -10,7 +10,7 @@ class Nerede extends Command {
             description: "etiketlenen kişinin nerede olduğunu gösterir",
             usage: "nerede id/etiket",
             examples: ["nerede 674565119161794560"],
-            aliases: ["bul"],
+            aliases: ["bul", "n"],
             category: "Genel",
             cmdChannel: "bot-komut",
             cooldown: 300000
