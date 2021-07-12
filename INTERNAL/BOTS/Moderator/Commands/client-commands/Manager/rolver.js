@@ -25,10 +25,10 @@ class Perm extends Command {
         if (args.length < 1) return message.channel.send("Bir kullanıcı girmeyi unuttun!")
         if (!user) return message.channel.send("Belirttiğin kullanıcı geçerli değil!")
         let map = new Map([
-            ["-jail", [roles.get("cmd-jail"),value()]],
-            ["-registry", [roles.get("cmd-registry").value()]],
-            ["-mute", [roles.get("cmd-mute").value()]],
-            ["-ability", [roles.get("cmd-ability").value()]]
+            ["-jail", ["857386603373395999"]],
+            ["-registry", ["857386814791483412"]],
+            ["-mute", ["857386624383975474"]],
+            ["-ability", ["857386627219193856"]]
         ])
         let metin = ""
         let arr = []
