@@ -187,11 +187,9 @@ module.exports = class JailCommand extends SlashCommand {
         const emojis = await low(client.adapters('emojis'));
         const userID = Object.values(ctx.options)[0];
         const guild = client.guilds.cache.get(ctx.guildID);
-
+        const PuanConfig = await Points_config.findOne({ _id: Object.values(ctx.options)[0]["rol"] });
         switch (Object.keys(ctx.options)[0]) {
-
             case "yap":
-                const PuanConfig = await Points_config.findOne({ _id: ctx.options["yap"]["rol"] });
                 if (PuanConfig) return await ctx.send('Bu rol için ayarlama zaten mevcut.', {
                     ephemeral: true
                 });
@@ -210,7 +208,6 @@ module.exports = class JailCommand extends SlashCommand {
                 break;
 
             case "düzenle":
-                const PuanConfig = await Points_config.findOne({ _id: ctx.options["yap"]["rol"] });
                 if (!PuanConfig) return await ctx.send('Bu rol için bir ayarlama daha yapılmamış.', {
                     ephemeral: true
                 });
@@ -218,7 +215,6 @@ module.exports = class JailCommand extends SlashCommand {
                 break;
 
             case "sil":
-                const PuanConfig = await Points_config.findOne({ _id: ctx.options["yap"]["rol"] });
                 if (!PuanConfig) return await ctx.send('Bu rol için bir ayarlama daha yapılmamış.', {
                     ephemeral: true
                 });
