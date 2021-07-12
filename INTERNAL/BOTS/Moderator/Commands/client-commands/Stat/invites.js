@@ -29,7 +29,7 @@ class Invites extends Command {
         Kullanıcı: **${mentioned.user.username}**
         Davet sayısı: ${rain(client, Data.records.length)}
         Sunucuda olan davet ettiği kişi sayısı: ${rain(client, Data.records.filter(rec => message.guild.members.cache.get(rec.user)).length)}
-        `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle("୪ P A S I F I C");
+        `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
 
         await message.channel.send(embed);
     }
