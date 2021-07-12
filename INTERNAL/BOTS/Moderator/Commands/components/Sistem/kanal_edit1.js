@@ -1,6 +1,7 @@
 const Component = require("../../../Base/Component");
 const Discord = require('discord.js');
 const low = require('lowdb');
+const private_channels = require("../../../../../MODELS/Temprorary/private_channels");
 
 class RolSeçim extends Component {
     constructor(client) {
@@ -25,10 +26,11 @@ class RolSeçim extends Component {
         const emojis = await low(client.adapters('emojis'));
         const guild = client.guilds.cache.get(ctx.guildID);
         const mentioned = guild.members.cache.get(ctx.user.id);
-        
+
         const voiceChannel = mentioned.voice.channel;
         if (!voiceChannel || (voiceChannel.parentID !== "857667607121756189")) return;
-
+        const channelData = await private_channels.findOne({ _id: voiceChannel.id, owner: ctx.user.id });
+        if (!channelData) return;
         await voiceChannel.setUserLimit(1)
 
     }

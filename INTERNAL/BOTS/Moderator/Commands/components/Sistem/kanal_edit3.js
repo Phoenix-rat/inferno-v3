@@ -28,7 +28,8 @@ class RolSeçim extends Component {
         
         const voiceChannel = mentioned.voice.channel;
         if (!voiceChannel || (voiceChannel.parentID !== "857667607121756189")) return;
-
+        const channelData = await private_channels.findOne({ _id: voiceChannel.id, owner: ctx.user.id });
+        if (!channelData) return;
         await voiceChannel.setUserLimit(3)
 
     }
