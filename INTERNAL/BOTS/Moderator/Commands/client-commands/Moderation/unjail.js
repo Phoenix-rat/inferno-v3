@@ -11,7 +11,7 @@ class unJail extends Command {
             examples: ["unjail 674565119161794560"],
             category: "Moderasyon",
             aliases: ["unj"],
-            accaptedPerms: ["cmd-jail", "cmd-all"],
+            accaptedPerms: ["cmd-jail", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000
         })
     }

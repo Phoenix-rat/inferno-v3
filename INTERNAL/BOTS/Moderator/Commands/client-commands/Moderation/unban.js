@@ -11,7 +11,7 @@ class unBan extends Command {
             examples: ["unban 674565119161794560"],
             category: "Moderasyon",
             aliases: ["af"],
-            accaptedPerms: ["cmd-ban","cmd-all"],
+            accaptedPerms: ["cmd-ban","cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000
         })
     }

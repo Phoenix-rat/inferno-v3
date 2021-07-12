@@ -11,7 +11,7 @@ class cunMute extends Command {
             examples: ["cunmute 674565119161794560"],
             category: "Moderasyon",
             aliases: ["cun"],
-            accaptedPerms: ["cmd-mute", "cmd-all"],
+            accaptedPerms: ["cmd-mute", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000
         })
     }

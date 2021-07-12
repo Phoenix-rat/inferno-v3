@@ -11,7 +11,7 @@ class vunMute extends Command {
             examples: ["vunmute 674565119161794560"],
             category: "Moderasyon",
             aliases: ["vun"],
-            accaptedPerms: ["cmd-mute", "cmd-all"],
+            accaptedPerms: ["cmd-mute", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000
         })
     }

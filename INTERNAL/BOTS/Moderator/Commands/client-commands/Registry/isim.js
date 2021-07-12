@@ -12,7 +12,7 @@ class Isim extends Command {
             category: "Kayıt",
             aliases: ["i", "ism"],
             cmdChannel: "exe-registry",
-            accaptedPerms: ["cmd-registry", "cmd-all"],
+            accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000
         });
     };

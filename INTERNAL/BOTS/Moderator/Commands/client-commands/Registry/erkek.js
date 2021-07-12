@@ -14,7 +14,7 @@ class Erkek extends Command {
             category: "Kayıt",
             aliases: ["e"],
             cmdChannel: "exe-registry",
-            accaptedPerms: ["cmd-registry", "cmd-all"],
+            accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 1000
         });
     };
