@@ -5,10 +5,10 @@ class Move extends Command {
 
     constructor(client) {
         super(client, {
-            name: "kanaltaşı",
-            description: "kanalda bulunan kişileri toplu olarak bir kanala taşır",
-            usage: "kanaltaşı kanalid/etiket/id",
-            examples: ["kanaltaşı 718265023750996028"],
+            name: "kilit",
+            description: "Mesajın atıldığı kanalı kilitler",
+            usage: "kilit",
+            examples: ["kilit"],
             cooldown: 3600000,
             category: "Düzen",
             accaptedPerms: ["cmd-single", "cmd-double", "cmd-ceo"]
