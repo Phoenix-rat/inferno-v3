@@ -96,7 +96,6 @@ class GuildMemberAdd {
 
             }
         });
-        /*
         let pointed = '•';
         if (member.user.username.includes(client.config.tag)) {
             pointed = client.config.tag;
@@ -144,20 +143,16 @@ class GuildMemberAdd {
         const yetkili = member.guild.roles.cache.get(roles.get("cmd-registry").value());
         const channel = member.guild.channels.cache.filter(c => (c.parentID === channels.get("st_registry").value()) && (c.type === "voice")).find(c => c.members.array().filter(m => m.roles.cache.has(yetkili.id)).length > 0);
         const embed = stripIndents`
-         ${emojis.get("pando1").value()} Aramıza hoş geldin **${member}**
+        ${emojis.get("pando1").value()} Aramıza hoş geldin ${member}. Biz de seni bekliyorduk, seninle beraber **${member.guild.memberCount}** kişi olduk! ${emojis.get("pando1").value()}
     
-         ${emojis.get("pando2").value()} Seninle beraber **${rain(client, member.guild.memberCount)}** kişiyiz.
-    
-         ${emojis.get("pando3").value()} Seni buraya getiren kişi: **${davetci ? (davetci.username || "Özel URL") : "ÖZEL URL"}** [\`Davet Sayısı: ${count}\`]
-    
-         ${emojis.get("pando4").value()} **Hesap:** ${rain(client, checkDays(member.user.createdAt))} gün önce açılmıştır.
+        Hesabını **${checkDays(member.user.createdAt)} gün önce** oluşturduğundan dolayı \`Şüpheli Hesap\` engelimizi aştın!
+        Unutma ${rules} toplumun düzenini sağlamak için var! Kurallarımıza göz atmayı unutma. Tekrardan **Hoş Geldin**
 
-         ${channel ? `${emojis.get("pando5").value()} Müsaitseniz Buyur Ediniz ${channel}` : `Kayıt olmak için Macellan kapılarından herhangi birine girip ${yetkili} rolünü etiketleyebilirsin.`}
+        Görünüşe göre seni buraya getiren kişi: **${davetci ? (davetci.username || "Özel URL") : "ÖZEL URL"}** [\`Davet Sayısı: ${count}\`]
+        ${channel ? `${emojis.get("pando5").value()} Müsaitsen ${channel} kanalına katılabilirsin.` : `Kayıt olmak için Gates of Hell kanallarından herhangi birine girip ${yetkili} rolünü etiketleyebilirsin.`}
         `
         member.guild.channels.cache.get(channels.get("welcome").value()).send(embed);
-        //member.guild.channels.cache.get(channels.get("welcome").value()).send(`${yetkili}`).then(msg => msg.delete({ timeout: 200 }));
         client.extention.emit('Logger', 'Registry', member.user.id, 'MEMBER_ADD', 'Yeni üye');
-        */
     }
 }
 

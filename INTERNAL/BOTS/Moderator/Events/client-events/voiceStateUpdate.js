@@ -4,6 +4,8 @@ const VoiceRecords = require('../../../../MODELS/StatUses/VoiceRecords');
 const vmutes = require('../../../../MODELS/Moderation/VoiceMuted');
 const channelXp = require('../../../../MODELS/Economy/channelXp');
 const Profile = require('../../../../MODELS/Economy/Profile');
+const Points_profile = require('../../../../MODELS/Economy/Points_profile');
+const Points_config = require('../../../../MODELS/Economy/Points_config');
 class VoiceStateUpdate {
     constructor(client) {
         this.client = client;
@@ -80,6 +82,19 @@ class VoiceStateUpdate {
                     }
                 }
             });
+            let selector = "voice-other";
+            if (!entry.selfMute && !entry.serverMute && !entry.selfDeaf && !entry.serverDeaf && (entry.type === "st_public")) selector = "voice-general"
+            const pointData = await Points_profile.findOne({ _id: cur.member.user.id });
+            const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
+            if (pointData && !pointData.points.filter(point => point.type === selector).find(point => point.invited === member.user.id)) await Points_profile.updateOne({ _id: cur.member.user.id }, {
+                $push: {
+                    points: {
+                        type: selector,
+                        points: selector === "voice-general" ? pointConfig.voicePublicPerMinute * Math.floor(comparedate(entry.created) / 60000) : pointConfig.voiceOtherPerMinute * Math.floor(comparedate(entry.created) / 60000),
+                        channel: entry.channelID
+                    }
+                }
+            });
             const pp = await Profile.findOne({ _id: cur.member.user.id });
             if (!pp) await Profile.create({
                 _id: cur.member.user.id,
@@ -100,7 +115,7 @@ class VoiceStateUpdate {
                 await Profile.updateOne({ _id: cur.member.user.id }, { $inc: { xp: calValue } });
                 await client.extention.emit("memberXp", cur.member);
             }
-        
+
             if (!cur.channel) return client.stats[cur.member.user.id] = null;
             const yeniEntry = {
                 _id: cur.member.user.id,
