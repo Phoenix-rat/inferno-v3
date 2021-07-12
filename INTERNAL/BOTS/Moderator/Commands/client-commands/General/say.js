@@ -11,7 +11,7 @@ class Say extends Command {
             usage: "say",
             examples: ["say"],
             category: "Genel",
-            accaptedPerms: ["cmd-registry", "cmd-all","cmd-manager","cmd-rhode","cmd-authority","cmd-staff"],
+            accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000
         });
     }
