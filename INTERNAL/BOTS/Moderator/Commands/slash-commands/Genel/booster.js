@@ -43,9 +43,9 @@ module.exports = class AFKCommand extends SlashCommand {
         const channels = await low(client.adapters('channels'));
         const emojis = await low(client.adapters('emojis'));
         const mentioned = client.guilds.cache.get(ctx.guildID).members.cache.get(ctx.user.id);
-        let point = '•';
+        let point = '⸸';
         if (client.config.tag.some(tag => mentioned.user.username.includes(tag))) {
-            await mentioned.roles.add(roles.get("th-taglı").value());
+            await mentioned.roles.add(roles.get("crew").value());
             point = client.config.tag[0];
         }
         await mentioned.setNickname(`${point} ${ctx.options["isim"]}`);
