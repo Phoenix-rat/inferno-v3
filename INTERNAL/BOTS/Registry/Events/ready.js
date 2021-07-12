@@ -13,6 +13,7 @@ class Ready {
         client = this.client;
         const utiller = await low(this.client.adapters('utils'));
         const guild = client.guilds.cache.get(client.config.server);
+        client.guild = guild;
         client.logger.log(`${client.user.tag}, ${client.users.cache.size} kişi için hizmet vermeye hazır!`, "ready");
         await client.user.setPresence({ activity: client.config.status, status: "idle" });
         client.owner = client.users.cache.get(client.config.owner);
