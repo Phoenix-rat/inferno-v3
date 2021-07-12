@@ -15,7 +15,8 @@ class Tantoony extends Client {
         this.commands = new Collection();
         this.aliases = new Collection();
         this.cmdCoodown = new Object();
-
+        this.buttons = new Collection();
+        
         this.invites = new Object();
         this.spamwait = new Map();
         this.spamcounts = new Object();
@@ -120,6 +121,36 @@ class Tantoony extends Client {
         }
         if (!command) {
             return `The command \`${commandName}\` doesn't seem to exist, nor is it an alias. Try again!`;
+        }
+        if (command.shutdown) {
+            await command.shutdown(this);
+        }
+        delete require.cache[require.resolve(`../BOTS/Moderator/${commandPath}/${commandName}.js`)];
+        return false;
+    }
+    
+    loadButton(commandPath, commandName) {
+        try {
+            const props = new (require(`../BOTS/Moderator/${commandPath}/${commandName}`))(this);
+            this.logger.log(`Loading Button: ${props.info.name}. 👌`, "load");
+            props.config.location = commandPath;
+            if (props.init) {
+                props.init(this);
+            }
+            this.commands.set(props.info.name, props);
+            return false;
+        } catch (e) {
+            return `Unable to load button ${commandName}: ${e}`;
+        }
+    }
+
+    async unloadButton(commandPath, commandName) {
+        let command;
+        if (this.commands.has(commandName)) {
+            command = this.commands.get(commandName);
+        }
+        if (!command) {
+            return `The button \`${commandName}\` doesn't seem to exist, nor is it an alias. Try again!`;
         }
         if (command.shutdown) {
             await command.shutdown(this);
