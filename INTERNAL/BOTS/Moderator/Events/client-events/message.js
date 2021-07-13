@@ -47,10 +47,12 @@ module.exports = class {
             await afkdata.deleteOne({ _id: message.member.user.id });
         }
         if (message.mentions.members.first()) {
+            console.log('a');
             const afksindata = await afkdata.find();
             const afks = message.mentions.members.array().filter(m => afksindata.some(doc => doc._id === m.user.id));
             if (afks.length > 0) {
-                message.channel.send(new Discord.MessageEmbed().setDescription(afks.map(afk => `${afk} \`${afksindata.find(data => data._id === afk.user.id).reason}\` sebebiyle, **${checkHours(afksindata.find(data => data._id === afk.user.id).created)}** saattir AFK!`).join('\n')));
+                console.log('b');
+                await message.channel.send(new Discord.MessageEmbed().setDescription(afks.map(afk => `${afk} \`${afksindata.find(data => data._id === afk.user.id).reason}\` sebebiyle, **${checkHours(afksindata.find(data => data._id === afk.user.id).created)}** saattir AFK!`).join('\n')));
                 await afks.forEach(async afk => {
                     await afkdata.updateOne({ _id: afk.user.id }, {
                         $push: {
