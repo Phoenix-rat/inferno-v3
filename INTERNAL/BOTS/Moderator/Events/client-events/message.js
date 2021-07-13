@@ -4,7 +4,7 @@ const afkdata = require('../../../../MODELS/Temprorary/AfkData');
 const Points_config = require('../../../../MODELS/Economy/Points_config');
 const Points_profile = require('../../../../MODELS/Economy/Points_profile');
 const tagged = require('../../../../MODELS/Temprorary/tagged');
-const { comparedate, checkMins } = require('../../../../HELPERS/functions');
+const { comparedate, checkMins, checkHours } = require('../../../../HELPERS/functions');
 const Tagli = require('../../../../MODELS/Datalake/Tagli');
 module.exports = class {
     constructor(client) {
@@ -47,11 +47,9 @@ module.exports = class {
             await afkdata.deleteOne({ _id: message.member.user.id });
         }
         if (message.mentions.members.first()) {
-            console.log('a');
             const afksindata = await afkdata.find();
             const afks = message.mentions.members.array().filter(m => afksindata.some(doc => doc._id === m.user.id));
             if (afks.length > 0) {
-                console.log('b');
                 await message.channel.send(new Discord.MessageEmbed().setDescription(afks.map(afk => `${afk} \`${afksindata.find(data => data._id === afk.user.id).reason}\` sebebiyle, **${checkHours(afksindata.find(data => data._id === afk.user.id).created)}** saattir AFK!`).join('\n')));
                 await afks.forEach(async afk => {
                     await afkdata.updateOne({ _id: afk.user.id }, {
