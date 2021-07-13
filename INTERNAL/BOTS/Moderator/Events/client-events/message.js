@@ -159,7 +159,7 @@ module.exports = class {
         if (time && (time > Date.now())) return message.channel.send(`${emojis.get("dmcmd").value()} Komutu tekrar kullanabilmek için lütfen **${Math.ceil((time - Date.now()) / 1000)}** saniye bekle!`);
 
         client.logger.log(`[(${message.author.id})] ${message.author.username} ran command [${cmd.info.name}]`, "cmd");
-        if ((message.channel.id === "857659757233700875") && !message.member.permissions.has("MANAGE_ROLES")) return;
+        if ((command === 'tag') && (message.channel.id === "857659757233700875") && !message.member.permissions.has("MANAGE_ROLES")) return;
         try {
             cmd.run(client, message, args);
         } catch (e) {
