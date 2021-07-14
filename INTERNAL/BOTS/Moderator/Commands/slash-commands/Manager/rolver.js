@@ -21,39 +21,31 @@ module.exports = class BanCommand extends SlashCommand {
                     required: true,
                     choices: [
                         {
-                            name: "DJ",
-                            value: "role_dj"
-                        },
-                        {
-                            name: "Editör",
-                            value: "role_editor"
-                        },
-                        {
-                            name: "Vokal",
-                            value: "role_vokal"
-                        },
-                        {
-                            name: "Müzisyen",
-                            value: "role_musician"
-                        },
-                        {
                             name: "Streamer",
                             value: "role_streamer"
+                        },
+                        {
+                            name: "Sponsor",
+                            value: "role_sponsor"
+                        },
+                        {
+                            name: "Vip",
+                            value: "role_vip"
                         },
                         {
                             name: "Ressam",
                             value: "role_ressam"
                         },
                         {
-                            name: "Şair/Yazar",
+                            name: "Şair",
                             value: "role_poet"
                         },
                         {
-                            name: "Seslendirme Sanatçısı",
-                            value: "role_voiceactor"
+                            name: "Yazılım",
+                            value: "role_developer"
                         },
                         {
-                            name: "Tasarımcı",
+                            name: "Tasarım",
                             value: "role_designer"
                         }
                     ]
@@ -63,33 +55,33 @@ module.exports = class BanCommand extends SlashCommand {
             defaultPermission: false,
             guildIDs: [IDS.guild],
             permissions: {
-                [IDS.guild]: [
-                    {
-                        type: ApplicationCommandPermissionType.ROLE,
-                        id: IDS.ability,
-                        permission: true
-                    },
-                    {
-                        type: ApplicationCommandPermissionType.ROLE,
-                        id: IDS.loki,
-                        permission: true
-                    },
-                    {
-                        type: ApplicationCommandPermissionType.ROLE,
-                        id: IDS.apallon,
-                        permission: true
-                    },
-                    {
-                        type: ApplicationCommandPermissionType.ROLE,
-                        id: IDS.owner,
-                        permission: true
-                    },
-                    {
-                        type: ApplicationCommandPermissionType.ROLE,
-                        id: IDS.root,
-                        permission: true
-                    }
-                ]
+              [IDS.guild]: [
+                {
+                  type: ApplicationCommandPermissionType.ROLE,
+                  id: IDS.ability,
+                  permission: true
+                },
+                {
+                  type: ApplicationCommandPermissionType.ROLE,
+                  id: IDS.all,
+                  permission: true
+                },
+                {
+                  type: ApplicationCommandPermissionType.ROLE,
+                  id: IDS.ceo,
+                  permission: true
+                },
+                {
+                  type: ApplicationCommandPermissionType.ROLE,
+                  id: IDS.owner,
+                  permission: true
+                },
+                {
+                  type: ApplicationCommandPermissionType.ROLE,
+                  id: IDS.root,
+                  permission: true
+                }
+              ]
             }
         });
 
