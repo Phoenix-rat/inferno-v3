@@ -24,7 +24,7 @@ class VoiceStateUpdate {
             const myChannelData = privChannels.find(c => c.owner === prev.member.user.id);
             if (myChannelData) {
                 const myChannel = prev.guild.channels.cache.get(myChannelData._id);
-                if (prev.channel && (prev.member.user.id === myChannelData.owner) && (prev.channel.id !== myChannelData._id)) {
+                if (prev.channel && (prev.member.user.id === myChannelData.owner) && (prev.channel.id === myChannelData._id)) {
                     console.log('a');
                     const myTimeout = setTimeout(async () => {
                         await myChannel.setUserLimit(myChannel.members.size);
