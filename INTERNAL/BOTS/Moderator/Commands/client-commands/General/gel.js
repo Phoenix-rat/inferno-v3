@@ -57,18 +57,18 @@ class Gel extends Command {
                 case "✔️":
                     await message.member.voice.setChannel(kanal.id);
                     collector.stop();
-                    await akısmoji.edit(cagirembed.setDescription(`${mentioned} kullanıcısı başarıyla ${message.member} kullanıcısının olduğu **${kanal.name}** isimli kanala taşınmıştır.`).setThumbnail(message.guild.iconURL()));
+                    await message.react("✔️");
                     break;
                 case "❌":
                     collector.stop();
+                    await message.react("❌");
                     break;
                 default:
                     break;
             }
         });
         collector.on("end", async () => {
-            await akısmoji.reactions.removeAll();
-            await akısmoji.edit(cagirembed.setDescription(`${mentioned} kullanıcısı başarıyla ${message.member} kullanıcısının olduğu **${kanal.name}** isimli kanala taşınmıştır.`).setThumbnail(message.guild.iconURL()));
+            await akısmoji.delete();
         });
     }
 }
