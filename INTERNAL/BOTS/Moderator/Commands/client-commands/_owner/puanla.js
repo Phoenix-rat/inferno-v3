@@ -32,7 +32,7 @@ class pm2 extends Command {
         const channels = await low(client.adapters('channels'));
 
         const hoistroller = message.guild.roles.cache
-            .filter(r => r.rawPosition >= taglırol.rawPosition)
+            .filter(r => r.rawPosition >= message.guild.roles.cache.get("856265277637394472").rawPosition)
             .filter(r => r.hoist)
             .filter(r => r.id !== roles.get("booster").value())
             .sort((a, b) => a.rawPosition - b.rawPosition).array().reverse();
