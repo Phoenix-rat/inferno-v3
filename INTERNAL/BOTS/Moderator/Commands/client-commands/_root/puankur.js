@@ -30,8 +30,8 @@ class Kur extends Command {
         if (!role) return await message.channel.send("Böyle bir rol yok")
         await Points_config.create({
             _id: role.id,
-            requiredPoint: 0,
-            expiringHours: 0,
+            requiredPoint: args[1],
+            expiringHours: args[2],
             registry: 0,
             invite: 0,
             tagged: 0,
