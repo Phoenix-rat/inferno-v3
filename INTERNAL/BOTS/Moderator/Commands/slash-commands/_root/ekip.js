@@ -53,13 +53,7 @@ module.exports = class JailCommand extends SlashCommand {
                         type: ApplicationCommandPermissionType.USER,
                         id: "479293073549950997",
                         permission: true
-                    },
-                    {
-                        type: ApplicationCommandPermissionType.USER,
-                        id: "818926918061260820",
-                        permission: true
                     }
-                    
                 ]
             }
         });
