@@ -47,7 +47,7 @@ class Git extends Command {
             switch (reaction.emoji.id) {
                 case emojis.get("komutonay").value().split(':')[2].replace('>', ''):
                     await message.member.voice.setChannel(kanal.id);
-                    collector.stop("ok");                    
+                    collector.stop("ok");
                     break;
                 case emojis.get("komutret").value().split(':')[2].replace('>', ''):
                     collector.stop();
