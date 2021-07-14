@@ -44,7 +44,7 @@ class Say extends Command {
 
 
         await message.channel.send(new Discord.MessageEmbed().setDescription(stripIndent`
-        ${bar(args[0])}
+        ${bar(args[0], args[1])}
         `).setColor('#7bf3e3'));
     }
 }
