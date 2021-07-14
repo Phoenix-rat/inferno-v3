@@ -25,9 +25,10 @@ class Gel extends Command {
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
         if (mentioned.user.id === message.member.user.id) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("pando1").value()} Kendi kendini etiketleme..`).setColor('#2f3136'));
         let kanal = message.member.voice.channel;
-        if (!kanal) return message.channel.send("Hangi kanalda olduğunu bulamıyorum!");
+        if (!kanal) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
+        if (!mentioned.voice || !mentioned.voice.channel) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
         if (message.member.roles.cache.has(roles.get("owner").value() && (mentioned.voice.channel.parentID !== channels.get("st_private").value()))) return await mentioned.voice.setChannel(message.member.voice.channel.id);
-        
+        if (kanal.id === mentioned.voice.channel.id) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
         try {
             await message.react(emojis.get("komutonay").value().split(':')[2].replace('>', ''));
             await message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
