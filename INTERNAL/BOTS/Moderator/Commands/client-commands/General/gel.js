@@ -58,11 +58,10 @@ class Gel extends Command {
             }
         });
         collector.on("end", async (collected, reason) => {
-            await message.reactions.removeAll();
             if (reason === "ok") {
-                return await message.react(emojis.get("komutonay").value().split(':')[2].replace('>', ''));
+                return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutret").value().split(':')[2].replace('>', '')).remove();
             } else {
-                return await message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
+                return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutonay").value().split(':')[2].replace('>', '')).remove();
             }
         });
     }
