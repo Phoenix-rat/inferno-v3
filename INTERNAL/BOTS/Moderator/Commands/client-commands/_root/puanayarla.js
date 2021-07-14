@@ -9,7 +9,7 @@ class Kur extends Command {
         super(client, {
             name: "puanayarla",
             description: "Açıklama Belirtilmemiş.",
-            usage: "Kullanım Belirtilmemiş.",
+            usage: "requiredPoint, expiringHours, registry, invite, tagged, authorized, message, voicePublicPerMinute, voiceOtherPerMinute",
             examples: ["Örnek Bulunmamakta"],
             category: "OWNER",
             aliases: [],
@@ -28,21 +28,14 @@ class Kur extends Command {
 
         const role = message.guild.roles.cache.find(r => r.name.toLowerCase().slice(2) === args[0]);
         if (!role) return await message.channel.send("Böyle bir rol yok")
-        await Points_config.create({
-            _id: role.id,
-            requiredPoint: 0,
-            expiringHours: 0,
-            registry: 0,
-            invite: 0,
-            tagged: 0,
-            authorized: 0,
-            message: 0,
-            voicePublicPerMinute: 0,
-            voiceOtherPerMinute: 0
+        await Points_config.updateOne({ _id: role.id }, {
+            $set: {
+                [args[1]]: args[2]
+            }
         });
-        await message.channel.send(new Discord.MessageEmbed().setDescription(`${role} rolü için gereken görev yapılandırması oluşturuldu.`))
-        
-        
+        await message.channel.send(new Discord.MessageEmbed().setDescription(`${role} rolü için gereken görev yapılandırması oluşturuldu.`));
+
+
     }
 
 }
