@@ -29,10 +29,10 @@ class Kur extends Command {
     async run(client, message, args, data) {
 
         if (PuanConfig) return await message.channel.send('Bu rol için ayarlama zaten mevcut.');
-        const role = message.guild.roles.cache.get(args[0]);
+        const role = message.guild.roles.cache.find(r => r.name.toLowerCase().slice(2) === args[0]);
         if (!role) return await message.channel.send("Böyle bir rol yok")
         await Points_config.create({
-            _id: args[0],
+            _id: role.id,
             requiredPoint: args[1],
             expiringHours: args[2],
             registry: args[3],
