@@ -28,7 +28,7 @@ class VoiceStateUpdate {
                     const myTimeout = setTimeout(async () => {
                         await myChannel.setUserLimit(myChannel.members.size);
                         leaves.delete(myChannel.id);
-                    }, 600000);
+                    }, 1000);
                     leaves.set(myChannel.id, myTimeout);
                 }
                 if ((cur.member.user.id === myChannelData.owner) && (cur.channel.id === myChannelData._id)) {
