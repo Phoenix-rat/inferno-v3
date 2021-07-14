@@ -17,6 +17,7 @@ class Tantoony extends Client {
         this.cmdCoodown = new Object();
         this.buttons = new Collection();
         
+        this.leaves = new Map();
         this.invites = new Object();
         this.spamwait = new Map();
         this.spamcounts = new Object();
@@ -25,7 +26,6 @@ class Tantoony extends Client {
         this.stats = new Object();
         this.banlimit = new Object();
         this.voicecutLimit = new Object();
-
         this.handler = new (require('../HELPERS/initialize'))(this);
         this.extention = new events.EventEmitter();
     };
