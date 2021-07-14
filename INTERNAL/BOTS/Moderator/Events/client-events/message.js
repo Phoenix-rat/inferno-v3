@@ -43,7 +43,7 @@ module.exports = class {
         this.client.spamwait[message.author.id][message.content] = Date.now() + 3000;
         if (message.member.roles.cache.has(roles.get("welcome").value()) && (message.channel.id === channels.get("welcome").value()) && (message.content === "393")) {
             message.delete();
-            await message.member.roles.remove(message.member.roles.cache.filter(r => r.id === roles.get("booster").value()).array());
+            await message.member.roles.remove(message.member.roles.cache.filter(r => r.id !== roles.get("booster").value()).array());
             await message.member.roles.add(roles.get("otb").value());
         }
         let system = await afkdata.findOne({ _id: message.member.user.id });
