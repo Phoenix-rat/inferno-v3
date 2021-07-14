@@ -57,7 +57,6 @@ class Git extends Command {
             }
         });
         collector.on("end", async (collected, reason) => {
-            await message.reactions.removeAll();
             if (reason === "ok") {
                 return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutret").value().split(':')[2].replace('>', '')).remove();
             } else {
