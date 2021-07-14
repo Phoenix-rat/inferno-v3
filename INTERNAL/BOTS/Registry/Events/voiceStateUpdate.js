@@ -38,7 +38,6 @@ class VoiceStateUpdate {
             if (myChannelData) {
                 const myChannel = prev.guild.channels.cache.get(myChannelData._id);
                 if (cur.channel && (cur.member.user.id === myChannelData.owner) && (cur.channel.id === myChannelData._id)) {
-                    console.log('b');
                     clearTimeout(leaves.get(myChannel.id));
                     leaves.delete(myChannel.id);
                 }
