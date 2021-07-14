@@ -21,6 +21,8 @@ class VoiceStateUpdate {
             }
         }
         if (cur && cur.channel && (cur.channel.id === channel.id)) {
+            const oldData = await private_channels.findOne({ owner: cur.member.user.id });
+            if (oldData) return await cur.member.voice.setChannel(oldData._id);
             const nueva = await channel.clone({
                 name: cur.member.displayName,
                 userLimit: 1,
