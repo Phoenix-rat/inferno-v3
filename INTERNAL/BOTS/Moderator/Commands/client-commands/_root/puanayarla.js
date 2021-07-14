@@ -1,6 +1,5 @@
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
-const yt = require('scrape-yt');
 const Discord = require('discord.js');
 
 const Points_config = require('../../../../../MODELS/Economy/Points_config');
