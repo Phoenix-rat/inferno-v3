@@ -44,24 +44,25 @@ class Git extends Command {
                 collector.stop();
                 return message.channel.send("Hangi kanalda olduğunu bulamıyorum!");
             }
-            switch (reaction.emoji.name) {
+            switch (reaction.emoji.id) {
                 case emojis.get("komutonay").value().split(':')[2].replace('>', ''):
                     await message.member.voice.setChannel(kanal.id);
-                    collector.stop();
-                    await message.reactions.removeAll();
-                    await message.react(emojis.get("komutonay").value().split(':')[2].replace('>', ''));
+                    collector.stop("ok");                    
                     break;
                 case emojis.get("komutret").value().split(':')[2].replace('>', ''):
                     collector.stop();
-                    await message.reactions.removeAll();
-                    await message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
                     break;
                 default:
                     break;
             }
         });
-        collector.on("end", async () => {
-            return;
+        collector.on("end", async (collected, reason) => {
+            await message.reactions.removeAll();
+            if (reason === "ok") {
+                return await message.react(emojis.get("komutonay").value().split(':')[2].replace('>', ''));
+            } else {
+                return await message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
+            }
         });
     }
 }
