@@ -29,6 +29,10 @@ class RolSeçim extends Component {
         const channelData = await private_channels.findOne({ owner: ctx.user.id });
         if (!channelData) return;
         await guild.channels.cache.get(channelData._id).setUserLimit(9);
+        await ctx.send("Kanal limiti 9 kullanıcı olarak ayarlandı.", {
+            ephemeral: true
+        });
+
 
     }
 }
