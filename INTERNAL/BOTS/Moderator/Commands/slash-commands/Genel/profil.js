@@ -10,7 +10,6 @@ module.exports = class AvatarCommand extends SlashCommand {
         super(creator, {
             name: 'profil',
             description: 'Kişinin profilini gösterir',
-            guildIDs: [IDS.guild],
             options: [
                 {
                     type: CommandOptionType.USER,
