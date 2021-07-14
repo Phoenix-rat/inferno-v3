@@ -10,7 +10,6 @@ module.exports = class AvatarCommand extends SlashCommand {
         super(creator, {
             name: 'randevu',
             description: 'Terapi randevusu almak için kullanılır.',
-            guildIDs: [IDS.guild],
             options: [
                 {
                     type: CommandOptionType.STRING,
