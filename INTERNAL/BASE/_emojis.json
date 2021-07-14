@@ -92,5 +92,11 @@
     "st_offline": "<a:st_offline:843090638836072468>",
     "st_other": "<a:st_stream:843090638894792714>",
     "komutonay": "<a:komutonay:864975016558592030>",
-    "komutret": "<a:komutret:864975019901976587>"
+    "komutret": "<a:komutret:864975019901976587>",
+    "solbar_dolu": "<a:solbar_dolu:864987254060613682>",
+    "sagbar_dolu": "<a:sagbar_dolu:864987287196663808>",
+    "ortabar_dolu": "<a:bar_dolu:864987269358420018>",
+    "solbar": "<:solbar:864987168094683180>",
+    "sagbar": "<:sagbar:864987226860290048>",
+    "ortabar": "<:bar:864987183613870100>"
 }
