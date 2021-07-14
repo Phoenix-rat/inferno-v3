@@ -28,8 +28,8 @@ class Git extends Command {
         if (message.member.roles.cache.has(roles.get("owner").value() && (mentioned.voice.channel.parentID !== channels.get("st_private").value()))) return await message.member.voice.setChannel(mentioned.voice.channel.id);
         
         try {
-            await message.react("✔️");
-            await message.react("❌");
+            await message.react(emojis.get("komutonay").value().split(':')[2].replace('>', ''));
+            await message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
         } catch (error) {
             console.error(error);
         }
@@ -45,16 +45,16 @@ class Git extends Command {
                 return message.channel.send("Hangi kanalda olduğunu bulamıyorum!");
             }
             switch (reaction.emoji.name) {
-                case "✔️":
+                case emojis.get("komutonay").value().split(':')[2].replace('>', ''):
                     await message.member.voice.setChannel(kanal.id);
                     collector.stop();
                     await message.reactions.removeAll();
-                    await message.react("✔️");
+                    await message.react(emojis.get("komutonay").value().split(':')[2].replace('>', ''));
                     break;
-                case "❌":
+                case emojis.get("komutret").value().split(':')[2].replace('>', ''):
                     collector.stop();
                     await message.reactions.removeAll();
-                    await message.react("❌");
+                    await message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
                     break;
                 default:
                     break;
