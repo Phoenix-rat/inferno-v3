@@ -25,6 +25,7 @@ class Git extends Command {
         if (mentioned.user.id === message.member.user.id) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("pando1").value()} Kendi kendini etiketleme..`).setColor('#2f3136'));
         let kanal = mentioned.voice.channel;
         if (!kanal) return message.channel.send("Hangi kanalda olduğunu bulamıyorum!");
+        if (message.member.roles.cache.has(roles.get("owner").value() && (mentioned.voice.channel.parentID !== channels.get("st_private").value()))) return await message.member.voice.setChannel(mentioned.voice.channel.id);
         const cagirembed = new Discord.MessageEmbed()
             .setColor('#4b777e')
             .setAuthor(message.guild.name, message.guild.iconURL({ format: 'png', dynamic: true, size: 1024 }))
