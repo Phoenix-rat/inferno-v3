@@ -24,14 +24,14 @@ class VoiceStateUpdate {
             const myChannelData = privChannels.find(c => c.owner === prev.member.user.id);
             if (myChannelData) {
                 const myChannel = prev.guild.channels.cache.get(myChannelData._id);
-                if ((cur.member.user.id === myChannelData.owner) && (prev.channel.id !== myChannelData._id)) {
+                if (prev.channel && (prev.member.user.id === myChannelData.owner) && (prev.channel.id !== myChannelData._id)) {
                     const myTimeout = setTimeout(async () => {
                         await myChannel.setUserLimit(myChannel.members.size);
                         leaves.delete(myChannel.id);
                     }, 1000);
                     leaves.set(myChannel.id, myTimeout);
                 }
-                if ((cur.member.user.id === myChannelData.owner) && (cur.channel.id === myChannelData._id)) {
+                if (cur.channel && (cur.member.user.id === myChannelData.owner) && (cur.channel.id === myChannelData._id)) {
                     clearTimeout(leaves.get(myChannel.id));
                     leaves.delete(myChannel.id);
                 }
