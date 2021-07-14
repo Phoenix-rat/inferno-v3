@@ -27,23 +27,15 @@ class Gel extends Command {
         let kanal = message.member.voice.channel;
         if (!kanal) return message.channel.send("Hangi kanalda olduğunu bulamıyorum!");
         if (message.member.roles.cache.has(roles.get("owner").value() && (mentioned.voice.channel.parentID !== channels.get("st_private").value()))) return await mentioned.voice.setChannel(message.member.voice.channel.id);
-        const cagirembed = new Discord.MessageEmbed()
-            .setColor('#4b777e')
-            .setAuthor(message.guild.name, message.guild.iconURL({ format: 'png', dynamic: true, size: 1024 }))
-            .setFooter(message.member.displayName, message.member.user.displayAvatarURL())
-            .setTimestamp()
-            //.setTitle("Birisinin sana ihtiyacı var!")
-            .setDescription(`Sevgili ${mentioned}, ${message.member} Seni çağırıyor.`)
-            .setThumbnail(mentioned.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 }))
+        
         try {
-            var akısmoji = await message.channel.send(cagirembed);
-            await akısmoji.react("✔️");
-            await akısmoji.react("❌");
+            await message.react("✔️");
+            await message.react("❌");
         } catch (error) {
             console.error(error);
         }
         const filter = (reaction, user) => user.id !== message.client.user.id;
-        const collector = akısmoji.createReactionCollector(filter, {
+        const collector = message.createReactionCollector(filter, {
             time: 120000
         });
         collector.on("collect", async (reaction, user) => {
@@ -57,10 +49,12 @@ class Gel extends Command {
                 case "✔️":
                     await message.member.voice.setChannel(kanal.id);
                     collector.stop();
+                    await message.reactions.removeAll();
                     await message.react("✔️");
                     break;
                 case "❌":
                     collector.stop();
+                    await message.reactions.removeAll();
                     await message.react("❌");
                     break;
                 default:
@@ -68,7 +62,7 @@ class Gel extends Command {
             }
         });
         collector.on("end", async () => {
-            await akısmoji.delete();
+            return;
         });
     }
 }
