@@ -83,7 +83,7 @@ class VoiceStateUpdate {
                 }
             });
             let selector = "voice-other";
-            if (!entry.selfMute && !entry.serverMute && !entry.selfDeaf && !entry.serverDeaf && (entry.type === "st_public")) selector = "voice-general"
+            if (!entry.selfMute && !entry.serverMute && !entry.selfDeaf && !entry.serverDeaf && (entry.type === "st_public")) selector = "voice-public"
             const pointData = await Points_profile.findOne({ _id: cur.member.user.id });
             if (pointData) {
                 const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
@@ -91,7 +91,7 @@ class VoiceStateUpdate {
                     $push: {
                         points: {
                             type: selector,
-                            points: selector === "voice-general" ? pointConfig.voicePublicPerMinute * Math.floor(comparedate(entry.created) / 60000) : pointConfig.voiceOtherPerMinute * Math.floor(comparedate(entry.created) / 60000),
+                            points: selector === "voice-public" ? pointConfig.voicePublicPerMinute * Math.floor(comparedate(entry.created) / 60000) : pointConfig.voiceOtherPerMinute * Math.floor(comparedate(entry.created) / 60000),
                             channel: entry.channelID
                         }
                     }

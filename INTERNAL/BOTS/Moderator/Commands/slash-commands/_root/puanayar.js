@@ -98,7 +98,7 @@ module.exports = class JailCommand extends SlashCommand {
                             required: true,
                             choices: [
                                 {
-                                    name: "Role Geçme Puanı",
+                                    name: "Rolü Geçme Puanı",
                                     value: "requiredPoint"
                                 },
                                 {
@@ -165,6 +165,11 @@ module.exports = class JailCommand extends SlashCommand {
                     {
                         type: ApplicationCommandPermissionType.USER,
                         id: '479293073549950997',
+                        permission: true
+                    },
+                    {
+                        type: ApplicationCommandPermissionType.USER,
+                        id: '484873072164208640',
                         permission: true
                     }
                 ]
