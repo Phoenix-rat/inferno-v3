@@ -33,15 +33,15 @@ class Kur extends Command {
         if (!role) return await message.channel.send("Böyle bir rol yok")
         await Points_config.create({
             _id: role.id,
-            requiredPoint: args[1],
-            expiringHours: args[2],
-            registry: args[3],
-            invite: args[4],
-            tagged: args[5],
-            authorized: args[6],
-            message: args[7],
-            voicePublicPerMinute: args[8],
-            voiceOtherPerMinute: args[9]
+            requiredPoint: 0,
+            expiringHours: 0,
+            registry: 0,
+            invite: 0,
+            tagged: 0,
+            authorized: 0,
+            message: 0,
+            voicePublicPerMinute: 0,
+            voiceOtherPerMinute: 0
         });
         await message.channel.send(new Discord.MessageEmbed().setDescription(`${role} rolü için gereken görev yapılandırması oluşturuldu.`))
         
