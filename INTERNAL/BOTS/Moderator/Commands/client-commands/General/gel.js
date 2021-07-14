@@ -29,8 +29,8 @@ class Gel extends Command {
         if (message.member.roles.cache.has(roles.get("owner").value() && (mentioned.voice.channel.parentID !== channels.get("st_private").value()))) return await mentioned.voice.setChannel(message.member.voice.channel.id);
         
         try {
-            await message.react("✔️");
-            await message.react("❌");
+            await message.react(emojis.get("komutonay").value().split(':')[2].replace('>', ''));
+            await message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
         } catch (error) {
             console.error(error);
         }
@@ -45,17 +45,17 @@ class Gel extends Command {
                 collector.stop();
                 return message.channel.send("Hangi kanalda olduğunu bulamıyorum!");
             }
-            switch (reaction.emoji.name) {
-                case "✔️":
+            switch (reaction.emoji.id) {
+                case emojis.get("komutonay").value().split(':')[2].replace('>', ''):
                     await message.member.voice.setChannel(kanal.id);
                     collector.stop();
                     await message.reactions.removeAll();
-                    await message.react("✔️");
+                    await message.react(emojis.get("komutonay").value().split(':')[2].replace('>', ''));
                     break;
-                case "❌":
+                case emojis.get("komutret").value().split(':')[2].replace('>', ''):
                     collector.stop();
                     await message.reactions.removeAll();
-                    await message.react("❌");
+                    await message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
                     break;
                 default:
                     break;
