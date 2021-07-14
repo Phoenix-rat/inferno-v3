@@ -25,13 +25,10 @@ class RolSeçim extends Component {
         const channels = await low(client.adapters('channels'));
         const emojis = await low(client.adapters('emojis'));
         const guild = client.guilds.cache.get(ctx.guildID);
-        const mentioned = guild.members.cache.get(ctx.user.id);
-        
-        const voiceChannel = mentioned.voice.channel;
-        if (!voiceChannel || (voiceChannel.parentID !== "857667607121756189")) return;
-        const channelData = await private_channels.findOne({ _id: voiceChannel.id, owner: ctx.user.id });
+
+        const channelData = await private_channels.findOne({ owner: ctx.user.id });
         if (!channelData) return;
-        await voiceChannel.setUserLimit(8)
+        await guild.channels.cache.get(channelData._id).setUserLimit(8);
 
     }
 }
