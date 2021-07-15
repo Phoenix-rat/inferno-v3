@@ -52,6 +52,7 @@ class Say extends Command {
             "value": 65
         });
         const att = new Discord.MessageAttachment(myBar, 'mybar');
+        /*
         const pointData = await Points_profile.findOne({ _id: message.author.id });
         const pointConfig = await Points_config.findOne({ _id: pointData.role });
         const myRole = message.guild.roles.cache.get(pointData.role);
@@ -60,7 +61,8 @@ class Say extends Command {
             .filter(r => r.hoist)
             .filter(r => r.id !== roles.get("booster").value())
             .sort((a, b) => a.rawPosition - b.rawPosition).array().find(role => role.rawPosition > myRole.rawPosition);
-        await message.channel.send(new Discord.MessageEmbed().setDescription(stripIndent`
+            */
+        await message.channel.send(new Discord.MessageEmbed()/*.setDescription(stripIndent`
         **Dante's INFEЯИO** puan bilgileri
         ${message.member} kullanıcısının puan bilgileri
         Yetkisi: ${myRole}
@@ -76,7 +78,7 @@ class Say extends Command {
         Bonus Puan: \`${pointData.points.filter(plog => plog.type === "bonus").map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
         ●▬▬▬▬▬▬▬▬▬▬●
         ${nextRole} rolüne yükselmek için ${pointConfig.expiringHours - checkHours(pointData.created)} saatin var!
-        `).setColor('#7bf3e3').setImage('attachment://mybar').attachFiles(att));
+        `)*/.setColor('#7bf3e3').setImage('attachment://mybar').attachFiles(att));
     }
 }
 
