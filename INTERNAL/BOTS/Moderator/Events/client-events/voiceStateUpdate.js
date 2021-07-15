@@ -97,6 +97,7 @@ class VoiceStateUpdate {
                     }
                 });
             }
+            client.extention.emit('memberPuan', cur.member);
             const pp = await Profile.findOne({ _id: cur.member.user.id });
             if (!pp) await Profile.create({
                 _id: cur.member.user.id,
