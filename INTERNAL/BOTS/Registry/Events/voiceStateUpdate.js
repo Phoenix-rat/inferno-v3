@@ -15,7 +15,7 @@ class VoiceStateUpdate {
         if (prev && prev.channel && cur && cur.channel && (cur.channel.id === prev.channel.id)) return;
         const privChannels = await private_channels.find();
         const channel = client.guild.channels.cache.get(channels.get("oda_olustur").value());
-        if (prev.channel && privChannels.some(c => c._id === prev.channel.id) && (prev.channel.id !== channel.id)) {
+        if (prev.channel && privChannels.some(c => c._id === prev.channel.id)) {
             if (prev.channel && (prev.channel.members.size === 0)) {
                 await prev.channel.delete();
                 await private_channels.deleteOne({ _id: prev.channel.id });
@@ -44,7 +44,7 @@ class VoiceStateUpdate {
             }
             if (cur.channel.id === channel.id) {
                 const oldData = await private_channels.findOne({ owner: cur.member.user.id });
-                if (oldData) return await cur.member.voice.setChannel(oldData._id);
+                if (oldData && cur.guild.channels.cache.get(oldData._id)) return await cur.member.voice.setChannel(oldData._id);
                 const nueva = await channel.clone({
                     name: cur.member.displayName,
                     userLimit: 1,
