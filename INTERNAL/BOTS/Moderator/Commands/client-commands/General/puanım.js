@@ -5,7 +5,7 @@ const { stripIndent } = require('common-tags');
 const Points_profile = require('../../../../../MODELS/Economy/Points_profile');
 const Points_config = require('../../../../../MODELS/Economy/Points_config');
 const { checkHours } = require('../../../../../HELPERS/functions');
-const BarModule = require('@loadingio/loading-bar');
+
 class Say extends Command {
 
     constructor(client) {
@@ -27,9 +27,9 @@ class Say extends Command {
         const roles = await low(client.adapters('roles'));
 
         function bar(point, maxPoint) {
-            const deger = Math.trunc(point * 5 / maxPoint);
+            const deger = Math.trunc(point * 10 / maxPoint);
             let str = "";
-            for (let index = 2; index < 4; index++) {
+            for (let index = 2; index < 9; index++) {
                 if ((deger / index) >= 1) {
                     str = str + emojis.get("ortabar_dolu").value()
                 } else {
@@ -38,21 +38,14 @@ class Say extends Command {
             }
             if (deger === 0) {
                 str = `${emojis.get("solbar").value()}${str}${emojis.get("sagbar").value()}`
-            } else if (deger === 5) {
+            } else if (deger === 10) {
                 str = `${emojis.get("solbar_dolu").value()}${str}${emojis.get("sagbar_dolu").value()}`
             } else {
                 str = `${emojis.get("solbar_dolu").value()}${str}${emojis.get("sagbar").value()}`
             }
             return str;
         }
-        const myBar = new BarModule("myBar", {
-            "stroke": '#f00',
-            "stroke-width": 10,
-            "preset": "fan",
-            "value": 65
-        });
-        const att = new Discord.MessageAttachment(myBar, 'mybar');
-        /*
+
         const pointData = await Points_profile.findOne({ _id: message.author.id });
         const pointConfig = await Points_config.findOne({ _id: pointData.role });
         const myRole = message.guild.roles.cache.get(pointData.role);
@@ -61,8 +54,8 @@ class Say extends Command {
             .filter(r => r.hoist)
             .filter(r => r.id !== roles.get("booster").value())
             .sort((a, b) => a.rawPosition - b.rawPosition).array().find(role => role.rawPosition > myRole.rawPosition);
-            */
-        await message.channel.send(new Discord.MessageEmbed()/*.setDescription(stripIndent`
+
+        await message.channel.send(new Discord.MessageEmbed().setDescription(stripIndent`
         **Dante's INFEЯИO** puan bilgileri
         ${message.member} kullanıcısının puan bilgileri
         Yetkisi: ${myRole}
@@ -78,7 +71,8 @@ class Say extends Command {
         Bonus Puan: \`${pointData.points.filter(plog => plog.type === "bonus").map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
         ●▬▬▬▬▬▬▬▬▬▬●
         ${nextRole} rolüne yükselmek için ${pointConfig.expiringHours - checkHours(pointData.created)} saatin var!
-        `)*/.setColor('#7bf3e3').setImage('attachment://mybar').attachFiles(att));
+        ${bar(pointData.msgPoints + pointData.points.map(plog => plog.point).reduce((a, b) => a + b, 0), pointConfig.requiredPoint)}
+        `).setColor('#7bf3e3'));
     }
 }
 
