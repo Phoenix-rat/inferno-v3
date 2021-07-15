@@ -99,7 +99,7 @@ module.exports = class {
         }
         const pointData = await Points_profile.findOne({ _id: message.author.id });
         if (pointData) {
-            const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
+            const pointConfig = await Points_config.findOne({ _id: pointData.role });
             if (pointData) await Points_profile.updateOne({ _id: message.author.id }, {
                 $inc: { msgPoints: pointConfig.message }
             });
