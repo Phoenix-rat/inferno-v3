@@ -144,7 +144,7 @@ module.exports = class {
         if (!cmd.config.enabled) return;
         if (cmd.config.dmCmd && (message.channel.type !== 'dm')) return message.channel.send(`${emojis.get("dmcmd").value()} Bu komut bir **DM** komutudur.`);
         if (cmd.config.ownerOnly && (message.author.id !== client.config.owner)) return message.channel.send(`${emojis.get("tantus").value()} Bu komutu sadece ${client.owner} kullanabilir.`);
-        if (cmd.config.onTest && !utils.get("helpers").value().includes(message.author.id) && (message.author.id !== client.config.owner)) return message.channel.send(`${emojis.get("ontest").value()} Bu komut henüz **test aşamasındadır**.`);
+        if (cmd.config.onTest && !utils.get("testers").value().includes(message.author.id) && (message.author.id !== client.config.owner)) return message.channel.send(`${emojis.get("ontest").value()} Bu komut henüz **test aşamasındadır**.`);
         if (cmd.config.rootOnly && !utils.get("mod").value().includes(message.author.id) && (message.author.id !== client.config.owner)) return message.channel.send(`${emojis.get("rootonly").value()} Bu komutu sadece **yardımcılar** kullanabilir.`);
         if (cmd.config.adminOnly && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== client.config.owner)) return message.channel.send(`${emojis.get("moddonly").value()} Bu komutu sadece **yöneticiler** kullanabilir.`);
         if (cmd.info.cmdChannel & message.guild && message.guild.channels.cache.get(channels.get(cmd.info.cmdChannel).value()) && (message.channel.id !== channels.get(cmd.info.cmdChannel).value())) return message.channel.send(`${emojis.get("text").value()} Bu komutu ${message.guild.channels.cache.get(channels.get(cmd.info.cmdChannel).value())} kanalında kullanmayı dene!`);
