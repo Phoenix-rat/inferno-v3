@@ -60,18 +60,18 @@ class Say extends Command {
         ${message.member} kullanıcısının puan bilgileri
         Yetkisi: ${myRole}
         ●▬▬▬▬▬▬▬▬▬▬●
-        Toplam Puan: \`${pointData.msgPoints + pointData.points.map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
-        Kayıt Puanı: \`${pointData.points.filter(plog => plog.type === "registry").map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
+        Toplam Puan: \`${pointData.msgPoints + pointData.points.map(plog => plog.points).reduce((a, b) => a + b, 0)}\`
+        Kayıt Puanı: \`${pointData.points.filter(plog => plog.type === "registry").map(plog => plog.points).reduce((a, b) => a + b, 0)}\`
         Mesaj Puanı: \`${pointData.msgPoints}\`
-        Davet Puanı: \`${pointData.points.filter(plog => plog.type === "invite").map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
-        Taglı Puanı: \`${pointData.points.filter(plog => plog.type === "tagged").map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
-        Yetkili Alım Puanı: \`${pointData.points.filter(plog => plog.type === "authorized").map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
-        Public Puanı: \`${pointData.points.filter(plog => plog.type === "voice-public").map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
-        Diğer Ses Puanı: \`${pointData.points.filter(plog => plog.type === "voice-other").map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
-        Bonus Puan: \`${pointData.points.filter(plog => plog.type === "bonus").map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
+        Davet Puanı: \`${pointData.points.filter(plog => plog.type === "invite").map(plog => plog.points).reduce((a, b) => a + b, 0)}\`
+        Taglı Puanı: \`${pointData.points.filter(plog => plog.type === "tagged").map(plog => plog.points).reduce((a, b) => a + b, 0)}\`
+        Yetkili Alım Puanı: \`${pointData.points.filter(plog => plog.type === "authorized").map(plog => plog.points).reduce((a, b) => a + b, 0)}\`
+        Public Puanı: \`${pointData.points.filter(plog => plog.type === "voice-public").map(plog => plog.points).reduce((a, b) => a + b, 0)}\`
+        Diğer Ses Puanı: \`${pointData.points.filter(plog => plog.type === "voice-other").map(plog => plog.points).reduce((a, b) => a + b, 0)}\`
+        Bonus Puan: \`${pointData.points.filter(plog => plog.type === "bonus").map(plog => plog.points).reduce((a, b) => a + b, 0)}\`
         ●▬▬▬▬▬▬▬▬▬▬●
         ${nextRole} rolüne yükselmek için ${pointConfig.expiringHours - checkHours(pointData.created)} saatin var!
-        ${bar(pointData.msgPoints + pointData.points.map(plog => plog.point).reduce((a, b) => a + b, 0), pointConfig.requiredPoint)}
+        ${bar(pointData.msgPoints + pointData.points.map(plog => plog.points).reduce((a, b) => a + b, 0), pointConfig.requiredPoint)}
         `).setColor('#7bf3e3'));
     }
 }
