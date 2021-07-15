@@ -156,7 +156,7 @@ module.exports = class {
             });
             let deyim = `Bu komutu kullanabilmek için ${allowedRoles[0]} rolüne sahip olmalısın!`;
             if (allowedRoles.length > 1) deyim = `Bu komutu kollanabilmek için aşağıdaki rollerden birisine sahip olmalısın:\n${allowedRoles.join(`\n`)}`;
-            if ((allowedRoles.length >= 1) && !allowedRoles.some(role => message.member.roles.cache.has(role.id)) && !message.member.permissions.has("ADMINISTRATOR") && (message.author.id !== client.config.owner)) {
+            if ((allowedRoles.length >= 1) && !allowedRoles.some(role => message.member.roles.cache.has(role.id)) && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== client.config.owner)) {
                 return message.channel.send(embed.setDescription(deyim).setColor('#2f3136'));
             }
         }
