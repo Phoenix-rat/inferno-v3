@@ -86,7 +86,7 @@ class VoiceStateUpdate {
             if (!entry.selfMute && !entry.serverMute && !entry.selfDeaf && !entry.serverDeaf && (entry.type === "st_public")) selector = "voice-public"
             const pointData = await Points_profile.findOne({ _id: cur.member.user.id });
             if (pointData) {
-                const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
+                const pointConfig = await Points_config.findOne({ _id: pointData.role });
                 if (pointData && !pointData.points.filter(point => point.type === selector).find(point => point.invited === member.user.id)) await Points_profile.updateOne({ _id: cur.member.user.id }, {
                     $push: {
                         points: {
