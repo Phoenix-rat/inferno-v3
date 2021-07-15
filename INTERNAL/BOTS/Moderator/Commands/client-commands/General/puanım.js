@@ -5,6 +5,7 @@ const { stripIndent } = require('common-tags');
 const Points_profile = require('../../../../../MODELS/Economy/Points_profile');
 const Points_config = require('../../../../../MODELS/Economy/Points_config');
 const { checkHours } = require('../../../../../HELPERS/functions');
+const BarModule = require('@loadingio/loading-bar');
 class Say extends Command {
 
     constructor(client) {
@@ -44,7 +45,13 @@ class Say extends Command {
             }
             return str;
         }
-
+        const myBar = new BarModule("myBar", {
+            "stroke": '#f00',
+            "stroke-width": 10,
+            "preset": "fan",
+            "value": 65
+        });
+        const att = new Discord.MessageAttachment(myBar, 'mybar');
         const pointData = await Points_profile.findOne({ _id: message.author.id });
         const pointConfig = await Points_config.findOne({ _id: pointData.role });
         const myRole = message.guild.roles.cache.get(pointData.role);
@@ -69,7 +76,7 @@ class Say extends Command {
         Bonus Puan: \`${pointData.points.filter(plog => plog.type === "bonus").map(plog => plog.point).reduce((a, b) => a + b, 0)}\`
         ●▬▬▬▬▬▬▬▬▬▬●
         ${nextRole} rolüne yükselmek için ${pointConfig.expiringHours - checkHours(pointData.created)} saatin var!
-        `).setColor('#7bf3e3'));
+        `).setColor('#7bf3e3').setImage('attachment://mybar').attachFiles(att));
     }
 }
 
