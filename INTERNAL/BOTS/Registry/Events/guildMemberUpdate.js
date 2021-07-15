@@ -35,7 +35,6 @@ class GuildMemberUpdate {
                 let saver = new models({ _id: cur.user.id, roles: roleNames });
                 await saver.save();
             } else {
-                console.log(entry.changes[0]);
                 await models.updateOne({ _id: cur.user.id }, { $set: { roles: roleNames } });
                 client.logger.log(`${entry.executor.username} => [${entry.changes[0].key}] ${entry.target.username} : ${entry.changes[0].new[0].name}`, "mngdb");
                 client.extention.emit('Logger', 'Registry', entry.executor.id, "MEMBER_ROLE_UPDATE", `${entry.target.username} kullanıcısı, ${entry.changes[0].new[0].name} rolü (${entry.changes[0].key})`);
