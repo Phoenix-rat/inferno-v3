@@ -38,7 +38,7 @@ class Sicil extends Command {
                 ID: index + 1,
                 Ceza: `${element.punish}`,
                 Sebep: `${element.reason}`,
-                Gün: `${new Date(element.created).getDay()}/${new Date(element.created).getMonth() + 1}/${new Date(element.created).getFullYear().toString().slice(2)} ${new Date(element.created).getHours()}:${new Date(element.created).getMinutes()}`
+                Gün: `${new Date(element.created).getDay() + 1}/${new Date(element.created).getMonth() + 1}/${new Date(element.created).getFullYear().toString().slice(2)} ${new Date(element.created).getHours()}:${new Date(element.created).getMinutes()}`
             };
             asdf.push(shem);
         }
