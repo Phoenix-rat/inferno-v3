@@ -20,7 +20,7 @@ class Sicil extends Command {
     }
 
     async run(client, message, args) {
-        const embed = new Discord.MessageEmbed().setColor('#2f3136');
+        const embed = new Discord.MessageEmbed().setTimestap().setAuthor().setColor('BLACK');
         let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0] || message.member.user.id;
         const doc = await sicil.findOne({ _id: mentionedID });
         if (!doc) return message.channel.send("Dosya bulunamadı!");
@@ -36,9 +36,9 @@ class Sicil extends Command {
             const element = scl[index];
             const shem = {
                 ID: index + 1,
-                Ceza: `${element.punish} - ${element.type}`,
+                Ceza: `${element.punish}`,
                 Sebep: `${element.reason}`,
-                Gün: checkDays(element.created)
+                Gün: Date(element.created)
             };
             asdf.push(shem);
         }
@@ -53,7 +53,7 @@ class Sicil extends Command {
         **Sorumlu:**  ${message.guild.members.cache.get(ecrin.executor) || "Bilinmiyor"}
         **Zaman:** \`${checkDays(ecrin.created)} gün önce\`
         **Süre:** \`${ecrin.duration}\`
-        `).setTitle("Pasific EMNIYET");
+        `).setTitle("† INFEЯИO EMNIYET");
         message.channel.send(ecrinim);
     }
 
