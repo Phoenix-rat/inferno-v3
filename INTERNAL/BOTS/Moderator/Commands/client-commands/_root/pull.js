@@ -42,16 +42,16 @@ class Kur extends Command {
             });
             ls.on('close', function (code) {
                 if (code == 0)
-                    console.log('Stop');
+                    message.channel.send(`\`\`\`${data.slice(0, 1980)}...\`\`\``);
                 else
-                    console.log('Start');
+                    message.channel.send(`\`\`\`${data.slice(0, 1980)}...\`\`\``);
             });
             setTimeout(() => {
                 ls.kill();
             }, 100);
         }
         Process();
-        
+
     }
 
 }
