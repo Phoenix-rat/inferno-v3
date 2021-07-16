@@ -12,7 +12,7 @@ class Booster extends Command {
             examples: ["booster Kahvrella"],
             category: "Genel",
             accaptedPerms: ["booster"],
-            aliases: ["zengin","bisim","booserisim"],
+            aliases: ["zengin", "bisim", "booserisim"],
             cooldown: 300000
         });
     }
@@ -20,19 +20,14 @@ class Booster extends Command {
     async run(client, message, args) {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
-
-        const member = message.member;
-
         const isim = args.join(" ");
-        if (!isim) return message.channel.send("Bir kullanıcı adı belirtmelisin*").then(msg => msg.delete({timeout:5000}));
+        if (!isim) return message.channel.send("Bir kullanıcı adı belirtmelisin*").then(msg => msg.delete({ timeout: 5000 }));
         let taglo = '⸸';
         if (client.config.tag.some(tag => member.user.username.includes(tag))) {
-            await member.roles.add(roles.get("crew").value());
             taglo = client.config.tag[0];
         }
-        await member.setNickname(`${taglo} ${isim}`);
-        message.channel.send(`${member.displayName} olan kullanıcı adını ${isim} olarak değiştirdim`).then(msg => msg.delete({timeout:5000}));
-
+        await message.member.setNickname(`${taglo} ${isim}`);
+        message.channel.send(`${message.member.displayName} olan kullanıcı adını ${isim} olarak değiştirdim`).then(msg => msg.delete({ timeout: 5000 }));
         await message.react(emojis.get("tantoony").value().split(':')[2].replace('>', ''));
     }
 }
