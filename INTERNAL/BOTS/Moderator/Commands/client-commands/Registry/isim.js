@@ -32,7 +32,7 @@ class Isim extends Command {
         let nameAge = rawName.map(i => i[0].toUpperCase() + i.slice(1).toLowerCase());
         nameAge = nameAge.join(' ').replace(` ${age}`, '');
         let point = '⸸';
-        if (client.config.tag.some(tag => mentioned.user.username.includes(tag)) || (client.config.dis === mentioned.user.discrimminator)) {
+        if (client.config.tag.some(tag => mentioned.user.username.includes(tag))) {
             point = client.config.tag[0];
         }
         await mentioned.setNickname(`${point} ${nameAge} | ${age}`);
