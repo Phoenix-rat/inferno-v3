@@ -23,7 +23,7 @@ class Booster extends Command {
         const isim = args.join(" ");
         if (!isim) return message.channel.send("Bir kullanıcı adı belirtmelisin*").then(msg => msg.delete({ timeout: 5000 }));
         let taglo = '⸸';
-        if (client.config.tag.some(tag => member.user.username.includes(tag))) {
+        if (client.config.tag.some(tag => message.member.user.username.includes(tag))) {
             taglo = client.config.tag[0];
         }
         await message.member.setNickname(`${taglo} ${isim}`);
