@@ -25,7 +25,7 @@ class RolSeçim extends Component {
         const emojis = await low(client.adapters('emojis'));
         const guild = client.guilds.cache.get(ctx.guildID);
         const mentioned = guild.members.cache.get(ctx.user.id);
-        const myRol = guild.roles.cache.get("sevgili_yok");
+        const myRol = guild.roles.cache.get(roles.get("sevgili_yok").value());
         if (mentioned.roles.cache.has(myRol.id)) {
             await mentioned.roles.remove(myRol.id);
             return await ctx.send(`\`${myRol.name}\` rolü üzerinizden alındı`, {
