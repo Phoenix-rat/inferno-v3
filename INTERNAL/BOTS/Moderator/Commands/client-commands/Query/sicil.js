@@ -45,7 +45,7 @@ class Sicil extends Command {
         const embeddoc = stringTable.create(asdf, {
             headers: ['ID', 'Ceza', 'Sebep', 'Gün']
         });
-        if (!sayi(sth)) return message.channel.send(embed.setDescription(`\`\`\`md\n${embeddoc}\`\`\``).setTitle('SİCİL KONTROL'));
+        if (!sayi(sth)) return message.channel.send(embed.setDescription(`\`\`\`md\n${embeddoc}\`\`\``).setTitle('† INFEЯИO Sicil Kontrol'));
         const ecrin = scl[sth - 1];
         const ecrinim = embed.setDescription(stripIndent`
         **Tür:** \`${ecrin.punish} - ${ecrin.type}\`
