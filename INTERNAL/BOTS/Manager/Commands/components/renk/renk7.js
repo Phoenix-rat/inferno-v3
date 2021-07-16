@@ -31,12 +31,12 @@ class RolSeçim extends Component {
         const myRol = guild.roles.cache.get(roles.get("renk_7").value());
         if (mentioned.roles.cache.has(myRol.id)) {
             await mentioned.roles.remove(myRol.id);
-            return await ctx.send(`\`${myRol.name}\` rolü üzerinizden alındı`, {
+            return await ctx.send(`\`Neon Havuç\` rolü üzerinizden alındı`, {
                 ephemeral: true
             });
         } else {
             await mentioned.roles.add(myRol.id);
-            return await ctx.send(`\`${myRol.name}\` rolü üzerinize verildi`, {
+            return await ctx.send(`\`Neon Havuç\` rolü üzerinize verildi`, {
                 ephemeral: true
             });
         }
