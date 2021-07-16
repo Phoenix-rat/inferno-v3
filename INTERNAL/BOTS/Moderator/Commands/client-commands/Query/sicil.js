@@ -20,7 +20,6 @@ class Sicil extends Command {
     }
 
     async run(client, message, args) {
-        const embed = new Discord.MessageEmbed().setTimestamp().setColor('BLACK');
         let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0] || message.member.user.id;
         const doc = await sicil.findOne({ _id: mentionedID });
         if (!doc) return message.channel.send("Dosya bulunamadı!");
@@ -45,7 +44,7 @@ class Sicil extends Command {
         const embeddoc = stringTable.create(asdf, {
             headers: ['ID', 'Ceza', 'Sebep', 'Gün']
         });
-        if (!sayi(sth)) return message.channel.send(embed.setDescription(`\`\`\`md\n${embeddoc}\`\`\``).setTitle('† INFEЯИO Sicil Kontrol'));
+        if (!sayi(sth)) return message.channel.send(`\`\`\`md\n${embeddoc}\`\`\``);
         const ecrin = scl[sth - 1];
         const ecrinim = embed.setDescription(stripIndent`
         **Tür:** \`${ecrin.punish} - ${ecrin.type}\`
