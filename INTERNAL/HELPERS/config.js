@@ -7,7 +7,7 @@ module.exports = {
 	prefix: '.',
     project: "winner",
     status: {
-        name: "Tantoony 🤍 INFEЯИO",
+        name: "Tantoony 🤍 Kahve",
         type: "LISTENING"
     },
     tag: ['†']

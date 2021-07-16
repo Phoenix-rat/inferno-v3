@@ -35,14 +35,15 @@ class Sicil extends Command {
         for (let index = 0; index < scl.length; index++) {
             const element = scl[index];
             const shem = {
-                no: index + 1,
-                tür: `${element.punish} - ${element.type}`,
-                gün: checkDays(element.created)
+                ID: index + 1,
+                Ceza: `${element.punish} - ${element.type}`,
+                Sebep: `${element.reason}`,
+                Gün: checkDays(element.created)
             };
             asdf.push(shem);
         }
         const embeddoc = stringTable.create(asdf, {
-            headers: ['no', 'tür', 'gün']
+            headers: ['ID', 'Ceza', 'Sebep', 'Gün']
         });
         if (!sayi(sth)) return message.channel.send(embed.setDescription(`\`\`\`md\n${embeddoc}\`\`\``).setTitle('SİCİL KONTROL'));
         const ecrin = scl[sth - 1];
