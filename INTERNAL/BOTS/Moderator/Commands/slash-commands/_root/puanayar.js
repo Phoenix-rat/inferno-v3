@@ -205,6 +205,9 @@ module.exports = class JailCommand extends SlashCommand {
                     voicePublicPerMinute: ctx.options["yap"]["ses-public-puan"],
                     voiceOtherPerMinute: ctx.options["yap"]["ses-diğer-puan"],
                 });
+                await ctx.send(`Başarıyla oluşturuldu`, {
+                    ephemeral: true
+                });
                 break;
 
             case "düzenle":
@@ -212,6 +215,9 @@ module.exports = class JailCommand extends SlashCommand {
                     ephemeral: true
                 });
                 await Points_config.updateOne({ _id: ctx.options["düzenle"]["rol"] }, { $set: { [ctx.options["düzenle"]["seçenek"]]: ctx.options["düzenle"]["değer"] } });
+                await ctx.send(`Başarıyla düzenlendi`, {
+                    ephemeral: true
+                });
                 break;
 
             case "sil":
@@ -219,6 +225,9 @@ module.exports = class JailCommand extends SlashCommand {
                     ephemeral: true
                 });
                 await Points_config.deleteOne({ _id: ctx.options["sil"]["rol"] });
+                await ctx.send(`Başarıyla silindi`, {
+                    ephemeral: true
+                });
                 break;
             default:
                 break;
