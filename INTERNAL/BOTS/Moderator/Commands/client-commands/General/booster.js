@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
-const lala = require('../../../../../BASE/personels.json')
+
 class Booster extends Command {
 
     constructor(client) {
@@ -22,7 +22,8 @@ class Booster extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
 
-        const member = client.guilds.cache.get(lala.guild).members.cache.get(message.member.id);
+        const member = message.member;
+        
         const isim = args.join(" ");
         if (!isim) return message.channel.send("Bir kullanıcı adı belirtmelisin*").then(msg => msg.delete({timeout:5000}));
         let taglo = '⸸';
