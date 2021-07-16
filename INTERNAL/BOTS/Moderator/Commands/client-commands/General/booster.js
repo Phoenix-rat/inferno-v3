@@ -24,15 +24,16 @@ class Booster extends Command {
 
         const member = client.guilds.cache.get(lala.guild).members.cache.get(message.member.id);
         const isim = args.join(" ");
-        if (!isim) return message.channel.send("Bir kullanıcı adı belirtmelisin*");
+        if (!isim) return message.channel.send("Bir kullanıcı adı belirtmelisin*").then(msg => msg.delete({timeout:5000}));
         let taglo = '⸸';
         if (client.config.tag.some(tag => member.user.username.includes(tag))) {
             await member.roles.add(roles.get("crew").value());
             taglo = client.config.tag[0];
         }
         await member.setNickname(`${taglo} ${isim}`);
-        message.channel.send(`${member.displayName} olan kullanıcı adını ${isim} olarak değiştirdim`)
-       message.react(emojis.get("tantoony").value())
+        message.channel.send(`${member.displayName} olan kullanıcı adını ${isim} olarak değiştirdim`).then(msg => msg.delete({timeout:5000}));
+
+        await message.react(emojis.get("tantoony").value().split(':')[2].replace('>', ''));
     }
 }
 
