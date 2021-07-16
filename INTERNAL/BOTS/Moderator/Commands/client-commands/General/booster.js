@@ -13,7 +13,6 @@ class Booster extends Command {
             category: "Genel",
             accaptedPerms: ["booster"],
             aliases: ["zengin","bisim","booserisim"],
-            cmdChannel: "bot-komut",
             cooldown: 300000
         });
     }
