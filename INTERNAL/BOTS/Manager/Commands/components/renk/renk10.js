@@ -28,7 +28,7 @@ class RolSeçim extends Component {
         if (!mentioned.user.username.includes(client.config.tag[0])) return ctx.send(`Bu buton sadece **Taglı** üyelerimize özel.`, {
             ephemeral: true
         });
-        const myRol = guild.roles.cache.get("renk_10");
+        const myRol = guild.roles.cache.get(roles.get("renk_10").value());
         if (mentioned.roles.cache.has(myRol.id)) {
             await mentioned.roles.remove(myRol.id);
             return await ctx.send(`\`${myRol.name}\` rolü üzerinizden alındı`, {
