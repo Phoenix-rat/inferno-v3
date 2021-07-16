@@ -25,6 +25,9 @@ class RolSeçim extends Component {
         const emojis = await low(client.adapters('emojis'));
         const guild = client.guilds.cache.get(ctx.guildID);
         const mentioned = guild.members.cache.get(ctx.user.id);
+        if (!mentioned.user.username.includes(client.config.tag[0])) return ctx.send(`Bu buton sadece **Taglı** üyelerimize özel.`, {
+            ephemeral: true
+        });
         const myRol = guild.roles.cache.get("renk_3");
         if (mentioned.roles.cache.has(myRol.id)) {
             await mentioned.roles.remove(myRol.id);
