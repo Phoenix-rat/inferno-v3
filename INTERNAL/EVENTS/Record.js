@@ -1,5 +1,5 @@
 const Punishments = require('../MODELS/StatUses/Punishments');
-
+const gen = require('shortid');
 class Record {
     constructor(client) {
         this.client = client;
@@ -7,6 +7,7 @@ class Record {
 
     async run(user, executor, reason, punish, type, duration) {
         const peer = {
+            id: gen.generate(),
             reason: reason,
             executor: executor,
             punish: punish,

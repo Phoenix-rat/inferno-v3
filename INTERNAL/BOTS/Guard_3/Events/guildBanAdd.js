@@ -2,6 +2,7 @@ const Permissions = require('../../../MODELS/Temprorary/Permissions');
 const Punishments = require('../../../MODELS/StatUses/Punishments');
 const low = require('lowdb');
 const { checkDays } = require('../../../HELPERS/functions');
+const gen = require('shortid');
 
 class GuildBanAdd {
     constructor(client) {
@@ -23,7 +24,8 @@ class GuildBanAdd {
         if ((permission && (permission.count > 0)) || utils.get("root").value().includes(entry.executor.id) || (banlog.length < 5)) {
             if (permission) await Permissions.updateOne({ user: entry.executor.id, type: "ban", effect: "member" }, { $inc: { count: -1 } });
             const peer = {
-                reason: entry.reeason ? entry.reason : "Belirtilmemiş",
+                id: gen.generate(),
+                reason: entry.reeason || "Belirtilmemiş",
                 executor: entry.executor.id,
                 punish: "Ban",
                 type: "Perma",

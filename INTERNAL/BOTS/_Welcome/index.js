@@ -30,7 +30,7 @@ for (let tokenim = 0; tokenim < myTokens.length; tokenim++) {
     client.on("ready", async () => {
         await client.channels.cache.get("860909021406036031").join();
         await client.user.setPresence({activity: {
-            name: "Tantoony 🤍 INFEЯИO",
+            name: "Tantoony 🤍 Kahve",
             type: "LISTENING"
         }});
     });
