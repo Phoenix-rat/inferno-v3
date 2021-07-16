@@ -5,7 +5,7 @@ const low = require('lowdb');
 class RolSeçim extends Component {
     constructor(client) {
         super(client, {
-            name: "katılımcı_secim",
+            name: "burç_secim",
             channel: "rol-al",
             accaptedPerms: [],
             cooldown: 10000,
@@ -25,9 +25,10 @@ class RolSeçim extends Component {
         const emojis = await low(client.adapters('emojis'));
         const guild = client.guilds.cache.get(ctx.guildID);
         const mentioned = guild.members.cache.get(ctx.user.id);
+        if (!ctx.data.data.values) return await await mentioned.roles.remove(Object.keys(roles.value()).filter(key => key.startsWith("burc_")).map(key => roles.get(key).value()));
         const roleIDs = ctx.data.data.values.map(v => roles.get(v).value());
         const rolArray = roleIDs.map(rID => guild.roles.cache.get(rID));
-        await mentioned.roles.remove(Object.keys(roles.value()).filter(key => key.startsWith("katılımcı_")).map(key => roles.get(key).value()));
+        await mentioned.roles.remove(Object.keys(roles.value()).filter(key => key.startsWith("burc_")).map(key => roles.get(key).value()));
         await mentioned.roles.add(roleIDs);
         const responseEmbed = new Discord.MessageEmbed().setDescription(`Sana;\n ${rolArray.join('\n')}\nrollerini verdim.`);
     }

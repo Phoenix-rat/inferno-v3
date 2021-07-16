@@ -57,6 +57,14 @@ module.exports = {
       cwd: "./INTERNAL/BOTS/Moderator"
     },
     {
+      name: "Autorole",
+      script: 'index.js',
+      watch: false,
+      exec_mode: "cluster",
+      max_memory_restart: "2G",
+      cwd: "./INTERNAL/BOTS/Manager"
+    },
+    {
       name: "Welcome",
       script: 'index.js',
       watch: false,
