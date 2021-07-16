@@ -12,7 +12,7 @@ class Booster extends Command {
             examples: ["booster Kahvrella"],
             category: "Genel",
             accaptedPerms: ["booster"],
-            aliases: ["booster","bisim","booserisim"],
+            aliases: ["zengin","bisim","booserisim"],
             cmdChannel: "bot-komut",
             cooldown: 300000
         });
@@ -23,7 +23,7 @@ class Booster extends Command {
         const emojis = await low(client.adapters('emojis'));
 
         const member = message.member;
-        
+
         const isim = args.join(" ");
         if (!isim) return message.channel.send("Bir kullanıcı adı belirtmelisin*").then(msg => msg.delete({timeout:5000}));
         let taglo = '⸸';
