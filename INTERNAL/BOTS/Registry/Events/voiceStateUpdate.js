@@ -17,8 +17,8 @@ class VoiceStateUpdate {
         const channel = client.guild.channels.cache.get(channels.get("oda_olustur").value());
         if (prev.channel && privChannels.some(c => c._id === prev.channel.id)) {
             if (prev.channel && (prev.channel.members.size === 0)) {
-                await prev.channel.delete();
                 await private_channels.deleteOne({ _id: prev.channel.id });
+                await prev.channel.delete();
                 return;
             }
             const myChannelData = privChannels.find(c => c.owner === prev.member.user.id);
