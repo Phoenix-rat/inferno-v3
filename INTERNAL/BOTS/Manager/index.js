@@ -38,7 +38,7 @@ const { GatewayServer } = require("slash-create");
 client.fetchApplication().then((app) => {
     const creator = new SlashCreator({
         applicationID: app.id,
-        publicKey: process.env.publicKey,
+        publicKey: process.env.publicKey_2,
         token: process.env.token_8,
         allowedMentions: {
             everyone: false,
