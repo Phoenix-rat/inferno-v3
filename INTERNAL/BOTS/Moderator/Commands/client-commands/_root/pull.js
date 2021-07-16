@@ -1,7 +1,5 @@
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
-const core = require('ytdl-core');
-const yt = require('scrape-yt');
 const Discord = require('discord.js');
 const { stripIndents } = require("common-tags");
 const children = require("child_process");
