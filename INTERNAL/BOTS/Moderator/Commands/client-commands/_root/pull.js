@@ -35,23 +35,23 @@ class Kur extends Command {
         function Process() {
             var ls = children.exec(`cd /home/${client.config.project}/${utils.get("dir").value()}; git pull`);
             ls.stdout.on('data', function (data) {
-                console.log(data);
+                message.channel.send(`\`\`\`${data.slice(0, 1980)}...\`\`\``);
             });
             ls.stderr.on('data', function (data) {
-                console.log(data);
+                message.channel.send(`\`\`\`${data.slice(0, 1980)}...\`\`\``);
             });
             ls.on('close', function (code) {
                 if (code == 0)
-                    message.channel.send(`\`\`\`${data.slice(0, 1980)}...\`\`\``);
+                    console.log('Stop');
                 else
-                    message.channel.send(`\`\`\`${data.slice(0, 1980)}...\`\`\``);
+                    console.log('Start');
             });
             setTimeout(() => {
                 ls.kill();
             }, 100);
         }
         Process();
-
+        
     }
 
 }
