@@ -20,7 +20,7 @@ class Sicil extends Command {
     }
 
     async run(client, message, args) {
-        const embed = new Discord.MessageEmbed().setTimestap().setAuthor().setColor('BLACK');
+        const embed = new Discord.MessageEmbed().setTimestap().setColor('BLACK');
         let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0] || message.member.user.id;
         const doc = await sicil.findOne({ _id: mentionedID });
         if (!doc) return message.channel.send("Dosya bulunamadı!");
