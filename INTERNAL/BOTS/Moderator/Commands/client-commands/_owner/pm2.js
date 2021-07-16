@@ -16,9 +16,9 @@ class pm2 extends Command {
             cooldown: 5000,
             enabled: true,
             adminOnly: false,
-            ownerOnly: true,
+            ownerOnly: false,
             onTest: false,
-            rootOnly: false,
+            rootOnly: true,
             dmCmd: false
         });
     }
