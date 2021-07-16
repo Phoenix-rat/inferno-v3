@@ -129,8 +129,7 @@ class GuildMemberAdd {
             }
         }
         if (registered) {
-            await member.roles.add(roles.get(registered.sex).value());
-            await member.roles.add(roles.get("member").value());
+            await member.roles.add(roles.get(registered.sex).value().concat(roles.get("member").value()));
             client.extention.emit('Logger', 'Registry', member.user.id, 'MEMBER_ADD', 'Kayıtlı');
             return;
         }

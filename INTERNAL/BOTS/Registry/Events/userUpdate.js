@@ -20,7 +20,7 @@ class UserUpdate {
             client.extention.emit('Jail', member, this.client.user.id, "Yasaklı Tag", "Perma", 1);
             await member.roles.add([roles.get("forbidden").value(), roles.get("denied").value()]);
             await member.roles.remove([roles.get("prisoner").value(), roles.get("denied").value()])
-            client.extention.emit('Logger', 'KDE', entry.executor.id, "FORBID_TAG", `${utils.get("forbidden").value().find(tag => !oldUser.username.includes(tag) && newUser.username.includes(tag))} tagını aldığından dolayı hapise atıldı`);
+            client.extention.emit('Logger', 'KDE', newUser.id, "FORBID_TAG", `${utils.get("forbidden").value().find(tag => !oldUser.username.includes(tag) && newUser.username.includes(tag))} tagını aldığından dolayı hapise atıldı`);
             const dmEmbed = new Discord.MessageEmbed().setColor('#2f3136')
                 .setDescription(`Kullanıcı adındaki ${utils.get("forbidden").value().find(tag => !oldUser.username.includes(tag) && newUser.username.includes(tag))} simgesi sunucumuzda yasaklı olan bir tagdır. Simgeyi kullanıcı adından kaldırdığında rollerin direkt olarak geri verilecektir.`);
             await member.send(dmEmbed);
@@ -33,7 +33,7 @@ class UserUpdate {
                 await pjail.roles.forEach(rolename => deletedRoles.push(guild.roles.cache.find(role => role.name === rolename).id));
                 await member.roles.add(deletedRoles);
                 await pjails.deleteOne({ _id: newUser.id });
-                client.extention.emit('Logger', 'KDE', entry.executor.id, "FORBID_TAG", `${utils.get("forbidden").value().find(tag => oldUser.username.includes(tag) && !newUser.username.includes(tag))} tagını çıkardığından dolayı hapisten çıkarıldı`);
+                client.extention.emit('Logger', 'KDE', newUser.id, "FORBID_TAG", `${utils.get("forbidden").value().find(tag => oldUser.username.includes(tag) && !newUser.username.includes(tag))} tagını çıkardığından dolayı hapisten çıkarıldı`);
                 await guild.channels.cache.get(channels.get("ast-ytag").value()).send(embed);
                 const dmEmbed = new Discord.MessageEmbed().setColor('#2f3136')
                     .setDescription(`Kullanıcı adındaki ${utils.get("forbidden").value().find(tag => !oldUser.username.includes(tag) && newUser.username.includes(tag))} simgesini çıkardığın için eski rollerin geri verilmiştir. İyi eğlenceler...`);
@@ -59,7 +59,7 @@ class UserUpdate {
                 await member.roles.remove(member.roles.cache.filter(r => r.editable).array());
                 await member.roles.add(roles.get("welcome").value());
             }
-            client.extention.emit('Logger', 'KDE', entry.executor.id, "AUTO_TAG", `Tag saldı`);
+            client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag saldı`);
         }
         const gangler = await gangs.find();
         const taglar = gangler.map(doc => doc._id);
