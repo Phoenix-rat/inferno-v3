@@ -27,7 +27,7 @@ class Say2 extends Command {
         let relax = await message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("booster").value())).size;
         let baby = await message.guild.voiceStates.cache.filter(v => v.channel).size;
         
-        const saranembed = new MessageEmbed().setTimestamp().setColor("BLACK").setFooter("Kahve ❤ † INFEЯИO").setTitle("† INFEЯИO Ses Bilgileri")
+        const saranembed = new MessageEmbed().setColor("BLACK").setFooter("Kahve ❤ † INFEЯИO").setTitle("† INFEЯИO Ses Bilgileri")
     
         await message.channel.send(saranembed .setDescription(stripIndent`
        ${emojis.get("kahvehac").value()} Sunucuda Toplam ${rain(client, böyle)} Üye Bulunmaktadır.
