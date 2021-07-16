@@ -29,7 +29,7 @@ class Booster extends Command {
         }
         await message.member.setNickname(`${taglo} ${isim}`);
         message.channel.send(`\`${dName.slice(2)}\` olan kullanıcı adını \`${isim}\` olarak değiştirdim`).then(msg => msg.delete({ timeout: 5000 }));
-        await message.react(emojis.get("tantoony").value().split(':')[2].replace('>', ''));
+        await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
     }
 }
 
