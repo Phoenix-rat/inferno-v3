@@ -67,13 +67,13 @@ class Initialize {
         });
     };
     
-    async buttons(path) {
+    async buttons(path, bot) {
         let directories = await readdir(path);
         this.client.logger.log(`Loading a total of ${directories.length} categories.`, "category");
         await directories.forEach((dir) => {
             readdir(path + dir + "/").then((buttons) => {
                 buttons.filter((btn) => btn.split(".").pop() === "js").forEach((btn) => {
-                    const response = this.client.loadButton(path + dir, btn);
+                    const response = this.client.loadButton(path + dir, btn, bot);
                     if (response) {
                         this.client.logger.log(response, "error");
                     }

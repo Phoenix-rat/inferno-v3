@@ -33,7 +33,7 @@ process.on("warning", (warn) => client.logger.log(warn, "varn"));
 process.on("beforeExit", () => console.log('Bitiriliyor...'));
 client.handler.events('/Events', __dirname, 'client-events');
 client.handler.dotCommands('./Commands/client-commands/');
-client.handler.buttons('./Commands/components/');
+client.handler.buttons('./Commands/components/', "Moderator");
 const { SlashCreator } = require("slash-create");
 const { GatewayServer } = require("slash-create");
 client.fetchApplication().then((app) => {

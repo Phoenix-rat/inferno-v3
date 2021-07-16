@@ -129,9 +129,9 @@ class Tantoony extends Client {
         return false;
     }
 
-    loadButton(commandPath, commandName) {
+    loadButton(commandPath, commandName, bott) {
         try {
-            const props = new (require(`../BOTS/Moderator/${commandPath}/${commandName}`))(this);
+            const props = new (require(`../BOTS/${bott}/${commandPath}/${commandName}`))(this);
             this.logger.log(`Loading Button: ${props.info.name}. 👌`, "load");
             props.config.location = commandPath;
             if (props.init) {
@@ -144,7 +144,7 @@ class Tantoony extends Client {
         }
     }
 
-    async unloadButton(commandPath, commandName) {
+    async unloadButton(commandPath, commandName, bott) {
         let command;
         if (this.buttons.has(commandName)) {
             command = this.buttons.get(commandName);
@@ -155,7 +155,7 @@ class Tantoony extends Client {
         if (command.shutdown) {
             await command.shutdown(this);
         }
-        delete require.cache[require.resolve(`../BOTS/Moderator/${commandPath}/${commandName}.js`)];
+        delete require.cache[require.resolve(`../BOTS/${bott}/${commandPath}/${commandName}.js`)];
         return false;
     }
 }
