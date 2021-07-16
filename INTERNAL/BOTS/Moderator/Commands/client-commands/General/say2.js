@@ -2,6 +2,8 @@ const { MessageEmbed } = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
 const { stripIndent } = require('common-tags');
+const { rain } = require("../../../../../HELPERS/functions");
+
 class Say2 extends Command {
 
     constructor(client) {
