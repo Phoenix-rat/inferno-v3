@@ -12,7 +12,7 @@ class Kur extends Command {
             usage: "Kullanım Belirtilmemiş.",
             examples: ["Örnek Bulunmamakta"],
             category: "OWNER",
-            aliases: ["başlat"],
+            aliases: [],
             acceptedRoles: [],
             cooldown: 5000,
             enabled: true,
