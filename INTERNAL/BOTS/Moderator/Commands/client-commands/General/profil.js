@@ -53,6 +53,7 @@ class Anonim extends Command {
          Kayıt eden kullanıcı: ${data.executor}
          Kayıt olma tarihi: ${data.created}
          Kayıt olma bilgileri: ${data.name} ${data.age} - ${data.sex}
+         
         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
         await message.channel.send(embedd);
     }
