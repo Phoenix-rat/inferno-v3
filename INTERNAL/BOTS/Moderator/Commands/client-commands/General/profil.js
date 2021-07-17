@@ -50,7 +50,7 @@ class Anonim extends Command {
 
          **❯ Kayıt Bilgisi**
 
-         Kayıt eden kullanıcı: ${profildata ? message.guld.members.cache.get(profildata.executor) : "Bulunamadı"}
+         Kayıt eden kullanıcı: ${profildata ? message.guild.members.cache.get(profildata.executor) : "Bulunamadı"}
          Kayıt olma tarihi: ${profildata ? checkDays(profildata.created) : "Bilinmiyor"}
          Kayıt olma bilgileri: ${profildata ? `${profildata.name} ${profildata.age} - ${profildata.sex}` : "Bulunamadı"}
         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
