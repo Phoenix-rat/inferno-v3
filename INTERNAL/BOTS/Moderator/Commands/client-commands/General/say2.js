@@ -29,16 +29,13 @@ class Say2 extends Command {
         let relax = await message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("booster").value())).size;
         let baby = await message.guild.voiceStates.cache.filter(v => v.channel).size;
 
-        const saranembed = new MessageEmbed().setColor("BLACK").setThumbnail(message.author.displayAvatarURL({ dynamic: true })).setFooter("Kahve ❤ † INFEЯИO").setTitle("† INFEЯИO Ses Bilgileri");
+        const saranembed = new MessageEmbed().setColor("BLACK").setAuthor("† INFEЯИO Ses Bilgileri", message.author.displayAvatarURL({ dynamic: true })).setFooter("Kahve ❤ † INFEЯИO");
         const obj = {};
         for (let index = 0; index < message.guild.channels.cache.array().length; index++) {
             const myChannel = message.guild.channels.cache.array()[index];
-            const key = obj[client.getPath(channels.value(), myChannel.parentID)];
-            if (!key) {
-                obj[client.getPath(channels.value(), myChannel.parentID)] = 0;
-            } else {
-                obj[client.getPath(channels.value(), myChannel.parentID)] = obj[client.getPath(channels.value(), myChannel.parentID)] + 1
-            }
+            const key = obj[client.getPath(channels.value(), myChannel.parentID)] || 0;
+            obj[client.getPath(channels.value(), myChannel.parentID)] = key + 1
+
         }
         console.log(obj);
 
