@@ -11,8 +11,7 @@ class KayitSil extends Command {
             examples: ["kayitsil 674565119161794560"],
             category: "Kayıt",
             aliases: ["kayıtsil", "kayıtsız", "kayitsiz"],
-            //cmdChannel: "suspicious",
-            accaptedPerms: ["oluozan", "oluozan2", "cmd-all"],
+            accaptedPerms: ["cmd-ceo", "oluozan2", "cmd-all"],
             cooldown: 10000
         });
     };
