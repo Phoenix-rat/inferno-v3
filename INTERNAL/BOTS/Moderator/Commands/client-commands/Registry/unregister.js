@@ -2,7 +2,7 @@ const Command = require('../../../Base/Command');
 const Discord = require('discord.js');
 const nameData = require('../../../../../MODELS/Datalake/Registered');
 const low = require('lowdb');
-class KayitSil extends Command {
+class KayitSil2 extends Command {
     constructor(client) {
         super(client, {
             name: "kayıtsız2",
@@ -32,4 +32,4 @@ class KayitSil extends Command {
         message.channel.send(embed.setDescription(`${member.toString()} üyesi başarıyla kayıtsıza atıldı!`));
     }
 }
-module.exports = KayitSil;
+module.exports = KayitSil2;
