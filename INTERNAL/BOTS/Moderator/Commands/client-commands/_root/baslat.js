@@ -31,7 +31,7 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
 
-        console.log(message.guild.channels.cache.map(c => `${c.name} : ${c.position}`).join('\n'));
+        console.log(message.guild.channels.cache.filter(c => c.type === "category").map(c => `${c.name} : ${c.position}`).join('\n'));
 
 
     }
