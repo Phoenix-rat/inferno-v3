@@ -34,20 +34,28 @@ class Say2 extends Command {
         for (let index = 0; index < message.guild.channels.cache.filter(c => c.type === "voice").array().length; index++) {
             const myChannel = message.guild.channels.cache.filter(c => c.type === "voice").array()[index];
             const key = obj[client.getPath(channels.value(), myChannel.parentID)] || 0;
-            obj[client.getPath(channels.value(), myChannel.parentID)] = key + myChannel.members.filter(m => !m.user.bot).size
-
+            obj[client.getPath(channels.value(), myChannel.parentID)] = key + myChannel.members.size
         }
         console.log(obj);
-
-
+        const lang = {
+            st_public: "Public",
+            st_private: "Private",
+            st_registry: "Kayıt",
+            st_crew: "Yetkili",
+            [undefined]: "Diğer"
+        }
+        const sesler = Object.values(obj).filter(k => obj[k] >= 10).sort((a, b) => obj[b] - obj[a]).slice(0, 3);
+        const deyim = sesler.map(k => `${client.getPath(lang, k)} kanallarında ${obj[k]} kişi bulunmaktadır.`).join('\n');
         await message.channel.send(saranembed.setDescription(stripIndent`
-       ${emojis.get("kahvehac").value()} Sunucuda ${rain(client, böyle)} üye var.
+       ${emojis.get("kahvehac").value()} Sunucuda ${böyle} üye var.
 
-       ${emojis.get("kahvehac").value()} Aktif olarak ${rain(client, ağlarım)} üye var.
+       ${emojis.get("kahvehac").value()} Aktif olarak ${ağlarım} üye var.
 
-       ${emojis.get("kahvehac").value()} Tagımızı taşıyarak bize destek olan ${rain(client, gitme)} üye var.
+       ${emojis.get("kahvehac").value()} Tagımızı taşıyarak bize destek olan ${gitme} üye var.
 
-       ${emojis.get("kahvehac").value()} Ses Kanallarında ${rain(client, baby)} Üye Bulunmaktadır.
+       ${emojis.get("kahvehac").value()} Ses Kanallarında ${baby} Üye Bulunmaktadır.
+
+       ${sesler === 0 ? "" : deyim}
         `));
     }
 }
