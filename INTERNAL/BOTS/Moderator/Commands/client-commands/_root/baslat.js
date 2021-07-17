@@ -37,6 +37,19 @@ class Kur extends Command {
         await parent.updateOverwrite(message.guild.roles.everyone.id, {
             VIEW_CHANNEL: null
         });
+        await parent.children.filter(c => c.type === 'text').forEach(async c => {
+            await c.permissionOverwrites.forEach(async o => {
+                await c.updateOverwrite(o.id, {
+                    VIEW_CHANNEL: true
+                });
+            });
+            await c.updateOverwrite(roles.get("muted").value(), {
+                VIEW_CHANNEL: null
+            });
+            await c.updateOverwrite(message.guild.roles.everyone.id, {
+                VIEW_CHANNEL: false
+            });
+        })
     }
 
 }
