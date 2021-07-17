@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const low = require('lowdb');
 const nameData = require('../../../../../MODELS/Datalake/Registered');
 const { sayi } = require('../../../../../HELPERS/functions');
-class Erkek extends Command {
+class TErkek extends Command {
     constructor(client) {
 
         super(client, {
@@ -13,7 +13,6 @@ class Erkek extends Command {
             examples: ["terkek 674565119161794560"],
             category: "Kayıt",
             aliases: ["te","tman"],
-            cmdChannel: "exe-registry",
             accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 1000
         });
@@ -68,4 +67,4 @@ class Erkek extends Command {
 
     }
 }
-module.exports = Erkek;
+module.exports = TErkek;
