@@ -12,7 +12,6 @@ class Duzelt extends Command {
             examples: ["duzelt 674565119161794560 isim tantoony"],
             category: "Kayıt",
             aliases: ["dzlt", "düzelt"],
-            cmdChannel: "exe-registry",
             accaptedPerms: ["cmd-registry", "cmd-all","cmd-manager","cmd-rhode","cmd-authority","cmd-staff"],
             cooldown: 10000,
             enabled: true
