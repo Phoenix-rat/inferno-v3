@@ -34,7 +34,7 @@ class Say2 extends Command {
         for (let index = 0; index < message.guild.channels.cache.filter(c => c.type === "voice").array().length; index++) {
             const myChannel = message.guild.channels.cache.filter(c => c.type === "voice").array()[index];
             const key = obj[client.getPath(channels.value(), myChannel.parentID)] || 0;
-            obj[client.getPath(channels.value(), myChannel.parentID)] = key + myChannel.members.size
+            obj[client.getPath(channels.value(), myChannel.parentID)] = key + myChannel.members.cache.filter(m => !m.user.bot).size
 
         }
         console.log(obj);
