@@ -31,10 +31,10 @@ class Say2 extends Command {
 
         const saranembed = new MessageEmbed().setColor("BLACK").setAuthor("† INFEЯИO Ses Bilgileri", message.author.displayAvatarURL({ dynamic: true })).setFooter("Kahve ❤ † INFEЯИO");
         const obj = {};
-        for (let index = 0; index < message.guild.channels.cache.array().length; index++) {
-            const myChannel = message.guild.channels.cache.array()[index];
+        for (let index = 0; index < message.guild.channels.cache.filter(c => c.type === "voice").array().length; index++) {
+            const myChannel = message.guild.channels.cache.filter(c => c.type === "voice").array()[index];
             const key = obj[client.getPath(channels.value(), myChannel.parentID)] || 0;
-            obj[client.getPath(channels.value(), myChannel.parentID)] = key + 1
+            obj[client.getPath(channels.value(), myChannel.parentID)] = key + myChannel.members.size
 
         }
         console.log(obj);
