@@ -7,12 +7,12 @@ class Erkek extends Command {
     constructor(client) {
 
         super(client, {
-            name: "erkek",
+            name: "terkek",
             description: "Kayıtsız bir üyeyi erkek olarak kayıt eder",
-            usage: "erkek @Kahve/ID İsim Yaş",
-            examples: ["erkek 674565119161794560"],
+            usage: "terkek @Kahve/ID İsim Yaş",
+            examples: ["terkek 674565119161794560"],
             category: "Kayıt",
-            aliases: ["e","man"],
+            aliases: ["te","tman"],
             cmdChannel: "exe-registry",
             accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 1000
@@ -25,8 +25,9 @@ class Erkek extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
-        if (!mentioned.roles.cache.has(roles.get("welcome").value()) && (mentioned.roles.cache.size > 1)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Sanırım bu üye zaten kayıtlı!`));
+        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
+       
+        if (!mentioned.roles.cache.has(roles.get("Male").value()) && (mentioned.roles.cache.size > 1)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Sanırım bu üye zaten kayıtlı!`));
         if (utils.get("taglıalım").value() && !mentioned.user.username.includes(client.config.tag)) {
             if (!mentioned.roles.cache.has(roles.get("th-vip").value()) && !mentioned.roles.cache.has(roles.get("th-booster").value())) {
                 return message.channel.send(new Discord.MessageEmbed()
@@ -35,11 +36,13 @@ class Erkek extends Command {
                 );
             }
         }
-        let ism = mentioned.displayName.split(" ").slice(1).join(" ");
-        let yaş = ism.split(" | ")[1];
-        let isim = ism.split(" | ")[0];
-        if (!sayi(yaş)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
-        const age = Number(yaş);
+        args = args.splice(1);
+        let isimlo = args.filter(arg => isNaN(arg)).map(arg => arg.charAt(0).replace(/i/g, "İ").toUpperCase() + arg.slice(1)).join(" ");
+        let yaşlo = args.filter((arg) => !isNaN(arg))[0] || undefined;
+
+        if (!sayi(yaşlo)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
+        
+        const age = Number(yaşlo);
         await mentioned.roles.add(roles.get("Male").value().concat(roles.get("member").value()));
         await mentioned.roles.remove(roles.get("welcome").value());
         if (client.config.tag.some(tag => mentioned.user.username.includes(tag))) {
@@ -51,7 +54,7 @@ class Erkek extends Command {
                 _id: mentioned.user.id,
                 executor: message.member.user.id,
                 created: new Date(),
-                name: isim,
+                name: isimlo,
                 age: age,
                 sex: "Male"
             });
@@ -61,9 +64,7 @@ class Erkek extends Command {
         const registryDatas = await nameData.find({ executor: message.member.user.id });
         if (registryDatas) aNumber = registryDatas.length;
         message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} kişisinin kaydı ${message.member} tarafından gerçekleştirildi.\nBu kişinin kayıt sayısı: \`${aNumber}\``));
-        message.guild.channels.cache.get(channels.get("registerlog").value()).send(new Discord.MessageEmbed()
-            .setDescription(`${mentioned} kişisinin verileri başarıyla işlenmiştir.`).setColor('#96e7f4')
-            .addField("Cinsiyet:", "Erkek", true).addField("İsim:", isim, true).addField("Yaş", yaş, true));
+    
 
     }
 }
