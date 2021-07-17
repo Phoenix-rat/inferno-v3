@@ -26,11 +26,11 @@ class Anonim extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const embed = new Discord.MessageEmbed().setColor('#2f3136');
-        
+
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
-        
-        const profildata = await vericik.findOne({ _id: mentioned.user.id});
+
+        const profildata = await vericik.findOne({ _id: mentioned.user.id }) || "Bulunamadı";
 
         const embedd = new Discord.MessageEmbed().setDescription(stripIndent`
         **❯ Kullanıcı bilgisi:**
@@ -50,9 +50,9 @@ class Anonim extends Command {
 
          **❯ Kayıt Bilgisi**
 
-         Kayıt eden kullanıcı: ${profildata.executor}
-         Kayıt olma tarihi: ${profildata.created}
-         Kayıt olma bilgileri: ${profildata.name} ${profildata.age} - ${profildata.sex}
+         Kayıt eden kullanıcı: ${profildata ? message.guld.members.cache.get(profildata.executor) : "Bulunamadı"}
+         Kayıt olma tarihi: ${profildata ? checkDays(profildata.created) : "Bilinmiyor"}
+         Kayıt olma bilgileri: ${profildata ? `${profildata.name} ${profildata.age} - ${profildata.sex}` : "Bulunamadı"}
         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
         await message.channel.send(embedd);
     }
