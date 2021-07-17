@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
 const { stripIndent } = require('common-tags');
-const { rain, getPath } = require("../../../../../HELPERS/functions");
+const { rain } = require("../../../../../HELPERS/functions");
 
 class Say2 extends Command {
 
@@ -33,11 +33,11 @@ class Say2 extends Command {
         const obj = {};
         for (let index = 0; index < message.guild.channels.cache.array().length; index++) {
             const myChannel = message.guild.channels.cache.array()[index];
-            const key = obj[getPath(channels.value(), myChannel.parentID)];
+            const key = obj[client.getPath(channels.value(), myChannel.parentID)];
             if (!key) {
-                obj[getPath(channels.value(), myChannel.parentID)] = 0;
+                obj[client.getPath(channels.value(), myChannel.parentID)] = 0;
             } else {
-                obj[getPath(channels.value(), myChannel.parentID)] = key + 1
+                obj[client.getPath(channels.value(), myChannel.parentID)] = key + 1
             }
         }
         console.log(obj);
