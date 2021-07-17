@@ -26,7 +26,6 @@ class RolSeçim extends Component {
         const guild = client.guilds.cache.get(ctx.guildID);
         const mentioned = guild.members.cache.get(ctx.user.id);
         const myRol = guild.roles.cache.get(roles.get("sevgili_yok").value());
-        await mentioned.roles.add(myRol.id);
         if (mentioned.roles.cache.has(myRol.id)) {
             await mentioned.roles.remove(myRol.id);
             return await ctx.send(`${myRol.name} rolü üzerinizden alındı`, {
