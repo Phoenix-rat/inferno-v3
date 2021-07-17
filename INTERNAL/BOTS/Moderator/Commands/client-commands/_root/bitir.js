@@ -34,7 +34,11 @@ class Kur extends Command {
         const publicCat = message.guild.channels.cache.filter(c => c.type === "category").array();
         const parent = message.guild.channels.cache.get(message.channel.parentID);
         await parent.setPosition(publicCat.length - 2);
+        await parent.updateOverwrite(message.guild.roles.everyone.id, {
+            VIEW_CHANNEL: false
+        });
         await message.guild.channels.cache.filter(c => c.parentID === parent.id).forEach(async c => {
+            await c.lockPermissions();
             await c.lockPermissions();
         });
         await parent.updateOverwrite(message.guild.roles.everyone.id, {
