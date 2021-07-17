@@ -35,7 +35,7 @@ class Kur extends Command {
         const parent = message.guild.channels.cache.get(message.channel.parentID);
         await parent.setPosition(publicCat.length - 2);
         await parent.permissionOverwrites.forEach(async o => {
-            await c.updateOverwrite(o.id, {
+            await parent.updateOverwrite(o.id, {
                 VIEW_CHANNEL: null
             });
         });
