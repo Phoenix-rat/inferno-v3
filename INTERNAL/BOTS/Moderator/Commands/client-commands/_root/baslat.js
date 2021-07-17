@@ -34,7 +34,9 @@ class Kur extends Command {
         const publicCat = message.guild.channels.cache.get(channels.get("st_public").value());
         const parent = message.guild.channels.cache.get(message.channel.parentID);
         await parent.setPosition(publicCat.position);
-
+        await parent.updateOverwrite(message.guild.roles.everyone.id, {
+            VIEW_CHANNEL: null
+        });
     }
 
 }
