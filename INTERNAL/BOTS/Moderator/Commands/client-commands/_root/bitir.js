@@ -37,6 +37,9 @@ class Kur extends Command {
         await parent.updateOverwrite(message.guild.roles.everyone.id, {
             VIEW_CHANNEL: false
         });
+        await parent.children.forEach(async c => {
+            await c.lockPermissions();
+        });
 
     }
 
