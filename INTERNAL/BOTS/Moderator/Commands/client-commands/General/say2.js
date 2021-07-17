@@ -40,9 +40,18 @@ class Say2 extends Command {
             "st_public": "Public",
             "st_private": "Private",
             "st_registry": "Kayıt",
-            "st_crew": "Yetkili"
+            "st_crew": "Yetkili",
+            "st_dc": "DC",
+            "st_tabu": "Tabu",
+            "st_gartic": "Gartic",
+            "st_konser": "Konser",
+            "st_vk": "VK",
+            "st_kk": "Kırmızı Koltuk",
+            "st_amgus": "Amoung Us",
+            "st_benkimim": "Ben Kimim",
+            "st_paranormal": "Paranormal",
         }
-        const sesler = Object.keys(obj).filter(k => lang[k]).filter(k => obj[k] >= 8).sort((a, b) => obj[b] - obj[a]).slice(0, 3);
+        const sesler = Object.keys(obj).filter(k => lang[k]).filter(k => obj[k] >= 10).sort((a, b) => obj[b] - obj[a]).slice(0, 3);
         const deyim = sesler.map(k => `${lang[k]} \`${obj[k]}\``).join(', ');
         await message.channel.send(saranembed.setDescription(stripIndent`
        ${emojis.get("kahvehac").value()} Sunucuda \`${böyle}\` üye var.
