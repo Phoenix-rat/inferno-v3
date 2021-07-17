@@ -28,6 +28,7 @@ class Anonim extends Command {
         
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        
         const embedd = new Discord.MessageEmbed().setDescription(stripIndent`
         **❯ Kullanıcı bilgisi:**
 
@@ -38,10 +39,14 @@ class Anonim extends Command {
          (\`${checkDays(mentioned.user.createdAt)} Gün Önce\`)
 
          **❯ Üyelik Bilgisi**
+
          Sunucu takma adı: ${mentioned.displayName}
          Sunucuya Katılma Tarihi: ${moment(mentioned.joinedAt).format("LLL")}
          (\`${checkDays(mentioned.joinedAt)} Gün Önce\`)
          Ayırıcı Rolü: ${mentioned.roles.cache.array().filter(r => r.hoist).sort((a, b) => b.rawPosition - a.rawPosition)[0]}
+
+         **❯ Kayıt Bilgisi**
+
         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
         await message.channel.send(embedd);
     }
