@@ -3,6 +3,7 @@ const Command = require("../../../Base/Command");
 const low = require('lowdb');
 const { stripIndent } = require('common-tags');
 const { rain, checkDays } = require('../../../../../HELPERS/functions');
+const vericik = require('../../../../../MODELS/Datalake/Registered');
 const moment = require("moment")
 moment.locale('tr');
 
@@ -29,6 +30,8 @@ class Anonim extends Command {
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
         
+        const data = await vericik.findOne({ _id: mentionedID });
+
         const embedd = new Discord.MessageEmbed().setDescription(stripIndent`
         **❯ Kullanıcı bilgisi:**
 
