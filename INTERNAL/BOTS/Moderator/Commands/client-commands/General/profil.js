@@ -39,7 +39,7 @@ class Anonim extends Command {
 
          **❯ Üyelik Bilgisi**
          Sunucu takma adı: ${mentioned.displayName}
-         Sunucuya Katılma Tarihi: ${moment(mentioned.user.joinedAt).format("LLL")}
+         Sunucuya Katılma Tarihi: ${moment(mentioned.joinedAt).format("LLL")}
          (\`${checkDays(mentioned.joinedAt)} Gün Önce\`)
          Ayırıcı Rolü: ${mentioned.roles.cache.array().filter(r => r.hoist).sort((a, b) => b.rawPosition - a.rawPosition)[0]}
         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
