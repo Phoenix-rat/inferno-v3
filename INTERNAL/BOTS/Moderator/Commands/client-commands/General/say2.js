@@ -29,7 +29,7 @@ class Say2 extends Command {
         let relax = await message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("booster").value())).size;
         let baby = await message.guild.voiceStates.cache.filter(v => v.channel).size;
 
-        const saranembed = new MessageEmbed().setColor("BLACK").setFooter(`${message.author.username} • Kahve ❤ † INFEЯИO`, message.author.displayAvatarURL({ dynamic: true }));
+        const saranembed = new MessageEmbed().setColor("BLACK").setFooter(`${message.author.username} • Kahve ❤ INFEЯИO †`, message.author.displayAvatarURL({ dynamic: true }));
         const obj = {};
         for (let index = 0; index < message.guild.channels.cache.filter(c => c.type === "voice").array().length; index++) {
             const myChannel = message.guild.channels.cache.filter(c => c.type === "voice").array()[index];
@@ -47,9 +47,9 @@ class Say2 extends Command {
         const deyim = sesler.map(k => `${lang[k]} \`${obj[k]}\``).join(', ');
         await message.channel.send(saranembed.setDescription(stripIndent`
        ${emojis.get("kahvehac").value()} Sunucuda \`${böyle}\` üye var.
-       ${emojis.get("kahvehac").value()} Aktif olarak \`${ağlarım}\` üye var.
+       ${emojis.get("kahvehac").value()} Aktif olan \`${ağlarım}\` üye var.
        ${emojis.get("kahvehac").value()} Tagımızı taşıyarak bize destek olan \`${gitme}\` üye var.
-       ${sesler.length === 0 ? `${emojis.get("kahvehac").value()} Ses Kanallarında \`${baby}\` üye bulunmaktadır.` : `${emojis.get("kahvehac").value()} ${deyim}, toplam seslide \`${baby}\` kişi bulunmaktadır.`}
+       ${sesler.length === 0 ? `${emojis.get("kahvehac").value()} Ses kanallarında \`${baby}\` üye bulunmaktadır.` : `${emojis.get("kahvehac").value()} ${deyim}, toplam seslide \`${baby}\` kişi bulunmaktadır.`}
         `));
     }
 }
