@@ -44,7 +44,7 @@ class Say2 extends Command {
             st_crew: "Yetkili",
             [undefined]: "Diğer"
         }
-        const sesler = Object.values(obj).filter(k => obj[k] >= 10).sort((a, b) => obj[b] - obj[a]).slice(0, 3);
+        const sesler = Object.values(obj)/*.filter(k => obj[k] >= 10)*/.sort((a, b) => obj[b] - obj[a]).slice(0, 3);
         const deyim = sesler.map(k => `${client.getPath(lang, k)} kanallarında ${obj[k]} kişi bulunmaktadır.`).join('\n');
         await message.channel.send(saranembed.setDescription(stripIndent`
        ${emojis.get("kahvehac").value()} Sunucuda ${böyle} üye var.
