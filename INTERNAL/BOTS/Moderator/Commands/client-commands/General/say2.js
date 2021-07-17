@@ -49,7 +49,7 @@ class Say2 extends Command {
        ${emojis.get("kahvehac").value()} Sunucuda \`${böyle}\` üye var.
        ${emojis.get("kahvehac").value()} Aktif olarak \`${ağlarım}\` üye var.
        ${emojis.get("kahvehac").value()} Tagımızı taşıyarak bize destek olan \`${gitme}\` üye var.
-       ${sesler.length === 0 ? `${emojis.get("kahvehac").value()} Ses Kanallarında \`${baby}\` Üye Bulunmaktadır.` : `${emojis.get("kahvehac").value()} ${deyim}, toplam seslide \`${baby}\` kişi bulunmaktadır.`}
+       ${sesler.length === 0 ? `${emojis.get("kahvehac").value()} Ses Kanallarında \`${baby}\` üye bulunmaktadır.` : `${emojis.get("kahvehac").value()} ${deyim}, toplam seslide \`${baby}\` kişi bulunmaktadır.`}
         `));
     }
 }
