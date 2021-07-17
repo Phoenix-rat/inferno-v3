@@ -36,7 +36,7 @@ class Link extends Command {
             }
             return str;
         }
-        return message.channel.send(bar(args[0], args[1]))
+        //return message.channel.send(bar(args[0], args[1]))
     }
 }
 
