@@ -19,7 +19,7 @@ class Anonim extends Command {
         });
     }
 
-    async run(client, message, args, data) {
+    async run(client, message, args) {
         client = this.client;
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
