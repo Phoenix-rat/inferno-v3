@@ -36,7 +36,6 @@ class Say2 extends Command {
             const key = obj[client.getPath(channels.value(), myChannel.parentID)] || 0;
             obj[client.getPath(channels.value(), myChannel.parentID)] = key + myChannel.members.size
         }
-        console.log(obj);
         const lang = {
             "st_public": "Public",
             "st_private": "Private",
@@ -45,7 +44,6 @@ class Say2 extends Command {
             [undefined]: "Diğer"
         }
         const sesler = Object.keys(obj).filter(k => obj[k] >= 10).sort((a, b) => obj[b] - obj[a]).slice(0, 3);
-        console.log(sesler);
         const deyim = sesler.map(k => `${emojis.get("kahvehac").value()} ${lang[k]} kanallarında ${obj[k]} kişi bulunmaktadır.`).join('\n\n');
         await message.channel.send(saranembed.setDescription(stripIndent`
        ${emojis.get("kahvehac").value()} Sunucuda ${böyle} üye var.
