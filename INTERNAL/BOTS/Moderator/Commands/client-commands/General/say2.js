@@ -38,14 +38,14 @@ class Say2 extends Command {
         }
         console.log(obj);
         const lang = {
-            st_public: "Public",
-            st_private: "Private",
-            st_registry: "Kayıt",
-            st_crew: "Yetkili",
+            "st_public": "Public",
+            "st_private": "Private",
+            "st_registry": "Kayıt",
+            "st_crew": "Yetkili",
             [undefined]: "Diğer"
         }
         const sesler = Object.values(obj)/*.filter(k => obj[k] >= 10)*/.sort((a, b) => obj[b] - obj[a]).slice(0, 3);
-        const deyim = sesler.map(k => `${client.getPath(lang, k)} kanallarında ${obj[k]} kişi bulunmaktadır.`).join('\n');
+        const deyim = sesler.map(k => `${lang[k]} kanallarında ${obj[k]} kişi bulunmaktadır.`).join('\n');
         await message.channel.send(saranembed.setDescription(stripIndent`
        ${emojis.get("kahvehac").value()} Sunucuda ${böyle} üye var.
 
