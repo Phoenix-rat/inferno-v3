@@ -37,7 +37,7 @@ class Anonim extends Command {
 
          ID: ${mentioned.id}
          Profil: ${mentioned}
-         Durum: ${mentioned.presence.status.replace('online', 'Çevrim İçi').replace('idle', 'Boşta').replace('dnd', 'Rahatsız Etmeyin').replace('offline', 'Çevrim Dışı')}
+         Durum: ${mentioned.presence.status.replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>').replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>').replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>').replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>')}
          Oluşturma Tarihi: ${moment(mentioned.user.createdAt).format("LLL")}
          (\`${checkDays(mentioned.user.createdAt)} Gün Önce\`)
 
