@@ -21,10 +21,27 @@ class vMute extends Command {
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
         const sebep = args.slice(2).join(" ");
-        if (!sebep) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("soru").value()} Bir sebep girmelisin`));
-        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("missingPerms").value()} Bunu yapmak için yeterli yetkiye sahip değilsin`));
-        if (!mentioned.bannable) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiyi banlamak için yeterli yetkiye sahip değilim`));
-        if (!sayi(args[1])) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`));
+        if (!mentioned) {
+            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+            return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136')).then(msg => msg.delete({ timeout: 1000 }));
+        }
+        const sebep = args.slice(2).join(" ");
+        if (!sebep) {
+            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("soru").value()} Bir sebep girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
+        }
+        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) {
+            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("missingPerms").value()} Bunu yapmak için yeterli yetkiye sahip değilsin`)).then(msg => msg.delete({ timeout: 1000 }));
+        }
+        if (!mentioned.bannable) {
+            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiyi mutelemek için yeterli yetkiye sahip değilim`)).then(msg => msg.delete({ timeout: 1000 }));
+        }
+        if (!sayi(args[1])) {
+            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir dakika girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
+        }
         client.extention.emit('vMute', mentioned, message.author.id, sebep, args[1]);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         //this.client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
