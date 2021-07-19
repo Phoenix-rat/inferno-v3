@@ -21,7 +21,7 @@ class Ban extends Command {
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+            return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136')).then(msg => msg.delete({ timeout: 1000 }));
         }
         let sebep = args.slice(2).join(" ");
         let typo;
