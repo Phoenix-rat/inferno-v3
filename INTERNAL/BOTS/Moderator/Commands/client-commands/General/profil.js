@@ -39,13 +39,13 @@ class Anonim extends Command {
          Profil: ${mentioned}
          Durum: ${mentioned.presence.status.replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>').replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>').replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>').replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>')}
          Oluşturma Tarihi: ${moment(mentioned.user.createdAt).format("LLL")}
-         (\`${checkDays(mentioned.user.createdAt)} Gün Önce\`)
+         (\`${moment(mentioned.user.createdAt).format("D [gün], H [saat], m [dakika]")}\`)
 
          **❯ Üyelik Bilgisi**
 
          Sunucu takma adı: ${mentioned.displayName}
          Sunucuya Katılma Tarihi: ${moment(mentioned.joinedAt).format("LLL")}
-         (\`${checkDays(mentioned.joinedAt)} Gün Önce\`)
+         (\`${moment(mentioned.user.createdAt).format("D [gün], H [saat], m [dakika]")}\`)
          Ayırıcı Rolü: ${mentioned.roles.cache.array().filter(r => r.hoist).sort((a, b) => b.rawPosition - a.rawPosition)[0]}
 
          **❯ Kayıt Bilgisi**
