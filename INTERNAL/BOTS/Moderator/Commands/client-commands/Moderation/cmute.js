@@ -34,11 +34,11 @@ class CMute extends Command {
         }
         if (!mentioned.bannable) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiyi banlamak için yeterli yetkiye sahip değilim`)).then(msg => msg.delete({ timeout: 1000 }));
+            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiyi mutelemek için yeterli yetkiye sahip değilim`)).then(msg => msg.delete({ timeout: 1000 }));
         }
         if (!sayi(args[1])) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
+            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir dakika girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
         }
         client.extention.emit('cMute', mentioned, message.author.id, sebep, args[1]);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
