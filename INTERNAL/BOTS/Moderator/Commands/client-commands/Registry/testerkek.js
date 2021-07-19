@@ -39,7 +39,7 @@ class TErkek extends Command {
         let isimlo = args.filter(arg => isNaN(arg)).map(arg => arg.charAt(0).replace(/i/g, "İ").toUpperCase() + arg.slice(1)).join(" ");
         let yaşlo = args.filter((arg) => !isNaN(arg))[0] || undefined;
 
-        if (!sayi(yaşlo)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
+        if (!yaşlo) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
         
         const age = Number(yaşlo);
         await mentioned.roles.add(roles.get("Male").value().concat(roles.get("member").value()));
