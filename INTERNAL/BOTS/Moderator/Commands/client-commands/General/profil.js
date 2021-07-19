@@ -37,7 +37,7 @@ class Anonim extends Command {
 
          ID: ${mentioned.id}
          Profil: ${mentioned}
-         Durum: ${mentioned.user.presence.activities.find(a => a.type === "CUSTOM_STATUS") ? mentioned.user.presence.activities.find(a => a.type === "CUSTOM_STATUS").state : "Bulunamadı"}
+         Durum: ${mentioned.presence.status.replace('online', 'Çevrim İçi').replace('idle', 'Boşta').replace('dnd', 'Rahatsız Etmeyin').replace('offline', 'Çevrim Dışı')}
          Oluşturma Tarihi: ${moment(mentioned.user.createdAt).format("LLL")}
          (\`${checkDays(mentioned.user.createdAt)} Gün Önce\`)
 
