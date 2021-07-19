@@ -19,7 +19,10 @@ class Ban extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        if (!mentioned) {
+            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+            return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        }
         let sebep = args.slice(2).join(" ");
         let typo;
         if (args[1] === 'perma') {
