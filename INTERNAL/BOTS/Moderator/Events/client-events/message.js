@@ -172,8 +172,8 @@ module.exports = class {
         try {
             cmd.run(client, message, args);
         } catch (e) {
+            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             console.log(e);
-            return message.channel.send(`${emojis.get("error").value()} | Sanırım bir hata oluştu...`);
         }
     }
 }
