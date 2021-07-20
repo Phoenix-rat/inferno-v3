@@ -15,6 +15,8 @@ class Anonim extends Command {
             description: "Kişinin kullanıcı bilgilerini gösterir",
             usage: "profil @etiket/id",
             examples: ["profil 674565119161794560"],
+            category: "Genel",
+            aliases: ["info", "bilgi", "i"],
             cooldown: 300000
         });
     }

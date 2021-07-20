@@ -10,7 +10,7 @@ class Isim extends Command {
             usage: "isim etiket/id isim yaş",
             examples: ["isim 674565119161794560 orhan yalın 20"],
             category: "Kayıt",
-            aliases: ["i", "ism"],
+            aliases: ["name", "ism"],
             cmdChannel: "exe-registry",
             accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000
