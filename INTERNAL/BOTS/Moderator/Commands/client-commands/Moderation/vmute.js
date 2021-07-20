@@ -25,7 +25,6 @@ class vMute extends Command {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136')).then(msg => msg.delete({ timeout: 1000 }));
         }
-        const sebep = args.slice(2).join(" ");
         if (!sebep) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("soru").value()} Bir sebep girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
