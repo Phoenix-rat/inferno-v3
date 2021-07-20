@@ -35,11 +35,17 @@ class Kiz extends Command {
                 );
             }
         }
-        let ism = mentioned.displayName.split(" ").slice(1).join(" ");
-        let yaş = ism.split(" | ")[1];
-        let isim = ism.split(" | ")[0];
-        if (!sayi(yaş)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
-        const age = Number(yaş);
+        let rawName = args.slice(1);
+        if (!rawName) return message.channel.send(new Discord.MessageEmbed().setDescription(`Bir isim girmelisin..`));
+        let age = Number(args[args.length - 1]);
+        if (!sayi(age)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
+        let nameAge = rawName.map(i => i[0].toUpperCase() + i.slice(1).toLowerCase());
+        nameAge = nameAge.join(' ').replace(` ${age}`, '');
+        let point = '⸸';
+        if (client.config.tag.some(tag => mentioned.user.username.includes(tag))) {
+            point = client.config.tag[0];
+        }
+        await mentioned.setNickname(`${point} ${nameAge} | ${age}`);
         await mentioned.roles.add(roles.get("Female").value().concat(roles.get("member").value()));
         await mentioned.roles.remove(roles.get("welcome").value());
         if (client.config.tag.some(tag => mentioned.user.username.includes(tag))) {
@@ -51,7 +57,7 @@ class Kiz extends Command {
                 _id: mentioned.user.id,
                 executor: message.member.user.id,
                 created: new Date(),
-                name: isim,
+                name: nameAge,
                 age: age,
                 sex: "Female"
             });
@@ -60,10 +66,7 @@ class Kiz extends Command {
         let aNumber = 0;
         const registryDatas = await nameData.find({ executor: message.member.user.id });
         if (registryDatas) aNumber = registryDatas.length;
-        message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} kişisinin kaydı ${message.member} tarafından gerçekleştirildi.\nBu kişinin kayıt sayısı: \`${aNumber}\``));
-        message.guild.channels.cache.get(channels.get("registerlog").value()).send(new Discord.MessageEmbed()
-            .setDescription(`${mentioned} kişisinin verileri başarıyla işlenmiştir.`).setColor('#96e7f4')
-            .addField("Cinsiyet:", "Kadın", true).addField("İsim:", isim, true).addField("Yaş", yaş, true));
+        await message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} kişisinin kaydı ${message.member} tarafından gerçekleştirildi.\nBu kişinin kayıt sayısı: \`${aNumber}\``)).then(async (msg) => await msg.delete({ timeout: 3000 }));
 
     }
 }
