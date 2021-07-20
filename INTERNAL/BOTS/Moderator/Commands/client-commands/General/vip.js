@@ -6,10 +6,12 @@ class Vip extends Command {
     constructor(client) {
         super(client, {
             name: "vip",
-            description: "Bütün komutları kategoriye bölerek açıklar ya da belirtiklen komutu detaylandırır.",
-            usage: "vip",
-            examples: ["elite", ""],
+            description: "Belirtilen kullanıcıya özel üye rolü verir.",
+            usage: "Vip @Kahve/ID",
+            examples: ["Vip @Kahve/ID"],
             category: "Genel",
+            aliases: ["vib", "elite"],
+            accaptedPerms: ["cmd-mute", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000
         });
     }
@@ -20,21 +22,22 @@ class Vip extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
 
-        const verilecek = roles.get("vip").value();
-        const verilen = message.guild.roles.cache.get(verilecek);
-
+        const embed31 = new Discord.MessageEmbed();
+        const gluklan = roles.get("vip").value();
+        const glukglukgluk = message.guild.roles.cache.get(gluklan);
         const embed31 = new Discord.MessageEmbed();
         const fucktheuser = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        
         if (!fucktheuser) return message.channel.send(new Discord.MessageEmbed()
         .setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('RANDOM'));
-        if (!fucktheuser.roles.cache.has(verilecek)) {
+        if (!fucktheuser.roles.cache.has(gluklan)) {
             await message.channel.send(embed31
-                .setDescription(`**${verilen.name}** rolü başarıyla ${fucktheuser} üyesine verildi!`));
-            await fucktheuser.roles.add(verilen.id);;
+                .setDescription(`**${glukglukgluk.name}** rolü başarıyla ${fucktheuser} üyesine verildi!`));
+            await fucktheuser.roles.add(glukglukgluk.id);
         } else {
-            await fucktheuser.roles.remove(verilen.id);
+            await fucktheuser.roles.remove(glukglukgluk.id);
             await message.channel.send(embed31
-            .setDescription(`**${verilen.name}** rolü başarıyla ${fucktheuser} üyesinden alındı!`));
+            .setDescription(`**${glukglukgluk.name}** rolü başarıyla ${fucktheuser} üyesinden alındı!`));
         }
         await message.react(emojis.get("ok").value());
     }
