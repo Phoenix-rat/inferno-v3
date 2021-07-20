@@ -7,8 +7,8 @@ class Vip extends Command {
         super(client, {
             name: "vip",
             description: "Belirtilen kullanıcıya özel üye rolü verir.",
-            usage: "Vip @Kahve/ID",
-            examples: ["Vip @Kahve/ID"],
+            usage: "vip @Kahve/ID",
+            examples: ["vip @Kahve/ID"],
             category: "Genel",
             aliases: ["vib", "elite"],
             accaptedPerms: ["cmd-mute", "cmd-double", "cmd-single", "cmd-ceo"],
