@@ -22,22 +22,21 @@ class Vip extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
 
-        const embed31 = new Discord.MessageEmbed();
-        const gluklan = roles.get("vip").value();
-        const glukglukgluk = message.guild.roles.cache.get(gluklan);
-        const embed31 = new Discord.MessageEmbed();
-        const fucktheuser = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        const roleID = roles.get("vip").value();
+        const myRole = message.guild.roles.cache.get(roleID);
+        const embed = new Discord.MessageEmbed();
+        const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         
-        if (!fucktheuser) return message.channel.send(new Discord.MessageEmbed()
+        if (!mentioned) return message.channel.send(new Discord.MessageEmbed()
         .setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('RANDOM'));
-        if (!fucktheuser.roles.cache.has(gluklan)) {
-            await message.channel.send(embed31
-                .setDescription(`**${glukglukgluk.name}** rolü başarıyla ${fucktheuser} üyesine verildi!`));
-            await fucktheuser.roles.add(glukglukgluk.id);
+        if (!mentioned.roles.cache.has(roleID)) {
+            await message.channel.send(embed
+                .setDescription(`**${myRole.name}** rolü başarıyla ${mentioned} üyesine verildi!`));
+            await mentioned.roles.add(myRole.id);
         } else {
-            await fucktheuser.roles.remove(glukglukgluk.id);
-            await message.channel.send(embed31
-            .setDescription(`**${glukglukgluk.name}** rolü başarıyla ${fucktheuser} üyesinden alındı!`));
+            await mentioned.roles.remove(myRole.id);
+            await message.channel.send(embed
+            .setDescription(`**${myRole.name}** rolü başarıyla ${mentioned} üyesinden alındı!`));
         }
         await message.react(emojis.get("ok").value());
     }
