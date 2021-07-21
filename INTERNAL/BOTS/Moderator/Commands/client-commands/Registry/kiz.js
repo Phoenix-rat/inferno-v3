@@ -9,8 +9,8 @@ class Kiz extends Command {
         super(client, {
             name: "kiz",
             description: "Kayıtsız bir üyeyi kız olarak kayıt eder",
-            usage: "kız etiket/id",
-            examples: ["kız 674565119161794560"],
+            usage: "kız @Kahve/ID İsim Yaş",
+            examples: ["kız @Kahve/ID İsim Yaş"],
             category: "Kayıt",
             aliases: ["k", "kız"],
             cmdChannel: "exe-registry",

@@ -1,17 +1,16 @@
 const Command = require("../../../Base/Command");
 const Discord = require("discord.js");
 const low = require('lowdb');
-class Move extends Command {
-
+class Lock extends Command {
     constructor(client) {
         super(client, {
-            name: "oldkilit",
+            name: "kilit",
             description: "Mesajın atıldığı kanalı kilitler",
-            usage: "oldkilit",
-            examples: ["oldkilit"],
+            usage: "kilit",
+            examples: ["lock"],
             cooldown: 3600000,
             category: "Düzen",
-            accaptedPerms: ["cmd-single", "cmd-double", "cmd-ceo"]
+            accaptedPerms: ["root", "owner", "cmd-ceo"]
         });
     }
 
@@ -21,14 +20,18 @@ class Move extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        if (args[0] && (args[0] === "aç")) {
-            await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-            return await message.channel.updateOverwrite(message.guild.roles.everyone.id, {
-                SEND_MESSAGES: null
-            });
-        }
-        await message.channel.updateOverwrite(message.guild.roles.everyone.id, {
-            SEND_MESSAGES: false
+        if (!message.member.hasPermission("ADMINISTRATOR")) return;
+        
+        const everyone = message.channel.permissionsFor(message.guild.id).has("SEND_MESSAGES");
+        const embed = new Discord.MessageEmbed()
+        message.channel.send(embed
+                .setFooter(`Kahve sizi önemsiyor (:`)
+                .setColor("RANDOM")
+                .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
+                .setDescription(`Başarılı bir şekilde kanal \`${everyone ? "kilitlendi" : "açıldı"}!\``)
+        );
+         message.channel.updateOverwrite(message.guild.id, {
+            SEND_MESSAGES: !everyone,
         });
         await message.channel.updateOverwrite(roles.get("cmd-ceo").value(), {
             SEND_MESSAGES: true
@@ -43,10 +46,7 @@ class Move extends Command {
             SEND_MESSAGES: true
         });
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-
-
     }
-
 }
 
-module.exports = Move;
+module.exports = Lock;
