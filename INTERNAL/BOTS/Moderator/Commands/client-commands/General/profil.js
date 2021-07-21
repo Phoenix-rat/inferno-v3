@@ -34,7 +34,7 @@ class Anonim extends Command {
         
         let TestVoice = mentioned.voice.channel ? "**Herhangi bir ses kanalında değil.**" : "**Adlı Ses Kanalında**";
 
-        let profstatus = ProfMember.presence.status
+        let profstatus = mentioned.presence.status
         .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
         .replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>')
         .replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>')
