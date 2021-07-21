@@ -10,7 +10,7 @@ class Lock extends Command {
             examples: ["lock"],
             cooldown: 3600000,
             category: "Düzen",
-            accaptedPerms: ["cmd-single", "cmd-double", "cmd-ceo"]
+            accaptedPerms: ["root", "owner", "cmd-ceo"]
         });
     }
 
