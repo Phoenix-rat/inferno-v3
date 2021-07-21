@@ -20,7 +20,8 @@ class Lock extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-
+        if (!message.member.hasPermission("ADMINISTRATOR")) return;
+        
         const everyone = message.channel.permissionsFor(message.guild.id).has("SEND_MESSAGES");
         const embed = new Discord.MessageEmbed()
         message.channel.send(embed
