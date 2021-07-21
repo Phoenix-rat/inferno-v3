@@ -16,7 +16,7 @@ class VoiceStateUpdate {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        const vmute = await vmutes.findOne({ _id: cur.member.user.id });
+        const vmute = await vmutes.findOne({ _id: cur.member ? cur.member.user.id : "" });
         if (vmute && !cur.serverMute) {
             await cur.setMute(true);
         }
