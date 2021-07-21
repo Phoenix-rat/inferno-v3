@@ -24,12 +24,13 @@ class Lock extends Command {
         
         const everyone = message.channel.permissionsFor(message.guild.id).has("SEND_MESSAGES");
         const embed = new Discord.MessageEmbed()
-        message.channel.send(embed
+       await message.channel.send(embed
                 .setFooter(`Kahve sizi önemsiyor (:`)
                 .setColor("RANDOM")
                 .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
                 .setDescription(`Başarılı bir şekilde kanal \`${everyone ? "kilitlendi" : "açıldı"}!\``)
-        );
+        ).then(msg => msg.delete({ timeout: 5000 }));
+
          message.channel.updateOverwrite(message.guild.id, {
             SEND_MESSAGES: !everyone,
         });
