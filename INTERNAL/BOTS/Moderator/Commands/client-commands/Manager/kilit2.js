@@ -2,12 +2,11 @@ const Command = require("../../../Base/Command");
 const Discord = require("discord.js");
 const low = require('lowdb');
 class Lock extends Command {
-
     constructor(client) {
         super(client, {
-            name: "lock",
+            name: "kilit",
             description: "Mesajın atıldığı kanalı kilitler",
-            usage: "lock",
+            usage: "kilit",
             examples: ["lock"],
             cooldown: 3600000,
             category: "Düzen",
@@ -25,29 +24,16 @@ class Lock extends Command {
         const everyone = message.channel.permissionsFor(message.guild.id).has("SEND_MESSAGES");
         const embed = new Discord.MessageEmbed()
         message.channel.send(embed
+                .setFooter(`Kahve sizi önemsiyor (:`)
                 .setColor("RANDOM")
                 .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
                 .setDescription(`Başarılı bir şekilde kanal \`${everyone ? "kilitlendi" : "açıldı"}!\``)
         );
-        await message.channel.updateOverwrite(message.guild.id, {
+         message.channel.updateOverwrite(message.guild.id, {
             SEND_MESSAGES: !everyone,
         });
-        await message.channel.updateOverwrite(roles.get("cmd-ceo").value(), {
-            SEND_MESSAGES: true
-        });
-        await message.channel.updateOverwrite(roles.get("cmd-single").value(), {
-            SEND_MESSAGES: true
-        });
-        await message.channel.updateOverwrite(roles.get("cmd-double").value(), {
-            SEND_MESSAGES: true
-        });
-        await message.channel.updateOverwrite(roles.get("owner").value(), {
-            SEND_MESSAGES: true
-        });
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-
     }
-
 }
 
 module.exports = Lock;

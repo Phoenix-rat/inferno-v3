@@ -5,10 +5,10 @@ class Move extends Command {
 
     constructor(client) {
         super(client, {
-            name: "kilit",
+            name: "oldkilit",
             description: "Mesajın atıldığı kanalı kilitler",
-            usage: "kilit",
-            examples: ["kilit"],
+            usage: "oldkilit",
+            examples: ["oldkilit"],
             cooldown: 3600000,
             category: "Düzen",
             accaptedPerms: ["cmd-single", "cmd-double", "cmd-ceo"]
