@@ -10,7 +10,7 @@ class Erkek extends Command {
             name: "erkek",
             description: "Kayıtsız bir üyeyi erkek olarak kayıt eder",
             usage: "erkek @Kahve/ID İsim Yaş",
-            examples: ["erkek 674565119161794560"],
+            examples: ["erkek @Kahve/ID İsim Yaş"],
             category: "Kayıt",
             aliases: ["e", "man"],
             cmdChannel: "exe-registry",
