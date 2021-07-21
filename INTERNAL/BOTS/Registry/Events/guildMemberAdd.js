@@ -84,7 +84,7 @@ class GuildMemberAdd {
                 const pointData = await Points_profile.findOne({ _id: davetci.id });
                 if (pointData) {
                     const pointConfig = await Points_config.findOne({ _id: pointData.roleID });
-                    if (pointData && !pointData.points.filter(point => point.type === "invite").find(point => point.invited === member.user.id)) await Points_profile.updateOne({ _id: davetci.id }, {
+                    if (pointConfig && pointData && !pointData.points.filter(point => point.type === "invite").find(point => point.invited === member.user.id)) await Points_profile.updateOne({ _id: davetci.id }, {
                         $push: {
                             points: {
                                 type: "invite",
