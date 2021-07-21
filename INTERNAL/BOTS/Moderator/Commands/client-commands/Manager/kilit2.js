@@ -25,7 +25,7 @@ class Lock extends Command {
         const everyone = message.channel.permissionsFor(message.guild.id).has("SEND_MESSAGES");
 
         message.channel.send(
-            new MessageEmbed()
+            new Discord.MessageEmbed()
                 .setColor("RANDOM")
                 .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
                 .setDescription(`Başarılı bir şekilde kanal \`${everyone ? "kilitlendi" : "açıldı"}!\``)
