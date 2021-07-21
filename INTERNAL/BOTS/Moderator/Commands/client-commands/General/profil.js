@@ -32,6 +32,8 @@ class Anonim extends Command {
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
         
+        let TestVoice = mentioned.voice.channel ? "**Herhangi bir ses kanalında değil.**" : "**Adlı Ses Kanalında**";
+
         let profstatus = ProfMember.presence.status
         .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
         .replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>')
@@ -42,22 +44,20 @@ class Anonim extends Command {
 
         const embedd = new Discord.MessageEmbed().setDescription(stripIndent`
         **❯ Kullanıcı bilgisi:**
-
-         ID: ${mentioned.id}
+         ${TestVoice}
+         ID: \`${mentioned.id}\`
          Profil: ${mentioned}
          Durum: ${profstatus}
-         Oluşturma Tarihi: ${moment(mentioned.user.createdAt).format("LLL")}
+         Oluşturma Tarihi: \`${moment(mentioned.user.createdAt).format("LLL")}\`
          (\`${checkDays(mentioned.user.createdAt)} Gün Önce\`)
 
          **❯ Üyelik Bilgisi**
-
-         Sunucu takma adı: ${mentioned.displayName}
-         Sunucuya Katılma Tarihi: ${moment(mentioned.joinedAt).format("LLL")}
+         Sunucu takma adı: \`${mentioned.displayName}\`
+         Sunucuya Katılma Tarihi: \`${moment(mentioned.joinedAt).format("LLL")}\`
          (\`${checkDays(mentioned.joinedAt)} Gün Önce\`)
          Ayırıcı Rolü: ${mentioned.roles.cache.array().filter(r => r.hoist).sort((a, b) => b.rawPosition - a.rawPosition)[0]}
 
          **❯ Kayıt Bilgisi**
-
          Kayıt eden kullanıcı: ${profildata ? message.guild.members.cache.get(profildata.executor) : "Bulunamadı"}
          Kayıt olma tarihi: ${profildata ? checkDays(profildata.created) + " gün önce" : "Bilinmiyor"}
          Kayıt olma bilgileri: ${profildata ? `${profildata.name} ${profildata.age} - ${profildata.sex}` : "Bulunamadı"}
