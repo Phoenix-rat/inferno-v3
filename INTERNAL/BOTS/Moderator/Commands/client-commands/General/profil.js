@@ -31,6 +31,12 @@ class Anonim extends Command {
 
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        
+        let profstatus = ProfMember.presence.status
+        .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
+        .replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>')
+        .replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>')
+        .replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>');
 
         const profildata = await vericik.findOne({ _id: mentioned.user.id });
 
@@ -39,7 +45,7 @@ class Anonim extends Command {
 
          ID: ${mentioned.id}
          Profil: ${mentioned}
-         Durum: ${mentioned.presence.status.replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>').replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>').replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>').replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>')}
+         Durum: ${profstatus}
          Oluşturma Tarihi: ${moment(mentioned.user.createdAt).format("LLL")}
          (\`${checkDays(mentioned.user.createdAt)} Gün Önce\`)
 
