@@ -29,8 +29,20 @@ class Lock extends Command {
                 .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
                 .setDescription(`Başarılı bir şekilde kanal \`${everyone ? "kilitlendi" : "açıldı"}!\``)
         );
-        message.channel.updateOverwrite(message.guild.id, {
+        await message.channel.updateOverwrite(message.guild.id, {
             SEND_MESSAGES: !everyone,
+        });
+        await message.channel.updateOverwrite(roles.get("cmd-ceo").value(), {
+            SEND_MESSAGES: true
+        });
+        await message.channel.updateOverwrite(roles.get("cmd-single").value(), {
+            SEND_MESSAGES: true
+        });
+        await message.channel.updateOverwrite(roles.get("cmd-double").value(), {
+            SEND_MESSAGES: true
+        });
+        await message.channel.updateOverwrite(roles.get("owner").value(), {
+            SEND_MESSAGES: true
         });
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 
