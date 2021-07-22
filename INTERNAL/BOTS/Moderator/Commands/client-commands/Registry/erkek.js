@@ -40,7 +40,6 @@ class Erkek extends Command {
         if (args.length < 3) return message.channel.send(new Discord.MessageEmbed().setDescription(`Kullanım: \`${this.help.usage}\``));
         let age = Number(args[args.length - 1]);
         if (!sayi(age)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
-        if (rawName.length < 2) return message.channel.send(new Discord.MessageEmbed().setDescription(`Lütfen isim yaş giriniz.`));
         let nameAge = rawName.map(i => i[0].toUpperCase() + i.slice(1).toLowerCase());
         nameAge = nameAge.join(' ').replace(` ${age}`, '');
         let point = '⸸';
