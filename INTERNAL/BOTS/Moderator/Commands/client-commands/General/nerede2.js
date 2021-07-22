@@ -22,8 +22,8 @@ class Where extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setFooter(`Kahve seni seviyor <3`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setFooter(`Kahve seni seviyor <3`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
         let desu = ``;
         let info = "";
