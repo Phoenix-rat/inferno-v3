@@ -37,8 +37,8 @@ class Where extends Command {
         const neredembed = embed.setDescription(`
         ${mentioned} kişisi **${desu}** kanalında. Kanala gitmek için ${mentioned.voice.channel}'a tıklaya bilirsin.
         \`\`\`Ses Biglileri: 
-        Mikrofonu: ${member.voice.mute ? `Kapalı` : `Açık`}
-        Kulaklığı: ${member.voice.deaf ? `Kapalı` : `Açık`}
+        Mikrofonu: ${mentioned.voice.mute ? `Kapalı` : `Açık`}
+        Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}
         \`\`\` 
         **${lmc} En son mesaj yazdığı kanal**`)
         await message.channel.send(neredembed).then(msg => msg.delete({ timeout: 8000 }));
