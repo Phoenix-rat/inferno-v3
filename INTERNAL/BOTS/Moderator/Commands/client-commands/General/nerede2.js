@@ -40,9 +40,7 @@ class Where extends Command {
         if (!lmc) lmc = `Bulunamadı`;
         const neredembed = embed.setDescription(`
         ${mentioned} kişisi **${desu}** kanalında.
-        \`\`\`Ses Biglileri:
-        ${info}
-        \`\`\` 
+        \`\`\`Ses Biglileri: ${info}\`\`\` 
         **${lmc} en son mesaj yazdığı kanal**`)
         message.channel.send(neredembed);
     }
