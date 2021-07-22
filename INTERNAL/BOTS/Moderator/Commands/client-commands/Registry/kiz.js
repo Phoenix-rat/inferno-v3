@@ -36,7 +36,7 @@ class Kiz extends Command {
             }
         }
         let rawName = args.slice(1);
-        if (args.length < 3) return message.channel.send(new Discord.MessageEmbed().setDescription(`Bir isim girmelisin..`));
+        if (args.length < 3) return message.channel.send(new Discord.MessageEmbed().setDescription(`Kullanım: \`${this.help.usage}\``));
         let age = Number(args[args.length - 1]);
         if (!sayi(age)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
         if (rawName.length < 2) return message.channel.send(new Discord.MessageEmbed().setDescription(`Lütfen isim yaş giriniz.`));
