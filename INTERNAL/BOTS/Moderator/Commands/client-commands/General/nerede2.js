@@ -22,7 +22,7 @@ class Where extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        const embed = new Discord.MessageEmbed().setColor("BLACK");
+        const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setFooter(`Kahve seni seviyor <3`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
         let desu = ``;
@@ -37,12 +37,13 @@ class Where extends Command {
             `
         }
         let lmc = message.guild.channels.cache.get(mentioned.lastMessageChannelID);
-        if (!lmc) lmc = `Bulunamadı`;
+        if (!lmc) lmc = `En son Mesaj yazdığı kanal bulunamadı`;
+       
         const neredembed = embed.setDescription(`
-        ${mentioned} kişisi **${desu}** kanalında.
+        ${mentioned} kişisi **${desu}** kanalında. Kanala gitmek için ${mentioned.voice.channel}'a tıklaya bilirsin.
         \`\`\`Ses Biglileri: ${info}\`\`\` 
         **${lmc} en son mesaj yazdığı kanal**`)
-        message.channel.send(neredembed);
+        await message.channel.send(neredembed).then(msg => msg.delete({ timeout: 8000 }));
     }
 }
 
