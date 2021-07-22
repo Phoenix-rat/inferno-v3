@@ -38,10 +38,9 @@ class Where extends Command {
         ${mentioned} kişisi **${desu}** kanalında. Kanala gitmek için ${mentioned.voice.channel}'a tıklaya bilirsin.
         \`\`\`Ses Biglileri:
         Mikrofonu: ${mentioned.voice.mute ? `Kapalı` : `Açık`}
-        Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}
-        \`\`\` 
+        Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}\`\`\` 
         **${lmc} En son mesaj yazdığı kanal**`)
-        await message.channel.send(neredembed).then(msg => msg.delete({ timeout: 12000 }));
+        await message.channel.send(neredembed).then(msg => msg.delete({ timeout: 120000 }));
     }
 }
 
