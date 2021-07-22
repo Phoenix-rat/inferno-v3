@@ -12,7 +12,6 @@ class Where extends Command {
             examples: ["tnerede 674565119161794560"],
             aliases: ["tbul", "tn"],
             category: "Genel",
-            cmdChannel: "bot-komut",
             cooldown: 300000
         });
     }
