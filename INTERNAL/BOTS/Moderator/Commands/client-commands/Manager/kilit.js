@@ -33,20 +33,11 @@ class Move extends Command {
         await message.channel.updateOverwrite(roles.get("cmd-ceo").value(), {
             SEND_MESSAGES: true
         });
-        await message.channel.updateOverwrite(roles.get("cmd-single").value(), {
-            SEND_MESSAGES: true
-        });
-        await message.channel.updateOverwrite(roles.get("cmd-double").value(), {
-            SEND_MESSAGES: true
-        });
         await message.channel.updateOverwrite(roles.get("owner").value(), {
             SEND_MESSAGES: true
         });
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-
-
     }
-
 }
 
 module.exports = Move;

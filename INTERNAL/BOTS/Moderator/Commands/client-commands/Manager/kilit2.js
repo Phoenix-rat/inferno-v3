@@ -37,12 +37,6 @@ class Lock extends Command {
         await message.channel.updateOverwrite(roles.get("cmd-ceo").value(), {
             SEND_MESSAGES: true
         });
-        await message.channel.updateOverwrite(roles.get("cmd-single").value(), {
-            SEND_MESSAGES: true
-        });
-        await message.channel.updateOverwrite(roles.get("cmd-double").value(), {
-            SEND_MESSAGES: true
-        });
         await message.channel.updateOverwrite(roles.get("owner").value(), {
             SEND_MESSAGES: true
         });

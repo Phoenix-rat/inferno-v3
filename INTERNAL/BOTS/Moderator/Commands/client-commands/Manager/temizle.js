@@ -11,7 +11,7 @@ class Avatar extends Command {
             examples: ["temizle 10", "temizle 100"],
             category: "Düzen",
             aliases: ["sil"],
-            accaptedPerms: ["cmd-authority", "root"],
+            accaptedPerms: ["root", "owner","cmd-ceo"],
             cooldown: 10000
         });
     }

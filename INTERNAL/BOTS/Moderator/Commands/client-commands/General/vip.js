@@ -11,7 +11,7 @@ class Vip extends Command {
             examples: ["vip @Kahve/ID"],
             category: "Genel",
             aliases: ["vib", "elite"],
-            accaptedPerms: ["cmd-mute", "cmd-double", "cmd-single", "cmd-ceo"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double","cmd-all"],
             cooldown: 10000
         });
     }
@@ -24,19 +24,19 @@ class Vip extends Command {
 
         const roleID = roles.get("vip").value();
         const myRole = message.guild.roles.cache.get(roleID);
-        const embed = new Discord.MessageEmbed();
+        const embed = new Discord.MessageEmbed().setColor("RANDOM")
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed()
-        .setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('RANDOM'));
+        .setDescription(`${emojis.get("kullaniciyok").value()} Kişiyi bulunamadım.`).setColor('RANDOM'));
         if (!mentioned.roles.cache.has(roleID)) {
             await message.channel.send(embed
-                .setDescription(`**${myRole.name}** rolü başarıyla ${mentioned} üyesine verildi!`));
+                .setDescription(`${mentioned} kişisine **${myRole.name}** adlı rolü başarıyla verdim!`));
             await mentioned.roles.add(myRole.id);
         } else {
             await mentioned.roles.remove(myRole.id);
             await message.channel.send(embed
-            .setDescription(`**${myRole.name}** rolü başarıyla ${mentioned} üyesinden alındı!`));
+            .setDescription(`${mentioned} kişisinden **${myRole.name}** adlı rolü başarıyla aldım!`));
         }
         await message.react(emojis.get("ok").value());
     }
