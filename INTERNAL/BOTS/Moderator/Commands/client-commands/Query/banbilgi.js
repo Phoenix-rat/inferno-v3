@@ -13,7 +13,7 @@ class BanSorgu extends Command {
             examples: ["banbilgi 674565119161794560"],
             category: "Sorgu",
             aliases: ["bbilgi"],
-            accaptedPerms: ["cmd-crew", "cmd-all"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "cmd-ban"],
             cooldown: 10000
         })
     }

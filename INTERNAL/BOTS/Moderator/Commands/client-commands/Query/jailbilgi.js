@@ -13,7 +13,7 @@ class JailSorgu extends Command {
             examples: ["jailbilgi 674565119161794560"],
             category: "Sorgu",
             aliases: ["jbilgi"],
-            accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double", "cmd-jail"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "cmd-jail"],
             cooldown: 10000
         })
     }

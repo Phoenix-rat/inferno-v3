@@ -13,7 +13,7 @@ class MuteSorgu extends Command {
             examples: ["mutebilgi 674565119161794560"],
             category: "Sorgu",
             aliases: ["mbilgi"],
-            accaptedPerms: ["cmd-crew", "cmd-all"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "cmd-mute"],
             cooldown: 10000
         })
     }
@@ -40,7 +40,7 @@ class MuteSorgu extends Command {
         V-Mute: ${vmData.duration || 'yok'}
         C-Mute: ${cmData.duration || 'yok'}
         `: (vmData || cmData).duration}
-        `).setColor('#2f3136').setFooter("Pasific Forever <3");
+        `).setColor('#2f3136').setFooter("İnferno Forever <3");
         await message.channel.send(embed);
     }
 }
