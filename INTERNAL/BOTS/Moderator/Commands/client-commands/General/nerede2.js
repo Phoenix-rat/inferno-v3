@@ -32,7 +32,7 @@ class Where extends Command {
         } else {
             desu = `${mentioned.voice.channel} \`${mentioned.voice.channel.members.size}/${mentioned.voice.channel.userLimit}\``;
         }
-        let lmc = message.guild.channels.cache.get(mentioned.lastMessageChannelID.name);
+        let lmc = message.guild.channels.cache.get(mentioned.lastMessageChannelID);
         if (!lmc) lmc = `•`;
         let stfu = `${mentioned.lastMessageChannelID ? `En son mesaj yazdığı kanal.` : `En son Mesaj yazdığı kanal bulunamadı.`}`
         const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setFooter(`Kahve sizi seviyor 🌟`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
