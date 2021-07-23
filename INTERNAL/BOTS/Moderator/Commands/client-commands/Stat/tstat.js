@@ -22,11 +22,10 @@ class Invites extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
+
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
-        if((message.guild.ownerID != message.author.id)) return;
-    let select = args[0];
-    const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
-    if (select === 'tstat') {
+        const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
+       
         if (!args[1] || (args[1] !== 'ses' && args[1] !== 'davet' && args[1] !== 'teyit')) return message.channel.send( embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({timeout: 5000}));
         if (args[1] === 'ses') {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
@@ -73,19 +72,15 @@ class Invites extends Command {
         if (args[1] === 'teyit') {
             const datam = await RegData.find({ executor: mentioned.user.id });
             if (!datam) return ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
-
             const embedD = new Discord.MessageEmbed().setColor('#2f3136').setDescription(stripIndent`
             Kullanıcı: **${mentioned.user.username}**
             Kayıt sayısı: ${datam.length}
             Bugünkü kayıt sayısı: ${datam.filter(data => checkDays(data.created) <= 1).length} 
             Haftalık kayıt sayısı: ${datam.filter(data => checkDays(data.created) <= 7).length} 
             `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle(guild.name);
-            return await ctx.send(embedD);
+            return await message.channel.send(embedD);
         }
-        return message.channel.send(embed.setDescription('istatistik bla bla bla'));
-    }
-    if (!select) return message.channel.send(embed.setDescription('Ses, chat veya teyit istatistiklerini felan filan.'));
-    
+        return message.channel.send(embed.setDescription('istatistik bla bla bla'));    
     }
 }
 module.exports = Invites;
