@@ -3,6 +3,8 @@ const low = require('lowdb');
 const Discord = require('discord.js');
 const { checkDays, rain } = require('../../../../../HELPERS/functions');
 const StatData = require('../../../../../MODELS/StatUses/VoiceRecords');
+const InviteData = require('../../../../../MODELS/StatUses/Invites');
+const RegData = require('../../../../../MODELS/Datalake/Registered');
 const { stripIndents } = require('common-tags');
 const stringTable = require('string-table');
 class Invites extends Command {
