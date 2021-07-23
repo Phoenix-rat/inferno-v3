@@ -56,30 +56,30 @@ class Invites extends Command {
             Kulaklık kapalı: \`${Math.floor(records.filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             Yayın Açık: \`${Math.floor(records.filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             Kamera Açık: \`${Math.floor(records.filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle(guild.name);
+            `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
             return await message.channel.send(responseEmbed); 
         }
 
         if (args[1] === 'davet') {
             const DataInv = await InviteData.findOne({ _id: mentioned.user.id });
             if (!DataInv) return await ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
-            const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(stripIndent`
+            const embed = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
             Kullanıcı: **${mentioned.user.username}**
             Davet sayısı: ${DataInv.records.length}
             Sunucuda olan davet ettiği kişi sayısı: ${DataInv.records.filter(rec => message.guild.members.cache.get(rec.user)).length}
-            `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle(guild.name);
+            `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
             return await message.channel.send(embed);
         }
 
         if (args[1] === 'teyit') {
             const datam = await RegData.find({ executor: mentioned.user.id });
             if (!datam) return ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
-            const embedD = new Discord.MessageEmbed().setColor('#2f3136').setDescription(stripIndent`
+            const embedD = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
             Kullanıcı: **${mentioned.user.username}**
             Kayıt sayısı: ${datam.length}
             Bugünkü kayıt sayısı: ${datam.filter(data => checkDays(data.created) <= 1).length} 
             Haftalık kayıt sayısı: ${datam.filter(data => checkDays(data.created) <= 7).length} 
-            `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle(guild.name);
+            `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
             return await message.channel.send(embedD);
         }
         return message.channel.send(embed.setDescription('istatistik bla bla bla'));    
