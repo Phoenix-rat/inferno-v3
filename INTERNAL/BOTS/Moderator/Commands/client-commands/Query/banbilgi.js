@@ -30,7 +30,7 @@ class BanSorgu extends Command {
         \`Komutu Kullanan:\` ${message.guild.members.cache.get(banData ? banData.executor : "123") ? message.guild.members.cache.get(banData.executor) : `Sunucuda değil (${banData.executor})`}
         \`Ban türü:\` ${banData ? banData.type : "Perma"}
         \`Açılacağı tarih:\` ${banData && (banData.type === "temp") ? banData.duration - checkDays(banData.created) : "Açılmayacak"}
-        `).setColor('#2f3136').setFooter("Pasific Forever <3");
+        `).setColor('#2f3136').setFooter("İnferno Forever <3");
         await message.channel.send(embed);
         client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
     }

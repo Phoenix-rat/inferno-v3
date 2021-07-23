@@ -10,8 +10,8 @@ class vMute extends Command {
             usage: "vmute etiket/id dakika sebep",
             examples: ["vmute 674565119161794560 10 botları kötü yapıyor"],
             category: "Moderasyon",
-            aliases: ["yargı", "infaz"],
-            accaptedPerms: ["cmd-mute", "cmd-double", "cmd-single", "cmd-ceo"],
+            aliases: ["sessustur", "sesmute"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "cmd-mute"],
             cooldown: 10000
         })
     }
