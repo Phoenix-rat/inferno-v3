@@ -11,7 +11,7 @@ class CMute extends Command {
             examples: ["cmute 674565119161794560 10 botları kötü yapıyor"],
             category: "Moderasyon",
             aliases: ["cm", "chatmute"],
-            accaptedPerms: ["cmd-mute", "cmd-double", "cmd-single", "cmd-ceo"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-mute"],
             cooldown: 10000
         })
     }
