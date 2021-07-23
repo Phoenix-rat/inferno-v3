@@ -24,7 +24,7 @@ class Invites extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-
+        let days = args[2] || 7;
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
        
