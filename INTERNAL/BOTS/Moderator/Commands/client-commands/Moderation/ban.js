@@ -21,7 +21,7 @@ class Ban extends Command {
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136')).then(msg => msg.delete({ timeout: 1000 }));
+            return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK')).then(msg => msg.delete({ timeout: 1000 }));
         }
         let sebep = args.slice(2).join(" ");
         let typo;
@@ -33,25 +33,25 @@ class Ban extends Command {
         }
         if (!sebep) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.eachRight("soru").value()} Bir sebep girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
+            return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.eachRight("soru").value()} Bir sebep girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
         }
         if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("missingPerms").value()} Bunu yapmak için yeterli yetkiye sahip değilsin`)).then(msg => msg.delete({ timeout: 1000 }));
+            return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("missingPerms").value()} Bunu yapmak için yeterli yetkiye sahip değilsin`)).then(msg => msg.delete({ timeout: 1000 }));
         }
         if (!mentioned.bannable) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiyi banlamak için yeterli yetkiye sahip değilim`)).then(msg => msg.delete({ timeout: 1000 }));
+            return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiyi banlamak için yeterli yetkiye sahip değilim`)).then(msg => msg.delete({ timeout: 1000 }));
         }
         if (!sayi(args[1])) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
+            return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
         }
         client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep, typo, args[1]);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
-        const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("ban").value()} ${mentioned} kullanıcısı ${message.member} tarafından banlandı!`);
+        const embed = new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("ban").value()} ${mentioned} kullanıcısı ${message.member} tarafından banlandı!`);
         await logChannel.send(embed);
     }
 }

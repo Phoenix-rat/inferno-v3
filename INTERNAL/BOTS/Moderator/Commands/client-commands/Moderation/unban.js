@@ -27,7 +27,7 @@ class unBan extends Command {
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         this.client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
-        const embed = new MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("unban").value()} ${mentioned} kullanıcısı banı ${message.member} tarafından kaldırıldı!`);
+        const embed = new MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("unban").value()} ${mentioned} kullanıcısı banı ${message.member} tarafından kaldırıldı!`);
         await logChannel.send(embed);
     }
 }

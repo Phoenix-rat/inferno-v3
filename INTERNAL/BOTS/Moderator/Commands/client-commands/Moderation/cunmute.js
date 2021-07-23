@@ -20,7 +20,7 @@ class cunMute extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
         const vData = await Mute.findOne({ _id: mentioned.user.id });
         if (!vData) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("notfound").value()} Kayıt Bulunamadı`));
         if (message.guild.members.cache.get(vData.executor).roles.highest.rawPosition > message.member.roles.highest.rawPosition) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("missingPerms").value()} Bunu yapabilmek için yeterli yetkiye sahip değilsin!`));
@@ -30,7 +30,7 @@ class cunMute extends Command {
         /*
         this.client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
-        const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("cunmute").value()} ${mentioned} kullanıcısı susturulması ${message.member} tarafından kaldırıldı!`);
+        const embed = new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("cunmute").value()} ${mentioned} kullanıcısı susturulması ${message.member} tarafından kaldırıldı!`);
         await logChannel.send(embed);
         */
     }
