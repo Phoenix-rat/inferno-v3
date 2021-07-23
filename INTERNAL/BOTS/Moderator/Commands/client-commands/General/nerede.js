@@ -7,9 +7,9 @@ class Nerede extends Command {
     constructor(client) {
         super(client, {
             name: "nerede",
-            description: "etiketlenen kişinin nerede olduğunu gösterir",
-            usage: "nerede id/etiket",
-            examples: ["nerede 674565119161794560"],
+            description: "etiketlenen kişinin nerede olduğunu gösterir.",
+            usage: "nerede @Kahve/ID",
+            examples: ["nerede @Kahve/ID"],
             aliases: ["bul", "n"],
             category: "Genel",
             cmdChannel: "bot-komut",
