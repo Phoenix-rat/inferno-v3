@@ -9,9 +9,9 @@ class CountByRole extends Command {
 
     constructor(client) {
         super(client, {
-            name: "rolsay",
+            name: "lalarolsay",
             description: "belirtilen roldeki kişileri etiketler",
-            usage: "rolsay rolid",
+            usage: "lalarolsay rolid",
             examples: ["rolsay 718265023750996028"],
             cooldown: 3600000,
             category: "Yetkili",
