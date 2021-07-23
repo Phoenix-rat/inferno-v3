@@ -24,12 +24,12 @@ class Invites extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        let days = args[2] || 7;
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;        
-        if (mentioned.user.id === message.author.id) args = args.slice(1)
+        if (mentioned.user.id !== message.author.id) args = args.slice(1);
+        let days = args[2] || 7;
         const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
-        if (!args[1] || (args[1] !== 'ses' && args[1] !== 'davet' && args[1] !== 'teyit')) return message.channel.send(embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({timeout: 5000}));
-        if (args[1] === 'ses') {
+        if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit')) return message.channel.send(embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({timeout: 5000}));
+        if (args[0] === 'ses') {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
             if (!Data) return ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const records = Data.records.filter(r => checkDays(r.enter) < days);
@@ -60,7 +60,7 @@ class Invites extends Command {
             return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 10000 })); 
         }
 
-        if (args[1] === 'davet') {
+        if (args[0] === 'davet') {
             const DataInv = await InviteData.findOne({ _id: mentioned.user.id });
             if (!DataInv) return await ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const embed = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
@@ -71,7 +71,7 @@ class Invites extends Command {
             return await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 }));
         }
 
-        if (args[1] === 'teyit') {
+        if (args[0] === 'teyit') {
             const datam = await RegData.find({ executor: mentioned.user.id });
             if (!datam) return ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const embedD = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
