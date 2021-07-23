@@ -23,15 +23,16 @@ class Invites extends Command {
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const datam = await Data.find({ executor: mentioned.user.id });
-        if (!datam) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`).setColor('#2f3136'));
+        if (!datam) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kayıt verisi bulunamadı.`).setColor('BLACK'));
 
-
-        const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(stripIndent`
-        Kullanıcı: **${mentioned.user.username}**
-        Kayıt sayısı: ${rain(client, datam.length)}
-        Bugünkü kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 1).length)} 
-        Haftalık kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 7).length)} 
-        `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
+        
+        const embedregistries = new Discord.MessageEmbed().setColor().setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
+        const embed = embedregistries.setDescription(stripIndent`
+        • Kullanıcı: **${mentioned.user.username}**
+        • Toplam Kayıt sayısı: ${rain(client, datam.length)}
+        • Bugünkü kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 1).length)} 
+        • Haftalık kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 7).length)} 
+        `)
 
         await message.channel.send(embed);
     }
