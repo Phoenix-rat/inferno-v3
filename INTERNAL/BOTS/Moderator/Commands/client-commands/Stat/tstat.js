@@ -27,7 +27,7 @@ class Invites extends Command {
         let days = args[2] || 7;
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;        
         const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
-       
+       if (!mentioned) args = args.slice(1)
         if (!args[1] || (args[1] !== 'ses' && args[1] !== 'davet' && args[1] !== 'teyit')) return message.channel.send(embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({timeout: 5000}));
         if (args[1] === 'ses') {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
