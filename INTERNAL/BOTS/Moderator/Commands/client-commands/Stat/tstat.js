@@ -5,7 +5,7 @@ const { checkDays, rain } = require('../../../../../HELPERS/functions');
 const StatData = require('../../../../../MODELS/StatUses/VoiceRecords');
 const InviteData = require('../../../../../MODELS/StatUses/Invites');
 const RegData = require('../../../../../MODELS/Datalake/Registered');
-const { stripIndents } = require('common-tags');
+const { stripIndent } = require('common-tags');
 const stringTable = require('string-table');
 class Invites extends Command {
     constructor(client) {
