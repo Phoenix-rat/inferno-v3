@@ -25,10 +25,10 @@ class Invites extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let days = args[2] || 7;
-        const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;        
         const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
        
-        if (!args[1] || (args[1] !== 'ses' && args[1] !== 'davet' && args[1] !== 'teyit')) return message.channel.send( embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({timeout: 5000}));
+        if (!args[1] || (args[1] !== 'ses' && args[1] !== 'davet' && args[1] !== 'teyit')) return message.channel.send(embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({timeout: 5000}));
         if (args[1] === 'ses') {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
             if (!Data) return ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
@@ -56,31 +56,31 @@ class Invites extends Command {
             Kulaklık kapalı: \`${Math.floor(records.filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             Yayın Açık: \`${Math.floor(records.filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             Kamera Açık: \`${Math.floor(records.filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
-            return await message.channel.send(responseEmbed); 
+            `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
+            return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 10000 })); 
         }
 
         if (args[1] === 'davet') {
             const DataInv = await InviteData.findOne({ _id: mentioned.user.id });
             if (!DataInv) return await ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const embed = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
-            Kullanıcı: **${mentioned.user.username}**
-            Davet sayısı: ${DataInv.records.length}
-            Sunucuda olan davet ettiği kişi sayısı: ${DataInv.records.filter(rec => message.guild.members.cache.get(rec.user)).length}
-            `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
-            return await message.channel.send(embed);
+            • Kullanıcı: **${mentioned.user.username}**
+            • Toplam Davet sayısı: ${DataInv.records.length}
+            • Sunucuda olan davet ettiği kişi sayısı: ${DataInv.records.filter(rec => message.guild.members.cache.get(rec.user)).length}
+            `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
+            return await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 }));
         }
 
         if (args[1] === 'teyit') {
             const datam = await RegData.find({ executor: mentioned.user.id });
             if (!datam) return ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const embedD = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
-            Kullanıcı: **${mentioned.user.username}**
-            Kayıt sayısı: ${datam.length}
-            Bugünkü kayıt sayısı: ${datam.filter(data => checkDays(data.created) <= 1).length} 
-            Haftalık kayıt sayısı: ${datam.filter(data => checkDays(data.created) <= 7).length} 
-            `).setThumbnail(mentioned.user.displayAvatarURL({ type: 'gif' })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
-            return await message.channel.send(embedD);
+            • Kullanıcı: **${mentioned.user.username}**
+            • Toplam Kayıt sayısı: ${rain(client, datam.length)}
+            • Bugünkü kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 1).length)} 
+            • Haftalık kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 7).length)} 
+            `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
+            return await message.channel.send(embedD).then(msg => msg.delete({ timeout: 10000 }));
         }
         return message.channel.send(embed.setDescription('istatistik bla bla bla'));    
     }
