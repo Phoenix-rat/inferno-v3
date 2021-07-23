@@ -23,9 +23,11 @@ class Where extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setFooter(`Kahve 🌠 INFEЯИO †`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
         let desu = ``;
+        let voiceinfo = `
+        • Mikrofonu: ${mentioned.voice.mute ? `Kapalı` : `Açık`}
+        • Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}`
         if (!mentioned.voice.channel) {
             desu = `Belirtilen kullanıcı hiçbir kanalda bulunmamaktadır.`;
         } else {
@@ -33,13 +35,13 @@ class Where extends Command {
         }
         let lmc = message.guild.channels.cache.get(mentioned.lastMessageChannelID);
         if (!lmc) lmc = `En son Mesaj yazdığı kanal bulunamadı`;
-       
+        const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setFooter(`(${lmc} En son mesaj yazdığı kanal.)`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
         const neredembed = embed.setDescription(`
-        ${mentioned} kişisi **${desu}** kanalında. Kanala gitmek için ${mentioned.voice.channel}'a tıklaya bilirsin.
-        \`\`\`Ses Biglileri:
-        Mikrofonu: ${mentioned.voice.mute ? `Kapalı` : `Açık`}
-        Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}\`\`\` 
-        **${lmc} En son mesaj yazdığı kanal**`)
+        ${mentioned} kişisi **${desu}** kanalında.
+         ** • Ses Biglileri:**
+        \`\`\`
+        ${voiceinfo}\`\`\` 
+        **• Kanala gitmek için ${mentioned.voice.channel}'a tıklaya bilirsin.**`)
         await message.channel.send(neredembed).then(msg => msg.delete({ timeout: 120000 }));
     }
 }
