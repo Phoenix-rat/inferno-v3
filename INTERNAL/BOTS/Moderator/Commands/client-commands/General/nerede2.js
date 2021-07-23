@@ -24,10 +24,11 @@ class Where extends Command {
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
+        if (!mentioned.voice.channelID) return message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} kişisi herhangi bir ses kanalında değil!`)).then(x => x.delete({ timeout: 10000 }));
         let desu = ``;
         let voiceinfo = `• Mikrofonu: ${mentioned.voice.mute ? `Kapalı` : `Açık`} \n• Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}`
         if (!mentioned.voice.channel) {
-            desu = `Belirtilen kullanıcı hiçbir kanalda bulunmamaktadır.`;
+            desu = ``;
         } else {
             desu = `${mentioned.voice.channel} \`${mentioned.voice.channel.members.size}/${mentioned.voice.channel.userLimit}\``;
         }
@@ -36,7 +37,7 @@ class Where extends Command {
         let stfu = `${mentioned.lastMessageChannelID ? `En son mesaj yazdığı kanal.` : `En son Mesaj yazdığı kanal bulunamadı.`}`
         const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setFooter(`(${lmc} ${stfu})`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
         const neredembed = embed.setDescription(`
-        ${mentioned} kişisi **${desu}** kanalında.
+        ${mentioned} kişisi "\`${mentioned.voice.channel.name}\`" kanalında.
          ** • Ses Biglileri:**
         \`\`\`${voiceinfo}\`\`\` 
         **• Kanala gitmek için ${mentioned.voice.channel}'a tıklaya bilirsin.**`)
