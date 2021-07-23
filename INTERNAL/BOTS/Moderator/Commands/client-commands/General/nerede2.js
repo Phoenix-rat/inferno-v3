@@ -21,20 +21,17 @@ class Where extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
+        
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
         if (!mentioned.voice.channelID) return message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} kişisi herhangi bir ses kanalında değil!`)).then(x => x.delete({ timeout: 10000 }));
 
         let whereinfo = `• Mikrofonu: ${mentioned.voice.mute ? `Kapalı` : `Açık`} \n• Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}`
-        let wherechannel = `${mentioned.voice.channel.name} ${mentioned.voice.channel.members.size}/${mentioned.voice.channel.userLimit}`;
+        let wherechannel = `${mentioned.voice.channel} (\`${mentioned.voice.channel.members.size}/${mentioned.voice.channel.userLimit}\`)`;
         
-        let lmc = message.guild.channels.cache.get(mentioned.lastMessageChannel);
-        if (!lmc) lmc = `•`;
-        let stfu = `${mentioned.lastMessageChannelID ? `En son mesaj yazdığı kanal.` : `En son Mesaj yazdığı kanal bulunamadı.`}`
         const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setTimestamp().setFooter(`• Kahve sizi seviyor 🌟`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
         const neredembed = embed.setDescription(`
-        ${mentioned} kişisi "\`${wherechannel}\`" kanalında.
-        (${lmc} ${stfu})
+        ${mentioned} kişisi ${wherechannel} kanalında.
          ** • Ses Biglileri:**
         \`\`\`${whereinfo}\`\`\` 
         **• Kanala gitmek için ${mentioned.voice.channel} kanalına tıklaya bilirsin.**`)
