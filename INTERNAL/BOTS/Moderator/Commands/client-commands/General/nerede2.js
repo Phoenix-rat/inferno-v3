@@ -25,7 +25,7 @@ class Where extends Command {
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
         let desu = ``;
-        let voiceinfo = `• Mikrofonu: ${mentioned.voice.mute ? `Kapalı` : `Açık`} \n • Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}`
+        let voiceinfo = `• Mikrofonu: ${mentioned.voice.mute ? `Kapalı` : `Açık`} \n• Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}`
         if (!mentioned.voice.channel) {
             desu = `Belirtilen kullanıcı hiçbir kanalda bulunmamaktadır.`;
         } else {
