@@ -11,7 +11,7 @@ class Ban extends Command {
             examples: ["ban 479293073549950997 10 botları kötü yapıyor"],
             category: "Moderasyon",
             aliases: ["yargı", "infaz"],
-            accaptedPerms: ["root", "cmd-double", "cmd-single", "cmd-ceo"],
+            accaptedPerms: ["root", "owner", "cmd-single", "cmd-ceo"],
             cooldown: 10000
         })
     }
