@@ -32,12 +32,13 @@ class Where extends Command {
         } else {
             desu = `${mentioned.voice.channel} \`${mentioned.voice.channel.members.size}/${mentioned.voice.channel.userLimit}\``;
         }
-        let lmc = message.guild.channels.cache.get(mentioned.lastMessageChannelID);
+        let lmc = message.guild.channels.cache.get(mentioned.lastMessageChannelID.name);
         if (!lmc) lmc = `•`;
         let stfu = `${mentioned.lastMessageChannelID ? `En son mesaj yazdığı kanal.` : `En son Mesaj yazdığı kanal bulunamadı.`}`
-        const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setFooter(`(${lmc} ${stfu})`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
+        const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setFooter(`Kahve sizi seviyor 🌟`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
         const neredembed = embed.setDescription(`
         ${mentioned} kişisi "\`${mentioned.voice.channel.name}\`" kanalında.
+        (${lmc} ${stfu})
          ** • Ses Biglileri:**
         \`\`\`${voiceinfo}\`\`\` 
         **• Kanala gitmek için ${mentioned.voice.channel}'a tıklaya bilirsin.**`)
