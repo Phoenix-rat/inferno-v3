@@ -3,7 +3,7 @@ const low = require('lowdb');
 const Discord = require('discord.js');
 const { checkDays, rain } = require('../../../../../HELPERS/functions');
 const StatData = require('../../../../../MODELS/StatUses/VoiceRecords');
-const { stripIndents } = require('common-tags');
+const { stripIndent } = require('common-tags');
 const stringTable = require('string-table');
 class Invites extends Command {
     constructor(client) {
@@ -32,7 +32,7 @@ class Invites extends Command {
 
     if (mentioned.user.id !== message.author.id) args = args.slice(1);
     let days = args[2] || 7;
-    
+
         const Data = await StatData.findOne({ _id: mentioned.user.id });
         if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
         const records = Data.records.filter(r => checkDays(r.enter) < days);
