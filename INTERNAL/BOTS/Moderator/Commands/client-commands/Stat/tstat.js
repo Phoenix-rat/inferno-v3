@@ -14,11 +14,11 @@ class Invites extends Command {
     constructor(client) {
         super(client, {
             name: "tstat",
-            description: "Belirtilen kullanıcının istatistiklerini gösterir",
-            usage: "tstat @etiket/id",
-            examples: ["tstat 674565119161794560"],
+            description: "Belirtilen segmenteki istatistiklerini gösterir",
+            usage: "tstat ses/davet/teyit",
+            examples: ["tstat ses/davet/teyit"],
             category: "Stats",
-            aliases: ["t31"],
+            aliases: ["t31","me"],
             cooldown: 10000
         })
     }
@@ -78,7 +78,7 @@ class Invites extends Command {
             const DataInv = await InviteData.findOne({ _id: mentioned.user.id });
             if (!DataInv) return await message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const embed = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
-            • Kullanıcı: **${mentioned.user.username}**
+            • Kullanıcı: ${mentioned}
             • Toplam Davet sayısı: ${DataInv.records.length}
             • Sunucuda olan davet ettiği kişi sayısı: ${DataInv.records.filter(rec => message.guild.members.cache.get(rec.user)).length}
             `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
@@ -89,7 +89,7 @@ class Invites extends Command {
             const datam = await RegData.find({ executor: mentioned.user.id });
             if (!datam) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const embedD = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
-            • Kullanıcı: **${mentioned.user.username}**
+            • Kullanıcı: ${mentioned}
             • Toplam Kayıt sayısı: ${rain(client, datam.length)}
             • Bugünkü kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 1).length)} 
             • Haftalık kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 7).length)} 
