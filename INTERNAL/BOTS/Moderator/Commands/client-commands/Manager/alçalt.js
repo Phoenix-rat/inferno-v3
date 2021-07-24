@@ -10,7 +10,7 @@ class Upgrade extends Command {
             usage: "alçalt @etiket/id",
             examples: ["alçalt 674565119161794560"],
             category: "Management",
-            accaptedPerms: ["cmd-all", "cmd-manager", "cmd-rhode"],
+            accaptedPerms: ["root", "owner", "cmd-ceo","yetkilialım"],
         });
     }
 
