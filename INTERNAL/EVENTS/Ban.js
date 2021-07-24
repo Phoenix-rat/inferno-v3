@@ -16,7 +16,7 @@ class PermaBanEvent {
         const Ban = await BanS.findOne({ _id: user });
         if (!Ban) {
             let pban = new BanS({
-                _id: user,
+                _id: user.id,
                 executor: executor,
                 reason: reason,
                 type: type,
