@@ -23,6 +23,16 @@ class Invites extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        
+        let tstatstatus = mentioned.presence.status
+        .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
+        .replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>')
+        .replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>')
+        .replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>');
+
+    if (mentioned.user.id !== message.author.id) args = args.slice(1);
+    let days = args[2] || 7;
+    
         const Data = await StatData.findOne({ _id: mentioned.user.id });
         if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
         const records = Data.records.filter(r => checkDays(r.enter) < days);
