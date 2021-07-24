@@ -46,6 +46,7 @@ class Invites extends Command {
             const records = Data.records.filter(r => checkDays(r.enter) < days);
             const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
             ${mentioned} kişisine ait ${days} günlük ses bilgileri:
+            
                **Not:** Bu sistem henüz test amaçlı yapılmıştır komutun daha güncel ve daha iyi hali gelene kadar bir süre bununla idare ediniz seviyiorsunuz kahvelendiz <3.
             
             **Genel Bilgileri:**
@@ -67,7 +68,7 @@ class Invites extends Command {
             • Yayın Açık: \`${Math.floor(records.filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             • Kamera Açık: \`${Math.floor(records.filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
          `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
-            return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 10000 })); 
+            return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 120000 })); 
         }
 
         if (args[0] === 'davet') {
