@@ -39,7 +39,7 @@ class Invites extends Command {
         let days = args[2] || 7;
 
         const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
-        if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit')) return message.channel.send(embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({ timeout: 5000 }));
+        if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit')) return message.channel.send(embed.setDescription('.me ses/davet/teyit böyle kullana bilirsiniz')).then(x => x.delete({ timeout: 5000 }));
         if (args[0] === 'ses') {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
             if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
