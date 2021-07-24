@@ -25,8 +25,23 @@ class Invites extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;        
+<<<<<<< Updated upstream
         if (mentioned.user.id !== message.author.id) args = args.slice(1);
         let days = args[2] || 7;
+=======
+<<<<<<< HEAD
+        if (mentioned.user.id === message.author.id) args = args.slice(1)
+        let tstatstatus = mentioned.presence.status
+        .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
+        .replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>')
+        .replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>')
+        .replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>');
+
+=======
+        if (mentioned.user.id !== message.author.id) args = args.slice(1);
+        let days = args[2] || 7;
+>>>>>>> 98ff3a114ced5b355c6d8f957e5fd10eb99ed54c
+>>>>>>> Stashed changes
         const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
         if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit')) return message.channel.send(embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({timeout: 5000}));
         if (args[0] === 'ses') {
@@ -35,27 +50,33 @@ class Invites extends Command {
             const records = Data.records.filter(r => checkDays(r.enter) < days);
             const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
             ${mentioned} kişisine ait ${days} günlük ses bilgileri:
+                **Genel Bilgileri:**
+            • ID: ${mentioned.id}
+            • Kullanıcı: ${mentioned}
+            • Durum: ${tstatstatus}
+            • Sunucuya Katılma Tarihi: \`${moment(mentioned.joinedAt).format("LLL")}\`
+            • Geçirilen toplam süre : \`${Math.floor(records.map(r => r.duration).length > 0 ? records.map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+
+            **Toplam Ses İstatistikleri**
+            • Toplam ses: \`${Math.floor(records.map(r => r.duration).length > 0 ? records.map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Mikrofon kapalı: \`${Math.floor(records.filter(r => r.selfMute).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Kulaklık kapalı: \`${Math.floor(records.filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Yayın Açık: \`${Math.floor(records.filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Kamera Açık: \`${Math.floor(records.filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+
+            **Public Ses İstatistikleri**
+            • Toplam ses: \`${Math.floor(records.filter(r => r.channelType === "st_public").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Mikrofon kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.selfMute).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Kulaklık kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Yayın Açık: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Kamera Açık: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             
-            __**Public Ses İstatistikleri**__
-            Toplam ses: \`${Math.floor(records.filter(r => r.channelType === "st_public").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Mikrofon kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.selfMute).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Kulaklık kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Yayın Açık: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Kamera Açık: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            ───────────────────
-            __**Secret Ses İstatistikleri**__
-            Toplam ses: \`${Math.floor(records.filter(r => r.channelType === "st_private").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Mikrofon kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.selfMute).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Kulaklık kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Yayın Açık: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Kamera Açık: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            ───────────────────
-            __**Toplam Ses İstatistikleri**__
-            Toplam ses: \`${Math.floor(records.map(r => r.duration).length > 0 ? records.map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Mikrofon kapalı: \`${Math.floor(records.filter(r => r.selfMute).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Kulaklık kapalı: \`${Math.floor(records.filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Yayın Açık: \`${Math.floor(records.filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            Kamera Açık: \`${Math.floor(records.filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            **Secret Ses İstatistikleri**
+            • Toplam ses: \`${Math.floor(records.filter(r => r.channelType === "st_private").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Mikrofon kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.selfMute).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Kulaklık kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Yayın Açık: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Kamera Açık: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
             return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 10000 })); 
         }
