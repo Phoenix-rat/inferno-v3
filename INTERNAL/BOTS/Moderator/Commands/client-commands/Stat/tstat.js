@@ -46,12 +46,19 @@ class Invites extends Command {
             const records = Data.records.filter(r => checkDays(r.enter) < days);
             const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
             ${mentioned} kişisine ait ${days} günlük ses bilgileri:
-                **Genel Bilgileri:**
+               **Not:** Bu sistem henüz test amaçlı yapılmıştır komutun daha güncel ve daha iyi hali gelene kadar bir süre bununla idare ediniz seviyiorsunuz kahvelendiz <3.
+            
+            **Genel Bilgileri:**
             • ID: ${mentioned.id}
             • Kullanıcı: ${mentioned}
             • Durum: ${tstatstatus}
             • Sunucuya Katılma Tarihi: \`${moment(mentioned.joinedAt).format("LLL")}\`
             • Geçirilen toplam süre : \`${Math.floor(records.map(r => r.duration).length > 0 ? records.map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+
+            **Ses Bilgileri:**
+            • Public ses süresi: \`${Math.floor(records.filter(r => r.channelType === "st_public").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Register ses süresi: \`${Math.floor(records.filter(r => r.channelType === "st_registry").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_registry").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Private ses süsresi: \`${Math.floor(records.filter(r => r.channelType === "st_private").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
 
             **Toplam Ses İstatistikleri**
             • Toplam ses: \`${Math.floor(records.map(r => r.duration).length > 0 ? records.map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
@@ -59,21 +66,7 @@ class Invites extends Command {
             • Kulaklık kapalı: \`${Math.floor(records.filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             • Yayın Açık: \`${Math.floor(records.filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             • Kamera Açık: \`${Math.floor(records.filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-
-            **Public Ses İstatistikleri**
-            • Toplam ses: \`${Math.floor(records.filter(r => r.channelType === "st_public").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            • Mikrofon kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.selfMute).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            • Kulaklık kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            • Yayın Açık: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            • Kamera Açık: \`${Math.floor(records.filter(r => r.channelType === "st_public").filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            
-            **Secret Ses İstatistikleri**
-            • Toplam ses: \`${Math.floor(records.filter(r => r.channelType === "st_private").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            • Mikrofon kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.selfMute).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            • Kulaklık kapalı: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            • Yayın Açık: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            • Kamera Açık: \`${Math.floor(records.filter(r => r.channelType === "st_private").filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_private").filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
+         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
             return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 10000 })); 
         }
 
