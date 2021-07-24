@@ -7,6 +7,9 @@ const InviteData = require('../../../../../MODELS/StatUses/Invites');
 const RegData = require('../../../../../MODELS/Datalake/Registered');
 const { stripIndent } = require('common-tags');
 const stringTable = require('string-table');
+const moment = require("moment")
+moment.locale('tr');
+
 class Invites extends Command {
     constructor(client) {
         super(client, {
