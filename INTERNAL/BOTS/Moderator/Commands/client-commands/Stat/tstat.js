@@ -27,19 +27,19 @@ class Invites extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;        
+        const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
 
         let tstatstatus = mentioned.presence.status
-        .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
-        .replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>')
-        .replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>')
-        .replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>');
+            .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
+            .replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>')
+            .replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>')
+            .replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>');
 
         if (mentioned.user.id !== message.author.id) args = args.slice(1);
         let days = args[2] || 7;
 
         const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
-        if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit')) return message.channel.send(embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({timeout: 5000}));
+        if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit')) return message.channel.send(embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({ timeout: 5000 }));
         if (args[0] === 'ses') {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
             if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
@@ -54,7 +54,7 @@ class Invites extends Command {
             • Kullanıcı: ${mentioned}
             • Durum: ${tstatstatus}
             • Sunucuya Katılma Tarihi: \`${moment(mentioned.joinedAt).format("LLL")}\`
-            • Geçirilen toplam süre : \`${Math.floor(records.map(r => r.duration).length > 0 ? records.map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
+            • Geçirilen toplam süre : \`${new Date(records.map(r => r.duration).reduce((a, b) => a + b, 0) * 1000).toISOString().substr(11, 8)} dakika\`
 
             **Ses Bilgileri:**
             • Public ses süresi: \`${Math.floor(records.filter(r => r.channelType === "st_public").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
@@ -66,7 +66,7 @@ class Invites extends Command {
             • Mikrofon kapalı: \`${Math.floor(records.filter(r => r.selfMute).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             • Kulaklık kapalı: \`${Math.floor(records.filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
          `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
-            return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 120000 })); 
+            return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 120000 }));
         }
 
         if (args[0] === 'davet') {
@@ -91,7 +91,7 @@ class Invites extends Command {
             `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
             return await message.channel.send(embedD).then(msg => msg.delete({ timeout: 10000 }));
         }
-        return message.channel.send(embed.setDescription('istatistik bla bla bla'));    
+        return message.channel.send(embed.setDescription('istatistik bla bla bla'));
     }
 }
 module.exports = Invites;
