@@ -44,6 +44,11 @@ class Invites extends Command {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
             if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const records = Data.records.filter(r => checkDays(r.enter) < days);
+            const birim = [
+                "Saat",
+                "Dakika",
+                "Saniye"
+            ];
             const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
             ${mentioned} kişisine ait ${days} günlük ses bilgileri:
 
@@ -54,7 +59,7 @@ class Invites extends Command {
             • Kullanıcı: ${mentioned}
             • Durum: ${tstatstatus}
             • Sunucuya Katılma Tarihi: \`${moment(mentioned.joinedAt).format("LLL")}\`
-            • Geçirilen toplam süre : \`${new Date(records.map(r => r.duration).reduce((a, b) => a + b, 0) * 1000).toISOString().substr(11, 8)} dakika\`
+            • Geçirilen toplam süre : \`${new Date(records.map(r => r.duration).reduce((a, b) => a + b, 0) * 1000).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
 
             **Ses Bilgileri:**
             • Public ses süresi: \`${Math.floor(records.filter(r => r.channelType === "st_public").map(r => r.duration).length > 0 ? records.filter(r => r.channelType === "st_public").map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
