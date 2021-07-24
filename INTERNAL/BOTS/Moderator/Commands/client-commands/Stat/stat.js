@@ -24,97 +24,36 @@ class Invites extends Command {
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const Data = await StatData.findOne({ _id: mentioned.user.id });
-        if (!Data) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`).setColor('#2f3136'));
+        if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
+        const records = Data.records.filter(r => checkDays(r.enter) < days);
+        const birim = [
+            "Saat",
+            "Dakika",
+            "Saniye"
+        ];
+        const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
+        ${mentioned} kişisine ait ${days} günlük ses bilgileri:
 
-        const objj = {
-            "st_public": "Genel kanallar",
-            "st_private": "Özel kanallar",
-            "st_registry": "Kayıt kanalları",
-            "st_prison": "Hapishane",
-            "st_crew": "Yetkili kanalları",
-        }
+           **Not:** Bu sistem test amaçlı yapılmıştır komutun daha güncel ve daha iyi hali gelene kadar bir süre bununla idare ediniz seviyiorsunuz kahvelendiz <3.
+        
+        **Genel Bilgileri:**
+        • ID: \`${mentioned.id}\`
+        • Kullanıcı: ${mentioned}
+        • Durum: ${tstatstatus}
+        • Sunucuya Katılma Tarihi: \`${moment(mentioned.joinedAt).format("LLL")}\`
+        • Geçirilen toplam süre : \`${new Date(records.map(r => r.duration).reduce((a, b) => a + b, 0) * 1000).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
 
-        function statconv(item) {
-            item = item.replace((item), element => {
-                return objj[element];
-            });
-            return item;
-        }
-        const records = Data.records.filter(r => checkDays(r.enter) < (args[1] || 7));
-        let myStats = {};
-        for (let indeex = 0; indeex < records.length; indeex++) {
-            const entry = records[indeex];
-            let cType = "Diğer";
-            if (entry.channelType) cType = statconv(entry.channelType);
-            if (!myStats[cType]) myStats[cType] = 0;
-            myStats[cType] = myStats[cType] + Math.floor(entry.duration / 60000);
-        };
-        let docs = [];
-        for (let index = 0; index < Object.keys(myStats).length; index++) {
-            const cData = Object.keys(myStats)[index];
-            const valuem = Math.floor((Object.values(myStats)[index] * 100) / Object.values(myStats).reduce((a, b) => a + b));
-            docs.push({
-                'Tip': cData,
-                '%??': '%' + valuem,
-                'Saat': Math.floor(Object.values(myStats)[index] / 60)
-            });
-        }
-        const embeddoc = stringTable.create(docs, {
-            headers: ['Tip', '%??', 'Saat']
-        });
+        **Ses Bilgileri:**
+        • Public ses süresi: \`${new Date(records.filter(r => r.channelType === "st_public").map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
+        • Register ses süresi: \`${new Date(records.filter(r => r.channelType === "st_registry").map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
+        • Private ses süsresi: \`${new Date(records.filter(r => r.channelType === "st_private").map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
 
-        const buffer = await client.canvas.renderToBuffer({
-            type: 'pie',
-            data: {
-                //labels: Object.keys(myStats),
-                datasets: [{
-                    //label: '# of Votes',
-                    data: Object.values(myStats),
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            color: 'rgb(255, 99, 132)',
-                            font: {
-                                family: "FONT"
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-
-        const att = new Discord.MessageAttachment(buffer, 'Stat.png');
-        await message.channel.send(new Discord.MessageEmbed().setTitle(message.guild.name).setDescription(stripIndents`
-        ${mentioned} kişisine ait ${args[1] || "7"} günlük ses bilgileri aşağıda belirtilmiştir.
-        \`\`\`${embeddoc}\`\`\`
-        `).setImage("attachment://Stat.png").attachFiles(att));
+        **Toplam Ses İstatistikleri**
+        • Toplam ses: \`${new Date(records.map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
+        • Mikrofon kapalı: \`${new Date(records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
+        • Kulaklık kapalı: \`${new Date(records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
+     `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setFooter("• Kahve seni önemsiyor- vallaha önemsiyom abi").setTitle(message.guild.name);
+        return await message.channel.send(responseEmbed)
     }
 }
 module.exports = Invites;
