@@ -10,7 +10,7 @@ class Upgrade extends Command {
             usage: "yükselt @etiket/id",
             examples: ["yükselt 674565119161794560"],
             category: "Management",
-            accaptedPerms: ["cmd-all", "cmd-manager", "cmd-rhode","yetkilialım"],
+            accaptedPerms: ["root", "owner", "cmd-ceo","yetkilialım"],
         });
     }
 
@@ -21,7 +21,7 @@ class Upgrade extends Command {
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
-        const embed = new Discord.MessageEmbed().setColor('#2f3136');
+        const embed = new Discord.MessageEmbed().setColor('BLACK');
         if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(embed.setDescription(`${emojis.warn} Bunu yapmak için yeterli yetkiye sahip değilsin`));
 
         const taglırol = message.guild.roles.cache.get(roles.get("starter").value());

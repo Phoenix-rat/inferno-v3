@@ -14,11 +14,12 @@ class Invites extends Command {
     constructor(client) {
         super(client, {
             name: "tstat",
-            description: "Belirtilen kullanıcının istatistiklerini gösterir",
-            usage: "tstat @etiket/id",
-            examples: ["tstat 674565119161794560"],
+            description: "Belirtilen segmenteki istatistiklerini gösterir",
+            usage: "tstat ses/davet/teyit",
+            examples: ["tstat ses/davet/teyit"],
             category: "Stats",
-            aliases: ["t31"],
+            aliases: ["t31","me"],
+            accaptedPerms: ["crew"],
             cooldown: 10000
         })
     }
@@ -39,7 +40,7 @@ class Invites extends Command {
         let days = args[2] || 7;
 
         const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
-        if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit')) return message.channel.send(embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({ timeout: 5000 }));
+        if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit')) return message.channel.send(embed.setDescription('.me ses/davet/teyit böyle kullana bilirsiniz')).then(x => x.delete({ timeout: 5000 }));
         if (args[0] === 'ses') {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
             if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
@@ -70,15 +71,15 @@ class Invites extends Command {
             • Toplam ses: \`${new Date(records.map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
             • Mikrofon kapalı: \`${new Date(records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
             • Kulaklık kapalı: \`${new Date(records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
-         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
-            return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 120000 }));
+         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setFooter("• Kahve seni önemsiyor- vallaha önemsiyom abi").setTitle(message.guild.name);
+            return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 20000 }));
         }
 
         if (args[0] === 'davet') {
             const DataInv = await InviteData.findOne({ _id: mentioned.user.id });
             if (!DataInv) return await message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const embed = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
-            • Kullanıcı: **${mentioned.user.username}**
+            • Kullanıcı: ${mentioned}
             • Toplam Davet sayısı: ${DataInv.records.length}
             • Sunucuda olan davet ettiği kişi sayısı: ${DataInv.records.filter(rec => message.guild.members.cache.get(rec.user)).length}
             `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
@@ -89,7 +90,7 @@ class Invites extends Command {
             const datam = await RegData.find({ executor: mentioned.user.id });
             if (!datam) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const embedD = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
-            • Kullanıcı: **${mentioned.user.username}**
+            • Kullanıcı: ${mentioned}
             • Toplam Kayıt sayısı: ${rain(client, datam.length)}
             • Bugünkü kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 1).length)} 
             • Haftalık kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 7).length)} 

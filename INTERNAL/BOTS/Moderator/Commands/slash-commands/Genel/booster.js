@@ -49,7 +49,7 @@ module.exports = class AFKCommand extends SlashCommand {
             point = client.config.tag[0];
         }
         await mentioned.setNickname(`${point} ${ctx.options["isim"]}`);
-        const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("pando1").value()} Başarıyla Ayarlandı!`);
+        const embed = new Discord.MessageEmbed().setColor('PURPLE').setDescription(`${emojis.get("pando1").value()} Başarıyla Ayarlandı!`);
         await ctx.send({
             embeds: [embed]
         });

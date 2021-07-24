@@ -26,11 +26,11 @@ class KayitSil extends Command {
 
         const data = await nameData.findOne({ _id: mentioned.user.id });
         if (!data) return message.channel.send(new Discord.MessageEmbed().setDescription('Veri bulunamadı').setColor('RED'));
-        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`Bunu yapmak için yeterli yetkiye sahip değilsin`));
+        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(new Discord.MessageEmbed().setColor("BLACK").setDescription(`Bunu yapmak için yeterli yetkiye sahip değilsin`));
         await nameData.deleteOne({ _id: mentioned.user.id });
         await mentioned.roles.remove(mentioned.roles.cache.filter(r => r.editable).array());
         await mentioned.roles.add(roles.get('welcome').value());
-        await message.channel.send(new Discord.MessageEmbed().setDescription("Kullanıcının verileri başarıyla silindi").setColor('#2f3136'));
+        await message.channel.send(new Discord.MessageEmbed().setDescription("Kullanıcının verileri başarıyla silindi").setColor("BLACK"));
     }
 }
 module.exports = KayitSil;

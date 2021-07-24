@@ -78,19 +78,19 @@ module.exports = class JailCommand extends SlashCommand {
         const userID = Object.values(ctx.options)[0];
         const guild = client.guilds.cache.get(ctx.guildID);
         const mentioned = client.guilds.cache.get(ctx.guildID).members.cache.get(userID);
-        const errEmbed = new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136');
+        const errEmbed = new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK');
         if (!mentioned) return await ctx.send({
             embeds: [errEmbed]
         });
-        const errEmbed2 = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.eachRight("soru").value()} Bir sebep girmelisin`);
+        const errEmbed2 = new Discord.MessageEmbed().setColor('RED').setDescription(`${emojis.eachRight("soru").value()} Bir sebep girmelisin`);
         if (!Object.values(ctx.options)[1]) return await ctx.send({
             embeds: [errEmbed2]
         });
-        const mPerms = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("missingPerms").value()} Bunu yapmak için yeterli yetkiye sahip değilsin`);
+        const mPerms = new Discord.MessageEmbed().setColor('RED').setDescription(`${emojis.get("missingPerms").value()} Bunu yapmak için yeterli yetkiye sahip değilsin`);
         if (guild.members.cache.get(ctx.user.id).roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return await ctx.send({
             embeds: [mPerms]
         });
-        const bPerms = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiyi banlamak için yeterli yetkiye sahip değilim`)
+        const bPerms = new Discord.MessageEmbed().setColor('RED').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiyi banlamak için yeterli yetkiye sahip değilim`)
         if (!mentioned.bannable) return message.channel.send({
             embeds: [bPerms]
         });
@@ -100,7 +100,7 @@ module.exports = class JailCommand extends SlashCommand {
         await client.extention.emit('Jail', mentioned, ctx.user.id, Object.values(ctx.options)[1], typo, duration);
         if (mentioned.voice.channel) await mentioned.voice.kick();
         const logChannel = guild.channels.cache.get(channels.get("cmd-jail").value());
-        const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("ok").value()} ${mentioned} kullanıcısı <@${ctx.user.id}> tarafından \`${Object.values(ctx.options)[1]}\` sebebiyle ${typo === "Perma" ? "sınırsız" : duration} günlüğüne zindana şutlandı!`);
+        const embed = new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("ok").value()} ${mentioned} kullanıcısı <@${ctx.user.id}> tarafından \`${Object.values(ctx.options)[1]}\` sebebiyle ${typo === "Perma" ? "sınırsız" : duration} günlüğüne zindana şutlandı!`);
         await logChannel.send(embed);
         const responseEmbed = new Discord.MessageEmbed().setDescription(`${mentioned} kullanıcısı başarıyla jail'e şutlandı!`);
         await ctx.send({
