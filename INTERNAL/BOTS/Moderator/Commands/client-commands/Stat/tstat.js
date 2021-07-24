@@ -55,7 +55,7 @@ class Invites extends Command {
                **Not:** Bu sistem test amaçlı yapılmıştır komutun daha güncel ve daha iyi hali gelene kadar bir süre bununla idare ediniz seviyiorsunuz kahvelendiz <3.
             
             **Genel Bilgileri:**
-            • ID: ${mentioned.id}
+            • ID: \`${mentioned.id}\`
             • Kullanıcı: ${mentioned}
             • Durum: ${tstatstatus}
             • Sunucuya Katılma Tarihi: \`${moment(mentioned.joinedAt).format("LLL")}\`
