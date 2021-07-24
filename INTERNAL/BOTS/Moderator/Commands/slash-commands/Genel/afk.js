@@ -44,7 +44,7 @@ module.exports = class AFKCommand extends SlashCommand {
             } catch (error) {
                 console.log(error);
             }
-            const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("pando1").value()} Başarıyla Ayarlandı!`);
+            const embed = new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("pando1").value()} Başarıyla Ayarlandı!`);
             await ctx.send({
                 embeds: [embed]
             });
