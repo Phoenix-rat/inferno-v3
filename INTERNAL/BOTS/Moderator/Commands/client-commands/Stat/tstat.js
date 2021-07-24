@@ -19,6 +19,7 @@ class Invites extends Command {
             examples: ["tstat ses/davet/teyit"],
             category: "Stats",
             aliases: ["t31","me"],
+            accaptedPerms: ["crew"],
             cooldown: 10000
         })
     }
@@ -70,8 +71,8 @@ class Invites extends Command {
             • Toplam ses: \`${new Date(records.map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
             • Mikrofon kapalı: \`${new Date(records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
             • Kulaklık kapalı: \`${new Date(records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b, 0)).toISOString().substr(11, 8).toString().split(':').map((v, i) => `${v} ${birim[i]}`).join(' ')}\`
-         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
-            return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 120000 }));
+         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setFooter("• Kahve seni önemsiyor- vallaha önemsiyom abi").setTitle(message.guild.name);
+            return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 20000 }));
         }
 
         if (args[0] === 'davet') {
