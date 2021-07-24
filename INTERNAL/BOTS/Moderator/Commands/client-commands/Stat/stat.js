@@ -5,6 +5,9 @@ const { checkDays, rain } = require('../../../../../HELPERS/functions');
 const StatData = require('../../../../../MODELS/StatUses/VoiceRecords');
 const { stripIndent } = require('common-tags');
 const stringTable = require('string-table');
+const moment = require("moment")
+moment.locale('tr');
+
 class Invites extends Command {
     constructor(client) {
         super(client, {
