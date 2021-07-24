@@ -42,12 +42,12 @@ class Invites extends Command {
         if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit')) return message.channel.send(embed.setDescription('Stat seçimi pls (ses/chat/teyit)')).then(x => x.delete({timeout: 5000}));
         if (args[0] === 'ses') {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
-            if (!Data) return ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
+            if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const records = Data.records.filter(r => checkDays(r.enter) < days);
             const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
             ${mentioned} kişisine ait ${days} günlük ses bilgileri:
-            
-               **Not:** Bu sistem henüz test amaçlı yapılmıştır komutun daha güncel ve daha iyi hali gelene kadar bir süre bununla idare ediniz seviyiorsunuz kahvelendiz <3.
+
+               **Not:** Bu sistem test amaçlı yapılmıştır komutun daha güncel ve daha iyi hali gelene kadar bir süre bununla idare ediniz seviyiorsunuz kahvelendiz <3.
             
             **Genel Bilgileri:**
             • ID: ${mentioned.id}
@@ -65,15 +65,13 @@ class Invites extends Command {
             • Toplam ses: \`${Math.floor(records.map(r => r.duration).length > 0 ? records.map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             • Mikrofon kapalı: \`${Math.floor(records.filter(r => r.selfMute).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
             • Kulaklık kapalı: \`${Math.floor(records.filter(r => r.selfDeaf).map(r => r.duration).length > 0 ? records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            • Yayın Açık: \`${Math.floor(records.filter(r => r.streaming).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
-            • Kamera Açık: \`${Math.floor(records.filter(r => r.videoOn).map(r => r.duration).length > 0 ? records.filter(r => r.streaming).map(r => r.duration).reduce((a, b) => a + b) / 60000 : 0)} dakika\`
          `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
             return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 120000 })); 
         }
 
         if (args[0] === 'davet') {
             const DataInv = await InviteData.findOne({ _id: mentioned.user.id });
-            if (!DataInv) return await ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
+            if (!DataInv) return await message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const embed = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
             • Kullanıcı: **${mentioned.user.username}**
             • Toplam Davet sayısı: ${DataInv.records.length}
@@ -84,7 +82,7 @@ class Invites extends Command {
 
         if (args[0] === 'teyit') {
             const datam = await RegData.find({ executor: mentioned.user.id });
-            if (!datam) return ctx.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
+            if (!datam) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const embedD = new Discord.MessageEmbed().setColor('RANDOM').setDescription(stripIndent`
             • Kullanıcı: **${mentioned.user.username}**
             • Toplam Kayıt sayısı: ${rain(client, datam.length)}
