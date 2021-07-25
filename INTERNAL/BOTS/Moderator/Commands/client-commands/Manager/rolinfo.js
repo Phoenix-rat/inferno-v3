@@ -9,7 +9,7 @@ class RoleInfo extends Command {
             name: "rolinfo",
             description: "Belirtilen roldeki üyeleri gösterir.",
             usage: "rolinfo @Rol/ID",
-            examples: ["vip @Rol/ID"],
+            examples: ["rolinfo @Rol/ID"],
             category: "Yetkili",
             aliases: ["rinfo", "roleinfo"],
             accaptedPerms: ["root", "owner"],
