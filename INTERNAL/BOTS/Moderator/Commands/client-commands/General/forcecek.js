@@ -9,7 +9,7 @@ class Gel extends Command {
             description: "İstediğiniz kişinin odasına gidin",
             usage: "forcecek etiket/id",
             examples: ["forcecek 674565119161794560"],
-            accaptedPerms: ["root","cmd_dante"],
+            accaptedPerms: ["cmd_dante"],
             aliases: ["fcek"],
             category: "Moderasyon",
             cooldown: 10000

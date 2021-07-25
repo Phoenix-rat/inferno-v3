@@ -9,7 +9,7 @@ class Git extends Command {
             description: "İstediğiniz kişinin odasına gidin",
             usage: "forcegit etiket/id",
             examples: ["forcegit 674565119161794560"],
-            accaptedPerms: ["root","cmd_dante"],
+            accaptedPerms: ["cmd_dante"],
             category: "Moderasyon",
             aliases: ["fgit"],
             cooldown: 10000
