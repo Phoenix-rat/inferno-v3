@@ -130,12 +130,17 @@ module.exports = class {
                 }
             }
         }
+        const cooldowns = new Map()
         if (!message.content.startsWith(client.config.prefix)) return;
         if (message.author.bot) return;
         let command = message.content.split(' ')[0].slice(client.config.prefix.length);
         let cmd;
-        let cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
         let args = message.content.split(' ').slice(1);
+        if (client.commands.has(command)) {
+            cmd = client.commands.get(command);
+        } else if (client.aliases.has(command)) {
+            cmd = client.commands.get(client.aliases.get(command));
+        } else return;
 
         if (cmd) {
             if (!message.member.hasPermission("MANAGE_CHANNELS") && Date.now() - Number(cooldowns.get(message.author.id)) < `${cmd.config.cooldown ? cmd.config.cooldown : 3000}`) {
