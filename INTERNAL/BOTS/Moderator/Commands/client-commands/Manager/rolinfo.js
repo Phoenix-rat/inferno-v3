@@ -27,7 +27,7 @@ class RoleInfo extends Command {
         if (!mentionedRole) return message.channel.send(new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setFooter("Kahvelendin <3")
-        .setDescription("Lütfen rolü etiketleyiniz veya ID sini giriniz!"))
+        .setDescription("Lütfen rolü etiketleyiniz veya ID sini giriniz!")).then(msg => msg.delete({ timeout: 5000 }));
         let mentionedRoleMembers = mentionedRole.members.map(role => `<@${role.id}> (\`${role.id}\`) `)
         message.channel.send(`${mentionedRole} rolündeki üyeler.
         
