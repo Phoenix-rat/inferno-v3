@@ -14,7 +14,7 @@ class Tantoony extends Client {
 
         this.commands = new Collection();
         this.aliases = new Collection();
-        this.cmdCoodown = new Object();
+        this.cmdCooldown = new Object();
         this.buttons = new Collection();
         
         this.leaves = new Map();

@@ -157,10 +157,10 @@ module.exports = class {
                 return await message.channel.send(embed.setDescription(deyim).setColor('BLACK')).then(msg => msg.delete({ timeout: 5000 }));
             }
         }
-        let uCooldown = client.cmdCoodown[message.author.id];
+        let uCooldown = client.cmdCooldown[message.author.id];
         if (!uCooldown) {
-            client.cmdCoodown[message.author.id] = {};
-            uCooldown = client.cmdCoodown[message.author.id];
+            client.cmdCooldown[message.author.id] = {};
+            uCooldown = client.cmdCooldown[message.author.id];
         }
         let time = uCooldown[cmd.info.name] || 0;
         if (time && (time > Date.now())) return message.channel.send(`${emojis.get("dmcmd").value()} Komutu tekrar kullanabilmek için lütfen **${Math.ceil((time - Date.now()) / 1000)}** saniye bekle!`);
