@@ -19,7 +19,7 @@ class Gel extends Command {
     async run(client, message, args) {
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
-        const emojis = await low(client.adapters('emojis'));
+        const emojis = await low(client.adapters('emojis'))
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
