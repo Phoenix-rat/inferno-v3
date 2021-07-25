@@ -130,7 +130,6 @@ module.exports = class {
                 }
             }
         }
-        const cooldowns = new Map()
         if (!message.content.startsWith(client.config.prefix)) return;
         if (message.author.bot) return;
         let command = message.content.split(' ')[0].slice(client.config.prefix.length);
@@ -141,14 +140,6 @@ module.exports = class {
         } else if (client.aliases.has(command)) {
             cmd = client.commands.get(client.aliases.get(command));
         } else return;
-
-        if (cmd) {
-            if (!message.member.hasPermission("MANAGE_CHANNELS") && Date.now() - Number(cooldowns.get(message.author.id)) < `${cmd.config.cooldown ? cmd.config.cooldown : 3000}`) {
-                message.react("⏳").catch(() => { })
-                message.delete({ timeout: 5000 }).catch(() => { })
-                return;
-            }
-
         const embed = new Discord.MessageEmbed();
         if (!cmd.config.enabled) return;
         if (cmd.config.dmCmd && (message.channel.type !== 'dm')) return message.channel.send(`${emojis.get("dmcmd").value()} Bu komut bir **DM** komutudur.`);
@@ -166,24 +157,21 @@ module.exports = class {
                 return await message.channel.send(embed.setDescription(deyim).setColor('BLACK')).then(msg => msg.delete({ timeout: 5000 }));
             }
         }
-
-
- /*       let uCooldown = client.cmdCoodown[message.author.id];
+        let uCooldown = client.cmdCoodown[message.author.id];
         if (!uCooldown) {
             client.cmdCoodown[message.author.id] = {};
             uCooldown = client.cmdCoodown[message.author.id];
         }
         let time = uCooldown[cmd.info.name] || 0;
         if (time && (time > Date.now())) return message.channel.send(`${emojis.get("dmcmd").value()} Komutu tekrar kullanabilmek için lütfen **${Math.ceil((time - Date.now()) / 1000)}** saniye bekle!`);
-*/
+
         client.logger.log(`[(${message.author.id})] ${message.author.username} ran command [${cmd.info.name}]`, "cmd");
         if (message.channel.id === "857659757233700875" && !message.member.permissions.has("MANAGE_ROLES") && command !== "tag") return;
         try {
             cmd.run(client, message, args);
-            cooldowns.set(message.author.id, Date.now());
         } catch (e) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             console.log(e);
         }
-    }}
+    }
 }
