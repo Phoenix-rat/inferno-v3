@@ -18,7 +18,6 @@ class RoleInfo extends Command {
     }
 
     async run(client, message, args) {
-
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
@@ -29,13 +28,11 @@ class RoleInfo extends Command {
         .setFooter("Kahvelendin <3")
         .setDescription("Lütfen rolü etiketleyiniz veya ID sini giriniz!")).then(msg => msg.delete({ timeout: 5000 }));
         let mentionedRoleMembers = mentionedRole.members.map(role => `<@${role.id}> (\`${role.id}\`) `)
-        message.channel.send(`${mentionedRole} rolündeki üyeler.
-        • Roldeki üye sayısı: \`${mentionedRole.members.size}\`
-        ──────────────────────────────────
+        message.channel.send(`• ${mentionedRole} rolündeki üyeler.
+• Roldeki üye sayısı: \`${mentionedRole.members.size}\`
+─────────────────
+${mentionedRoleMembers.join("\n")})`, { split: true })
 
-        ${mentionedRoleMembers.join("\n")})`, { split: true })
     }
-
 }
-
 module.exports = RoleInfo;
