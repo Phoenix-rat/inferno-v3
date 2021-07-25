@@ -11,6 +11,7 @@ class Git extends Command {
             examples: ["forcegit 674565119161794560"],
             accaptedPerms: ["root","cmd_dante"],
             category: "Moderasyon",
+            aliases: ["fgit"],
             cooldown: 10000
         });
     }

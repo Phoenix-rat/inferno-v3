@@ -10,6 +10,7 @@ class Gel extends Command {
             usage: "forcecek etiket/id",
             examples: ["forcecek 674565119161794560"],
             accaptedPerms: ["root","cmd_dante"],
+            aliases: ["fcek"],
             category: "Moderasyon",
             cooldown: 10000
         });
