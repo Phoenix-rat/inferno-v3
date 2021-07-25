@@ -8,7 +8,7 @@ class Lock extends Command {
             description: "Mesajın atıldığı kanalı kilitler",
             usage: "kilit",
             examples: ["lock"],
-            cooldown: 3600000,
+            cooldown: 300000,
             category: "Düzen",
             accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double",]
         });
