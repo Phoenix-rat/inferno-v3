@@ -18,7 +18,7 @@ class Eval extends Command {
             cooldown: 5000,
             enabled: true,
             adminOnly: false,
-            ownerOnly: false,
+            ownerOnly: true,
             onTest: false,
             rootOnly: false,
             dmCmd: false
@@ -26,8 +26,6 @@ class Eval extends Command {
     }
 
     async run(client, message, args) {
-
-        if(mesasge.author.id !== "853011311328100411") return
 
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
