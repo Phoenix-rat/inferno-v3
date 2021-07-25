@@ -29,7 +29,7 @@ class RoleInfo extends Command {
         .setColor("RANDOM")
         .setDescription("Belirtilen rolü sunucuda bulamadım lütfen rolü etiketleyiniz veya ID sini giriniz!"))
  
-        let mentionedRoleMembers = mentionedRole.members.map(role => `<@${mentionedRole.id}> - (\`${mentionedRole.id}\`) `)
+        let mentionedRoleMembers = mentionedRole.members.map(role => `<@${role.id}> - (\`${role.id}\`) `)
         message.channel.send(`${mentionedRole} rolündeki üyeler.
         
         ${mentionedRoleMembers.join("\n")})`, { split: true })
