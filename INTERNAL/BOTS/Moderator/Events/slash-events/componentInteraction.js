@@ -50,10 +50,10 @@ module.exports = class {
                 ephemeral: true
             });
         }
-        let uCooldown = client.cmdCoodown[ctx.user.id];
+        let uCooldown = client.cmdCooldown[ctx.user.id];
         if (!uCooldown) {
-            client.cmdCoodown[ctx.user.id] = {};
-            uCooldown = client.cmdCoodown[ctx.user.id];
+            client.cmdCooldown[ctx.user.id] = {};
+            uCooldown = client.cmdCooldown[ctx.user.id];
         }
         let time = uCooldown[cmd.info.name] || 0;
         if (time && (time > Date.now())) return await ctx.send(`Komutu tekrar kullanabilmek için lütfen **${Math.ceil((time - Date.now()) / 1000)}** saniye bekle!`, {
