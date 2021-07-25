@@ -27,12 +27,12 @@ class Lust extends Command {
         
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed()
         .setDescription(`${emojis.get("kullaniciyok").value()} Kişiyi bulunamadım.`).setColor('RANDOM'));
-        if (!mentioned.roles.cache.has(roles.get("starter").value().concat(roles.get("cmd-crew").value()))) {
+        if (!mentioned.roles.cache.has(roles.get("Lust").value())) {
             await message.channel.send(embed
                 .setDescription(`${mentioned} kişisine "**Lust**" yetkisine çıkardım!`));
-            await mentioned.roles.add(roles.get("starter").value().concat(roles.get("cmd-crew").value()));
+            await mentioned.roles.add(roles.get("Lust"));
         } else {
-            await mentioned.roles.remove(roles.get("starter").value().concat(roles.get("cmd-crew").value()));
+            await mentioned.roles.remove(roles.get("Lust").value());
             await message.channel.send(embed
             .setDescription(`${mentioned} kişisini "**Lust**" yetkisinden indirdim!`));
         }
