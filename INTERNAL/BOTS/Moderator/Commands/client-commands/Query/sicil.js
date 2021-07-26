@@ -26,7 +26,7 @@ class Sicil extends Command {
         let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0] || message.member.user.id;
         const patates = new Discord.MessageEmbed().setThumbnail(message.guild.iconURL({ dynamic: true })).setTimestamp().setFooter(`• Adam ol ceza yeme -Kahve 🌟`).setTitle("† Dante's INFEЯИO").setColor("BLACK")
         const whathefuck = await sicil.findOne({ _id: mentionedID });
-        if (!whathefuck) return message.channel.send("Dosya bulunamadı!");
+        if (!whathefuck) return message.channel.send(new Discord.MessageEmbed().setColor("BLACK").setDescription("Kullancının herhangi bir ceza geçmişi bulunmamaktadır!"));
         let sth;
         if (args[1] && args[1].includes('-')) {
             sth = args[1].split('-')[1];
