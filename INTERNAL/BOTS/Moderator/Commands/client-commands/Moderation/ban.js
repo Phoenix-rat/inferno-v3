@@ -35,18 +35,9 @@ class Ban extends Command {
         // } else {
         //     typo = 'temp';
         // }
-        if (!sebep) {
-            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.eachRight("soru").value()} Bir sebep girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
-        }
-        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) {
-            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("missingPerms").value()} Bunu yapmak için yeterli yetkiye sahip değilsin`)).then(msg => msg.delete({ timeout: 1000 }));
-        }
-        if (!mentioned.bannable) {
-            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiyi banlamak için yeterli yetkiye sahip değilim`)).then(msg => msg.delete({ timeout: 1000 }));
-        }
+        if (!sebep) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("soru").value()} Bir sebep girmelisin`));
+        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("missingPerms").value()} Bunu yapmak için yeterli yetkiye sahip değilsin`));
+        if (!mentioned.bannable) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiye reklam cezası vermek için yeterli yetkiye sahip değilim`));
       //  if (!sayi(args[1])) {
       //      await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
       //      return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
