@@ -24,7 +24,7 @@ class unBan extends Command {
         if (BanDoc && message.guild.members.cache.get(BanDoc.executor).roles.highest.rawPosition > message.member.roles.highest.rawPosition) return message.channel.send(new MessageEmbed().setDescription(`${emojis.get("missingPerms").value()} Bu kullanıcının banını kaldıracak yetkiye sahip değilsin!`));
         if (BanDoc) await Bans.deleteOne({_id: args[0]});
         await message.guild.members.unban(args[0], `${message.author.username} tarafından kaldırıldı`);
-        await message.channel.send(`${user} adlı kullanıcının banı kaldırıldı!`)
+        await message.channel.send(`Kullanıcının banı başarıyla kaldırıldı!`)
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
         const embed = new MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("unban").value()} ${mentioned} kullanıcısı banı ${message.member} tarafından kaldırıldı!`);
