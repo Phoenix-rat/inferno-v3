@@ -42,7 +42,7 @@ class Call extends Command {
         • Booster üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("booster").value())).size}\`
         • Taglı üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("crew").value())).size}\`
         • Vip üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("vip").value())).size}\`
-        • Sunucudaki Bot sayısı: \`${message.guild.user.bot.size}\`
+        • Sunucudaki Bot sayısı: \`${message.guild.members.cache.filter(x => x && x.user.bot).size}\`
         ───────────────────
         • Erkek üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has("854162987619057665")).size}\`
         • Kadın üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has("854162990534623233")).size}\`
