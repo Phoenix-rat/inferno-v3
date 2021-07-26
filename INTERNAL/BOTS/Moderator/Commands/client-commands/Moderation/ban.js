@@ -63,7 +63,6 @@ class Ban extends Command {
         • Banlanma Tarihi: \`${moment(Date.now()).format("LLL")}\`
         • Banlanma Sebebi: \`${sebep}\``)
         .setColor('BLACK')
-        .setTimestap()
         .setFooter(`• Ban log felan filan -Kahve 🌟`)
         await logChannel.send(embed);
     }
