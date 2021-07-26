@@ -30,7 +30,7 @@ class Sicil extends Command {
 
         const embed = new Discord.MessageEmbed().setDescription(([
                 whathefuck.length > 15 ? `Belirttiğim kişinin toplam ${whathefuck.length} cezası var.\n` : 
-                `${user} kullanıcısının sicili;\n`,
+                `${message.guild.members.cache.get(mentionedID) || `Sunucuda değil (${mentionedID})`} kullanıcısının sicili;\n`,
                  whathefuck.map((punish) =>`\`${moment(punish.start).format("LLL")}\` tarihinde 
                  ${message.guild.members.cache.get(punish.executor) || "Bilinmiyor"} tarafından **${punish.reason}** sebebiyle cezalandırılmış. (**${punish.punish}**)`)
                  .slice(0, 15).join("\n"),])
