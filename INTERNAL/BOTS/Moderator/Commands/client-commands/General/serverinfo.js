@@ -30,7 +30,6 @@ class Call extends Command {
         • Sunucunun adı: **${message.guild.name}**
         • Sunucunun ID'si: \`${message.guild.id}\`
         • Açılma Tarihi: \`${moment(message.guild.createdAt).format("LLL")}\`
-        • Taç sahibi: "\`${message.guild.owner.user.username}\`"
         ───────────────────
         • Rol sayısı: \`${message.guild.roles.cache.size}\`
         • Kanal sayısı: \`${message.guild.channels.cache.size}\`
