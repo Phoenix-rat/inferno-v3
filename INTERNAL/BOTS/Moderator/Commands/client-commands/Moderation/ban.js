@@ -55,13 +55,16 @@ class Ban extends Command {
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 
         const logChannel = message.guild.channels.cache.get(channels.get("ban-log").value());
-        const embed = new Discord.MessageEmbed().setColor('BLACK').setTimestap().setFooter(`• Ban log felan filan -Kahve 🌟`)
+        const embed = new Discord.MessageEmbed()
         .setDescription(`${mentioned} (\`${mentioned.id}\`) üyesi ${message.author} tarafından sunucudan uzaklaştırıldı.
 
         • Banlanan Üye: ${mentioned ? mentioned.toString() : ""} \`(${mentioned.id})\`
         • Banlayan Yetkili: ${message.author} \`(${message.author.id})\`
         • Banlanma Tarihi: \`${moment(Date.now()).format("LLL")}\`
         • Banlanma Sebebi: \`${sebep}\``)
+        .setColor('BLACK')
+        .setTimestap()
+        .setFooter(`• Ban log felan filan -Kahve 🌟`)
         await logChannel.send(embed);
     }
 }
