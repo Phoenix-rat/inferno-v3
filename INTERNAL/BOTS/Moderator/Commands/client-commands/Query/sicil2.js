@@ -11,12 +11,12 @@ class Sicil extends Command {
 
     constructor(client) {
         super(client, {
-            name: "sicil",
+            name: "sicil2",
             description: "Bir üyenin dosyalarını açar",
-            usage: "sicil etiket/id sayfa-numara",
-            examples: ["sicil 674565119161794560 2-1"],
+            usage: "sicil2 etiket/id sayfa-numara",
+            examples: ["sicil2 674565119161794560 2-1"],
             category: "Sorgu",
-            aliases: [],
+            aliases: ["s31"],
             accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single"],
             cooldown: 60000,
         });
