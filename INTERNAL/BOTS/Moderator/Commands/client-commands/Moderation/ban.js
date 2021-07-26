@@ -26,7 +26,7 @@ class Ban extends Command {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK')).then(msg => msg.delete({ timeout: 1000 }));
         }
-        let sebep = args.slice(2).join(" ");
+        let sebep = args.slice(1).join(" ");
         let typo = "perma"
         // if (args[1] === 'perma') {
         //     sebep = args.slice(2).join(" ");
