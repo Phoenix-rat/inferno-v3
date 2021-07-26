@@ -39,7 +39,7 @@ class Upgrade extends Command {
         if (currol) await mentioned.roles.add(currol.id);
         if (oldrol) await mentioned.roles.remove(oldrol.id);
         await message.channel.send(`Hayırlı Olsun ${mentioned}, Artık __**${currol.name}**__ Rolüne Sahipsin :)`);
-        await message.react(emojiler.get("okred").value().split(':')[2].replace('>', ''));
+        await message.react(emojis.get("okr").value().split(':')[2].replace('>', ''));
 
         let embedsex = new Discord.MessageEmbed()
             .setAuthor(`Tantoony Sizi Seviyor -Kahve`, message.guild.owner.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 }))
