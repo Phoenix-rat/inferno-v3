@@ -29,7 +29,7 @@ class unJail extends Command {
         await mentioned.roles.remove(roles.get("prisoner").value());
         await Jails.deleteOne({ _id: mentioned.user.id });
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-        client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
+       // client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
         const embed = new MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("unjail").value()} ${mentioned} kullanıcısı jail'i ${message.member} tarafından kaldırıldı!`);
         await logChannel.send(embed);

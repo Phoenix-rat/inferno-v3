@@ -26,7 +26,7 @@ class vunMute extends Command {
         await Mute.deleteOne({ _id: mentioned.user.id });
         if (mentioned.voice && mentioned.voice.channel) await mentioned.voice.setMute(false);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-        this.client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
+      //  this.client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
         const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("vunmute").value()} ${mentioned} kullanıcısı susturulması ${message.member} tarafından kaldırıldı!`);
         await logChannel.send(embed);
