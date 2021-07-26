@@ -4,6 +4,8 @@ const sicil = require('../../../../../MODELS/StatUses/Punishments');
 const stringTable = require('string-table');
 const { checkDays, sayi } = require('../../../../../HELPERS/functions');
 const { stripIndent } = require("common-tags");
+const moment = require("moment")
+moment.locale('tr')
 class Sicil extends Command {
 
     constructor(client) {
@@ -22,7 +24,7 @@ class Sicil extends Command {
     async run(client, message, args) {
         let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0] || message.member.user.id;
         const doc = await sicil.findOne({ _id: mentionedID });
-        if (!doc) return message.channel.send("Dosya bulunamadı!");
+        if (!doc) return message.channel.send("Veri bulunamadı!");
         let sth;
         if (args[1] && args[1].includes('-')) {
             sth = args[1].split('-')[1];
@@ -37,7 +39,7 @@ class Sicil extends Command {
                 ID: index + 1,
                 Ceza: `${element.punish}`,
                 Sebep: `${element.reason}`,
-                Gün: `${new Date(element.created).getDate()}/${new Date(element.created).getMonth() + 1}/${new Date(element.created).getFullYear().toString().slice(2)} ${new Date(element.created).getHours()}:${new Date(element.created).getMinutes()}`
+                Gün: `${moment(element.created).format("LLL")}`
             };
             asdf.push(shem);
         }
