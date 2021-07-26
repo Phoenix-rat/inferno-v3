@@ -41,11 +41,14 @@ class Call extends Command {
         ───────────────────
         • Booster üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("booster").value())).size}\`
         • Taglı üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("crew").value())).size}\`
+        • Vip üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("vip").value())).size}\`
+        • Sunucudaki Bot sayısı: \`${message.guild.user.bot.size}\`
+        ───────────────────
         • Erkek üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has("854162987619057665")).size}\`
         • Kadın üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has("854162990534623233")).size}\`
+        • Kayıtsız üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("welcome").value())).size}\`
         ───────────────────
         • Cezalı üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("prisoner").value())).size}\`
-        • Kayıtsız üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("welcome").value())).size}\`
         `);
         await message.channel.send(embed.setColor('BLACK').setThumbnail(message.guild.iconURL({ dynamic: true })).setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true }), "https://tantoony.net/"));
     }
