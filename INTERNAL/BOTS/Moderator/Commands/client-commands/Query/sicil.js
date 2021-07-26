@@ -48,7 +48,7 @@ class Sicil extends Command {
         });
 
         const ecrin = scl[sth - 1];
-        const ecrinim = embed.setDescription(stripIndent`
+        const ecrinim = new Discord.MessageEmbed() .setDescription(stripIndent`
         **Tür:** \`${ecrin.punish} - ${ecrin.type}\`
         **Sebep:**  \`${ecrin.reason}\`
         **Sorumlu:**  ${message.guild.members.cache.get(ecrin.executor) || "Bilinmiyor"}
