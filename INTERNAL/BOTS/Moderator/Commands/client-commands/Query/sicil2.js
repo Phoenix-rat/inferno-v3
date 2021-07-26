@@ -35,7 +35,7 @@ class Sicil extends Command {
         if (!args[1]) args[1] = 1;
         const scl = await whathefuck.get("records");
         
-        const embed = new Discord.MessageEmbed().setTitle("† Dante's INFEЯИO").setColor("BLACK").setDescription(([`${message.guild.members.cache.get(mentionedID) || `Sunucuda değil (${mentionedID})`} kullanıcısının ceza geçmişi.\n`,
+        const embed = new Discord.MessageEmbed().setThumbnail(message.guild.iconURL({ dynamic: true })).setTimestamp().setFooter(`• Adam ol ceza yeme -Kahve 🌟`).setTitle("† Dante's INFEЯИO").setColor("BLACK").setDescription(([`${message.guild.members.cache.get(mentionedID) || `Sunucuda değil (${mentionedID})`} kullanıcısının ceza geçmişi.\n`,
                 scl.map((punish) =>`• \`${moment(punish.created).format("LLL")}\` tarihinde ${message.guild.members.cache.get(punish.executor) || "Bilinmiyor"} tarafından \`"${punish.reason}"\` sebebiyle cezalandırılmış. (\`${punish.punish}\`)`)
                  .slice(0, 15).join("\n───────────────────\n"),])
         );
