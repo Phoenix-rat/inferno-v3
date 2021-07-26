@@ -14,7 +14,7 @@ class Eval extends Command {
             examples: ["Örnek Bulunmamakta"],
             category: "OWNER",
             aliases: [],
-            accaptedPerms: [],
+            accaptedPerms: ["root"],
             cooldown: 5000,
             enabled: true,
             adminOnly: false,
