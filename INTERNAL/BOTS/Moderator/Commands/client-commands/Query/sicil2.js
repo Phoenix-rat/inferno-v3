@@ -25,13 +25,22 @@ class Sicil extends Command {
     async run(client, message, args) {
         let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0] || message.member.user.id;
         
-        const whathefuck = ((await sicil.find({ _id: mentionedID })) || []).reverse();
+        const whathefuck = await sicil.findOne({ _id: mentionedID });
         if (!whathefuck.length) return message.channel.send("Belirttilen kişinin verisi bulunmamaktadır.");
 
+        const wtfrecord = await whathefuck.get("records").reverse();
+        let sth;
+        if (args[1] && args[1].includes('-')) {
+            sth = args[1].split('-')[1];
+            args[1] = args[1].split('-')[0];
+        }
+        if (!args[1]) args[1] = 1;
+        const lala = wtfrecord[sth - 1];
+
         const embed = new Discord.MessageEmbed().setDescription(([
-                whathefuck.length > 15 ? `Belirttiğim kişinin toplam ${whathefuck.length} cezası var.\n` : 
+            lala.length > 15 ? `Belirttiğim kişinin toplam ${lala.length} cezası var.\n` : 
                 `${message.guild.members.cache.get(mentionedID) || `Sunucuda değil (${mentionedID})`} kullanıcısının sicili;\n`,
-                 whathefuck.map((punish) =>`\`${moment(punish.start).format("LLL")}\` tarihinde 
+                lala.map((punish) =>`\`${moment(punish.start).format("LLL")}\` tarihinde 
                  ${message.guild.members.cache.get(punish.executor) || "Bilinmiyor"} tarafından **${punish.reason}** sebebiyle cezalandırılmış. (**${punish.punish}**)`)
                  .slice(0, 15).join("\n"),])
         );
