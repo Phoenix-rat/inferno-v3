@@ -44,9 +44,9 @@ class Sicil extends Command {
             asdf.push(shem);
         }
         const embeddoc = stringTable.create(asdf, {
-            headers: ['ID', 'Ceza', 'Sebep', 'Gün']
+            headers: ['ID', 'Ceza Türü', 'Ceza Sebebi', 'Ceza Tarihi']
         });
-        if (!sayi(sth)) return message.channel.send(`${embeddoc}`);
+        if (!sayi(sth)) return message.channel.send(`\`\`\`md\n${embeddoc}\`\`\``);
         const ecrin = scl[sth - 1];
         const ecrinim = embed.setDescription(stripIndent`
         **Tür:** \`${ecrin.punish} - ${ecrin.type}\`
