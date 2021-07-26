@@ -42,7 +42,7 @@ class Ban extends Command {
       //      await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
       //      return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
       //  }
-        client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep, typo, args[1]);
+        client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep, typo);
         await message.channel.send(`${mentioned} kullancısına başarıyla ban atıldı!`);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 
