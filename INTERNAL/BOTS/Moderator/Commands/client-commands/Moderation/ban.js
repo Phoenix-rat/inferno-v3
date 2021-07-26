@@ -2,6 +2,9 @@ const Command = require('../../../Base/Command');
 const low = require('lowdb');
 const Discord = require('discord.js');
 const { sayi } = require('../../../../../HELPERS/functions');
+const moment = require("moment")
+moment.locale('tr')
+
 class Ban extends Command {
     constructor(client) {
         super(client, {
@@ -48,10 +51,17 @@ class Ban extends Command {
             return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
         }
         client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep, typo, args[1]);
-        await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         await message.channel.send(`${mentioned} kullancısına başarıyla ban atıldı!`);
-        const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
-        const embed = new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("ban").value()} ${mentioned} kullanıcısı ${message.member} tarafından banlandı!`);
+        await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
+
+        const logChannel = message.guild.channels.cache.get(channels.get("ban-log").value());
+        const embed = new Discord.MessageEmbed().setColor('BLACK').setTimestap().setFooter(`• Ban log felan filan -Kahve 🌟`)
+        .setDescription(`${mentioned} (\`${mentioned.id}\`) üyesi ${message.author} tarafından sunucudan uzaklaştırıldı.
+
+        • Banlanan Üye: ${mentioned ? mentioned.toString() : ""} \`(${mentioned.id})\`
+        • Banlayan Yetkili: ${message.author} \`(${message.author.id})\`
+        • Banlanma Tarihi: \`${moment(Date.now()).format("LLL")}\`
+        • Banlanma Sebebi: \`${sebep}\``)
         await logChannel.send(embed);
     }
 }
