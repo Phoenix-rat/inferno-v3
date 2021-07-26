@@ -24,7 +24,7 @@ class Sicil extends Command {
 
     async run(client, message, args) {
         let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0] || message.member.user.id;
-        
+        const patates = new Discord.MessageEmbed().setThumbnail(message.guild.iconURL({ dynamic: true })).setTimestamp().setFooter(`• Adam ol ceza yeme -Kahve 🌟`).setTitle("† Dante's INFEЯИO").setColor("BLACK")
         const whathefuck = await sicil.findOne({ _id: mentionedID });
         if (!whathefuck) return message.channel.send("Dosya bulunamadı!");
         let sth;
@@ -35,8 +35,6 @@ class Sicil extends Command {
         if (!args[1]) args[1] = 1;
         const scl = await whathefuck.get("records");
         
-        const patates = new Discord.MessageEmbed().setThumbnail(message.guild.iconURL({ dynamic: true })).setTimestamp().setFooter(`• Adam ol ceza yeme -Kahve 🌟`).setTitle("† Dante's INFEЯИO").setColor("BLACK")
-
         const embed = patates.setDescription(([`${message.guild.members.cache.get(mentionedID) || `Sunucuda değil (${mentionedID})`} kullanıcısının ceza geçmişi.\n`,
                 scl.map((punish) =>`• ${message.guild.members.cache.get(punish.executor) || "Bilinmiyor"} tarafından \`${moment(punish.created).format("LLL")}\` tarihinde \`"${punish.reason}"\` sebebiyle cezalandırılmış. (\`${punish.punish}\`)`)
                  .slice(0, 15).join("\n───────────────────\n"),])
