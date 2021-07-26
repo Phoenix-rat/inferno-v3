@@ -27,13 +27,14 @@ class Ban extends Command {
             return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK')).then(msg => msg.delete({ timeout: 1000 }));
         }
         let sebep = args.slice(2).join(" ");
-        let typo;
-        if (args[1] === 'perma') {
-            typo = 'perma';
-            args[1] = 0;
-        } else {
-            typo = 'temp';
-        }
+        let typo = "perma"
+        // if (args[1] === 'perma') {
+        //     sebep = args.slice(2).join(" ");
+        //     typo = 'perma';
+        //     args[1] = 0;
+        // } else {
+        //     typo = 'temp';
+        // }
         if (!sebep) {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.eachRight("soru").value()} Bir sebep girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
@@ -46,10 +47,10 @@ class Ban extends Command {
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiyi banlamak için yeterli yetkiye sahip değilim`)).then(msg => msg.delete({ timeout: 1000 }));
         }
-        if (!sayi(args[1])) {
-            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
-        }
+      //  if (!sayi(args[1])) {
+      //      await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+      //      return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
+      //  }
         client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep, typo, args[1]);
         await message.channel.send(`${mentioned} kullancısına başarıyla ban atıldı!`);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
