@@ -49,7 +49,6 @@ class Ban extends Command {
         }
         client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep, typo, args[1]);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-        client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
         const embed = new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("ban").value()} ${mentioned} kullanıcısı ${message.member} tarafından banlandı!`);
         await logChannel.send(embed);

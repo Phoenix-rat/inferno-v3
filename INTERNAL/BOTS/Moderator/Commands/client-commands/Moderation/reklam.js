@@ -39,7 +39,6 @@ class Jail extends Command {
         client.extention.emit('Reklam', mentioned, message.author.id, sebep, typo);
         if (mentioned.voice.channel) await mentioned.voice.kick();
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-        //this.client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
         const logChannel = message.guild.channels.cache.get(channels.get("jaillog").value());
         const embed = new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("ok").value()} ${mentioned} kullanıcısı ${message.member} tarafından ${sebep} sebebiyle kalıcı olarak zindana şutlandı!`);
         await logChannel.send(embed);
