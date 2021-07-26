@@ -11,7 +11,7 @@ class Jail extends Command {
             examples: ["reklam 674565119161794560 botları kötü yapıyor"],
             category: "Moderasyon",
             aliases: ["rek", "req"],
-            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-jail"],
+            accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double","cmd-single", "cmd-jail"],
             cooldown: 10000
         })
     }
