@@ -27,7 +27,7 @@ class BanSorgu extends Command {
         • Banlanma sebebi: \`${banData ? banData.reason : "Sebeb Belirtilmemiş"}\`
         • Banlayan kullanıcı: ${message.guild.members.cache.get(banData ? banData.executor : "123") ? message.guild.members.cache.get(banData.executor) : `Sunucuda değil (${banData.executor})`}
         • Ban süresi: \`${banData ? banData.type : "Perma"}\`
-        • Açılacağı tarih:\` ${banData && (banData.type === "temp") ? banData.duration - checkDays(banData.created) : "Açılmayacak"}
+        • Açılacağı tarih: \`${banData && (banData.type === "temp") ? banData.duration - checkDays(banData.created) : "Açılmayacak"}\`
         `).setColor('BLACK').setTitle("† Dante's INFEЯИO");
         await message.channel.send(embed);
         client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
