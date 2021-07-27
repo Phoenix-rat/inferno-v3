@@ -31,7 +31,7 @@ class Kur extends Command {
         const channels = await low(client.adapters('channels'));
 
         let curGm = Gm(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`).setFormat('gif');
-        for (let index = 1; index <= 100; index++) {
+        for (let index = 10; index <= 100; index++) {
             curGm = curGm.delay(1).in(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`);
             console.log('processing.. =' + index);
         }
