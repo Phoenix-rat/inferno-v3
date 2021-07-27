@@ -33,7 +33,7 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
 
-        const myGm = Gm();
+        const myGm = Gm().setFormat('gif');
         const framePNGs = await readdir(__dirname + '/../../../../../SRC/point_items/');
         let curGm = myGm;
         for (let index = 1; index < framePNGs.length; index++) {
