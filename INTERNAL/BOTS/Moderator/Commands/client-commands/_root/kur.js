@@ -34,7 +34,7 @@ class Kur extends Command {
         const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${args[0] ? Number(args[0]) : pngFiles.length}.png`)
         let curGm = Gm(PNG).setFormat('gif').loop(1);
         for (let index = 0; index < (args[0] ? Number(args[0]) : pngFiles.length); index++) {
-            curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]).delay(1);
+            curGm = curGm.delay(1).in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]);
         }
         curGm.toBuffer(async (error, buffer) => {
             if (error) return console.log(error);
