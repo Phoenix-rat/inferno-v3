@@ -42,6 +42,7 @@ class Kur extends Command {
         const pngFiles = fs.readdirSync(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0].slice(2)).sort((a, b) => Number(a) - Number(b));
         for (let index = 0; index < (args[0] ? Math.round(Number(args[2]) / 4) : pngFiles.length); index++) {
             const myGm = Gm(message.author.displayAvatarURL({ format: 'gif' }));
+            console.log(myGm);
             let file;
             try {
                 file = fs.open(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`, 'r', (error, fd) => {
