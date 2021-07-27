@@ -46,7 +46,7 @@ class Kur extends Command {
             const context = canvas.getContext("2d");
             const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, canvas.width, canvas.height);
-            const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'gif', dynamic: true }));
+            const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'png', dynamic: true }));
             context.drawImage(avatar, 25, 25, 200, 200);
             const canvasBufer = canvas.toBuffer();
             const newGm = Gm(canvasBufer).setFormat('png')
