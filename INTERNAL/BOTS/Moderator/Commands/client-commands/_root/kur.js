@@ -34,9 +34,9 @@ class Kur extends Command {
         const channels = await low(client.adapters('channels'));
 
         const myGm = Gm();
-        const framePNGs = await readdir(__dirname + '/../../../../SRC/point_items/');
+        const framePNGs = await readdir(__dirname + '../../../../../SRC/point_items/');
         for (let index = 0; index < framePNGs.length; index++) {
-            const frameIndex = __dirname + `/../../../../SRC/point_items/${framePNGs[index]}`;
+            const frameIndex = __dirname + `../../../../../SRC/point_items/${framePNGs[index]}`;
             myGm.in(frameIndex).delay(100);
         }
         myGm.toBuffer((error, buffer) => {
