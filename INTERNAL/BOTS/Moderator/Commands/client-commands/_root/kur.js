@@ -39,7 +39,7 @@ class Kur extends Command {
         let curGm = Gm();
         for (let index = 1; index < framePNGs.length + 1; index++) {
             curGm = await curGm.delay(100 * index).in(__dirname + `/../../../../../SRC/point_items/${index}.png`);
-            console.log(curGM);
+            console.log(curGm);
             if (index === 100) {
                 await curGm.toBuffer(async (error, buffer) => {
                     if (error) return console.log(error);
