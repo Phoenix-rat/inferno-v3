@@ -22,15 +22,13 @@ class BanSorgu extends Command {
         const banInfo = await message.guild.fetchBan(args[0]);
         if (!banInfo) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("warn").value()} Belirtilen **ID*'ye sahip bir banlı kullanıcı bulunamadı.`));
         const banData = await Bans.findOne({ _id: args[0] });
-        const embed = new Discord.MessageEmbed().setTitle("Ban Bilgisi").setDescription(stripIndent`
-        ${emojis.get("user").value()} **Kullanıcı:** ${banInfo.user.tag}
-        ${emojis.get("reason").value()} **Banlanma sebebi:** ${banInfo.reason}
-        ${emojis.get("id").value()} **Kullanıcı ID'si:** ${banInfo.user.id}
-        \`Komut sebebi:\` ${banData ? banData.reason : "Komut kullanılmamış"}
-        \`Komutu Kullanan:\` ${message.guild.members.cache.get(banData ? banData.executor : "123") ? message.guild.members.cache.get(banData.executor) : `Sunucuda değil (${banData.executor})`}
-        \`Ban türü:\` ${banData ? banData.type : "Perma"}
-        \`Açılacağı tarih:\` ${banData && (banData.type === "temp") ? banData.duration - checkDays(banData.created) : "Açılmayacak"}
-        `).setColor('#2f3136').setFooter("İnferno Forever <3");
+        const embed = new Discord.MessageEmbed().setDescription(stripIndent`
+        • Banlanan Kullanıcı: ${banInfo.user} (${banInfo.user.tag} - ${banInfo.user.id})
+        • Banlanma sebebi: \`${banData ? banData.reason : "Sebeb Belirtilmemiş"}\`
+        • Banlayan kullanıcı: ${message.guild.members.cache.get(banData ? banData.executor : "123") ? message.guild.members.cache.get(banData.executor) : `Sunucuda değil (${banData.executor})`}
+        • Ban süresi: \`${banData ? banData.type : "Perma"}\`
+        • Açılacağı tarih:\` ${banData && (banData.type === "temp") ? banData.duration - checkDays(banData.created) : "Açılmayacak"}
+        `).setColor('BLACK').setTitle("† Dante's INFEЯИO");
         await message.channel.send(embed);
         client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
     }
