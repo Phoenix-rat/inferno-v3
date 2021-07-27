@@ -56,11 +56,12 @@ class Kur extends Command {
             request(message.author.displayAvatarURL({ format: 'gif' }), {
                 encoding: null
             }, (error, response, body) => {
-                if (error) return console.log(error);
                 console.log(body);
-                const myGm = Gm(body).selectFrame(index);
+                if (error) return console.log(error);
+                const myGm = Gm(body).selectFrame(index).in().delay(1);
                 console.log(myGm);
                 myGm.toBuffer(async (err, buffer) => {
+                    console.log(buffer);
                     if (err) return console.log(err);
                     const avatar = await Canvas.loadImage(buffer);
                     context.drawImage(avatar, 75, 60, 200, 200);
