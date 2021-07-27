@@ -32,7 +32,6 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const encoder = new GIFEncoder(1000, 400);
-        encoder.createReadStream().pipe(fs.createWriteStream('/hom/inferno/tempIMG/myGif.gif'));
         encoder.start();
         encoder.setRepeat(-1);   // 0 for repeat, -1 for no-repeat
         encoder.setDelay(1);  // frame delay in ms
@@ -55,8 +54,10 @@ class Kur extends Command {
             const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'jpg' }));
             context.drawImage(avatar, 50, 50, 200, 200);
             encoder.addFrame(context);
+            console.log(index);
         }
         encoder.finish();
+        console.log('done!');
         const buffer = encoder.out.getData();
         const attachment = new Discord.MessageAttachment(buffer, 'my-points.gif');
         await message.channel.send(attachment);
