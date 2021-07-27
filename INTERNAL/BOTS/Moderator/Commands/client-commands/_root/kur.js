@@ -56,7 +56,7 @@ class Kur extends Command {
             await request(message.author.displayAvatarURL({ format: 'gif' }), {
                 encoding: null
             }, async (error, response, body) => {
-                const frameGm = Gm(body).setFormat('gif').loop(1).delay(1).in([]);
+                const frameGm = Gm(body).setFormat('gif').loop(1).delay(1).in([body]);
                 await message.channel.send(new Discord.MessageAttachment(body, 'body.gif'));
                 console.log(frameGm);
                 frameGm.toBuffer(async (err, buffer) => {
