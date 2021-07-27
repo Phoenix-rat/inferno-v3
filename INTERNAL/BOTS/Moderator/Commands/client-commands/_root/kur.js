@@ -5,6 +5,10 @@ const fs = require('fs');
 const util = require('util');
 const readdir = util.promisify(fs.readdir);
 const Gm = require("gm");
+const GIFEncoder = require('gifencoder');
+const encoder = new GIFEncoder(854, 480);
+const pngFileStream = require('png-file-stream');
+const fs = require('fs');
 class Kur extends Command {
 
     constructor(client) {
@@ -35,19 +39,20 @@ class Kur extends Command {
 
         const framePNGs = await readdir(__dirname + '/../../../../../SRC/point_items/');
         console.log(framePNGs);
-        let curGm = Gm();
+        let curGm = Gm(new ReadableStream);
         for (let index = 1; index < framePNGs.length + 1; index++) {
-            curGm = curGm.in(__dirname + `/../../../../../SRC/point_items/${framePNGs[index]}`).in(__dirname + `/../../../../../SRC/point_items/${framePNGs[index + 1]}`).delay(100);
+            curGm = await curGm.in(__dirname + `/../../../../../SRC/point_items/${framePNGs[index]}`).delay(100);
             if (index === 100) {
-                curGm.toBuffer((error, buffer) => {
+                await curGm.toBuffer(async (error, buffer) => {
                     if (error) return console.log(error);
                     const att = new Discord.MessageAttachment(buffer, 'pointBar.gif', {
                         content_type: 'image/gif'
                     });
-                    message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar.gif').attachFiles(att));
+                    await message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar.gif').attachFiles(att));
                 });
             }
         }
+
     }
 
 }
