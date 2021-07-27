@@ -38,7 +38,7 @@ class Kur extends Command {
         for (let index = 1; index < framePNGs.length + 1; index++) {
             curGm = curGm.in(__dirname + `/../../../../../SRC/point_items/${framePNGs[index]}`).in(__dirname + `/../../../../../SRC/point_items/${framePNGs[index + 1]}`).delay(100);
             if (index === 100) {
-                curGm.write((error, buffer) => {
+                curGm.toBuffer((error, buffer) => {
                     if (error) return console.log(error);
                     const att = new Discord.MessageAttachment(buffer, 'pointBar.gif', {
                         content_type: 'image/gif'
