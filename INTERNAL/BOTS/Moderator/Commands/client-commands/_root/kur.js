@@ -33,8 +33,10 @@ class Kur extends Command {
         let curGm = Gm(`${__dirname}/../../../../../../SRC/point_items/0.png`).setFormat('gif');
         console.log(curGm);
         for (let index = 1; index <= 100; index++) {
-            curGm = curGm.delay(100 * index).in(__dirname + `/../../../../../SRC/point_items/${index}.png`);
-            console.log(curGm);
+            curGm.delay(100 * index).in(__dirname + `/../../../../../SRC/point_items/${index}.png`).toBuffer((error, buffer) => {
+                if (error) return console.log(error);
+                curGm = Gm(buffer);
+            });
             if (index === 100) {
                 curGm.toBuffer((error, buffer) => {
                     if (error) return console.log(error);
