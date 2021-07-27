@@ -5,6 +5,7 @@ const Canvas = require('canvas');
 const GIFEncoder = require('gifencoder');
 const fs = require('fs');
 const Gm = require('gm');
+const request = require('request');
 class Kur extends Command {
 
     constructor(client) {
@@ -40,7 +41,14 @@ class Kur extends Command {
         const canvas = Canvas.createCanvas(1000, 400);
         const context = canvas.getContext('2d');
         const pngFiles = fs.readdirSync(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0].slice(2)).sort((a, b) => Number(a) - Number(b));
-        const myGm = Gm(message.author.displayAvatarURL({ format: 'gif' }));
+        request(message.author.displayAvatarURL({ format: 'gif' }), {
+            encoding: null
+        }, (error, response, body) => {
+            if (error) return console.log(error);
+            console.log(body);
+            const myGm = Gm(body);
+            console.log(myGm);            
+        });
         for (let index = 0; index < (args[0] ? Math.round(Number(args[2]) / 4) : pngFiles.length); index++) {
             console.log(myGm);
             let file;
