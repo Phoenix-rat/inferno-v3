@@ -41,7 +41,7 @@ class Kur extends Command {
         for (let index = 0; index < (args[0] ? Number(args[0]) : pngFiles.length - 1); index++) {
             let file;
             try {
-                file = fs.open(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`, 'r', (error, fd) => {
+                file = fs.open(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`, 'r', (error, fd) => {
                     if (error) index = index + 1;
                 });
             } finally {
@@ -51,7 +51,7 @@ class Kur extends Command {
             const canvas = Canvas.createCanvas(1000, 400);
             const context = canvas.getContext('2d');
             // Since the image takes time to load, you should await it
-            const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`);
+            const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`);
             // This uses the canvas dimensions to stretch the image onto the entire canvas
             context.drawImage(background, 0, 0, canvas.width, canvas.height);
             // Wait for Canvas to load the image
