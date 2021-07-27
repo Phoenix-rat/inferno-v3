@@ -57,15 +57,17 @@ class Kur extends Command {
                 encoding: null
             }, async (error, response, body) => {
                 const frameGm = Gm(body).setFormat('gif');
+                console.log(frameGm);
                 frameGm.toBuffer(async (err, buffer) => {
-                    await message.channel.send(new Discord.MessageAttachment(buffer, 'points.png'));
+                    console.log(buffer);
                     if (err) return console.log(err);
+                    await message.channel.send(new Discord.MessageAttachment(buffer, 'points.png'));
                     const myGm = Gm(buffer).resize(500, 500).setFormat('gif').selectFrame(index).setFormat('png');
                     console.log(myGm);
                     myGm.toBuffer(async (er, buff) => {
                         console.log(buff);
-                        await message.channel.send(new Discord.MessageAttachment(buff, 'buffer.png'));
                         if (er) return console.log(er);
+                        await message.channel.send(new Discord.MessageAttachment(buff, 'buffer.png'));
                         const avatar = await Canvas.loadImage(buff);
                         context.drawImage(avatar, 75, 60, 200, 200);
                     });
