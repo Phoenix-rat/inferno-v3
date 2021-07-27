@@ -31,9 +31,6 @@ class Kur extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        const Frames = Pixelar('https://cdn.discordapp.com/avatars/484873072164208640/a_98f4f69f74f1d0bbe13136944df5171b.gif?size=1024', (err, pixs) => {
-            console.log(pixs);
-        });
         const encoder = new GIFEncoder(1000, 400);
         encoder.start();
         encoder.setRepeat(-1);   // 0 for repeat, -1 for no-repeat
@@ -44,7 +41,9 @@ class Kur extends Command {
         const context = canvas.getContext('2d');
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0].slice(2)).sort((a, b) => Number(a) - Number(b));
         for (let index = 0; index < (args[0] ? Math.round(Number(args[2]) / 4) : pngFiles.length); index++) {
-            const gm = Gm()
+            const Frames = Pixelar('https://cdn.discordapp.com/avatars/484873072164208640/a_98f4f69f74f1d0bbe13136944df5171b.gif?size=1024', (err, pixs) => {
+                console.log(pixs.data);
+            });
             let file;
             try {
                 file = fs.open(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`, 'r', (error, fd) => {
