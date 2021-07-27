@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const Canvas = require('canvas');
 const GIFEncoder = require('gifencoder');
 const fs = require('fs');
-const Gm = require('gm');
+const Gm = require('gm').subClass({ imageMagick: false });
 class Kur extends Command {
 
     constructor(client) {
@@ -40,31 +40,8 @@ class Kur extends Command {
         const canvas = Canvas.createCanvas(1000, 400);
         const context = canvas.getContext('2d');
         const pngFiles = fs.readdirSync(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0].slice(2)).sort((a, b) => Number(a) - Number(b));
-
-        function gmToBuffer(data) {
-            return new Promise((resolve, reject) => {
-                data.stream((err, stdout, stderr) => {
-                    if (err) { return reject(err) }
-                    const chunks = []
-                    stdout.on('data', (chunk) => { chunks.push(chunk) })
-                    // these are 'once' because they can and do fire multiple times for multiple errors,
-                    // but this is a promise so you'll have to deal with them one at a time
-                    stdout.once('end', () => { resolve(Buffer.concat(chunks)) })
-                    stderr.once('data', (data) => { reject(String(data)) })
-                })
-            })
-        }
-
         for (let index = 0; index < (args[0] ? Math.round(Number(args[2]) / 4) : pngFiles.length); index++) {
-            const myGm = Gm().in([message.author.displayAvatarURL({ format: 'gif' })]);
-            gmToBuffer(myGm).then((buffer) => {
-                let dataPrefix = `data:image/png;base64,`
-                let data = dataPrefix + buffer.toString('base64')
-                return callback(null, data)
-            }).catch(function (err) {
-                console.log(err)
-                return callback(err)
-            });
+            const myGm = Gm(message.author.displayAvatarURL({ format: 'gif' }));
             let file;
             try {
                 file = fs.open(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`, 'r', (error, fd) => {
@@ -75,7 +52,7 @@ class Kur extends Command {
             }
             const background = await Canvas.loadImage(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, 1000, 400);
-            myGm.selectFrame(index).setFormat('jpg').toBuffer((err, buffer) => {
+            myGm.selectFrame(index).toBuffer((err, buffer) => {
                 if (err) return console.log(err);
                 const avatar = await Canvas.loadImage(buffer);
                 context.drawImage(avatar, 75, 60, 200, 200);
