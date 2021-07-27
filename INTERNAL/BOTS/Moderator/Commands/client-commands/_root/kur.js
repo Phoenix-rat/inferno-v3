@@ -32,11 +32,8 @@ class Kur extends Command {
         const channels = await low(client.adapters('channels'));
         const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`)
         let curGm = Gm(PNG).setFormat('gif');
-        const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
-        console.log(pngFiles);
-        for (let index = 1; index <= 100; index++) {
-            curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`]).delay(1);
-        }
+        const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b)).slice(1).map(f => fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${f}.png`));
+        curGm = curGm.in(pngFiles).delay(10);
         curGm.toBuffer(async (error, buffer) => {
             if (error) return console.log(error);
             const att = new Discord.MessageAttachment(buffer, 'pointBar.gif');
