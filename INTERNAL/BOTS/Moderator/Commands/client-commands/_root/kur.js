@@ -1,11 +1,7 @@
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
 const Discord = require('discord.js');
-const fs = require('fs');
-const util = require('util');
-const readdir = util.promisify(fs.readdir);
 const Gm = require("gm");
-const fs = require('fs');
 class Kur extends Command {
 
     constructor(client) {
