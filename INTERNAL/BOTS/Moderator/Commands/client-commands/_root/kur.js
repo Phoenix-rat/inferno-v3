@@ -60,7 +60,7 @@ class Kur extends Command {
                 console.log(body);
                 const myGm = Gm(body).selectFrame(index);
                 console.log(myGm);
-                myGm.toBuffer((err, buffer) => {
+                myGm.toBuffer(async (err, buffer) => {
                     if (err) return console.log(err);
                     const avatar = await Canvas.loadImage(buffer);
                     context.drawImage(avatar, 75, 60, 200, 200);
