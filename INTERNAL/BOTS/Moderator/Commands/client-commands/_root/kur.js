@@ -56,16 +56,19 @@ class Kur extends Command {
             await request(message.author.displayAvatarURL({ format: 'gif' }), {
                 encoding: null
             }, async (error, response, body) => {
-                await message.channel.send(new Discord.MessageAttachment(body, 'points.png'));
-                if (error) return console.log(error);
-                const myGm = Gm(body).resize(500, 500).setFormat('gif').selectFrame(index).setFormat('png');
-                console.log(myGm);
-                await myGm.toBuffer(async (err, buffer) => {
-                    console.log(buffer);
-                    await message.channel.send(new Discord.MessageAttachment(buffer, 'buffer.png'));
+                const frameGm = Gm(body).setFormat('gif');
+                frameGm.toBuffer(async (err, buffer) => {
+                    await message.channel.send(new Discord.MessageAttachment(buffer, 'points.png'));
                     if (err) return console.log(err);
-                    const avatar = await Canvas.loadImage(buffer);
-                    context.drawImage(avatar, 75, 60, 200, 200);
+                    const myGm = Gm(buffer).resize(500, 500).setFormat('gif').selectFrame(index).setFormat('png');
+                    console.log(myGm);
+                    myGm.toBuffer(async (er, buff) => {
+                        console.log(buff);
+                        await message.channel.send(new Discord.MessageAttachment(buff, 'buffer.png'));
+                        if (er) return console.log(er);
+                        const avatar = await Canvas.loadImage(buff);
+                        context.drawImage(avatar, 75, 60, 200, 200);
+                    });
                 });
             });
             encoder.addFrame(context);
