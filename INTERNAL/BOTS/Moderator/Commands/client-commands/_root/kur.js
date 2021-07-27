@@ -31,15 +31,13 @@ class Kur extends Command {
         const channels = await low(client.adapters('channels'));
 
         let curGm = Gm(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`).setFormat('gif');
-        for (let index = 10; index <= 100; index++) {
+        for (let index = 1; index <= 10000; index++) {
             curGm = curGm.delay(1).in(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`);
-            console.log('processing.. =' + index);
         }
         curGm.toBuffer(async (error, buffer) => {
             if (error) return console.log(error);
             const att = new Discord.MessageAttachment(buffer, 'pointBar.gif');
             await message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar.gif').attachFiles(att));
-            console.log('done!');
         });  
 
     }
