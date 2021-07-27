@@ -41,7 +41,9 @@ class Kur extends Command {
             if (index === 100) {
                 curGm.toBuffer((error, buffer) => {
                     if (error) return console.log(error);
-                    const att = new Discord.MessageAttachment(buffer, 'pointBar.gif');
+                    const att = new Discord.MessageAttachment(buffer, 'pointBar.gif', {
+                        content_type: 'image/gif'
+                    });
                     message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar.gif').attachFiles(att));
                 });
             }
