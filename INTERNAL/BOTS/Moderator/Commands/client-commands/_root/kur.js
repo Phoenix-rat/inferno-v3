@@ -33,16 +33,14 @@ class Kur extends Command {
         let curGm = Gm(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`).setFormat('gif');
         for (let index = 1; index <= 100; index++) {
             curGm = curGm.delay(1).in(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`);
+            console.log('processing.. =' + index);
         }
-        setTimeout(() => {
-            curGm.toBuffer(async (error, buffer) => {
-                if (error) return console.log(error);
-                const att = new Discord.MessageAttachment(buffer, 'pointBar.gif', {
-                    content_type: 'image/gif'
-                });
-                await message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar.gif').attachFiles(att));
-            });            
-        }, 10000);
+        curGm.toBuffer(async (error, buffer) => {
+            if (error) return console.log(error);
+            const att = new Discord.MessageAttachment(buffer, 'pointBar.gif');
+            await message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar.gif').attachFiles(att));
+            console.log('done!');
+        });  
 
     }
 
