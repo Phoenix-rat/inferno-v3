@@ -35,9 +35,10 @@ class Kur extends Command {
 
         const myGm = Gm();
         const framePNGs = await readdir(__dirname + '/../../../../../SRC/point_items/');
+        let curGm = myGm;
         for (let index = 1; index < framePNGs.length; index++) {
             const frameIndex = __dirname + `../../../../../SRC/point_items/${framePNGs[index]}`;
-            myGm.in(frameIndex).delay(100);
+            curGm = curGm.in(frameIndex).delay(100);
         }
         myGm.toBuffer((error, buffer) => {
             if (error) throw error;
