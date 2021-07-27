@@ -3,8 +3,6 @@ const low = require('lowdb');
 const Discord = require('discord.js');
 const Gm = require("gm");
 const fs = require('fs');
-const Canvas = require('canvas');
-const gifFrames = require("gif-frames");
 class Kur extends Command {
 
     constructor(client) {
@@ -32,22 +30,10 @@ class Kur extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`);
-        //const ProfilePicPixels = Pixelar(message.author.displayAvatarURL({ format: 'gif', dynamic: true }));
+        const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`)
         let curGm = Gm(PNG).setFormat('gif');
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
         for (let index = 1; index < (args[0] ? Number(args[0]) : pngFiles.length); index++) {
-            await gifFrames({
-                url: message.author.displayAvatarURL({ format: 'gif' }),
-                frames: 0
-            }).then((frameData) => frameData.forEach(f => f.getImage().pipe(fs.createWriteStream(`/home/infeno/temp_img/${message.author.id}/${index}.png`))));
-            const canvas = Canvas.createCanvas(1000, 400, "svg")
-            const context = canvas.getContext("2d");
-            const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`);
-            context.drawImage(background, 0, 0, canvas.width, canvas.height);
-            //const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'png' }));
-            //context.drawImage(avatar, 25, 25, 200, 200);
-            //const canvasBufer = canvas.toBuffer();
             curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]).delay(1);
         }
         for (let index = 0; index < 10; index++) {
