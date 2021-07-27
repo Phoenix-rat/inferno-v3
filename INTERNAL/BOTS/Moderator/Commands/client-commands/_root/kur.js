@@ -39,7 +39,7 @@ class Kur extends Command {
         for (let index = 1; index < (args[0] ? Number(args[0]) : pngFiles.length); index++) {
             await gifFrames({
                 url: message.author.displayAvatarURL({ format: 'gif', dynamic: true }),
-                frames: 105
+                frames: 0
             }).then((frameData) => frameData.forEach(f => f.getImage().pipe(fs.createWriteStream(`/home/infeno/temp_img/${message.author.id}/${index}.png`))));
             const canvas = Canvas.createCanvas(1000, 400, "svg")
             const context = canvas.getContext("2d");
