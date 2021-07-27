@@ -53,11 +53,13 @@ class Kur extends Command {
             }
             const background = await Canvas.loadImage(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, 1000, 400);
+            /* 
             myGm.selectFrame(index).toBuffer((err, buffer) => {
                 if (err) return console.log(err);
                 const avatar = await Canvas.loadImage(buffer);
                 context.drawImage(avatar, 75, 60, 200, 200);
             });
+            */
             encoder.addFrame(context);
             console.log(index);
         }
