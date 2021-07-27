@@ -7,6 +7,10 @@ const { stripIndents } = require("common-tags");
 const children = require("child_process");
 const VoiceChannels = require("../../../../../MODELS/Datalake/VoiceChannels");
 const request = require("request");
+const fs = require('fs');
+const util = require('util');
+const readdir = util.promisify(fs.readdir);
+const Gm = require("gm");
 class Kur extends Command {
 
     constructor(client) {
@@ -16,7 +20,7 @@ class Kur extends Command {
             usage: "Kullanım Belirtilmemiş.",
             examples: ["Örnek Bulunmamakta"],
             category: "OWNER",
-            aliases: [],
+            aliases: ["deneme"],
             acceptedRoles: [],
             cooldown: 5000,
             enabled: true,
@@ -34,28 +38,19 @@ class Kur extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        function Process() {
-            var ls = children.execFile('C:/Users/Administrator/Documents/TantoonyFiles/Pandomeme/INTERNAL/BOTS/_CD/starter.bat');
-            ls.stdout.on('data', function (data) {
-                console.log(data);
-            });
-            ls.stderr.on('data', function (data) {
-                console.log(data);
-            });
-            ls.on('close', function (code) {
-                if (code == 0)
-                    console.log('Stop');
-                else
-                    console.log('Start');
-            });
+
+        const myGm = Gm();
+        const framePNGs = await readdir('../../../../../SRC/point_items');
+        for (let index = 0; index < framePNGs.length; index++) {
+            const frameIndex = `../../../../../SRC/point_items/${framePNGs[index]}`;
+            myGm.in(frameIndex).delay(100);
         }
-        Process();
-        /*
-        for (let index = 1; index <= utils.get("cdSize").value(); index++) {
-            Process(`C:/Users/Administrator/Documents/TantoonyFiles/Pandomeme/INTERNAL/BOTS/_CD/cd${index}/baslat.bat`);
-        }
-        */
-        
+        myGm.toBuffer((error, buffer) => {
+            if (error) throw error;
+            const att = new Discord.MessageAttachment(buffer, 'pointBar');
+            message.channel.send(new Discord.MessageEmbed().setImage('attachments://pointBar').attachFiles(att));
+        });
+
     }
 
 }
