@@ -37,7 +37,7 @@ class Kur extends Command {
             curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]).delay(1);
             console.log(curGm);
         }
-        curGm.pause(5).toBuffer(async (error, buffer) => {
+        curGm.delay(5000).toBuffer(async (error, buffer) => {
             if (error) return console.log(error);
             const att = new Discord.MessageAttachment(buffer, 'pointBar.gif');
             await message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar.gif').attachFiles(att));
