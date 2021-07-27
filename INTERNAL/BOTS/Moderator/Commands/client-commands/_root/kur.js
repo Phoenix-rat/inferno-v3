@@ -35,11 +35,12 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`);
+        const ProfilePicPixels = Pixelar(message.author.displayAvatarURL({ format: 'gif', dynamic: true }));
         let curGm = Gm(PNG).setFormat('gif');
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
         for (let index = 1; index < (args[0] ? Number(args[0]) : pngFiles.length); index++) {
             const frame = await gifFrames({
-                url: message.author.displayAvatarURL({ type: 'gif', dynamic: true }),
+                url: message.author.displayAvatarURL({ format: 'gif', dynamic: true }),
                 frames: 105
             }).then((frameData) => frameData[index].getImage());
             console.log(frame);
