@@ -31,10 +31,10 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
-        const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${args[0] ? Number(args[0]) : pngFiles[index] - 1}.png`)
+        const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${args[0] ? Number(args[0]) : pngFiles.length - 1}.png`)
         let curGm = Gm(PNG).setFormat('gif').loop(1);
-        for (let index = 0; index < (args[0] ? Number(args[0]) : pngFiles[index] - 1); index++) {
-            curGm = curGm.delay(1).in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index] - 1}.png`]);
+        for (let index = 0; index < (args[0] ? Number(args[0]) : pngFiles.length - 1); index++) {
+            curGm = curGm.delay(1).in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]);
         }
         curGm.toBuffer(async (error, buffer) => {
             if (error) return console.log(error);
