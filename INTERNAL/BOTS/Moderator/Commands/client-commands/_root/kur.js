@@ -34,12 +34,12 @@ class Kur extends Command {
         const channels = await low(client.adapters('channels'));
 
         const framePNGs = await readdir(__dirname + '/../../../../../SRC/point_items/');
-        let curGm = Gm();
+        let curGm = require('gm').subClass({ imageMagick: true });
         for (let index = 1; index < framePNGs.length + 1; index++) {
             const frameIndex = __dirname + `/../../../../../SRC/point_items/${framePNGs[index]}`;
             curGm = curGm.in(frameIndex);
         }
-        curGm.delay(100).resize(600,600).toBuffer((error, buffer) => {
+        curGm.delay(100).resize(600, 600).toBuffer((error, buffer) => {
             if (error) return console.log(error);
             const att = new Discord.MessageAttachment(buffer, 'pointBar');
             message.channel.send(new Discord.MessageEmbed().setImage('attachments://pointBar').attachFiles(att));
