@@ -3,8 +3,10 @@ const low = require('lowdb');
 const Discord = require('discord.js');
 const Gm = require("gm");
 const fs = require('fs');
-const canvas = require('canvas');
-const Encoder = require('gifencoder');
+const Canvas = require('canvas');
+const Pixelar = require('get-pixels');
+const GifEncoder = require('gif-encoder');
+const gifFrames = require("gif-frames");
 class Kur extends Command {
 
     constructor(client) {
@@ -33,10 +35,25 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`);
+        const stream = fs.createWriteStream(message.author.displayAvatarURL({ type: 'gif', dynamic: true }));
+        const ProfilePicPixels = Pixelar(message.author.displayAvatarURL({ type: 'gif', dynamic: true }));
         let curGm = Gm(PNG).setFormat('gif');
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
         for (let index = 1; index < (args[0] ? Number(args[0]) : pngFiles.length); index++) {
-            curGm = curGm.setDraw(message.author.displayAvatarURL({ dynamic: true, type: 'gif' }), 0, 0, "floodfill").in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]).delay(1);
+            const frame = await gifFrames({
+                url: message.author.displayAvatarURL({ type: 'gif', dynamic: true }),
+                frames: 105
+            }).then((frameData) => frameData[index].getImage());
+            console.log(frame);
+            const canvas = Canvas.createCanvas(1000, 400, "svg")
+            const context = canvas.getContext("2d");
+            const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`);
+            context.drawImage(background, 0, 0, canvas.width, canvas.height);
+            const avatar = await Canvas.loadImage(frame);
+            context.drawImage(avatar, 25, 25, 200, 200);
+            const canvasBufer = canvas.toBuffer();
+            const newGm = Gm(canvasBuffer).setFormat('png')
+            curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]).delay(1);
         }
         for (let index = 0; index < 10; index++) {
             curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${args[0] ? Number(args[0]) : pngFiles.length}.png`]).delay(10);
