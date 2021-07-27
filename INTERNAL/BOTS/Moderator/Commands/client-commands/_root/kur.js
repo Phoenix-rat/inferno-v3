@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const Canvas = require('canvas');
 const GIFEncoder = require('gifencoder');
 const fs = require('fs');
-const Gm = require('gm').subClass({ imageMagick: true });
+const Gm = require('gm');
 class Kur extends Command {
 
     constructor(client) {
