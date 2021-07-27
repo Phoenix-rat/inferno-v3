@@ -42,7 +42,7 @@ class Kur extends Command {
     
             // use node-canvas
             const canvas = Canvas.createCanvas(1000, 400);
-            const ctx = canvas.getContext('2d');
+            const context = canvas.getContext('2d');
             // Since the image takes time to load, you should await it
             const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`);
             // This uses the canvas dimensions to stretch the image onto the entire canvas
@@ -51,7 +51,7 @@ class Kur extends Command {
             const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'jpg' }));
             // Draw a shape onto the main canvas
             context.drawImage(avatar, 25, 25, 200, 200);    
-            encoder.addFrame(ctx);
+            encoder.addFrame(context);
         }
         encoder.finish();
         const buffer = encoder.out.getData();
