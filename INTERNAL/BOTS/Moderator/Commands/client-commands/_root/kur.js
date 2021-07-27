@@ -38,7 +38,7 @@ class Kur extends Command {
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
         for (let index = 1; index < (args[0] ? Number(args[0]) : pngFiles.length); index++) {
             await gifFrames({
-                url: message.author.displayAvatarURL({ format: 'gif', dynamic: true }),
+                url: message.author.displayAvatarURL({ format: 'gif' }),
                 frames: 0
             }).then((frameData) => frameData.forEach(f => f.getImage().pipe(fs.createWriteStream(`/home/infeno/temp_img/${message.author.id}/${index}.png`))));
             const canvas = Canvas.createCanvas(1000, 400, "svg")
