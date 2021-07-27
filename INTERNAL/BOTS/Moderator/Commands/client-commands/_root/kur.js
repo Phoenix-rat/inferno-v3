@@ -58,7 +58,7 @@ class Kur extends Command {
             }, async (error, response, body) => {
                 console.log(body);
                 if (error) return console.log(error);
-                const myGm = Gm(body).setFormat('gif').selectFrame(index);
+                const myGm = Gm(body);
                 console.log(myGm);
                 await myGm.toBuffer(async (err, buffer) => {
                     console.log(buffer);
