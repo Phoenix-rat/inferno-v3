@@ -33,7 +33,7 @@ class Kur extends Command {
         let curGm = Gm(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`).setFormat('gif');
         console.log(curGm);
         for (let index = 1; index <= 100; index++) {
-            curGm = curGm.delay(100 * index).in(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`);
+            curGm = curGm.delay(1 * index).in(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`);
             if (index === 100) {
                 curGm.toBuffer((error, buffer) => {
                     if (error) return console.log(error);
