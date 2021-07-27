@@ -42,9 +42,9 @@ class Kur extends Command {
             fs.open(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`);
             let file;
             try {
-                file = fs.open(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`, 'r');
-            } catch (e) {
-                if (e) index = index + 1;
+                file = fs.open(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`, 'r', (error, fd) => {
+                    if (error) index = index + 1;
+                });
             } finally {
                 await file.close();
             }
