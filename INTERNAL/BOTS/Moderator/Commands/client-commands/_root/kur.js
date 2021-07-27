@@ -40,7 +40,7 @@ class Kur extends Command {
         const canvas = Canvas.createCanvas(1000, 400);
         const context = canvas.getContext('2d');
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0].slice(2)).sort((a, b) => Number(a) - Number(b));
-        for (let index = 0; index < (args[0] ? Number(args[0]) : pngFiles.length; index++) {
+        for (let index = 0; index < (args[0] ? Number(args[0]) : pngFiles.length); index++) {
             let file;
             try {
                 file = fs.open(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`, 'r', (error, fd) => {
