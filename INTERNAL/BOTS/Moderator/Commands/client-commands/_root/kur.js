@@ -33,7 +33,7 @@ class Kur extends Command {
         const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`)
         let curGm = Gm(PNG).setFormat('gif');
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
-        for (let index = 1; index < Number(args[0]) || pngFiles.length; index++) {
+        for (let index = 1; index < (args[0] ? Number(args[0]) : pngFiles.length); index++) {
             curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]).delay(1);
             console.log(curGm);
         }
@@ -41,7 +41,7 @@ class Kur extends Command {
             if (error) return console.log(error);
             const att = new Discord.MessageAttachment(buffer, 'pointBar.gif');
             await message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar.gif').attachFiles(att));
-        });  
+        });
 
     }
 
