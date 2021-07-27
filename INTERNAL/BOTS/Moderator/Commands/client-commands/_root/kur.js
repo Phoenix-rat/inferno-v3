@@ -41,14 +41,13 @@ class Kur extends Command {
                 url: message.author.displayAvatarURL({ format: 'gif', dynamic: true }),
                 frames: 105
             }).then((frameData) => frameData.forEach(f => f.getImage().pipe(fs.createWriteStream(`/home/infeno/temp_img/${message.author.id}/${index}.png`))));
-            console.log(frame);
             const canvas = Canvas.createCanvas(1000, 400, "svg")
             const context = canvas.getContext("2d");
             const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, canvas.width, canvas.height);
-            const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'png', dynamic: true }));
-            context.drawImage(avatar, 25, 25, 200, 200);
-            const canvasBufer = canvas.toBuffer();
+            //const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'png' }));
+            //context.drawImage(avatar, 25, 25, 200, 200);
+            //const canvasBufer = canvas.toBuffer();
             curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]).delay(1);
         }
         for (let index = 0; index < 10; index++) {
