@@ -38,7 +38,6 @@ class Kur extends Command {
             if (index === 100) {
                 await curGm.toBuffer(async (error, buffer) => {
                     if (error) return console.log(error);
-                    await buffer
                     const att = new Discord.MessageAttachment(buffer, 'pointBar.gif', {
                         content_type: 'image/gif'
                     });
