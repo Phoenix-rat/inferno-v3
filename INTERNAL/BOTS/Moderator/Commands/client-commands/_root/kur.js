@@ -2,6 +2,7 @@ const Command = require("../../../Base/Command");
 const low = require('lowdb');
 const Discord = require('discord.js');
 const Gm = require("gm");
+const fs = require('fs');
 class Kur extends Command {
 
     constructor(client) {
@@ -29,10 +30,10 @@ class Kur extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-
-        let curGm = Gm(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`).setFormat('gif');
+        const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`)
+        let curGm = Gm(PNG).setFormat('gif');
         for (let index = 1; index <= 100; index++) {
-            curGm = curGm.in(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`).delay(1);
+            curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`]).delay(1);
         }
         curGm.toBuffer(async (error, buffer) => {
             if (error) return console.log(error);
