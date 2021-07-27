@@ -56,9 +56,8 @@ class Kur extends Command {
         }
 
         for (let index = 0; index < (args[0] ? Math.round(Number(args[2]) / 4) : pngFiles.length); index++) {
-            const myGm = Gm().in([message.author.displayAvatarURL({ format: 'gif' })]).delay(1);
-            const datam = gm(request(url)).borderColor('#000').border(1, 1).resize(200, 200)
-            gmToBuffer(datam).then((buffer) => {
+            const myGm = Gm().in([message.author.displayAvatarURL({ format: 'gif' })]);
+            gmToBuffer(myGm).then((buffer) => {
                 let dataPrefix = `data:image/png;base64,`
                 let data = dataPrefix + buffer.toString('base64')
                 return callback(null, data)
