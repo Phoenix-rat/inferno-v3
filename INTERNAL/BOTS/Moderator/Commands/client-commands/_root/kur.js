@@ -34,7 +34,7 @@ class Kur extends Command {
         const channels = await low(client.adapters('channels'));
 
         const framePNGs = await readdir(__dirname + '/../../../../../SRC/point_items/');
-        let curGm = require('gm').subClass({ imageMagick: true });
+        let curGm = Gm();
         for (let index = 1; index < framePNGs.length + 1; index++) {
             const frameIndex = __dirname + `/../../../../../SRC/point_items/${framePNGs[index]}`;
             curGm = curGm.in(frameIndex);
