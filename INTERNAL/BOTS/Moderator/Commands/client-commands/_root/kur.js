@@ -4,8 +4,6 @@ const Discord = require('discord.js');
 const Gm = require("gm");
 const fs = require('fs');
 const Canvas = require('canvas');
-const Pixelar = require('get-pixels');
-const GifEncoder = require('gif-encoder');
 const gifFrames = require("gif-frames");
 class Kur extends Command {
 
