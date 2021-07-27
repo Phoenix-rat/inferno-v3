@@ -43,7 +43,7 @@ class Kur extends Command {
         for (let index = 0; index < (args[0] ? Math.round(Number(args[2]) / 4) : pngFiles.length); index++) {
             const myGm = Gm(message.author.displayAvatarURL({ format: 'gif' })).setFormat('gif');
             let buffer;
-            myGm.selectFrame(index).toBuffer((err, buff) => {
+            myGm.selectFrame(index).setFormat('jpg').toBuffer((err, buff) => {
                 if (err) return console.log(err);
                 buffer = buff;
             });
