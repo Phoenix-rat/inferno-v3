@@ -41,9 +41,12 @@ class Kur extends Command {
         const context = canvas.getContext('2d');
         const pngFiles = fs.readdirSync(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0].slice(2)).sort((a, b) => Number(a) - Number(b));
         for (let index = 0; index < (args[0] ? Math.round(Number(args[2]) / 4) : pngFiles.length); index++) {
-            const myGm = Gm('https://cdn.discordapp.com/avatars/484873072164208640/a_98f4f69f74f1d0bbe13136944df5171b.gif?size=1024').setFormat('gif');
-            
-            console.log(myGm);
+            const myGm = Gm(message.author.displayAvatarURL({ format: 'gif' })).setFormat('gif');
+            let buffer;
+            myGm.selectFrame(index).toBuffer((err, buff) => {
+                if (err) return console.log(err);
+                buffer = buff;
+            });
             let file;
             try {
                 file = fs.open(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`, 'r', (error, fd) => {
@@ -54,15 +57,15 @@ class Kur extends Command {
             }
             const background = await Canvas.loadImage(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, 1000, 400);
-            const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'jpg' }));
+            const avatar = await Canvas.loadImage(buffer);
             context.drawImage(avatar, 75, 60, 200, 200);
             encoder.addFrame(context);
             console.log(index);
         }
         encoder.finish();
         console.log('done!');
-        const buffer = encoder.out.getData();
-        const attachment = new Discord.MessageAttachment(buffer, 'my-points.gif');
+        const ender = encoder.out.getData();
+        const attachment = new Discord.MessageAttachment(ender, 'my-points.gif');
         await message.channel.send(attachment);
 
     }
