@@ -53,14 +53,14 @@ class Kur extends Command {
             const background = await Canvas.loadImage(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, 1000, 400);
             
-            request(message.author.displayAvatarURL({ format: 'gif' }), {
+            await request(message.author.displayAvatarURL({ format: 'gif' }), {
                 encoding: null
-            }, (error, response, body) => {
+            }, async (error, response, body) => {
                 console.log(body);
                 if (error) return console.log(error);
-                const myGm = Gm(body).selectFrame(index).in().delay(1);
+                const myGm = Gm(body).setFormat('gif').selectFrame(index);
                 console.log(myGm);
-                myGm.toBuffer(async (err, buffer) => {
+                await myGm.toBuffer(async (err, buffer) => {
                     console.log(buffer);
                     if (err) return console.log(err);
                     const avatar = await Canvas.loadImage(buffer);
