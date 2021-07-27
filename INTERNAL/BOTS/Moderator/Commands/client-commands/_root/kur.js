@@ -31,7 +31,8 @@ class Kur extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        const encoder = new GIFEncoder(1000, 400);;
+        const encoder = new GIFEncoder(1000, 400);
+        encoder.createReadStream().pipe(fs.createWriteStream('/hom/inferno/tempIMG/myGif.gif'));
         encoder.start();
         encoder.setRepeat(-1);   // 0 for repeat, -1 for no-repeat
         encoder.setDelay(1);  // frame delay in ms
@@ -50,7 +51,7 @@ class Kur extends Command {
                 if (file) await file.close();
             }
             const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`);
-            context.drawImage(background, 0, 0, canvas.width, canvas.height);
+            context.drawImage(background, 0, 0, 1000, 400);
             const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'jpg' }));
             context.drawImage(avatar, 50, 50, 200, 200);
             encoder.addFrame(context);
