@@ -30,7 +30,7 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
 
-        let curGm = Gm(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`).setFormat('gif').pointSize(1000);
+        let curGm = Gm(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`).setFormat('gif').threshold(1000);
         for (let index = 1; index <= 100; index++) {
             curGm = curGm.delay(1).in(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`);
         }
