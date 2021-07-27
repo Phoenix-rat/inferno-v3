@@ -39,7 +39,6 @@ class Kur extends Command {
         encoder.setQuality(10); // image quality. 10 is default.
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
         for (let index = 0; index < (args[0] ? Number(args[0]) : pngFiles.length - 1); index++) {
-            fs.open(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`);
             let file;
             try {
                 file = fs.open(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${index}.png`, 'r', (error, fd) => {
