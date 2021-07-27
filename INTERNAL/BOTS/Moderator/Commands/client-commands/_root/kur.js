@@ -41,12 +41,7 @@ class Kur extends Command {
         const context = canvas.getContext('2d');
         const pngFiles = fs.readdirSync(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0].slice(2)).sort((a, b) => Number(a) - Number(b));
         for (let index = 0; index < (args[0] ? Math.round(Number(args[2]) / 4) : pngFiles.length); index++) {
-            const myGm = Gm(message.author.displayAvatarURL({ format: 'gif' })).setFormat('gif');
-            let buffer;
-            myGm.selectFrame(index).setFormat('jpg').toBuffer((err, buff) => {
-                if (err) return console.log(err);
-                buffer = buff;
-            });
+            const myGm = Gm().in([message.author.displayAvatarURL({ format: 'gif' })]).delay(1);
             let file;
             try {
                 file = fs.open(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`, 'r', (error, fd) => {
@@ -57,8 +52,11 @@ class Kur extends Command {
             }
             const background = await Canvas.loadImage(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, 1000, 400);
-            const avatar = await Canvas.loadImage(buffer);
-            context.drawImage(avatar, 75, 60, 200, 200);
+            myGm.selectFrame(index).setFormat('jpg').toBuffer((err, buffer) => {
+                if (err) return console.log(err);
+                const avatar = await Canvas.loadImage(buffer);
+                context.drawImage(avatar, 75, 60, 200, 200);
+            });
             encoder.addFrame(context);
             console.log(index);
         }
