@@ -5,9 +5,6 @@ const fs = require('fs');
 const util = require('util');
 const readdir = util.promisify(fs.readdir);
 const Gm = require("gm");
-const GIFEncoder = require('gifencoder');
-const encoder = new GIFEncoder(854, 480);
-const pngFileStream = require('png-file-stream');
 const fs = require('fs');
 class Kur extends Command {
 
