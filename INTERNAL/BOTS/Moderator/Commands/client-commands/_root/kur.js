@@ -49,7 +49,6 @@ class Kur extends Command {
             const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'png', dynamic: true }));
             context.drawImage(avatar, 25, 25, 200, 200);
             const canvasBufer = canvas.toBuffer();
-            const newGm = Gm(canvasBufer).setFormat('png')
             curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]).delay(1);
         }
         for (let index = 0; index < 10; index++) {
