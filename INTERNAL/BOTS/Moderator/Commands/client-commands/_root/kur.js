@@ -41,16 +41,7 @@ class Kur extends Command {
         const canvas = Canvas.createCanvas(1000, 400);
         const context = canvas.getContext('2d');
         const pngFiles = fs.readdirSync(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0].slice(2)).sort((a, b) => Number(a) - Number(b));
-        request(message.author.displayAvatarURL({ format: 'gif' }), {
-            encoding: null
-        }, (error, response, body) => {
-            if (error) return console.log(error);
-            console.log(body);
-            const myGm = Gm(body);
-            console.log(myGm);            
-        });
         for (let index = 0; index < (args[0] ? Math.round(Number(args[2]) / 4) : pngFiles.length); index++) {
-            console.log(myGm);
             let file;
             try {
                 file = fs.open(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`, 'r', (error, fd) => {
@@ -61,13 +52,20 @@ class Kur extends Command {
             }
             const background = await Canvas.loadImage(`/home/winner/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, 1000, 400);
-            /* 
-            myGm.selectFrame(index).toBuffer((err, buffer) => {
-                if (err) return console.log(err);
-                const avatar = await Canvas.loadImage(buffer);
-                context.drawImage(avatar, 75, 60, 200, 200);
+            
+            request(message.author.displayAvatarURL({ format: 'gif' }), {
+                encoding: null
+            }, (error, response, body) => {
+                if (error) return console.log(error);
+                console.log(body);
+                const myGm = Gm(body).selectFrame(index);
+                console.log(myGm);
+                myGm.toBuffer((err, buffer) => {
+                    if (err) return console.log(err);
+                    const avatar = await Canvas.loadImage(buffer);
+                    context.drawImage(avatar, 75, 60, 200, 200);
+                });
             });
-            */
             encoder.addFrame(context);
             console.log(index);
         }
