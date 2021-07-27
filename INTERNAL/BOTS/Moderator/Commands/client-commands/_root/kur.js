@@ -40,7 +40,7 @@ class Kur extends Command {
         const canvas = Canvas.createCanvas(1000, 400);
         const context = canvas.getContext('2d');
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
-        for (let index = 0; index < (args[0] ? Number(args[0]) : pngFiles.length - 1); index++) {
+        for (let index = 1; index < (args[0] ? Number(args[0]) : pngFiles.length - 1); index++) {
             let file;
             try {
                 file = fs.open(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`, 'r', (error, fd) => {
@@ -52,7 +52,7 @@ class Kur extends Command {
             const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, 1000, 400);
             const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'jpg' }));
-            context.drawImage(avatar, 50, 50, 200, 200);
+            context.drawImage(avatar, 100, 100, 200, 200);
             encoder.addFrame(context);
             console.log(index);
         }
