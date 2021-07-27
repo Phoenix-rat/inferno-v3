@@ -42,7 +42,7 @@ class Kur extends Command {
         curGm.delay(100).resize(600, 600).toBuffer((error, buffer) => {
             if (error) return console.log(error);
             const att = new Discord.MessageAttachment(buffer, 'pointBar');
-            message.channel.send(new Discord.MessageEmbed().setImage('attachments://pointBar').attachFiles(att));
+            message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar').attachFiles(att));
         });
     }
 
