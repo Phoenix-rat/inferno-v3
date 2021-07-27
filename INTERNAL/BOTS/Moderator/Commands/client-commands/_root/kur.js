@@ -32,9 +32,10 @@ class Kur extends Command {
         const channels = await low(client.adapters('channels'));
         const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`)
         let curGm = Gm(PNG).setFormat('gif');
-        const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b)).slice(1).map(f => fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${f}.png`));
+        const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
         for (let index = 1; index < pngFiles.length; index++) {
-            curGm = curGm.in(pngFiles[index]).delay(1);
+            curGm = curGm.in([`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`]).delay(1);
+            console.log(curGm);
         }
         curGm.toBuffer(async (error, buffer) => {
             if (error) return console.log(error);
