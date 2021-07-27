@@ -35,7 +35,7 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const PNG = fs.readFileSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/0.png`);
-        const ProfilePicPixels = Pixelar(message.author.displayAvatarURL({ format: 'gif', dynamic: true }));
+        //const ProfilePicPixels = Pixelar(message.author.displayAvatarURL({ format: 'gif', dynamic: true }));
         let curGm = Gm(PNG).setFormat('gif');
         const pngFiles = fs.readdirSync(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/`).map(str => str.split('.')[0]).sort((a, b) => Number(a) - Number(b));
         for (let index = 1; index < (args[0] ? Number(args[0]) : pngFiles.length); index++) {
@@ -48,7 +48,7 @@ class Kur extends Command {
             const context = canvas.getContext("2d");
             const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, canvas.width, canvas.height);
-            const avatar = await Canvas.loadImage(frame);
+            const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'gif', dynamic: true }));
             context.drawImage(avatar, 25, 25, 200, 200);
             const canvasBufer = canvas.toBuffer();
             const newGm = Gm(canvasBuffer).setFormat('png')
