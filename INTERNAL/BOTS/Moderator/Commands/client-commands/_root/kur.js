@@ -52,7 +52,7 @@ class Kur extends Command {
             const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, 1000, 400);
             const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'jpg' }));
-            context.drawImage(avatar, 100, 100, 200, 200);
+            context.drawImage(avatar, 80, 50, 200, 200);
             encoder.addFrame(context);
             console.log(index);
         }
