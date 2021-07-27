@@ -45,7 +45,7 @@ class Kur extends Command {
                     if (error) index = index + 1;
                 });
             } finally {
-                if (!file) await file.close();
+                if (file) await file.close();
             }
             // use node-canvas
             const canvas = Canvas.createCanvas(1000, 400);
