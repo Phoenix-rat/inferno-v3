@@ -33,7 +33,7 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
 
-        const myGm = Gm().setFormat('gif');
+        const myGm = Gm().setFormat('jpeg');
         const framePNGs = await readdir(__dirname + '/../../../../../SRC/point_items/');
         let curGm = myGm;
         for (let index = 1; index < framePNGs.length; index++) {
@@ -41,7 +41,7 @@ class Kur extends Command {
             curGm = curGm.in(frameIndex).delay(100);
         }
         curGm.toBuffer((error, buffer) => {
-            if (error) throw error;
+            if (error) return console.log(error);
             const att = new Discord.MessageAttachment(buffer, 'pointBar');
             message.channel.send(new Discord.MessageEmbed().setImage('attachments://pointBar').attachFiles(att));
         });
