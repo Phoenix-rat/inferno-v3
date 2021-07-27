@@ -41,8 +41,8 @@ class Kur extends Command {
         }
         curGm.delay(100).toBuffer((error, buffer) => {
             if (error) return console.log(error);
-            const att = new Discord.MessageAttachment(buffer, 'pointBar');
-            message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar').attachFiles(att));
+            const att = new Discord.MessageAttachment(buffer, 'pointBar.gif');
+            message.channel.send(new Discord.MessageEmbed().setImage('attachment://pointBar.gif').attachFiles(att));
         });
     }
 
