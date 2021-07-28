@@ -1,19 +1,22 @@
-const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
+const Discord = require("discord.js");
 const low = require('lowdb');
+
 class Roles extends Command {
+
     constructor(client) {
         super(client, {
             name: "roles",
             description: "Belirtilen roldeki üyeleri gösterir.",
-            usage: "roles @Rol/ID",
-            examples: ["roles @Rol/ID"],
+            usage: "roles",
+            examples: ["roller", "roles"],
             category: "Yetkili",
-            aliases: ["roller", "groles"],
+            aliases: ["roller", "roles"],
             accaptedPerms: ["root", "owner"],
             cooldown: 10000
         });
     }
+
     async run(client, message, args, data) {
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
