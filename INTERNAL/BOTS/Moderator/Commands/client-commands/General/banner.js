@@ -12,7 +12,6 @@ class Banner extends Command {
             examples: ["banner id"],
             category: "Genel",
             aliases: [],
-            cmdChannel: "bot-komut",
             cooldown: 30000
         });
     }
