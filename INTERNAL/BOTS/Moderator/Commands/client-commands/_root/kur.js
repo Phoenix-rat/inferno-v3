@@ -58,7 +58,8 @@ class Kur extends Command {
                 encoding: null
             }, async (error, response, body) => {
                 console.log(body);
-                const frameGm = Gm(body).setFormat('gif').loop(1).delay(1);
+                const frameGm = Gm(body).selectFrame(1);
+                console.log(`!!!!!!!!!!\n` + frameGm);
                 //await message.channel.send(new Discord.MessageAttachment(body, 'body.gif'));
                 console.log(frameGm);
                 frameGm.toBuffer(async (err, buffer) => {
