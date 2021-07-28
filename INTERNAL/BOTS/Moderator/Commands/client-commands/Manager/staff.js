@@ -21,7 +21,7 @@ class Staffver extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         
-        const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0])
         if (!mentioned) return await message.channel.send(yetenekembed.setDescription(`Kullanıcı bulunamadı :(`))
         
         const yetenekembed = new Discord.MessageEmbed().setColor("BLACK").setTimestamp()
