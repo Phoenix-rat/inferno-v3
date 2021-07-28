@@ -15,7 +15,7 @@ class Staffver extends Command {
         });
     }
 
-    async run(client, message, args, data) {
+    async run(client, message, args) {
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
