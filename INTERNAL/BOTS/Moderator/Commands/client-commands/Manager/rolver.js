@@ -26,9 +26,10 @@ class Rolver extends Command {
         if (!gavat) return await message.channel.send(yetenekembed.setDescription(`Kullanıcı bulunamadı :(`))
 
         let gavatadam = args[0];
-        if(!gavatadam) return message.channel.send(`kahve oruspu çocu burayı doldurcan `);
-
-        if(gavatadam == "vip"){
+        if (!args[0] || (args[0] !== 'vip' && args[0] !== 'dj' && args[0] !== 'editör' && args[0] !== 'vokal' && args[0] !== 'ressam' && args[0] !== 'streamer' && args[0] !== 'müzisyen' && args[0] !== 'tasarımcı'))
+         return message.channel.send('Test').then(x => x.delete({ timeout: 5000 }));
+       
+         if(gavatadam == "vip"){
             if(!gavat.roles.cache.has(roles.get("vip").value())) {
                 gavat.roles.add(roles.get("vip").value())
                 return message.channel.send(yetenekembed.setDescription(`Başarıyla ${roles.get("vip").value()} adlı rolü verdim.`)) 
