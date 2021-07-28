@@ -27,9 +27,9 @@ class Roles extends Command {
         let guildRoles = message.guild.roles.cache.sort((kahve, stark) => kahve.position - stark.position).map(grol => `${grol.name} - (${grol.id})`).join("\n");
     //    await message.channel.send(GREmbed.setDescription(`${guildRoles}`, { split: true }));
 
-        splitembed(`**${uye} Üyesinin Sicili**\n\n ${listedPenal}`).then(list => {
+        splitembed(`${guildRoles}`).then(list => {
                 list.forEach(item => {
-                    message.channel.send(`${guildRoles}`);
+                    message.channel.send(`${item}`);
                 });
             });
 
