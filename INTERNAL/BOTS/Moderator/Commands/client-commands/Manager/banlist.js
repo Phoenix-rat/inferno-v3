@@ -24,11 +24,11 @@ class RoleInfo extends Command {
         const channels = await low(client.adapters('channels'));
         message.guild.fetchBans(true).then(banuser => {
         let Banneduser = banuser.map(x => `${x.user.tag} (\`${x.user.id}\`)`)
-            message.channel.send(`
+            message.channel.send(new Discord.MessageEmbed().setDescription(`
 • Banlı Kullanıcılar.
-• Toplam Banlı Kullancı sayısı: ${banuser.size}           
+• Toplam Banlı Kullancı sayısı: \`${banuser.size}\`           
 ${Banneduser.join("\n")})`, 
-{ split: true })
+{ split: true }))
         })
     }
 }
