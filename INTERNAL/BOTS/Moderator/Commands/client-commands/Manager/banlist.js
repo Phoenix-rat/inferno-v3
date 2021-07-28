@@ -6,12 +6,12 @@ class RoleInfo extends Command {
 
     constructor(client) {
         super(client, {
-            name: "rolinfo",
-            description: "Belirtilen roldeki üyeleri gösterir.",
-            usage: "rolinfo @Rol/ID",
-            examples: ["rolinfo @Rol/ID"],
+            name: "banlist",
+            description: "sunucudaki banlı üyeleri gösterir.",
+            usage: "banlist",
+            examples: ["banlist"],
             category: "Yetkili",
-            aliases: ["rinfo", "roleinfo"],
+            aliases: ["banlar"],
             accaptedPerms: ["root", "owner"],
             cooldown: 10000
         });
