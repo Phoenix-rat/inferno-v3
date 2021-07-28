@@ -1,18 +1,17 @@
 const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
-class Perm extends Command {
+class Rolver extends Command {
     constructor(client) {
         super(client, {
-            name: "yetenek",
+            name: "rolver",
             description: "Sunucuda bulunan üyelere perm vermek için kullanılır",
             usage: "yetenek @Kahve/ID vip",
             examples: ["rolver @Kahve/ID -ability"],
             cooldown: 3600000,
             category: "Perm",
-            aliases: ["rolver","yetenekver"],
+            aliases: ["yetenek","yetenekver"],
             accaptedPerms: ["root", "owner","cmd-ceo"],
-            enabled: false
         });
     }
     async run(client, message, args, data) {
@@ -88,4 +87,4 @@ class Perm extends Command {
     }
 }
 
-module.exports = Perm;
+module.exports = Rolver;
