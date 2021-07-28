@@ -9,7 +9,7 @@ class Roles extends Command {
             usage: "roller",
             examples: ["roller"],
             cooldown: 3600000,
-            category: "Diğer",
+            category: "Düzen",
             aliases: ["roles","kroles"],
             accaptedPerms: ["root","owner"],
             enabled: false
