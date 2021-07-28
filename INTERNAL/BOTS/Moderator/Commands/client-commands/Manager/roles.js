@@ -24,7 +24,8 @@ class Roles extends Command {
         const channels = await low(client.adapters('channels'));
 
         const GREmbed = new Discord.MessageEmbed().setColor("Black");
-        let guildRoles = message.guild.roles.cache.sort((kahve, stark) => kahve.position - stark.position).map(grol => `${grol.name} - (${grol.id})`).join("\n");
+     //   let guildRoles = message.guild.roles.cache.sort((kahve, stark) => kahve.position - stark.position).map(grol => `${grol.name} - (${grol.id})`).join("\n");
+        let guildRoles = message.guild.members.cache.filter(a => a).map(a => `${a} ${a.id}`)
     //    await message.channel.send(GREmbed.setDescription(`${guildRoles}`, { split: true }));
 
         splitembed(`${guildRoles}`).then(list => {
