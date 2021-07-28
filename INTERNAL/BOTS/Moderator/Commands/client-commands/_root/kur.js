@@ -6,7 +6,6 @@ const GIFEncoder = require('gifencoder');
 const fs = require('fs');
 const Gm = require('gm');
 const request = require('request');
-const giphy = require('gif2sprite');
 class Kur extends Command {
 
     constructor(client) {
