@@ -22,7 +22,7 @@ class Staffver extends Command {
         const channels = await low(client.adapters('channels'));
         
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-        if (!mentioned) return await message.channel.send(yetenekembed.setDescription(`Kullanıcı bulunamadı :(`))
+        if (!mentioned) return await message.channel.send(new Discord.MessageEmbed().setColor("BLACK").setDescription(`Kullanıcı bulunamadı :(`)).then(msg => msg.delete({ timeout: 10000 }));
         
         const yetenekembed = new Discord.MessageEmbed().setColor("BLACK").setTimestamp()
         .setFooter(`• Kahve sizi seviyor 🌟`).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
