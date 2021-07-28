@@ -26,7 +26,7 @@ class Staffver extends Command {
         if (isNaN(slowtime)) return message.channel.send("Bir sayı girmelisin");
         if (slowtime > 1000) return message.channel.send("En fazla 100 saniye slow atabilirsin");
         message.channel.setRateLimitPerUser(args[0]);
-        message.channel.send(`Bu kanalda artık ${slowtime} süresinde bir yazıla bilecek.`);
+        message.channel.send(`Bu kanalda artık ${slowtime} saniye süresinde bir yazıla bilecek.`);
     }
 }
 
