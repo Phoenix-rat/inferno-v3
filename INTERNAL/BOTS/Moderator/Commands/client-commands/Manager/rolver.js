@@ -11,7 +11,7 @@ class Perm extends Command {
             cooldown: 3600000,
             category: "Perm",
             aliases: ["rolver","yetenekver"],
-            accaptedPerms: ["cmd-ceo"],
+            accaptedPerms: ["root", "owner","cmd-ceo"],
             enabled: false
         });
     }
