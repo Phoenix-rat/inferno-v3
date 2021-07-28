@@ -5,15 +5,16 @@ class Rolver extends Command {
     constructor(client) {
         super(client, {
             name: "rolver",
-            description: "Sunucuda bulunan üyelere perm vermek için kullanılır",
-            usage: "yetenek @Kahve/ID vip",
-            examples: ["rolver @Kahve/ID -ability"],
-            cooldown: 3600000,
-            category: "Perm",
-            aliases: ["yetenek","yetenekver"],
-            accaptedPerms: ["root", "owner","cmd-ceo"],
+            description: "Belirtilen roldeki üyeleri gösterir.",
+            usage: "rolver @Kahve/ID",
+            examples: ["rolver @Kahve/ID"],
+            category: "Yetkili",
+            aliases: ["ver", "yetenek"],
+            accaptedPerms: ["root", "owner"],
+            cooldown: 10000
         });
     }
+
     async run(client, message, args, data) {
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
