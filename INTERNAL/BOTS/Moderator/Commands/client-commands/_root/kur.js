@@ -57,7 +57,7 @@ class Kur extends Command {
                 encoding: null
             }, async (error, response, body) => {
                 gifFrames({ 
-                    url: body,
+                    url: message.author.displayAvatarURL({ format: 'gif' }),
                     frames: 0,
                     outputType: 'canvas'
                 }).then((frameData) => {
