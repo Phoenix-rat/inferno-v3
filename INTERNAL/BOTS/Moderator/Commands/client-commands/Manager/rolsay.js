@@ -12,7 +12,7 @@ class CountByRole extends Command {
             examples: ["rolsay 718265023750996028"],
             cooldown: 3600000,
             category: "Yetkili",
-            accaptedPerms: ["cmd-all"]
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single"],
         });
     }
 
