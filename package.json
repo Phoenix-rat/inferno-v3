@@ -19,6 +19,7 @@
         "ffmpeg-static": "^4.3.0",
         "fs": "0.0.1-security",
         "get-pixels": "^3.3.3",
+        "gif-decoding": "0.0.1",
         "gif-encoder": "^0.7.2",
         "gif-extract-frames": "^1.0.2",
         "gif-frames": "^1.0.1",

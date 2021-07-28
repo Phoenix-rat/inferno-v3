@@ -3,10 +3,10 @@ const low = require('lowdb');
 const Discord = require('discord.js');
 const Canvas = require('canvas');
 const GIFEncoder = require('gifencoder');
-const Framer = require('gif-frames');
 const fs = require('fs');
 const Gm = require('gm');
 const request = require('request');
+const Decoder = require('gif-decoding');
 class Kur extends Command {
 
     constructor(client) {
@@ -58,11 +58,11 @@ class Kur extends Command {
                 encoding: null
             }, async (error, response, body) => {
                 console.log(body);
-                const frameGm = Gm(body).selectFrame(1);
+                const decodedGif = Decoder(body);
                 console.log(`!!!!!!!!!!`);
-                console.log(frameGm);
+                console.log(decodedGif);
                 //await message.channel.send(new Discord.MessageAttachment(body, 'body.gif'));
-                console.log(frameGm);
+                /*
                 frameGm.toBuffer(async (err, buffer) => {
                     if (err) return console.log(err);
                     await message.channel.send(new Discord.MessageAttachment(buffer, 'points.png'));
@@ -75,6 +75,7 @@ class Kur extends Command {
                         context.drawImage(avatar, 75, 60, 200, 200);
                     });
                 });
+                */
             });
 
             encoder.addFrame(context);
