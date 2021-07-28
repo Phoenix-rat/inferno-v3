@@ -26,7 +26,7 @@ class RoleInfo extends Command {
         let Banneduser = banuser.map(x => `<@${x.user.tag}> (\`${x.user.id}\`)`)
             message.channel.send(`
 • Banlı Kullanıcılar.
-• Toplam Banlı Kullancı sayısı: ${Banneduser.size}           
+• Toplam Banlı Kullancı sayısı: ${banuser.size}           
 ${Banneduser.join("\n")})`, 
 { split: true })
         })
