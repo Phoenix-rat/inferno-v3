@@ -27,7 +27,7 @@ class RoleInfo extends Command {
         .setColor("RANDOM")
         .setFooter("Kahvelendin <3")
         .setDescription("Lütfen rolü etiketleyiniz veya ID sini giriniz!")).then(msg => msg.delete({ timeout: 5000 }));
-        let mentionedRoleMembers = mentionedRole.members.map(role => `<@${role.id}> (\`${role.id}\`) `)
+        let mentionedRoleMembers = mentionedRole.members.map(role => `${message.guild.members.cache.get(role.id)} (\`${role.id}\`) `)
         message.channel.send(`• ${mentionedRole} rolündeki üyeler.
 • Roldeki üye sayısı: \`${mentionedRole.members.size}\`
 ─────────────────
