@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
-class Perm extends Command {
+class Roles extends Command {
     constructor(client) {
         super(client, {
             name: "roller",
-            description: "Sunucuda bulunan üyelere perm vermek için kullanılır",
+            description: "Sunucuda bulunan rolelri görüntüler",
             usage: "roller",
             examples: ["roller"],
             cooldown: 3600000,
@@ -27,4 +27,4 @@ class Perm extends Command {
     }
 }
 
-module.exports = Perm;
+module.exports = Roles;
