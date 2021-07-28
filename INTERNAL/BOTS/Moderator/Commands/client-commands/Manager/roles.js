@@ -23,7 +23,7 @@ class Perm extends Command {
         
         const GREmbed = new Discord.MessageEmbed().setColor("Black");
         let guildRoles = message.guild.roles.cache.sort((kahve, stark) => kahve.position - stark.position).map(grol => `${grol.name} - (${grol.id})`).join("\n");
-        message.channel.send(GREmbed.setDescription(`${guildRoles}`, {split:true}));
+        await message.channel.send(GREmbed.setDescription(`${guildRoles}`, {split:true}));
     }
 }
 
