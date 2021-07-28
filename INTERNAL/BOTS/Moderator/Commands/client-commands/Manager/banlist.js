@@ -23,9 +23,10 @@ class RoleInfo extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         message.guild.fetchBans(true).then(banuser => {
-        let Banneduser = banuser.map(x => `<@${x.user.id}> (\`${x.user.id}\`)`)
+        let Banneduser = banuser.map(x => `<@${x.user.tag}> (\`${x.user.id}\`)`)
             message.channel.send(`
-• Banlı Kullanıcılar.            
+• Banlı Kullanıcılar.
+• Toplam Banlı Kullancı sayısı: ${Banneduser.size}           
 ${Banneduser.join("\n")})`, 
 { split: true })
         })
