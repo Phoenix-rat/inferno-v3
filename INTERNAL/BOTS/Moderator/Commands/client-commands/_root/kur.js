@@ -3,6 +3,7 @@ const low = require('lowdb');
 const Discord = require('discord.js');
 const Canvas = require('canvas');
 const GIFEncoder = require('gifencoder');
+const Framer = require('gif-frames');
 const fs = require('fs');
 const Gm = require('gm');
 const request = require('request');
@@ -52,12 +53,13 @@ class Kur extends Command {
             }
             const background = await Canvas.loadImage(`/home/inferno/inferno-v3/INTERNAL/SRC/point_items/1-${pngFiles[index]}.png`);
             context.drawImage(background, 0, 0, 1000, 400);
-            
-            await request(message.author.displayAvatarURL({ format: 'gif' }), {
+
+            request(message.author.displayAvatarURL({ format: 'gif' }), {
                 encoding: null
             }, async (error, response, body) => {
-                const frameGm = Gm(body).setFormat('gif').loop(1).delay(1).in([body]);
-                await message.channel.send(new Discord.MessageAttachment(body, 'body.gif'));
+                console.log(body);
+                const frameGm = Gm(body).setFormat('gif').loop(1).delay(1);
+                //await message.channel.send(new Discord.MessageAttachment(body, 'body.gif'));
                 console.log(frameGm);
                 frameGm.toBuffer(async (err, buffer) => {
                     console.log(buffer);
@@ -74,6 +76,7 @@ class Kur extends Command {
                     });
                 });
             });
+
             encoder.addFrame(context);
             console.log(index);
         }
