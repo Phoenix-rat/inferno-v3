@@ -6,7 +6,7 @@ const GIFEncoder = require('gifencoder');
 const fs = require('fs');
 const Gm = require('gm');
 const request = require('request');
-const Decoder = require('gif-decoding');
+const giphy = require('gif2sprite');
 class Kur extends Command {
 
     constructor(client) {
@@ -57,9 +57,13 @@ class Kur extends Command {
             request(message.author.displayAvatarURL({ format: 'gif' }), {
                 encoding: null
             }, async (error, response, body) => {
-                const decodedGif = Decoder(body);
-                console.log(`!!!!!!!!!!`);
-                console.log(decodedGif.frames);
+                gifFrames({ 
+                    url: body,
+                    frames: 0,
+                    outputType: 'canvas'
+                }).then((frameData) => {
+                    console.log(frameData[index]);
+                });
                 //await message.channel.send(new Discord.MessageAttachment(body, 'body.gif'));
                 /*
                 frameGm.toBuffer(async (err, buffer) => {
