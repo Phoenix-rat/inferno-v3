@@ -64,11 +64,9 @@ class Kur extends Command {
                 //await message.channel.send(new Discord.MessageAttachment(body, 'body.gif'));
                 console.log(frameGm);
                 frameGm.toBuffer(async (err, buffer) => {
-                    console.log(buffer);
                     if (err) return console.log(err);
                     await message.channel.send(new Discord.MessageAttachment(buffer, 'points.png'));
                     const myGm = Gm(buffer).in().resize(200).selectFrame(index).setFormat('png');
-                    console.log(myGm);
                     myGm.toBuffer(async (er, buff) => {
                         console.log(buff);
                         if (er) return console.log(er);
