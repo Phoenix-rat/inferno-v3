@@ -4,14 +4,14 @@ const low = require('lowdb');
 class Perm extends Command {
     constructor(client) {
         super(client, {
-            name: "yetenek",
+            name: "roller",
             description: "Sunucuda bulunan üyelere perm vermek için kullanılır",
-            usage: "yetenek @Kahve/ID vip",
-            examples: ["rolver @Kahve/ID -ability"],
+            usage: "roller",
+            examples: ["roller"],
             cooldown: 3600000,
-            category: "Perm",
-            aliases: ["rolver","yetenekver"],
-            accaptedPerms: ["cmd-ceo"],
+            category: "Diğer",
+            aliases: ["roles","kroles"],
+            accaptedPerms: ["root","owner"],
             enabled: false
         });
     }
@@ -20,7 +20,10 @@ class Perm extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-
+        
+        const GREmbed = new Discord.MessageEmbed().setColor("Black");
+        let guildRoles = message.guild.roles.cache.sort((kahve, stark) => kahve.position - stark.position).map(grol => `${grol.name} - (${grol.id})`).join("\n");
+        message.channel.send(GREmbed.setDescription(`${guildRoles}`, {split:true}));
     }
 }
 
