@@ -37,40 +37,41 @@ class Staffver extends Command {
         • .permver @Kahve/ID mute (\`Silencer †\`) permini verir.
         • .permver @Kahve/ID gang (\`Gang †\`) permini verir.
         ───────────────────
-        `))
+        `)).then(msg => msg.delete({ timeout: 10000 }));
 
          if(select == "register") {
             if(!mentioned.roles.cache.has(roles.get("cmd-registry").value())) {
                 mentioned.roles.add(roles.get("cmd-registry").value())
                  const registeremb = new Discord.MessageEmbed().setColor("BLACK").setDescription(`Başarıyla \`Gatekeeper †\` adlı rolü verdim.`)
-                 return message.channel.send(registeremb)
+                 return await message.channel.send(registeremb).then(msg => msg.delete({ timeout: 10000 }));
             }
         }
         if(select == "ability") {
             if(!mentioned.roles.cache.has(roles.get("cmd-ability").value())) {
                 mentioned.roles.add(roles.get("cmd-ability").value())
                   const abilityemb = new Discord.MessageEmbed().setColor("BLACK").setDescription(`Başarıyla \`Ruby †\` adlı rolü verdim.`)
-                  return message.channel.send(abilityemb)
+                  return await message.channel.send(abilityemb).then(msg => msg.delete({ timeout: 10000 }));
             }
         }
         if(select == "jail") {
             if(!mentioned.roles.cache.has(roles.get("cmd-jail").value())) {
                 mentioned.roles.add(roles.get("cmd-jail").value())
                   const jailemb = new Discord.MessageEmbed().setColor("BLACK").setDescription(`Başarıyla \`Punisher †\` adlı rolü verdim.`) 
+                  return await message.channel.send(jailemb).then(msg => msg.delete({ timeout: 10000 }));
             }
         }
         if(select == "mute") {
             if(!mentioned.roles.cache.has(roles.get("cmd-mute").value())) {
                 mentioned.roles.add(roles.get("cmd-mute").value())
                 const muteemb = new Discord.MessageEmbed().setColor("BLACK").setDescription(`Başarıyla \`Silencer †\` adlı rolü verdim.`)
-                return message.channel.send(muteemb)
+                return await message.channel.send(muteemb).then(msg => msg.delete({ timeout: 10000 }));
             }
         }
         if(select == "gang") {
             if(!mentioned.roles.cache.has(roles.get("cmd-crew").value())) {
                 mentioned.roles.add(roles.get("cmd-crew").value())
                 const gangemb = new Discord.MessageEmbed().setColor("BLACK").setDescription(`Başarıyla \`Gang †\` adlı rolü verdim.`)
-                return message.channel.send(gangemb)
+                return await message.channel.send(gangemb).then(msg => msg.delete({ timeout: 10000 }));
             }
         }
     }
