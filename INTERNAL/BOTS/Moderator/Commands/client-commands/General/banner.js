@@ -56,4 +56,3 @@ async function avatar(client, message, member, token) {
     if(isavatarGIF) yarrak = avatarGIF; else yarrak = avatarPNG
     message.channel.send(yarrak)
 }
-module.exports = avatar;
