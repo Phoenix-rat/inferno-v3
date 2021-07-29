@@ -25,9 +25,9 @@ class Banner extends Command {
 
         if (message.mentions.members.first()) {
 
-            let member = message.mentions.members.first()
+            let member = message.mentions.members.first().id
 
-            avatar(client, message, member.id, "ODY5MzQ2Mjc3NDY3NTAwNTk1.YP830A.BtutP3faTiJdv7_dHSJ2KF_xoRE")
+            avatar(client, message, member, "ODY5MzQ2Mjc3NDY3NTAwNTk1.YP830A.BtutP3faTiJdv7_dHSJ2KF_xoRE")
 
         } else if (!message.mentions.members.first()) {
 
