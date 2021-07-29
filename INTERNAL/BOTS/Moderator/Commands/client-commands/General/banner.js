@@ -25,7 +25,7 @@ class Banner extends Command {
         let amcik;
         if(!message.guild.members.cache.get(args[0])) return amcik = args[0]; else
         if(member) amcik = member.id
-        if(!member || !amcik) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
+        if(!member || !args[0]) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
 
         avatar(client, message, amcik, "ODY5MzQ2Mjc3NDY3NTAwNTk1.YP830A.BtutP3faTiJdv7_dHSJ2KF_xoRE")
 
