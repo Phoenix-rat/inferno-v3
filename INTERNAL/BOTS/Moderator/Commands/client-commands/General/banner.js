@@ -55,7 +55,7 @@ async function avatar(client, message, member, token) {
         }
     })
     let json = await fetched.json();
-    if (json.banner == null) return message.reply(`${json.username} adlı kullanıcının **Banner'i** bulunmamaktadır.`)
+    if (json.banner == null) return message.channel.send(`\`${json.username}#${json.discriminator}\` adlı kullanıcı **banner** kullanmıyor.`)
     let avatarGIF = `https://cdn.discordapp.com/banners/${userID}/${json.banner}.gif?size=1024`;
     let avatarPNG = `https://cdn.discordapp.com/banners/${userID}/${json.banner}.png?size=1024`;
     let avatarFetch = await fetch(avatarGIF);
