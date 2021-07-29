@@ -12,7 +12,8 @@ class Banner extends Command {
             examples: ["banner id"],
             category: "Genel",
             aliases: [],
-            cooldown: 30000
+            cmdChannel: "bot-komut",
+            cooldown: 5000
         });
     }
     //TOKEN BENİM BOT TOKENİ SADECE APİDEN BİLGİ ÇEKMEK İÇİN HERHANGİ BİR ZAAFI YOK ELLEMEYİN SİKERİM - STARK
@@ -25,9 +26,10 @@ class Banner extends Command {
 
         if (message.mentions.members.first()) {
 
-            let member = message.mentions.members.first().id
+            let member = message.mentions.members.first()
+            let app = member.id
 
-            avatar(client, message, member, "ODY5MzQ2Mjc3NDY3NTAwNTk1.YP830A.BtutP3faTiJdv7_dHSJ2KF_xoRE")
+            avatar(client, message, app, "ODY5MzQ2Mjc3NDY3NTAwNTk1.YP830A.BtutP3faTiJdv7_dHSJ2KF_xoRE")
 
         } else if (!message.mentions.members.first()) {
 
