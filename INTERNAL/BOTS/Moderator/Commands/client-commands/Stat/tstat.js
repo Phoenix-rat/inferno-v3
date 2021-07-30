@@ -113,9 +113,7 @@ class Invites extends Command {
                         
             const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
             ${mentioned} kişisine ait ${days} günlük mesaj bilgileri:
-
-               **Not:** Sistemin bu bölümü acele bir şekilde yazılmıştır. Hata var ise Stark †#0001 <3.
-            
+        
             **Genel Bilgileri:**
             • ID: \`${mentioned.id}\`
             • Kullanıcı: ${mentioned}
@@ -124,8 +122,7 @@ class Invites extends Command {
 
             **Toplam Mesaj İstatistikleri**
              ${description}
-        
-         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setFooter("• Kahve seni önemsiyor- vallaha önemsiyom abi").setTitle(message.guild.name);
+             `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setFooter("• bla bla bla - Starks").setTitle(message.guild.name);
             return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 20000 }));
         }
         return message.channel.send(embed.setDescription('istatistik bla bla bla'));
