@@ -5,6 +5,8 @@ const { checkDays, rain } = require('../../../../../HELPERS/functions');
 const StatData = require('../../../../../MODELS/StatUses/VoiceRecords');
 const InviteData = require('../../../../../MODELS/StatUses/Invites');
 const RegData = require('../../../../../MODELS/Datalake/Registered');
+const stat_msg = require('../../../../../MODELS/StatUses/stat_msg');
+
 const { stripIndent } = require('common-tags');
 const stringTable = require('string-table');
 const moment = require("moment")
@@ -96,6 +98,32 @@ class Invites extends Command {
             • Haftalık kayıt sayısı: ${rain(client, datam.filter(data => checkDays(data.created) <= 7).length)} 
             `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle(message.guild.name);
             return await message.channel.send(embedD).then(msg => msg.delete({ timeout: 10000 }));
+        }
+        if(args[0] == 'mesaj') {
+            const Data = await stat_msg.findOne({ _id: mentioned.user.id });
+            if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
+            const records = Data.records.filter(r => checkDays(r.enter) < days);
+            let stats = {};
+            records.forEach(record => {
+              stats[record.channel] = stats[record.channel] ? stats[record.channel] + 1 : 0
+            });
+            const description = Object.keys(stats).map(channelID => `${message.guild.channels.cache.get(channelID) || "\`Bilinmiyor\`"}: ${stats[channelID] || 0} mesaj`).join('\n');
+                        
+            const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
+            ${mentioned} kişisine ait ${days} günlük mesaj bilgileri:
+
+               **Not:** Sistemin bu bölümü acele bir şekilde yazılmıştır. Hata var ise Stark †#0001 <3.
+            
+            **Genel Bilgileri:**
+            • ID: \`${mentioned.id}\`
+            • Kullanıcı: ${mentioned}
+            • Durum: ${tstatstatus}
+            • Sunucuya Katılma Tarihi: \`${moment(mentioned.joinedAt).format("LLL")}\`
+
+             ${description}
+        
+         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setFooter("• Kahve seni önemsiyor- vallaha önemsiyom abi").setTitle(message.guild.name);
+            return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 20000 }));
         }
         return message.channel.send(embed.setDescription('istatistik bla bla bla'));
     }
