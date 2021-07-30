@@ -6,6 +6,8 @@ const Points_profile = require('../../../../MODELS/Economy/Points_profile');
 const tagged = require('../../../../MODELS/Temprorary/tagged');
 const { comparedate, checkMins, checkHours } = require('../../../../HELPERS/functions');
 const Tagli = require('../../../../MODELS/Datalake/Tagli');
+const stat_msg = require("../../../../MODELS/StatUses/stat_msg.js")
+
 module.exports = class {
     constructor(client) {
         this.client = client;
@@ -97,6 +99,34 @@ module.exports = class {
                 }
             }
         }
+
+        //
+        const msgStat = await stat_msg.findOne({ _id: message.author.id });
+        if (!msgStat) {
+            await stat_msg.create({
+                _id: message.author.id,
+                records: [
+                    {
+                        channel: message.channel.id,
+                        content: message.content,
+                        created: new Date()
+                    }
+                ]
+            });
+        } else {
+            await stat_msg.updateOne({ _id: message.author.id }, {
+                $push: {
+                    records: {
+                        channel: message.channel.id,
+                        content: message.content,
+                        created: new Date()
+                    }
+                }
+            });
+        }
+
+
+        //
         const pointData = await Points_profile.findOne({ _id: message.author.id });
         if (pointData) {
             const pointConfig = await Points_config.findOne({ _id: pointData.role });
