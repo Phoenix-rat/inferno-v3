@@ -18,7 +18,6 @@ class Say extends Command {
             aliases: ["puan"],
             accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000,
-            onTest: false
         });
     }
 
