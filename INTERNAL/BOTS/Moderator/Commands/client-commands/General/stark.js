@@ -15,12 +15,8 @@ class stark extends Command {
     async run(client, message, args) {
         const messageXp = await stat_msg.findOne({ _id: message.author.id });
 
-        
-
-
-
         if(messageXp) {
-            message.reply(`${messageXp.message}`)
+            message.reply(`${messageXp.messagenumber}`)
         }
         else { 
             message.reply("veri yok")
