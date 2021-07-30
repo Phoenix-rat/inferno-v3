@@ -42,7 +42,7 @@ class Invites extends Command {
         let days = args[2] || 7;
 
         const embed = new Discord.MessageEmbed().setColor("RANDOM").setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }));
-        if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit' && args[0] !== 'mesaj')) return message.channel.send(embed.setDescription('.me ses/davet/teyit böyle kullana bilirsiniz')).then(x => x.delete({ timeout: 5000 }));
+        if (!args[0] || (args[0] !== 'ses' && args[0] !== 'davet' && args[0] !== 'teyit' && args[0] !== 'mesaj')) return message.channel.send(embed.setDescription('.me ses/davet/teyit/mesaj böyle kullana bilirsiniz')).then(x => x.delete({ timeout: 5000 }));
         if (args[0] === 'ses') {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
             if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
@@ -108,7 +108,7 @@ class Invites extends Command {
                 const element = records[index];
                 stats[element.channel] = stats[element.channel] ? stats[element.channel] + 1 : 0;
             }
-            const description = Object.keys(stats).map(channelID => `${message.guild.channels.cache.get(channelID) || "\`Bilinmiyor\`"}: ${stats[channelID] || 0} mesaj`).join('\n');
+            const description = Object.keys(stats).map(channelID => `\`•\` ${message.guild.channels.cache.get(channelID) || "\`Bilinmiyor\`"}: ${stats[channelID] || 0} mesaj`).join('\n');
                         
             const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
             ${mentioned} kişisine ait ${days} günlük mesaj bilgileri:
@@ -121,6 +121,7 @@ class Invites extends Command {
             • Durum: ${tstatstatus}
             • Sunucuya Katılma Tarihi: \`${moment(mentioned.joinedAt).format("LLL")}\`
 
+            **Toplam Mesaj İstatistikleri**
              ${description}
         
          `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setFooter("• Kahve seni önemsiyor- vallaha önemsiyom abi").setTitle(message.guild.name);
