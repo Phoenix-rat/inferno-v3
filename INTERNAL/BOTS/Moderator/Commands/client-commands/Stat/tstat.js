@@ -106,7 +106,7 @@ class Invites extends Command {
             let stats = {};
             for (let index = 0; index < records.length; index++) {
                 const element = records[index];
-                stats[record.channel] = stats[record.channel] ? stats[record.channel] + 1 : 0;
+                stats[element.channel] = stats[element.channel] ? stats[element.channel] + 1 : 0;
             }
             const description = Object.keys(stats).map(channelID => `${message.guild.channels.cache.get(channelID) || "\`Bilinmiyor\`"}: ${stats[channelID] || 0} mesaj`).join('\n');
                         
