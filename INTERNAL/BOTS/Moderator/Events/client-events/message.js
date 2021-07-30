@@ -103,26 +103,35 @@ module.exports = class {
         //
         const msgStat = await stat_msg.findOne({ _id: message.author.id });
         if (!msgStat) {
-            await stat_msg.create({
-                _id: message.author.id,
-                records: [
-                    {
-                        channel: message.channel.id,
-                        content: message.content,
-                        created: new Date()
-                    }
-                ]
-            });
+
+            await stat_msg.findOneAndUpdate({ _id: message.author.id }, { $inc: { message: 1 } }, { upsert: true })
+            await stat_msg.findOneAndUpdate({ _id: message.author.id }, { $push: { channel: { channel: message.channel.id, content: message.content, created: new Date() } } }, { upsert: true })
+
+
+
+            /*       await stat_msg.create({
+                       _id: message.author.id,
+                       records: [
+                           {
+                               channel: message.channel.id,
+                               content: message.content,
+                               created: new Date()
+                           }
+                       ]
+                   });*/
         } else {
-            await stat_msg.updateOne({ _id: message.author.id }, {
-                $push: {
-                    records: {
-                        channel: message.channel.id,
-                        content: message.content,
-                        created: new Date()
+            await stat_msg.findOneAndUpdate({ _id: message.author.id }, { $inc: { message: 1 } }, { upsert: true })
+            await stat_msg.findOneAndUpdate({ _id: message.author.id }, { $push: { channel: { channel: message.channel.id, content: message.content, created: new Date() } } }, { upsert: true })
+
+            /*    await stat_msg.updateOne({ _id: message.author.id }, {
+                    $push: {
+                        records: {
+                            channel: message.channel.id,
+                            content: message.content,
+                            created: new Date()
+                        }
                     }
-                }
-            });
+                });*/
         }
 
 
