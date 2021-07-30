@@ -102,7 +102,7 @@ class Invites extends Command {
         if(args[0] == 'mesaj') {
             const Data = await stat_msg.findOne({ _id: mentioned.user.id });
             if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
-            const records = Data.records.filter(r => checkDays(r.enter) < days);
+            const records = Data.records.filter(r => checkDays(r.created) < days);
             let stats = {};
             records.forEach(record => {
               stats[record.channel] = stats[record.channel] ? stats[record.channel] + 1 : 0
