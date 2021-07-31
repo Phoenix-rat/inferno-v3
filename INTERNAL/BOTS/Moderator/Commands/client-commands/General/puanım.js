@@ -6,16 +6,16 @@ const Points_profile = require('../../../../../MODELS/Economy/Points_profile');
 const Points_config = require('../../../../../MODELS/Economy/Points_config');
 const { checkHours } = require('../../../../../HELPERS/functions');
 
-class Say extends Command {
+class stark extends Command {
 
     constructor(client) {
         super(client, {
-            name: "puanım",
+            name: "stark",
             description: "Puan bilgisini verir..",
-            usage: "puanım",
-            examples: ["puanım"],
+            usage: "stark",
+            examples: ["stark"],
             category: "Genel",
-            aliases: ["puan"],
+            aliases: ["stark"],
            // accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
          //   cooldown: 10000,
         });
@@ -55,7 +55,7 @@ class Say extends Command {
             .filter(r => r.id !== roles.get("booster").value())
             .sort((a, b) => a.rawPosition - b.rawPosition).array().find(role => role.rawPosition > myRole.rawPosition);
 
-        await message.channel.send(new Discord.MessageEmbed().setDescription(stripIndent`
+        message.channel.send(new Discord.MessageEmbed().setDescription(`
         **Dante's INFEЯИO** puan bilgileri
         ${message.member} kullanıcısının puan bilgileri
         Yetkisi: ${myRole}
@@ -76,4 +76,4 @@ class Say extends Command {
     }
 }
 
-module.exports = Say;
+module.exports = stark;
