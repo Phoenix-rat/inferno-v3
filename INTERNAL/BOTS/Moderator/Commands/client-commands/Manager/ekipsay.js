@@ -27,7 +27,7 @@ class ekipsay extends Command {
         const discri = message.guild.members.cache.filter(stark => !stark.bot).filter(a => a.user.discriminator == "1458").size;
         const yazitag = message.guild.members.cache.filter(m => m.user.username.includes("Rîff")).size
 
-        let embed = new MessageEmbed().setColor("BLACK").setFooter(`• Kahve ❤ INFEЯИO †`, message.author.displayAvatarURL({ dynamic: true }));
+        let embed = new MessageEmbed().setColor("BLACK").setFooter(`• Stark ❤ INFEЯИO † ❌ 1458`, message.author.displayAvatarURL({ dynamic: true }));
         message.channel.send(embed.setDescription(stripIndent`
         ${emojis.get("kahvehac").value()} Rîff tagını **${yazitag}** kişi taşıyor.
         ${emojis.get("kahvehac").value()} 1458 tagını **${discri}** kişi taşıyor.
