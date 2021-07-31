@@ -16,8 +16,8 @@ class Say extends Command {
             examples: ["puanım"],
             category: "Genel",
             aliases: ["puan"],
-            accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
-            cooldown: 10000,
+           // accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
+         //   cooldown: 10000,
         });
     }
 
