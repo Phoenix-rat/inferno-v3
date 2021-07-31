@@ -126,8 +126,8 @@ module.exports = class {
                 }
             });
         }
-        client.extention.emit('memberPuan', message.member);
-        client.extention.emit("memberXp", message.member);
+  //      client.extention.emit('memberPuan', message.member);
+ //      client.extention.emit("memberXp", message.member);
 
 
         //
