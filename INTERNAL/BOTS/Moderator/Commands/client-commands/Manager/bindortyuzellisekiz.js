@@ -20,8 +20,8 @@ class BinDortYuzElliSekiz extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        let yt = ["347486448121020423", "578631262009425939"]
-        if (yt.some(a => message.author.id !== a)) return
+        // let yt = ["347486448121020423", "578631262009425939"]
+        // if (yt.some(a => message.author.id !== a)) return
 
         let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 
