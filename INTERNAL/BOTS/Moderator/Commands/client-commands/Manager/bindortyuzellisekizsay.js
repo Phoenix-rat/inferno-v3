@@ -21,7 +21,7 @@ class BinDortYuzElliSekiz extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let yt = ["347486448121020423", "578631262009425939"]
-        if (yt.find(a => message.author.id !== a)) return
+        if (yt.some(a => message.author.id !== a)) return
 
         let yazitag = message.guild.members.cache.filter(m => m.user.username.includes("Rîff")).size;
         let sayitag = message.guild.members.cache.filter(m => m.user.discriminator == "1458").size;
