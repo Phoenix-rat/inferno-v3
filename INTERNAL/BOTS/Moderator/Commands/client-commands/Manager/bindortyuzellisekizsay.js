@@ -5,7 +5,7 @@ const { MessageEmbed } = require('discord.js');
 const Command = require("../../../Base/Command");
 const { stripIndent } = require('common-tags');
 const { rain } = require("../../../../../HELPERS/functions");
-class BinDortYuzElliSekiz extends Command {
+class BinDortYuzElliSekizsay extends Command {
 
     constructor(client) {
         super(client, {
@@ -65,4 +65,4 @@ class BinDortYuzElliSekiz extends Command {
 
     }
 }
-module.exports = BinDortYuzElliSekiz;
+module.exports = BinDortYuzElliSekizsay;
