@@ -5,17 +5,17 @@ const { MessageEmbed } = require('discord.js');
 const Command = require("../../../Base/Command");
 const { stripIndent } = require('common-tags');
 const { rain } = require("../../../../../HELPERS/functions");
-class BinDortYuzElliSekizsay extends Command {
+class starkekipsay extends Command {
 
     constructor(client) {
         super(client, {
-            name: "bindortyuzellisekizsay",
+            name: "1458say",
             description: "1458 Üyelerine özel rol verir.",
-            usage: "bindortyuzellisekiz",
-            examples: ["bindortyuzellisekizsay"],
+            usage: "1458say @member/ID",
+            examples: ["1458say"],
             category: "Yetkili",
             aliases: ["1458say"],
-            accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double","cmd-single",],
+            accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double","cmd-single"],
 
         });
     }
@@ -65,4 +65,4 @@ class BinDortYuzElliSekizsay extends Command {
 
     }
 }
-module.exports = BinDortYuzElliSekizsay;
+module.exports = starkekipsay;
