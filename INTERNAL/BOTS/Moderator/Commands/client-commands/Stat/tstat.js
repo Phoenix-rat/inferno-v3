@@ -58,11 +58,6 @@ class Invites extends Command {
             const Data = await StatData.findOne({ _id: mentioned.user.id });
             if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
             const records = Data.records.filter(r => checkDays(r.enter) < days);
-            const birim = [
-                "Saat",
-                "Dakika",
-                "Saniye"
-            ];
             const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
             ${mentioned} kişisine ait ${days} günlük ses bilgileri:
 
