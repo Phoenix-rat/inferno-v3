@@ -41,7 +41,7 @@ class Invites extends Command {
             minutes = (minutes < 10) ? "0" + minutes : minutes;
             seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-            return hours + "Saat, " + minutes + "Dakika, " + seconds + "Saniye";
+            return hours + " saat, " + minutes + " dk, " + seconds + " sn";
         }
         let tstatstatus = mentioned.presence.status
             .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
