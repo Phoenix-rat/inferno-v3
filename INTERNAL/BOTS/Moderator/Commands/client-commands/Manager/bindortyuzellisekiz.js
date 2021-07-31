@@ -25,12 +25,12 @@ class BinDortYuzElliSekiz extends Command {
 
         let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 
-        if (!member) return message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
+        if (!member) return message.react(emojis.get("warn").value().split(':')[2].replace('>', ''));
 
         if (member.roles.cache.has("870076552610717706")) return message.reply("Kullanıcıda zaten perm var bilader amacın ne ?").catch(() => { })
 
         member.roles.add("870076552610717706").catch(() => { })
-
+        message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 
     }
 }
