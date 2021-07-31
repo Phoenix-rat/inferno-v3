@@ -36,11 +36,11 @@ class Invites extends Command {
                 seconds = Math.floor((duration / 1000) % 60),
                 minutes = Math.floor((duration / (1000 * 60)) % 60),
                 hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
+            /*
             hours = (hours < 10) ? "0" + hours : hours;
             minutes = (minutes < 10) ? "0" + minutes : minutes;
             seconds = (seconds < 10) ? "0" + seconds : seconds;
-
+            */
             return hours + " saat, " + minutes + " dk, " + seconds + " sn";
         }
         let tstatstatus = mentioned.presence.status
@@ -83,7 +83,7 @@ class Invites extends Command {
             **Toplam Ses İstatistikleri**
             • Toplam ses: \`${msToTime(records.map(r => r.duration).reduce((a, b) => a + b, 0))}\`
             • Mikrofon kapalı: \`${msToTime(records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b, 0))}\`
-            • Kulaklık kapalı: \`${msToTime(records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b, 0))}\`
+            • Kulaklık kapalı: \`${msToTime(records.filter(r => r.selfDeaf).map(r => r.duration).reduce((a, b) => a + b, 0))}\`
          `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setFooter("• Kahve seni önemsiyor- vallaha önemsiyom abi").setTitle(message.guild.name);
             return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 20000 }));
         }
