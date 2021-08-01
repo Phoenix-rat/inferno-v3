@@ -11,7 +11,7 @@ class Teamlo extends Command {
             examples: ["kek @Kahve/ID"],
             category: "Genel",
             aliases: ["kekyelan","kekmek"],
-            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double"],
+            accaptedPerms: ["root"],
             cooldown: 10000
         });
     }
