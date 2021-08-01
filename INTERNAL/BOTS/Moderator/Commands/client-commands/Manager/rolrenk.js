@@ -7,10 +7,10 @@ class CountByRole extends Command {
     constructor(client) {
         super(client, {
             name: "rolrenk",
-            description: "belirtilen roldeki kişileri etiketler",
+            description: "belirtilen rolün rengini yollar",
             usage: "rolrenk rolid",
             examples: ["rolrenk 718265023750996028"],
-            cooldown: 3600000,
+        //    cooldown: 3600000,
             category: "Yetkili",
             accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single"],
         });
