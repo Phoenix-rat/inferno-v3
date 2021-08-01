@@ -51,7 +51,7 @@ module.exports = class JailCommand extends SlashCommand {
                 [IDS.guild]: [
                     {
                         type: ApplicationCommandPermissionType.USER,
-                        id: "479293073549950997",
+                        id: "632628139020910656",
                         permission: true
                     }
                 ]
