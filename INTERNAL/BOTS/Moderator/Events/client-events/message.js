@@ -101,6 +101,7 @@ module.exports = class {
         }
 
         //
+        /*
         const msgStat = await stat_msg.findOne({ _id: message.author.id });
         if (!msgStat) {
             if (!message.guild || message.author.bot) return
@@ -140,7 +141,7 @@ module.exports = class {
             if (message && message.deletable) message.delete({ timeout: 100 }).catch(() => {});
             return message.reply(`Küfür içeren mesajlar kullanmaya devam edersen cezalandırılacaksın!`).then(a => a.delete({timeout: 4000})).catch(() => {});
         }
-    
+        */
         //
         const pointData = await Points_profile.findOne({ _id: message.author.id });
         if (pointData) {
