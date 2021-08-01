@@ -5,12 +5,12 @@ class Dj extends Command {
 
     constructor(client) {
         super(client, {
-            name: "dj",
+            name: "editör",
             description: "Belirtilen kullanıcıya özel üye rolü verir.",
-            usage: "dj @Kahve/ID",
-            examples: ["dj @Kahve/ID"],
+            usage: "editör @Kahve/ID",
+            examples: ["editör @Kahve/ID"],
             category: "Genel",
-            aliases: [],
+            aliases: ["edit"],
             accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double"],
             cooldown: 10000
         });
