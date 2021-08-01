@@ -24,6 +24,8 @@ class CountByRole extends Command {
         const channels = await low(client.adapters('channels'));
         const mentionedRole = message.guild.roles.cache.get(args[0]) || message.mentions.roles.first()
         if(mentionedRole) return;
+        console.log("test")
+        message.reply("trst")
         message.channel.send(`\`\`\`${mentionedRole.hexColor}\`\`\``)
     }
 
