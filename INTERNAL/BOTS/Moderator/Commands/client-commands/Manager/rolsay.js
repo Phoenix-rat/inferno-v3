@@ -23,7 +23,6 @@ class CountByRole extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const mentionedRole = message.guild.roles.cache.get(args[0]) || message.mentions.roles.first()
-        await message.channel.send(`\`\`\`${mentionedRole.name} Rolüne Sahip Online Olan ${mentionedRole.members.size} Kişi Bulunmaktadır \`\`\``);
        
        if(args[1] == "kişiler") { 
         for (let index = 0; index < Math.floor(mentionedRole.members.array().length / 40); index++) {
