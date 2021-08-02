@@ -13,7 +13,7 @@ class Kur extends Command {
             examples: ["Örnek Bulunmamakta"],
             category: "OWNER",
             aliases: ["başlat"],
-            acceptedRoles: [],
+            acceptedRoles: ["root", "owner", "etkinlikyt"],
             cooldown: 5000,
             enabled: true,
             adminOnly: false,

@@ -2,16 +2,15 @@ const { MessageEmbed } = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
 
-class BinDortYuzElliSekiz extends Command {
-
+class Crax extends Command {
     constructor(client) {
         super(client, {
-            name: "bindortyuzellisekiz",
-            description: "1458 Üyelerine özel rol verir.",
-            usage: "bindortyuzellisekiz @member/ID",
-            examples: ["bindortyuzellisekiz"],
+            name: "lust",
+            description: "0054 Üyelerine özel rol verir.",
+            usage: "lust @member/ID",
+            examples: ["lust"],
             category: "Yetkili",
-            aliases: ["1458"],
+            aliases: ["lt"],
             accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double","cmd-single"],
         });
     }
@@ -24,10 +23,10 @@ class BinDortYuzElliSekiz extends Command {
 
         let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
         if (!member) return message.react(emojis.get("warn").value().split(':')[2].replace('>', ''));
-        if (member.roles.cache.has("870076552610717706")) return message.reply("Kullanıcıda zaten perm var bilader amacın ne ?").catch(() => { })
-        member.roles.add("870076552610717706").catch(() => { })
-        message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
+        if (member.roles.cache.has("871446895665491978")) return message.reply("Kullanıcıda zaten perm var bilader amacın ne ?").catch(() => { })
 
+        member.roles.add("871446895665491978").catch(() => { })
+        message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
     }
 }
-module.exports = BinDortYuzElliSekiz;
+module.exports = Crax;
