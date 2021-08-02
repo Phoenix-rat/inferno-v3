@@ -28,34 +28,38 @@ class ekipsay extends Command {
         let ekipiki = message.guild.roles.cache.get("871446895665491978")
 
         embed.setDescription(stripIndent`
-        Aşşağıda sunucuda ekiplerin bilgileri verilmiştir. (Bilgiler değişiklik gösterebilir.)
+        __Aşşağıda sunucuda ekiplerin bilgileri verilmiştir. (Bilgiler değişiklik gösterebilir.)_
         
-        • Toplam ekip sayısı: \`2\`
-        • Toplam ekip üyesi: \`${ekipbir.members.size + ekipiki.members.size}\`
-        • Toplam ekip çevrimiçi üye: \`${ekipbir.members.filter(a => a.presence.status !== 'offline').size + ekipiki.members.filter(a => a.presence.status !== 'offline').size}\`
-        • Toplam ekip Çevrimdışı üye: \`${ekipbir.members.filter(a => a.presence.status !== 'offline').size + ekipiki.members.filter(a => a.presence.status == 'offline').size}\`
-        • Toplam ekip sesteki üye: \`${ekipbir.members.filter(a => a.voice.channel).size + ekipiki.members.filter(a => a.voice.channel).size}\`
-        • Toplam ekip seste olmayan üye: \`${ekipbir.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size + ekipiki.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\`
+        <a:inferno_tac1:871751562043736064> • **Toplam ekip sayısı:** \`2 Ekip\`
+        <:stark_toplamuye:871770253431037992> **Toplam ekip üyesi:** \`${ekipbir.members.size + ekipiki.members.size} kişi\`
+        <:inferno_cervimici:866719561944662016> **Toplam ekip çevrimiçi üye:** \`${ekipbir.members.filter(a => a.presence.status !== 'offline').size + ekipiki.members.filter(a => a.presence.status !== 'offline').size} kişi\`
+        <:inferno_cevrimdisi:866719610303414292> **Toplam ekip Çevrimdışı üye:** \`${ekipbir.members.filter(a => a.presence.status !== 'offline').size + ekipiki.members.filter(a => a.presence.status == 'offline').size} kişi\`
+        <:stark_sestekiler:871770248825696296> **Toplam ekip sesteki üye:** \`${ekipbir.members.filter(a => a.voice.channel).size + ekipiki.members.filter(a => a.voice.channel).size} kişi\`
+        <:stark_sesteyok:871771305408626739> **Toplam ekip seste olmayan üye:** \`${ekipbir.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size + ekipiki.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size} kişi\`
 
-        ─────────────────────
-        <@&870076552610717706> **Ekibinin Bilgileri**;
-        
-        • **Ekip Sahibi:** <@!347486448121020423>
-        • **Toplam üye:** \`${ekipbir.members.size}\`
-        • **Çevrimiçi üye:** \`${ekipbir.members.filter(a => a.presence.status !== 'offline').size}\`
-        • **Çevrimdışı üye:** \`${ekipbir.members.filter(a => a.presence.status == 'offline').size}\`
-        • **Sesteki üye:** \`${ekipbir.members.filter(a => a.voice.channel).size}\`
-        • **Seste olmayan üye:** \`${ekipbir.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\`
         ─────────────────────
 
         <@&870076552610717706> **Ekibinin Bilgileri**;
         
-        • **Ekip Sahibi:** <@!760162970793410580>
-        • **Toplam üye:** \`${ekipiki.members.size}\`
-        • **Çevrimiçi üye:** \`${ekipiki.members.filter(a => a.presence.status !== 'offline').size}\`
-        • **Çevrimdışı üye:** \`${ekipiki.members.filter(a => a.presence.status == 'offline').size}\`
-        • **Sesteki üye:** \`${ekipiki.members.filter(a => a.voice.channel).size}\`
-        • **Seste olmayan üye:** \`${ekipiki.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\``)
+        <a:inferno_supriz:860952232907505714> **Ekip Sahibi:** <@!347486448121020423>
+
+        <:stark_toplamuye:871770253431037992> **Toplam üye:** \`${ekipbir.members.size}\`
+        <:inferno_cervimici:866719561944662016> **Çevrimiçi üye:** \`${ekipbir.members.filter(a => a.presence.status !== 'offline').size} kişi\`
+        <:inferno_cevrimdisi:866719610303414292> **Çevrimdışı üye:** \`${ekipbir.members.filter(a => a.presence.status == 'offline').size} kişi\`
+        <:stark_sestekiler:871770248825696296> **Sesteki üye:** \`${ekipbir.members.filter(a => a.voice.channel).size} kişi\`
+        <:stark_sesteyok:871771305408626739> **Seste olmayan üye:** \`${ekipbir.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size} kişi\`
+         
+        ─────────────────────
+
+        <@&870076552610717706> **Ekibinin Bilgileri**;
+
+        <a:inferno_supriz:860952232907505714> **Ekip Sahibi:** <@!760162970793410580>
+
+        <:stark_toplamuye:871770253431037992> **Toplam üye:** \`${ekipiki.members.size}\`
+        <:inferno_cervimici:866719561944662016> **Çevrimiçi üye:** \`${ekipiki.members.filter(a => a.presence.status !== 'offline').size} kişi\`
+        <:inferno_cevrimdisi:866719610303414292> **Çevrimdışı üye:** \`${ekipiki.members.filter(a => a.presence.status == 'offline').size} kişi\`
+        <:stark_sestekiler:871770248825696296> **Sesteki üye:** \`${ekipiki.members.filter(a => a.voice.channel).size} kişi\`
+        <:stark_sesteyok:871771305408626739> **Seste olmayan üye:** \`${ekipiki.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size} kişi\``)
 
         message.channel.send(embed)
     }
