@@ -29,4 +29,4 @@ class Crax extends Command {
         message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
     }
 }
-module.exports = Crax;
+module.exports = Lust;
