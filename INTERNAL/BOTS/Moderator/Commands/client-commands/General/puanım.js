@@ -16,8 +16,14 @@ class stark extends Command {
             examples: ["stark"],
             category: "Genel",
             aliases: ["stark"],
-           // accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
-         //   cooldown: 10000,
+            acceptedRoles: [],
+            cooldown: 5000,
+            enabled: true,
+            adminOnly: false,
+            ownerOnly: false,
+            onTest: false,
+            rootOnly: true,
+            dmCmd: false
         });
     }
 
@@ -46,7 +52,38 @@ class stark extends Command {
             return str;
         }
 
-        const pointData = await Points_profile.findOne({ _id: message.author.id });
+
+       // const pointData = await Points_profile.findOne({ _id: message.author.id });
+       // const pointConfig = await Points_config.findOne({ _id: pointData.role });
+        const myRole = message.guild.roles.cache.get("856266299285045288");
+        const nexReole = message.guild.roles.cache.get("871185595492360222")
+     /*   const nextRole = message.guild.roles.cache
+            .filter(r => r.rawPosition >= myRole.rawPosition)
+            .filter(r => r.hoist)
+            .filter(r => r.id !== roles.get("booster").value())
+            .sort((a, b) => a.rawPosition - b.rawPosition).array().find(role => role.rawPosition > myRole.rawPosition);*/
+
+        message.channel.send(new Discord.MessageEmbed().setDescription(`
+        **Dante's INFEЯИO** puan bilgileri
+        ${message.member} kullanıcısının puan bilgileri
+        Yetkisi: ${myRole}
+        ●▬▬▬▬▬▬▬▬▬▬●
+        Toplam Puan: \`10000\`
+        Kayıt Puanı: \`30\`
+        Mesaj Puanı: \`1000\`
+        Davet Puanı: \`50\`
+        Taglı Puanı: \`50\`
+        Yetkili Alım Puanı: \`50\`
+        Public Puanı: \`5000\`
+        Diğer Ses Puanı: \`3820\`
+        Bonus Puan: \`0\`
+        ●▬▬▬▬▬▬▬▬▬▬●
+        ${nexReole} rolüne yükselmek için \`500\` saatin var!
+        ${bar(10000, 15000)}
+        `).setColor('#7bf3e3'));
+
+        
+      /*  const pointData = await Points_profile.findOne({ _id: message.author.id });
         const pointConfig = await Points_config.findOne({ _id: pointData.role });
         const myRole = message.guild.roles.cache.get(pointData.role);
         const nextRole = message.guild.roles.cache
@@ -72,7 +109,7 @@ class stark extends Command {
         ●▬▬▬▬▬▬▬▬▬▬●
         ${nextRole} rolüne yükselmek için ${pointConfig.expiringHours - checkHours(pointData.created)} saatin var!
         ${bar(pointData.msgPoints + pointData.points.map(plog => plog.points).reduce((a, b) => a + b, 0), pointConfig.requiredPoint)}
-        `).setColor('#7bf3e3'));
+        `).setColor('#7bf3e3'));*/
     }
 }
 
