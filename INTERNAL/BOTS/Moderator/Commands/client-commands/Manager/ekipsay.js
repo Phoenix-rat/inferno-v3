@@ -23,7 +23,7 @@ class ekipsay extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        let embed = new Discord.MessageEmbed().setColor("#000000").setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true })).setFooter(`Stark 🌹 ❤ † INFEЯИO`, `${message.author.avatarURL({ dynamic: true }) || message.guild.iconURL({ dynamic: true })}`)
+        let embed = new MessageEmbed().setColor("#000000").setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true })).setFooter(`Stark 🌹 ❤ † INFEЯИO`, `${message.author.avatarURL({ dynamic: true }) || message.guild.iconURL({ dynamic: true })}`)
         let ekipbir = message.guild.roles.cache.get("870076552610717706")
         let ekipiki = message.guild.roles.cache.get("871446895665491978")
 
