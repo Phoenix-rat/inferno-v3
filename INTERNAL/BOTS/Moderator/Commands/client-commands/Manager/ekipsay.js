@@ -7,12 +7,12 @@ class ekipsay extends Command {
 
     constructor(client) {
         super(client, {
-            name: "ekipsay",
+            name: "ekip",
             description: "Ekiptekileri sayar.",
-            usage: "ekipsay @member/ID",
-            examples: ["ekipsay"],
+            usage: "ekip",
+            examples: ["ekip"],
             category: "Yetkili",
-            aliases: ["ekipsay"],
+            aliases: ["ekip"],
             accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single"],
 
         });
@@ -23,23 +23,40 @@ class ekipsay extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
+        let embed = new Discord.MessageEmbed().setColor("#000000").setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true })).setFooter(`Stark 🌹 ❤ † INFEЯИO`, `${message.author.avatarURL({ dynamic: true }) || message.guild.iconURL({ dynamic: true })}`)
+        let ekipbir = message.guild.roles.cache.get("870076552610717706")
+        let ekipiki = message.guild.roles.cache.get("871446895665491978")
 
-        const discri = message.guild.members.cache.filter(stark => !stark.bot).filter(a => a.user.discriminator == "1458").size;
-        const yazitag = message.guild.members.cache.filter(m => m.user.username.includes("Rîff")).size
-        const cradiscri = message.guild.members.cache.filter(stark => !stark.bot).filter(a => a.user.discriminator == "0054").size;
-        const crayazitag = message.guild.members.cache.filter(m => m.user.username.includes("Crax")).size
+        embed.setDescription(stripIndent`
+        Aşşağıda sunucuda ekiplerin bilgileri verilmiştir. (Bilgiler değişiklik gösterebilir.)
+        
+        • Toplam ekip sayısı: \`2\`
+        • Toplam ekip üyesi: \`${ekipbir.members.size + ekipiki.members.size}\`
+        • Toplam ekip çevrimiçi üye: \`${ekipbir.members.cache.filter(a => a.presence.status !== 'offline').size + ekipiki.members.cache.filter(a => a.presence.status !== 'offline').size}\`
+        • Toplam ekip Çevrimdışı üye: \`${ekipbir.members.cache.filter(a => a.presence.status !== 'offline').size + ekipiki.members.cache.filter(a => a.presence.status == 'offline').size}\`
+        • Toplam ekip sesteki üye: \`${ekipbir.members.cache.filter(a => a.voice.channel).size + ekipiki.members.cache.filter(a => a.voice.channel).size}\`
+        • Toplam ekip seste olmayan üye: \`${ekipbir.members.cache.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size + ekipiki.members.cache.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\`
 
-        let embed = new MessageEmbed().setColor("BLACK").setAuthor(message.guild.name, message.guild.iconURL({dynamic:true})).setFooter(`• Stark ❤ 1458 ❤ 0054`, message.author.displayAvatarURL({ dynamic: true }));
-        message.channel.send(embed.setDescription(stripIndent`
-       
-        ${emojis.get("kahvehac").value()} **Rîff** tagını **${yazitag}** kişi taşıyor.
-        ${emojis.get("kahvehac").value()} **1458** tagını **${discri}** kişi taşıyor.
+        ─────────────────────
+        <@&870076552610717706> **Ekibinin Bilgileri**;
+        
+        • **Ekip Sahibi:** <@!347486448121020423>
+        • **Toplam üye:** \`${ekipbir.members.size}\`
+        • **Çevrimiçi üye:** \`${ekipbir.members.cache.filter(a => a.presence.status !== 'offline').size}\`
+        • **Çevrimdışı üye:** \`${ekipbir.members.cache.filter(a => a.presence.status == 'offline').size}\`
+        • **Sesteki üye:** \`${ekipbir.members.cache.filter(a => a.voice.channel).size}\`
+        • **Seste olmayan üye:** \`${ekipbir.members.cache.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\`
+        ─────────────────────
 
-        ${emojis.get("kahvehac").value()} **Crax** tagını **${crayazitag}** kişi taşıyor.
-        ${emojis.get("kahvehac").value()} **0054** tagını **${cradiscri}** kişi taşıyor.
+        <@&870076552610717706> **Ekibinin Bilgileri**;
+        
+        • **Ekip Sahibi:** <@!760162970793410580>
+        • **Toplam üye:** \`${ekipiki.members.size}\`
+        • **Çevrimiçi üye:** \`${ekipiki.members.cache.filter(a => a.presence.status !== 'offline').size}\`
+        • **Çevrimdışı üye:** \`${ekipiki.members.cache.filter(a => a.presence.status == 'offline').size}\`
+        • **Sesteki üye:** \`${ekipiki.members.cache.filter(a => a.voice.channel).size}\`
+        • **Seste olmayan üye:** \`${ekipiki.members.cache.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\``)
 
-        ${emojis.get("kahvehac").value()} __Toplam Ekip üye sayısı:__ **${discri + yazitag + crayazitag + cradiscri}**
-        `))
     }
 }
 module.exports = ekipsay;
