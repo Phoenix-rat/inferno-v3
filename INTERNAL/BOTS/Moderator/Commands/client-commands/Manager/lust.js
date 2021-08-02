@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
 
-class Crax extends Command {
+class Lust extends Command {
     constructor(client) {
         super(client, {
             name: "lust",
