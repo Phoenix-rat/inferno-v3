@@ -31,13 +31,14 @@ class ekipsay extends Command {
 
         let embed = new MessageEmbed().setColor("BLACK").setAuthor(message.guild.name, message.guild.iconURL({dynamic:true})).setFooter(`• Stark ❤ 1458 ❤ 0054`, message.author.displayAvatarURL({ dynamic: true }));
         message.channel.send(embed.setDescription(stripIndent`
+       
         ${emojis.get("kahvehac").value()} **Rîff** tagını **${yazitag}** kişi taşıyor.
         ${emojis.get("kahvehac").value()} **1458** tagını **${discri}** kişi taşıyor.
 
         ${emojis.get("kahvehac").value()} **Crax** tagını **${crayazitag}** kişi taşıyor.
         ${emojis.get("kahvehac").value()} **0054** tagını **${cradiscri}** kişi taşıyor.
 
-        ${emojis.get("kahvehac").value()} Toplam Ekip üye sayısı: **${discri + yazitag + crayazitag + cradiscri}**
+        ${emojis.get("kahvehac").value()} __Toplam Ekip üye sayısı:__ **${discri + yazitag + crayazitag + cradiscri}**
         `))
     }
 }
