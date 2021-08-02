@@ -28,7 +28,7 @@ class ekipsay extends Command {
         let ekipiki = message.guild.roles.cache.get("871446895665491978")
 
         embed.setDescription(stripIndent`
-        __Aşşağıda sunucuda ekiplerin bilgileri verilmiştir. (Bilgiler değişiklik gösterebilir.)_
+        __Aşşağıda sunucuda ekiplerin bilgileri verilmiştir. (Bilgiler değişiklik gösterebilir.)__
         
         <a:inferno_tac1:871751562043736064> • **Toplam ekip sayısı:** \`2 Ekip\`
         <:stark_toplamuye:871770253431037992> **Toplam ekip üyesi:** \`${ekipbir.members.size + ekipiki.members.size} kişi\`
