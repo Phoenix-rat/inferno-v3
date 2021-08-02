@@ -32,30 +32,30 @@ class ekipsay extends Command {
         
         • Toplam ekip sayısı: \`2\`
         • Toplam ekip üyesi: \`${ekipbir.members.size + ekipiki.members.size}\`
-        • Toplam ekip çevrimiçi üye: \`${ekipbir.members.cache.filter(a => a.presence.status !== 'offline').size + ekipiki.members.cache.filter(a => a.presence.status !== 'offline').size}\`
-        • Toplam ekip Çevrimdışı üye: \`${ekipbir.members.cache.filter(a => a.presence.status !== 'offline').size + ekipiki.members.cache.filter(a => a.presence.status == 'offline').size}\`
-        • Toplam ekip sesteki üye: \`${ekipbir.members.cache.filter(a => a.voice.channel).size + ekipiki.members.cache.filter(a => a.voice.channel).size}\`
-        • Toplam ekip seste olmayan üye: \`${ekipbir.members.cache.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size + ekipiki.members.cache.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\`
+        • Toplam ekip çevrimiçi üye: \`${ekipbir.members.filter(a => a.presence.status !== 'offline').size + ekipiki.members.filter(a => a.presence.status !== 'offline').size}\`
+        • Toplam ekip Çevrimdışı üye: \`${ekipbir.members.filter(a => a.presence.status !== 'offline').size + ekipiki.members.filter(a => a.presence.status == 'offline').size}\`
+        • Toplam ekip sesteki üye: \`${ekipbir.members.filter(a => a.voice.channel).size + ekipiki.members.filter(a => a.voice.channel).size}\`
+        • Toplam ekip seste olmayan üye: \`${ekipbir.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size + ekipiki.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\`
 
         ─────────────────────
         <@&870076552610717706> **Ekibinin Bilgileri**;
         
         • **Ekip Sahibi:** <@!347486448121020423>
         • **Toplam üye:** \`${ekipbir.members.size}\`
-        • **Çevrimiçi üye:** \`${ekipbir.members.cache.filter(a => a.presence.status !== 'offline').size}\`
-        • **Çevrimdışı üye:** \`${ekipbir.members.cache.filter(a => a.presence.status == 'offline').size}\`
-        • **Sesteki üye:** \`${ekipbir.members.cache.filter(a => a.voice.channel).size}\`
-        • **Seste olmayan üye:** \`${ekipbir.members.cache.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\`
+        • **Çevrimiçi üye:** \`${ekipbir.members.filter(a => a.presence.status !== 'offline').size}\`
+        • **Çevrimdışı üye:** \`${ekipbir.members.filter(a => a.presence.status == 'offline').size}\`
+        • **Sesteki üye:** \`${ekipbir.members.filter(a => a.voice.channel).size}\`
+        • **Seste olmayan üye:** \`${ekipbir.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\`
         ─────────────────────
 
         <@&870076552610717706> **Ekibinin Bilgileri**;
         
         • **Ekip Sahibi:** <@!760162970793410580>
         • **Toplam üye:** \`${ekipiki.members.size}\`
-        • **Çevrimiçi üye:** \`${ekipiki.members.cache.filter(a => a.presence.status !== 'offline').size}\`
-        • **Çevrimdışı üye:** \`${ekipiki.members.cache.filter(a => a.presence.status == 'offline').size}\`
-        • **Sesteki üye:** \`${ekipiki.members.cache.filter(a => a.voice.channel).size}\`
-        • **Seste olmayan üye:** \`${ekipiki.members.cache.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\``)
+        • **Çevrimiçi üye:** \`${ekipiki.members.filter(a => a.presence.status !== 'offline').size}\`
+        • **Çevrimdışı üye:** \`${ekipiki.members.filter(a => a.presence.status == 'offline').size}\`
+        • **Sesteki üye:** \`${ekipiki.members.filter(a => a.voice.channel).size}\`
+        • **Seste olmayan üye:** \`${ekipiki.members.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\``)
 
         message.channel.send(embed)
     }
