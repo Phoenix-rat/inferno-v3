@@ -25,10 +25,10 @@ class RoleInfo extends Command {
         let mentionedRole = message.mentions.roles.first() || message.guild.roles.cache.get(args[0])
         if (!mentionedRole) return message.channel.send(new Discord.MessageEmbed()
         .setColor("RANDOM")
-        .setFooter("Kahvelendin <3")
+        .setFooter("Stark <3 Kahve")
         .setDescription("Lütfen rolü etiketleyiniz veya ID sini giriniz!")).then(msg => msg.delete({ timeout: 5000 }));
         let mentionedRoleMembers = mentionedRole.members.map(role => `${message.guild.members.cache.get(role.id)} (\`${role.id}\`) `)
-        message.channel.send(`• ${mentionedRole} rolündeki üyeler.
+        message.channel.send(`• \`${mentionedRole.name}\` rolündeki üyeler.
 • Roldeki üye sayısı: \`${mentionedRole.members.size}\`
 ─────────────────
 ${mentionedRoleMembers.join("\n")})`, { split: true })
