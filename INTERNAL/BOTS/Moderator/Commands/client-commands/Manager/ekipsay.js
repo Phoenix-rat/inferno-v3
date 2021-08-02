@@ -51,7 +51,7 @@ class ekipsay extends Command {
          
         ─────────────────────
 
-        <@&870076552610717706> **Ekibinin Bilgileri**;
+        <@&871446895665491978> **Ekibinin Bilgileri**;
 
         <a:inferno_supriz:860952232907505714> **Ekip Sahibi:** <@!760162970793410580>
 
