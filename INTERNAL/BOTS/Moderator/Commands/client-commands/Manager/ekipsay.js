@@ -57,6 +57,7 @@ class ekipsay extends Command {
         • **Sesteki üye:** \`${ekipiki.members.cache.filter(a => a.voice.channel).size}\`
         • **Seste olmayan üye:** \`${ekipiki.members.cache.filter(a => a.presence.status !== 'offline' && !a.voice.channel).size}\``)
 
+        message.channel.send(embed)
     }
 }
 module.exports = ekipsay;
