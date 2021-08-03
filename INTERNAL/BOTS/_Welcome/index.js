@@ -28,14 +28,14 @@ for (let tokenim = 0; tokenim < myTokens.length; tokenim++) {
     const client = new Discord.Client();
     client.login(tokeni);
     client.on("ready", async () => {
-        await client.channels.cache.get("860909021406036031").join();
+        await client.channels.cache.get("872253610891829248").join();
         await client.user.setPresence({activity: {
             name: "Tantoony 🤍 Kahve",
             type: "LISTENING"
         }});
     });
     client.on('voiceStateUpdate', async (prev, cur) => {
-        if (cur.member.id === client.user.id) concon = await client.channels.cache.get("860909021406036031").join();
+        if (cur.member.id === client.user.id) concon = await client.channels.cache.get("872253610891829248").join();
     });
 }
 const selamlı = [];
