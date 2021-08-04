@@ -1,6 +1,7 @@
 require('dotenv').config({ path: __dirname + '/../../../.env' });
 const { Intents } = require('discord.js');
 const Tantoony = require('./../../BASE/Tantoony');
+const low = require("lowdb")
 const client = new Tantoony({
     ws: {
         intents: new Intents(Intents.ALL).remove([
@@ -52,3 +53,15 @@ client.fetchApplication().then((app) => {
     client.handler.events('/Events', __dirname, 'slash-events', creator);
     client.handler.slashCommands('./Commands/slash-commands/', creator);
 });
+
+const korpeamcik = require("../../MODELS/Moderation/Rollog.js")
+client.on("guildMemberUpdate", async(oldMember, newMember) =>{
+    const emojis = await low(client.adapters('emojis'));
+    let aldiverdi;
+    if(oldMember.roles.cache.size < newMember.roles.cache.size){ aldiverdi = message.react(emojis.get("ok").value().split(':')[2].replace('>', '')) } else { aldiverdi = message.react(emojis.get("error").value().split(':')[2].replace('>', ''))}
+    if(oldMember.roles.cache.size !== newMember.roles.cache.size) {
+    let rolveren = await oldMember.guild.fetchAuditLogs({ type: 'GUILD_MEMBER_UPDATE' }).then(audit => audit.entries.first());
+    let role = oldMember.roles.cache.find(s => !newMember.roles.cache.has(s.id)) || newMember.roles.cache.find(s => !oldMember.roles.cache.has(s.id))
+    await korpeamcik.findOneAndUpdate({_id: newMember.id}, {$push: {rolveridb: { staffID: rolveren.executor.id, tarih: new Date.now(), rolid: role.id, type: aldiverdi }}}, {upsert:true})
+    }
+})
