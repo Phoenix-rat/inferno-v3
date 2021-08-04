@@ -29,14 +29,14 @@ class Upgrade extends Command {
         let yetkiNumber;
         let sahipOlunanRol = Number();
         for (yetkiNumber = 0; yetkiNumber < yagmur.Yetkiler.length; yetkiNumber++) {
-            if (user.roles.cache.has(yagmur.Yetkiler[yetkiNumber])) {
+            if (mentioned.roles.cache.has(yagmur.Yetkiler[yetkiNumber])) {
                 sahipOlunanRol += yetkiNumber
             };
         }
-        if (!user.roles.cache.has(yagmur.Yetkiler[yagmur.Yetkiler.length - 1])) {
-            await user.roles.add(yagmur.Yetkiler[sahipOlunanRol + 1]).catch(e => { })
-            await user.roles.remove(yagmur.Yetkiler[sahipOlunanRol]).catch(e => { })
-            await message.channel.send(embed.setDescription(`${user} Kullanısı <@&${yagmur.Yetkiler[sahipOlunanRol + 1]}> Yetkisine Başarılı bir Şekilde Yükseltildi.`)).catch(e => { })
+        if (!mentioned.roles.cache.has(yagmur.Yetkiler[yagmur.Yetkiler.length - 1])) {
+            await mentioned.roles.add(yagmur.Yetkiler[sahipOlunanRol + 1]).catch(e => { })
+            await mentioned.roles.remove(yagmur.Yetkiler[sahipOlunanRol]).catch(e => { })
+            await message.channel.send(embed.setDescription(`${mentioned} Kullanısı <@&${yagmur.Yetkiler[sahipOlunanRol + 1]}> Yetkisine Başarılı bir Şekilde Yükseltildi.`)).catch(e => { })
         } else { message.channel.send(embed.setDescription(`:x: Belirtilen Kullanıcı Zaten Max Role Sahip.`)).catch(e => { }) }
     }
 }
