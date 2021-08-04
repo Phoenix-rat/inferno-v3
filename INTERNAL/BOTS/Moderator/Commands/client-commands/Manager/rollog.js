@@ -38,8 +38,8 @@ class CountByRole extends Command {
 
         if (rolelogs && rolelogs.rolveridb.length > 10) {
             await question.react("◀");
+            await question.react("❌");
             await question.react("▶");
-
             const collector = question.createReactionCollector(
                 (react, user) => ["◀", "▶"].some((e) => e == react.emoji.name) && user.id == message.author.id,
                 { time: 120000 }
@@ -52,6 +52,9 @@ class CountByRole extends Command {
                     page += 1;
                     let newList = liste.slice(page == 1 ? 0 : page * 10 - 10, page * 10).join("\n");
                     question.edit(embed.setDescription(`${mentioned} kişisinin toplamda ${liste.length} rol bilgisi bulunmakta son 10 rolün bilgileri aşağıda belirtilmiştir. \n\n${newList}`));
+                }
+                if(react.emoji.name == "❌") {
+                    question.delete({timeout: 100}).catch(() => {})
                 }
                 if (react.emoji.name == "◀") {
                     if (liste.slice((page - 1) * 10 - 10, (page - 1) * 10).length <= 0) return;
