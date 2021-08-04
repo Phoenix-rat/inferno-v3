@@ -58,7 +58,7 @@ const korpeamcik = require("../../MODELS/Moderation/Rollog.js")
 client.on("guildMemberUpdate", async(oldMember, newMember) =>{
     const emojis = await low(client.adapters('emojis'));
     let aldiverdi;
-    if(oldMember.roles.cache.size < newMember.roles.cache.size){ aldiverdi = message.react(emojis.get("ok").value().split(':')[2].replace('>', '')) } else { aldiverdi = message.react(emojis.get("error").value().split(':')[2].replace('>', ''))}
+    if(oldMember.roles.cache.size < newMember.roles.cache.size){ aldiverdi = emojis.get("ok").value().split(':')[2].replace('>', '') } else { aldiverdi = emojis.get("error").value().split(':')[2].replace('>', '')}
     if(oldMember.roles.cache.size !== newMember.roles.cache.size) {
     let rolveren = await oldMember.guild.fetchAuditLogs({ type: 'GUILD_MEMBER_UPDATE' }).then(audit => audit.entries.first());
     let role = oldMember.roles.cache.find(s => !newMember.roles.cache.has(s.id)) || newMember.roles.cache.find(s => !oldMember.roles.cache.has(s.id))
