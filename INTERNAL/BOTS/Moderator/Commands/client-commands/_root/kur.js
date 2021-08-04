@@ -6,6 +6,12 @@ const GIFEncoder = require('gifencoder');
 const fs = require('fs');
 const Gm = require('gm');
 const request = require('request');
+
+const pngCanvases = [];
+for
+
+
+
 class Kur extends Command {
 
     constructor(client) {
@@ -32,6 +38,11 @@ class Kur extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
+        
+
+
+
+
         const encoder = new GIFEncoder(1000, 400);
         encoder.start();
         encoder.setRepeat(-1);   // 0 for repeat, -1 for no-repeat
@@ -56,7 +67,7 @@ class Kur extends Command {
             request(message.author.displayAvatarURL({ format: 'gif' }), {
                 encoding: null
             }, async (error, response, body) => {
-                gifFrames({ 
+                gifFrames({
                     url: message.author.displayAvatarURL({ format: 'gif' }),
                     frames: 0,
                     outputType: 'canvas'
@@ -89,6 +100,7 @@ class Kur extends Command {
         const attachment = new Discord.MessageAttachment(ender, 'my-points.gif');
         await message.channel.send(attachment);
 
+        
 
     }
 
