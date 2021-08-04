@@ -1,6 +1,7 @@
 const low = require('lowdb');
 const { MessageEmbed } = require('discord.js');
-const msg_snipe = require("../../../../MODELS/Moderation/Snipe.js") 
+const msg_snipe = require("../../../../MODELS/Moderation/Snipe.js"); 
+const config  = require("../../../../HELPERS/config.js")
 class MessageDelete {
     constructor(client) {
         this.client = client;
@@ -8,6 +9,7 @@ class MessageDelete {
     async run(message) {
         const client = this.client;
         if (!message.guild) return;
+        let prefix = message.content.startWith(config.prefix)
         if (message.guild.id !== client.config.server) return;
         const entry = await message.guild.fetchAuditLogs({ type: 'MESSAGE_DELETE' }).then(logs => logs.entries.first());
         const utils = await low(client.adapters('utils'));
