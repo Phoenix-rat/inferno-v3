@@ -31,7 +31,7 @@ class CountByRole extends Command {
     //    staffID: rolveren.executor.id, tarih: new Date.now(), rolid: role.id, type: aldiverdi
         const liste = rolelogs.rolveridb.map(a => `${a.type} Rol: <@${a.roleid}> Yetkili: <@!${a.staffID}> \n${moment(a.tarih).format("DD/MM hh:mm")}`).reverse();
         let page = 1;
-        const embed = new MessageEmbed().setAuthor(mentioned.displayName, mentioned.user.avatarURL({ dynamic: true })).setColor("RANDOM");
+        const embed = new Discord.MessageEmbed().setAuthor(mentioned.displayName, mentioned.user.avatarURL({ dynamic: true })).setColor("RANDOM");
         const question = await message.channel.send(
             embed.setDescription(liste.slice(page == 1 ? 0 : page * 10 - 10, page * 10).join("\n"))
         );
