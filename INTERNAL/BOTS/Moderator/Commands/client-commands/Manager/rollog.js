@@ -23,7 +23,7 @@ class CountByRole extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        const mentioned = message.guild.members.cache.get(args[0]) || message.mentions.members.first()
+        const mentioned = message.guild.members.cache.get(args[0]) || message.mentions.members.first() || message.member
         if(!mentioned) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
         let rolelogs = await rol_log.findOne({_id: mentioned.id}).exec();
 
@@ -33,7 +33,7 @@ class CountByRole extends Command {
         let page = 1;
         const embed = new Discord.MessageEmbed().setAuthor(mentioned.displayName, mentioned.user.avatarURL({ dynamic: true })).setColor("RANDOM");
         const question = await message.channel.send(
-            embed.setDescription(`${mentioned} kişisinin toplamda ${liste.length} rol bilgisi bulunmakta son 10 rolün bilgileri aşağıda belirtilmiştir. \n\n${liste.slice(page == 1 ? 0 : page * 10 - 10, page * 10).join("\n")}`)
+            embed.setDescription(`${mentioned} kişisinin toplamda **${liste.length}** rol bilgisi bulunmakta son 10 rolün bilgileri aşağıda belirtilmiştir. \n\n${liste.slice(page == 1 ? 0 : page * 10 - 10, page * 10).join("\n")}`)
         );
 
         if (rolelogs && rolelogs.rolveridb.length > 10) {

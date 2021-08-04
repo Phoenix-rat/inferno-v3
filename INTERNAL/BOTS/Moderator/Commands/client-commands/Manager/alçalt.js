@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
+const yagmur = require("../../../../../BASE/yagmur.json")
 class Upgrade extends Command {
 
     constructor(client) {
@@ -26,33 +27,33 @@ class Upgrade extends Command {
 
         const taglırol = message.guild.roles.cache.get(roles.get("starter").value());
 
-        const hoistroller = message.guild.roles.cache
-            .filter(r => r.rawPosition > taglırol.rawPosition + 2)
-            .filter(r => r.hoist)
-            .filter(r => r.id !== roles.get("booster").value())
-            .sort((a, b) => a.rawPosition - b.rawPosition).array().reverse();
-        //oistroller.forEach(r => console.log(r.name));
-        const rawrol = mentioned.roles.cache.filter(r => r.hoist).sort((a, b) => a.rawPosition - b.rawPosition).array().reverse()[0];
-        let currol = hoistroller.find(r => r.rawPosition < rawrol.rawPosition);
-        let oldrol = hoistroller.find(r => r.rawPosition === rawrol.rawPosition);
-        if (!currol) currol = hoistroller.reverse()[0];
-        if (currol.rawPosition > message.guild.roles.cache.get(roles.get("finisher").value()).rawPosition) return message.channel.send("Bu imkansız!");
-        if (currol) await mentioned.roles.add(currol.id);
-        if (oldrol) await mentioned.roles.remove(oldrol.id);
-        await message.channel.send(`Üzgünüm ${mentioned}. Umarım ilerde tekrar yükselirsin..`);
-
-        let embedsex = new Discord.MessageEmbed()
-            .setAuthor(`Tantoony Sizi Önemsiyor -Kahve`, message.guild.owner.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 }))
-            .setColor("#ffffff")
-            .setTitle("Bir rol verildi!")
-            .setFooter("26 Ağustos 2020'den İtibaren...", client.user.displayAvatarURL())
-            .addField("Komutu kullanan: ", message.member, true)
-            .addField("Kullanıcı:", mentioned, true)
-            .addField("Verilen rol: ", currol, true)
-            //.addField("Sebep: ", sebep, true)
-            .setDescription(`${mentioned} Kullanıcısına yetki verildi!`)
-            .setTimestamp()
-            .setThumbnail(mentioned.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 }));
+             let yetkiNumber;
+            let sahipOlunanRol = Number();
+            for (yetkiNumber = 0; yetkiNumber < yagmur.Yetkiler.length ; yetkiNumber++) {
+              if(mentioned.roles.cache.has(yagmur.Yetkiler[yetkiNumber])) {
+                sahipOlunanRol += yetkiNumber
+              };
+            }  
+            if(!mentioned.roles.cache.has(yagmur.Yetkiler[0])){
+            await mentioned.roles.add(yagmur.Yetkiler[sahipOlunanRol-1]).catch(e => { })
+            await mentioned.roles.remove(yagmur.Yetkiler[sahipOlunanRol]).catch(e => { })
+            await message.channel.send(embed.setDescription(`${mentioned} Kullanısı <@&${yagmur.Yetkiler[sahipOlunanRol-1]}> Yetkisine Başarılı bir Şekilde Düşürüldü.`)).catch(e => { })
+          } else {
+            message.channel.send(embed.setDescription(`:x: Belirtilen yetkili zaten en alt yetkide. Yetkisini almak istermisiniz? ?`)).then(async msj => {
+            await msj.react('✅');
+           const kabul = (reaction, user) => {
+            return ['✅'].includes(reaction.emoji.name) && user.id === message.author.id;
+          };
+        msj.awaitReactions(kabul, {max: 1, time: 50000, error: ['time']}).then(async c => {
+          let cevap = c.first();
+          if (cevap) {
+          if(mentioned.roles.cache.has("854162987619057665")) await mentioned.roles.set(["854162987619057665"]).catch(e => { })
+          if(mentioned.roles.cache.has("854162990534623233")) await mentioned.roles.set(["854162990534623233"]).catch(e => { })
+          if(mentioned.user.username.includes("†")) await user.roles.add("855651068591341588").catch(e => { })
+           await msj.delete().catch(e => { });
+        } }) });
+        } 
+        
 
         //await message.guild.channels.cache.get(kanallar.get("cmd-yetki").value()).send(embedsex);
         //this.client.cmdCooldown[message.author.id][this.help.name] = Date.now() + this.info.cooldown;
