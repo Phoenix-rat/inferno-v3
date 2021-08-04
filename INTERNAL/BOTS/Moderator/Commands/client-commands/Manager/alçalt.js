@@ -49,7 +49,7 @@ class Upgrade extends Command {
                     if (cevap) {
                         if (mentioned.roles.cache.has("854162987619057665")) await mentioned.roles.set(["854162987619057665"]).catch(e => { })
                         if (mentioned.roles.cache.has("854162990534623233")) await mentioned.roles.set(["854162990534623233"]).catch(e => { })
-                        if (mentioned.user.username.includes("†")) await user.roles.add("855651068591341588").catch(e => { })
+                        if (mentioned.user.username.includes("†")) await mentioned.roles.add("855651068591341588").catch(e => { })
                         await msj.delete().catch(e => { });
                     }
                 })
