@@ -29,7 +29,7 @@ class CountByRole extends Command {
 
         if(!rolelogs || rolelogs.length) return message.channel.send(`${client.emojis.cache.get(emojis.get("komutret").value().split(':')[2].replace('>', ''))} Kullanıcının verisi bulunamadı.`)
     //    staffID: rolveren.executor.id, tarih: new Date.now(), rolid: role.id, type: aldiverdi
-        const liste = rolelogs.rolveridb.map(a => `${a.type} Rol: <@${a.roleid}> Yetkili: <@!${a.staffID}> \n${moment(a.tarih).format("DD/MM hh:mm")}`).reverse();
+        const liste = rolelogs.rolveridb.map(a => `${client.emojis.cache.get(a.type)} Rol: <@&${a.roleid}> Yetkili: <@!${a.staffID}> \n**Tarih:** \`${moment(a.tarih).format("lll")}\``).reverse();
         let page = 1;
         const embed = new Discord.MessageEmbed().setAuthor(mentioned.displayName, mentioned.user.avatarURL({ dynamic: true })).setColor("RANDOM");
         const question = await message.channel.send(
