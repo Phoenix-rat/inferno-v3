@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
+const yagmur = require("../../../../../BASE/stark.json")
+
 class Upgrade extends Command {
 
     constructor(client) {
@@ -10,7 +12,7 @@ class Upgrade extends Command {
             usage: "yükselt @etiket/id",
             examples: ["yükselt 674565119161794560"],
             category: "Management",
-            accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double","cmd-single","yetkilialım"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "yetkilialım"],
         });
     }
 
@@ -24,39 +26,18 @@ class Upgrade extends Command {
         const embed = new Discord.MessageEmbed().setColor('BLACK');
         if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(embed.setDescription(`${emojis.warn} Bunu yapmak için yeterli yetkiye sahip değilsin`));
 
-        const taglırol = message.guild.roles.cache.get(roles.get("starter").value());
-
-        const hoistroller = message.guild.roles.cache
-            .filter(r => r.rawPosition >= taglırol.rawPosition)
-            .filter(r => r.hoist)
-            .filter(r => r.id !== roles.get("booster").value())
-            .sort((a, b) => a.rawPosition - b.rawPosition).array().reverse();
-        //hoistroller.forEach(r => console.log(r.name));
-        const rawrol = mentioned.roles.cache.filter(r => r.hoist).sort((a, b) => a.rawPosition - b.rawPosition).array().reverse()[0];
-        let currol = hoistroller.reverse().find(r => r.rawPosition > rawrol.rawPosition);
-        let oldrol = hoistroller.reverse().find(r => r.rawPosition === rawrol.rawPosition);
-        if (currol.rawPosition >= message.guild.roles.cache.get(roles.get("finisher").value()).rawPosition) return message.channel.send("Bu imkansız!");
-        if (currol) await mentioned.roles.add(currol.id);
-        if (oldrol) await mentioned.roles.remove(oldrol.id);
-        await message.channel.send(`Hayırlı Olsun ${mentioned}, Artık __**${currol.name}**__ Rolüne Sahipsin :)`);
-        await message.react(emojis.get("okr").value().split(':')[2].replace('>', ''));
-
-        let embedsex = new Discord.MessageEmbed()
-            .setAuthor(`Tantoony Sizi Seviyor -Kahve`, message.guild.owner.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 }))
-            .setColor("#ffffff")
-            .setTitle("Bir rol verildi!")
-            .setFooter("26 Ağustos 2020'den İtibaren...", client.user.displayAvatarURL())
-            .addField("Komutu kullanan: ", message.member, true)
-            .addField("Kullanıcı:", mentioned, true)
-            .addField("Verilen rol: ", currol, true)
-            //.addField("Sebep: ", sebep, true)
-            .setDescription(`${mentioned} Kullanıcısına yetki verildi!`)
-            .setTimestamp()
-            .setThumbnail(mentioned.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 }));
-
-        //await message.guild.channels.cache.get(kanallar.get("cmd-yetki").value()).send(embedsex);
-        //this.client.cmdCooldown[message.author.id][this.help.name] = Date.now() + this.info.cooldown;
-
+        let yetkiNumber;
+        let sahipOlunanRol = Number();
+        for (yetkiNumber = 0; yetkiNumber < yagmur.Yetkiler.length; yetkiNumber++) {
+            if (user.roles.cache.has(yagmur.Yetkiler[yetkiNumber])) {
+                sahipOlunanRol += yetkiNumber
+            };
+        }
+        if (!user.roles.cache.has(yagmur.Yetkiler[yagmur.Yetkiler.length - 1])) {
+            await user.roles.add(yagmur.Yetkiler[sahipOlunanRol + 1]).catch(e => { })
+            await user.roles.remove(yagmur.Yetkiler[sahipOlunanRol]).catch(e => { })
+            await message.channel.send(embed.setDescription(`${user} Kullanısı <@&${yagmur.Yetkiler[sahipOlunanRol + 1]}> Yetkisine Başarılı bir Şekilde Yükseltildi.`)).catch(e => { })
+        } else { message.channel.send(embed.setDescription(`:x: Belirtilen Kullanıcı Zaten Max Role Sahip.`)).catch(e => { }) }
     }
 }
 
