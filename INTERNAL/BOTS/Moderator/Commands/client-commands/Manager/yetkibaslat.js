@@ -8,7 +8,7 @@ class Upgrade extends Command {
     constructor(client) {
         super(client, {
             name: "yetkibaslat",
-            description: "Belirtilen kullanıcının yetkisini yükseltir",
+            description: "Belirtilen kullanıcıyı yetkiye başlatır.",
             usage: "yetkibaşlat @etiket/id",
             examples: ["yetkibaslat 853011311328100411"],
             category: "Management",
