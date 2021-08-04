@@ -61,7 +61,9 @@ client.on("guildMemberUpdate", async(oldMember, newMember) =>{
     if(oldMember.roles.cache.size < newMember.roles.cache.size){ aldiverdi = client.emojis.cache.get(emojis.get("ok").value().split(':')[2].replace('>', '')) } else { aldiverdi = client.emojis.cache.get(emojis.get("error").value().split(':')[2].replace('>', ''))}
     if(oldMember.roles.cache.size !== newMember.roles.cache.size) {
     let rolveren = await oldMember.guild.fetchAuditLogs({ type: 'GUILD_MEMBER_UPDATE' }).then(audit => audit.entries.first());
+    if(rolveren.executor.bot) return;
     let role = oldMember.roles.cache.find(s => !newMember.roles.cache.has(s.id)) || newMember.roles.cache.find(s => !oldMember.roles.cache.has(s.id))
+    console.log(role)
     await korpeamcik.findOneAndUpdate({_id: newMember.id}, {$push: {rolveridb: { staffID: rolveren.executor.id, tarih: Date.now(), rolid: role.id, type: aldiverdi }}}, {upsert:true})
     }
 })
