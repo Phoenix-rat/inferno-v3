@@ -36,7 +36,7 @@ class CountByRole extends Command {
             embed.setDescription(`${mentioned} kişisinin toplamda ${liste.length} rol bilgisi bulunmakta son 10 rolün bilgileri aşağıda belirtilmiştir. \n\n${liste.slice(page == 1 ? 0 : page * 10 - 10, page * 10).join("\n")}`)
         );
 
-        if (rolelogs.length > 10) {
+        if (rolelogs && rolelogs.rolveridb.length > 10) {
             await question.react("◀");
             await question.react("▶");
 
