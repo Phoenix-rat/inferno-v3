@@ -62,6 +62,6 @@ client.on("guildMemberUpdate", async(oldMember, newMember) =>{
     if(oldMember.roles.cache.size !== newMember.roles.cache.size) {
     let rolveren = await oldMember.guild.fetchAuditLogs({ type: 'GUILD_MEMBER_UPDATE' }).then(audit => audit.entries.first());
     let role = oldMember.roles.cache.find(s => !newMember.roles.cache.has(s.id)) || newMember.roles.cache.find(s => !oldMember.roles.cache.has(s.id))
-    await korpeamcik.findOneAndUpdate({_id: newMember.id}, {$push: {rolveridb: { staffID: rolveren.executor.id, tarih: new Date.now(), rolid: role.id, type: aldiverdi }}}, {upsert:true})
+    await korpeamcik.findOneAndUpdate({_id: newMember.id}, {$push: {rolveridb: { staffID: rolveren.executor.id, tarih: Date.now(), rolid: role.id, type: aldiverdi }}}, {upsert:true})
     }
 })
