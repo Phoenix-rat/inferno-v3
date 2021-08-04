@@ -41,7 +41,7 @@ class CountByRole extends Command {
             await question.react("▶");
 
             const collector = question.createReactionCollector(
-                (react, user) => ["◀", "▶"].some((e) => e == react.emoji.name) && user.id == mentioned.id,
+                (react, user) => ["◀", "▶"].some((e) => e == react.emoji.name) && user.id == message.author.id,
                 { time: 120000 }
             );
 
