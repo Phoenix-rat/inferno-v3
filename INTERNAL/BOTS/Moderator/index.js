@@ -63,7 +63,7 @@ client.on("guildMemberUpdate", async(oldMember, newMember) =>{
     let rolveren = await oldMember.guild.fetchAuditLogs({ type: 'GUILD_MEMBER_UPDATE' }).then(audit => audit.entries.first());
     if(rolveren.executor.bot) return;
     let role = oldMember.roles.cache.find(s => !newMember.roles.cache.has(s.id)) || newMember.roles.cache.find(s => !oldMember.roles.cache.has(s.id))
-    console.log(`${role.id}`)
-    await korpeamcik.findOneAndUpdate({_id: newMember.id}, {$push: {rolveridb: { staffID: rolveren.executor.id, tarih: Date.now(), rolid: role.id, type: aldiverdi }}}, {upsert:true})
+    console.log(`Rol Güncellendi: ${role.id}`)
+    await korpeamcik.findOneAndUpdate({_id: newMember.id}, {$push: {rolveridb: { staffID: rolveren.executor.id, tarih: Date.now(), rolid: `${role.id}`, type: aldiverdi }}}, {upsert:true})
     }
 })

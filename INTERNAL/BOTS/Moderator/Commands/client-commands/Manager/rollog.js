@@ -29,11 +29,11 @@ class CountByRole extends Command {
 
         if(!rolelogs || rolelogs.length) return message.channel.send(`${client.emojis.cache.get(emojis.get("komutret").value().split(':')[2].replace('>', ''))} Kullanıcının verisi bulunamadı.`)
     //    staffID: rolveren.executor.id, tarih: new Date.now(), rolid: role.id, type: aldiverdi
-        const liste = rolelogs.rolveridb.map(a => `${client.emojis.cache.get(a.type)} Rol: <@&${a.roleid}> Yetkili: <@!${a.staffID}> \n**Tarih:** \`${moment(a.tarih).format("lll")}\``).reverse();
+        const liste = rolelogs.rolveridb.map(a => `${client.emojis.cache.get(a.type)} Rol: <@&${a.rolid}> Yetkili: <@!${a.staffID}> \n**Tarih:** \`${moment(a.tarih).format("lll")}\` \n**─────────────────**`).reverse();
         let page = 1;
         const embed = new Discord.MessageEmbed().setAuthor(mentioned.displayName, mentioned.user.avatarURL({ dynamic: true })).setColor("RANDOM");
         const question = await message.channel.send(
-            embed.setDescription(liste.slice(page == 1 ? 0 : page * 10 - 10, page * 10).join("\n"))
+            embed.setDescription(`${mentioned} kişisinin toplamda ${liste.length} rol bilgisi bulunmakta son 10 rolün bilgileri aşağıda belirtilmiştir. \n\n${liste.slice(page == 1 ? 0 : page * 10 - 10, page * 10).join("\n")}`)
         );
 
         if (roleLogs.length > 10) {
@@ -51,13 +51,13 @@ class CountByRole extends Command {
                     if (liste.slice((page + 1) * 10 - 10, (page + 1) * 10).length <= 0) return;
                     page += 1;
                     let newList = liste.slice(page == 1 ? 0 : page * 10 - 10, page * 10).join("\n");
-                    question.edit(embed.setDescription(newList));
+                    question.edit(embed.setDescription(`${mentioned} kişisinin toplamda ${liste.length} rol bilgisi bulunmakta son 10 rolün bilgileri aşağıda belirtilmiştir. \n\n${newList}`));
                 }
                 if (react.emoji.name == "◀") {
                     if (liste.slice((page - 1) * 10 - 10, (page - 1) * 10).length <= 0) return;
                     page -= 1;
                     let newList = liste.slice(page == 1 ? 0 : page * 10 - 10, page * 10).join("\n");
-                    question.edit(embed.setDescription(newList));
+                    question.edit(embed.setDescription(`${mentioned} kişisinin toplamda ${liste.length} rol bilgisi bulunmakta son 10 rolün bilgileri aşağıda belirtilmiştir. \n\n${newList}`));
                 }
             });
         }
