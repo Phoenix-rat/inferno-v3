@@ -23,7 +23,7 @@ class CountByRole extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        const mentioned = message.guild.members.cache.get(args[0]) || message.mentions.members.first() || message.guild.roles.cache.find(r => r.name.includes(args[0]))
+        const mentioned = message.guild.members.cache.get(args[0]) || message.mentions.members.first()
         if(!mentioned) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
         let rolelogs = await rol_log.findOne({_id: mentioned.id}).exec();
 
