@@ -24,6 +24,7 @@ class Upgrade extends Command {
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
         const embed = new Discord.MessageEmbed().setColor('#2f3136');
         if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(embed.setDescription(`${emojis.warn} Bunu yapmak için yeterli yetkiye sahip değilsin`));
+        if(!mentioned.user.username.includes("†")) return message.channel.send(embed.setDescription(`${mentioned} \`Kullanıcısında tag(†) bulunmadığı için işlem iptal edildi\``))
 
         const taglırol = message.guild.roles.cache.get(roles.get("starter").value());
 
