@@ -14,7 +14,7 @@ module.exports = class {
     }
     async run(message) {
         const client = this.client;
-        if (message.guild && (message.guild.id !== client.config.server)) return;
+        if (message.guild && (message.guild.id !== client.config.server) || message.author.bot) return;
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
