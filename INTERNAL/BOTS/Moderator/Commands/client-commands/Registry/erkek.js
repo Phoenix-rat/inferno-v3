@@ -69,7 +69,7 @@ class Erkek extends Command {
         if (registryDatas) aNumber = registryDatas.length;
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         let publicRooms = message.guild.channels.cache.filter(c => c.parentID === "854087056757489696" && c.type === "voice" && c.id != "871460692321009715");
-        if(mentioned.voice.channel) mentioned.voice.setChannel(publicRooms.random().id).catch(() => {})
+        if(mentioned.voice) mentioned.voice.setChannel(publicRooms.random().id).catch(() => {})
         await message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} kişisinin kaydı ${message.member} tarafından gerçekleştirildi.\nBu kişinin kayıt sayısı: \`${aNumber}\``)).then(async (msg) => await msg.delete({ timeout: 3000 }));
 
     }
