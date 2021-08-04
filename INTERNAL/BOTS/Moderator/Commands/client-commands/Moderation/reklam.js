@@ -21,7 +21,7 @@ class Jail extends Command {
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
-        let sebep = args.slice(1).join(" ");
+        let sebep = args.slice(1).join(" ") || "Reklam"
         let typo = "perma"
         // if (args[1] === 'perma') {
         //     sebep = args.slice(2).join(" ");
@@ -30,7 +30,7 @@ class Jail extends Command {
         // } else {
         //     typo = 'temp';
         // }
-        if (!sebep) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("soru").value()} Bir sebep girmelisin`));
+     //   if (!sebep) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("soru").value()} Bir sebep girmelisin`));
         if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("missingPerms").value()} Bunu yapmak için yeterli yetkiye sahip değilsin`));
         if (!mentioned.bannable) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("miisingBotPerms").value()} Bu kişiye reklam cezası vermek için yeterli yetkiye sahip değilim`));
       //  if (!sayi(args[1]) && (args[1] !== 'perma')) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`));
