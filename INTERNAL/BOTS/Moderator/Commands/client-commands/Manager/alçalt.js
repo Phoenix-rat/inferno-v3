@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
-const yagmur = require("../../../../../BASE/yagmur.json")
+const yagmur = require("../../../../../BASE/stark.json")
 class Upgrade extends Command {
 
     constructor(client) {
@@ -11,7 +11,7 @@ class Upgrade extends Command {
             usage: "alçalt @etiket/id",
             examples: ["alçalt 674565119161794560"],
             category: "Management",
-            accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double","cmd-single","yetkilialım"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "yetkilialım"],
         });
     }
 
@@ -27,33 +27,35 @@ class Upgrade extends Command {
 
         const taglırol = message.guild.roles.cache.get(roles.get("starter").value());
 
-             let yetkiNumber;
-            let sahipOlunanRol = Number();
-            for (yetkiNumber = 0; yetkiNumber < yagmur.Yetkiler.length ; yetkiNumber++) {
-              if(mentioned.roles.cache.has(yagmur.Yetkiler[yetkiNumber])) {
+        let yetkiNumber;
+        let sahipOlunanRol = Number();
+        for (yetkiNumber = 0; yetkiNumber < yagmur.Yetkiler.length; yetkiNumber++) {
+            if (mentioned.roles.cache.has(yagmur.Yetkiler[yetkiNumber])) {
                 sahipOlunanRol += yetkiNumber
-              };
-            }  
-            if(!mentioned.roles.cache.has(yagmur.Yetkiler[0])){
-            await mentioned.roles.add(yagmur.Yetkiler[sahipOlunanRol-1]).catch(e => { })
+            };
+        }
+        if (!mentioned.roles.cache.has(yagmur.Yetkiler[0])) {
+            await mentioned.roles.add(yagmur.Yetkiler[sahipOlunanRol - 1]).catch(e => { })
             await mentioned.roles.remove(yagmur.Yetkiler[sahipOlunanRol]).catch(e => { })
-            await message.channel.send(embed.setDescription(`${mentioned} Kullanısı <@&${yagmur.Yetkiler[sahipOlunanRol-1]}> Yetkisine Başarılı bir Şekilde Düşürüldü.`)).catch(e => { })
-          } else {
+            await message.channel.send(embed.setDescription(`${mentioned} Kullanısı <@&${yagmur.Yetkiler[sahipOlunanRol - 1]}> Yetkisine Başarılı bir Şekilde Düşürüldü.`)).catch(e => { })
+        } else {
             message.channel.send(embed.setDescription(`:x: Belirtilen yetkili zaten en alt yetkide. Yetkisini almak istermisiniz? ?`)).then(async msj => {
-            await msj.react('✅');
-           const kabul = (reaction, user) => {
-            return ['✅'].includes(reaction.emoji.name) && user.id === message.author.id;
-          };
-        msj.awaitReactions(kabul, {max: 1, time: 50000, error: ['time']}).then(async c => {
-          let cevap = c.first();
-          if (cevap) {
-          if(mentioned.roles.cache.has("854162987619057665")) await mentioned.roles.set(["854162987619057665"]).catch(e => { })
-          if(mentioned.roles.cache.has("854162990534623233")) await mentioned.roles.set(["854162990534623233"]).catch(e => { })
-          if(mentioned.user.username.includes("†")) await user.roles.add("855651068591341588").catch(e => { })
-           await msj.delete().catch(e => { });
-        } }) });
-        } 
-        
+                await msj.react('✅');
+                const kabul = (reaction, user) => {
+                    return ['✅'].includes(reaction.emoji.name) && user.id === message.author.id;
+                };
+                msj.awaitReactions(kabul, { max: 1, time: 50000, error: ['time'] }).then(async c => {
+                    let cevap = c.first();
+                    if (cevap) {
+                        if (mentioned.roles.cache.has("854162987619057665")) await mentioned.roles.set(["854162987619057665"]).catch(e => { })
+                        if (mentioned.roles.cache.has("854162990534623233")) await mentioned.roles.set(["854162990534623233"]).catch(e => { })
+                        if (mentioned.user.username.includes("†")) await user.roles.add("855651068591341588").catch(e => { })
+                        await msj.delete().catch(e => { });
+                    }
+                })
+            });
+        }
+
 
         //await message.guild.channels.cache.get(kanallar.get("cmd-yetki").value()).send(embedsex);
         //this.client.cmdCooldown[message.author.id][this.help.name] = Date.now() + this.info.cooldown;
