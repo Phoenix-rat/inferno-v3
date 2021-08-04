@@ -8,7 +8,7 @@ class Jail extends Command {
             name: "reklam",
             description: "Belirtilen kullanıcıyı reklam cezası ile hapse atar",
             usage: "reklam etiket/id sebep",
-            examples: ["reklam 674565119161794560 botları kötü yapıyor"],
+            examples: ["reklam 674565119161794560"],
             category: "Moderasyon",
             aliases: ["rek", "req"],
             accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double","cmd-single", "cmd-jail"],
