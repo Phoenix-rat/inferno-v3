@@ -47,7 +47,7 @@ class RolSeçim extends Component {
             });
         }
         if (array.some(a => mentioned.roles.cache.has(a))) {
-            return await ctx.send(`Şu anda bir burç rolü olduğundan iptal edildi.`, {
+            return await ctx.send(`Şu anda bir burç rolüne sahip olduğundan iptal edildi.`, {
                 ephemeral: true
             })
         }
