@@ -41,7 +41,7 @@ class Kur extends Command {
         const channels = await low(client.adapters('channels'));
 
         let member = message.guild.members.cache.get(args[0]) || message.mentions.members.first()
-        const avatarURL = memeber.user.avatarURL({ format: "png" })
+        const avatarURL = member.user.avatarURL({ format: "png" })
         let templateImage = null;
         let templateImagePath = "../../../../../SRC/point_items/template.png"
         let yetkiNumber;
