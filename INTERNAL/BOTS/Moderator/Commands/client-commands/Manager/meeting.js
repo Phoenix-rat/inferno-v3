@@ -22,7 +22,7 @@ class Meeting extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
 
-        const meetingemb = new Discord.MessageEmbed().setColor("BLACK").setTimestamp().setFooter(`• Kahve sizi seviyor 🌟`).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
+        const meetingemb = new Discord.MessageEmbed().setColor("BLACK").setTimestamp().setFooter(`• Kahve sizi seviyor 🌟`).setThumbnail(message.member.user.displayAvatarURL({ dynamic: true })).setColor(messsage.member.user.displayHexColor).setTitle("† Dante's INFEЯИO");
 
 if (!args[0] || (args[0] !== 'katıldı' && args[0] !== 'muteall')) 
         return message.channel.send(meetingemb.setDescription(`
