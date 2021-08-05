@@ -32,7 +32,7 @@ class RolSeçim extends Component {
                 ephemeral: true
             });
         } else {
-            await mentioned.roles.remove(Object.keys(roles.value()).filter(key => key.startsWith("sevgili_")).map(key => roles.get(key).value()));
+            await mentioned.roles.remove(Object.keys(roles.value()).filter(key => key.startsWith("etkinlik_")).map(key => roles.get(key).value()));
             await mentioned.roles.add(myRol.id);
             return await ctx.send(`${myRol.name} rolü üzerinize verildi`, {
                 ephemeral: true
