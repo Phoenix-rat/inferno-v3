@@ -24,7 +24,6 @@ class Meeting extends Command {
 
     const meetingemb = new Discord.MessageEmbed().setColor("BLACK").setTimestamp().setFooter(`• Kahve sizi seviyor 🌟`).setColor("BLACK").setTitle("† Dante's INFEЯИO");
 
-
     if (args[0] == 'katıldı') {
       let joined = message.member.voice.channel.members.filter(member => !member.roles.cache.has(roles.get("katıldı perm gelcek").value())).array();
       joined.forEach((member, fast) => {
