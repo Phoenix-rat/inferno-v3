@@ -39,10 +39,6 @@ class RolSeçim extends Component {
             });
         }
 
-
-
-
-
     }
 }
 
