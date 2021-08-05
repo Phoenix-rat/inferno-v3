@@ -43,7 +43,7 @@ class Kur extends Command {
         let member = message.guild.members.cache.get(args[0]) || message.mentions.members.first()
         const avatarURL = member.user.avatarURL({ format: "png" })
         let templateImage = null;
-        let templateImagePath = `./template.png`
+        let templateImagePath = path.resolve(__dirname, `template.png`)
         let yetkiNumber;
         let sahipOlunanRol = Number();
         for (yetkiNumber = 0; yetkiNumber < Roles.Roles.length; yetkiNumber++) {
@@ -59,13 +59,13 @@ class Kur extends Command {
         const xpCurrent = 100;
         const xpMax = 100;
         const xpBarColor = "#4200ff";
-        const badgePaths = Array(5).fill("").map((_, i) => `../../../../src/badges/badge${i + 1}.png`);
+        const badgePaths = Array(5).fill("").map((_, i) => path.resolve(__dirname,`../../../../src/badges/badge${i + 1}.png`))
 
         if (!templateImage) {
             templateImage = await Canvas.loadImage(templateImagePath);
         }
-        let tmpFolder = path.resolve(`../../../../src/tmp/profile/${randomString(8)}`);
-        await makeSureFolderExists(tmpFolder);
+        let tmpFolder = path.resolve(`./tmp/profile/${randomString(8)}`);
+         await makeSureFolderExists(tmpFolder);
 
         let canvas = Canvas.createCanvas(500, 200);
         let ctx = canvas.getContext("2d");
