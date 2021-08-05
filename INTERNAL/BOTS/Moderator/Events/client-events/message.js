@@ -14,7 +14,8 @@ module.exports = class {
     }
     async run(message) {
         const client = this.client;
-        if (message.guild && (message.guild.id !== client.config.server) || message.author.bot) return;
+        if (message.guild && (message.guild.id !== client.config.server)) return;
+        if(message.author.bot) return;
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
@@ -23,9 +24,10 @@ module.exports = class {
         if (!myCooldown) {
             client.spamwait[message.author.id] = {};
             myCooldown = client.spamwait[message.author.id];
+            
         };
         let mytime = myCooldown[message.content] || 0;
-        if (mytime && (mytime > Date.now()) && !message.member.permissions.has("ADMINISTRATOR") && (message.channel.id !== '863118599026638868')) {
+        if (mytime && (mytime > Date.now()) && !message.member.permissions.has("ADMINISTRATOR") && !message.author.bot && (message.channel.id !== '863118599026638868')) {
             let myCount = client.spamcounts[message.author.id];
             if (!myCount) {
                 this.client.spamcounts[message.author.id] = {};
