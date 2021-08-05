@@ -11,7 +11,7 @@ class Vip extends Command {
             examples: ["vip @Kahve/ID"],
             category: "Genel",
             aliases: ["vib", "elite"],
-            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double"],
+            accaptedPerms: ["root", "owner"],
             cooldown: 10000
         });
     }
