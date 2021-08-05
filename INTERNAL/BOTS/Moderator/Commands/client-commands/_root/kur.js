@@ -51,8 +51,8 @@ class Kur extends Command {
                 sahipOlunanRol += yetkiNumber
             };
         }
-        const roleText = `${message.guild.roles.cache.get(sahipOlunanRol).name}`;
-        const roleColor = `${message.guild.roles.cache.get(sahipOlunanRol).hexColor}`;
+        const roleText = `${message.guild.roles.cache.get(Roles.Roles[sahipOlunanRol]).name}`;
+        const roleColor = `${message.guild.roles.cache.get(Roles.Roles[sahipOlunanRol]).hexColor}`;
         const sesText = "600 Saat";
         const msgText = "1000 Mesaj";
         const usernameText = `${member.displayName ? member.displayName : member.user.username}`
