@@ -39,25 +39,24 @@ class RolSeçim extends Component {
             "854096841616654388"
 
         ]
-
-        if (array.some(a => mentioned.roles.cache.has(a))) {
-            return await ctx.send(`Şu anda bir burç rolü olduğundan iptal edildi.`, {
-                ephemeral: true
-            })
-        }
         const myRol = guild.roles.cache.get(roles.get("burc_boga").value());
         if (mentioned.roles.cache.has(myRol.id)) {
             await mentioned.roles.remove(myRol.id);
             return await ctx.send(`${myRol.name} rolü üzerinizden alındı`, {
                 ephemeral: true
             });
-        } else {
-            await mentioned.roles.remove(Object.keys(roles.value()).filter(key => key.startsWith("burc_")).map(key => roles.get(key).value()));
-            await mentioned.roles.add(myRol.id);
-            return await ctx.send(`${myRol.name} rolü üzerinize verildi`, {
-                ephemeral: true
-            });
         }
+        if (array.some(a => mentioned.roles.cache.has(a))) {
+            return await ctx.send(`Şu anda bir burç rolü olduğundan iptal edildi.`, {
+                ephemeral: true
+            })
+        }
+        await mentioned.roles.remove(Object.keys(roles.value()).filter(key => key.startsWith("burc_")).map(key => roles.get(key).value()));
+        await mentioned.roles.add(myRol.id);
+        return await ctx.send(`${myRol.name} rolü üzerinize verildi`, {
+            ephemeral: true
+        });
+
 
 
 
