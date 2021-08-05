@@ -43,7 +43,7 @@ class Kur extends Command {
         let member = message.guild.members.cache.get(args[0]) || message.mentions.members.first()
         const avatarURL = member.user.avatarURL({ format: "png" })
         let templateImage = null;
-        let templateImagePath = "../../../../../SRC/point_items/template.png"
+        let templateImagePath = `/home/inferno/inferno-v3/INTERNAL/SRC/point_items/template.png`
         let yetkiNumber;
         let sahipOlunanRol = Number();
         for (yetkiNumber = 0; yetkiNumber < Roles.Roles.length; yetkiNumber++) {
