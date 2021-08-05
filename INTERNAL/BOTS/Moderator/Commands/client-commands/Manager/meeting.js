@@ -17,47 +17,52 @@ class Meeting extends Command {
   }
 
   async run(client, message, args) {
-    const utils = await low(client.adapters('utils'));
     const roles = await low(client.adapters('roles'));
-    const emojis = await low(client.adapters('emojis'));
-    const channels = await low(client.adapters('channels'));
 
     const meetingemb = new Discord.MessageEmbed().setColor("BLACK").setTimestamp().setFooter(`• Kahve sizi seviyor 🌟`).setColor("BLACK").setTitle("† Dante's INFEЯИO");
 
-    if (args[0] == 'katıldı') {
-      let joined = message.member.voice.channel.members.filter(member => !member.roles.cache.has(roles.get("katıldı perm gelcek").value())).array();
-      joined.forEach((member, fast) => {
-        setTimeout(async () => {
-          member.roles.add(roles.get("katıldı perm gelcek").value()).catch();
-        }, fast * 750)
-      })
-      return message.channel.send(`Toplantı Odasında bulunan toplam \`${katıldı.size}\` kişiye rolü dağtımaya başaldım!`)
-    } else if (args[0] == 'sustoplantı') {
-      if (!message.member.voice.channel.id) return message.channel.send(`Bir ses kanalında değilsin.`)
-      let MutedMembers = message.guild.channels.cache.get(message.member.voice.channel.id).members.array().filter(x => x.id !== message.member.id);
-      MutedMembers.forEach((x, y) => {
-        setTimeout(async () => {
-          x.voice.setMute(true)
-        }, y * 200)
-      })
-      await message.channel.send(`Toplantı kanalındaki (\`${MutedMembers.length}\`) adet kişi susturuldu!`)
-    } else if (args[0] == 'konuspublic') {
-      if (!message.member.voice.channel.id) return message.channel.send(`Bir ses kanalında değilsin.`)
-      let MutedMembers = message.guild.channels.cache.get(message.member.voice.channel.id).members.array().filter(x => x.id !== message.member.id);
-      MutedMembers.forEach((x, y) => {
-        setTimeout(async () => {
-          x.voice.setMute(false)
-        }, y * 200)
-      })
-      await message.channel.send(`Toplantı kanalındaki (\`${MutedMembers.length}\`) adet kişinin susturması kaldırıldı!`)
-    } else {
-      return message.channel.send(meetingemb.setDescription(`
+    switch (args[0]) {
+      case "katıldı": {
+        let joined = message.member.voice.channel.members.filter(member => !member.roles.cache.has(roles.get("katıldı perm gelcek").value())).array();
+        joined.forEach((member, fast) => {
+          setTimeout(async () => {
+            member.roles.add(roles.get("katıldı perm gelcek").value()).catch();
+          }, fast * 750)
+        })
+        message.channel.send(`Toplantı Odasında bulunan toplam \`${katıldı.size}\` kişiye rolü dağtımaya başaldım!`)
+        break;
+      }
+      case "sustoplantı": {
+        if (!message.member.voice.channel.id) return message.channel.send(`Bir ses kanalında değilsin.`)
+        let MutedMembers = message.guild.channels.cache.get(message.member.voice.channel.id).members.array().filter(x => x.id !== message.member.id);
+        MutedMembers.forEach((x, y) => {
+          setTimeout(async () => {
+            x.voice.setMute(true)
+          }, y * 200)
+        })
+        break;
+      }
+      case "konuspublic": {
+        if (!message.member.voice.channel.id) return message.channel.send(`Bir ses kanalında değilsin.`)
+        let MutedMembers = message.guild.channels.cache.get(message.member.voice.channel.id).members.array().filter(x => x.id !== message.member.id);
+        MutedMembers.forEach((x, y) => {
+          setTimeout(async () => {
+            x.voice.setMute(false)
+          }, y * 200)
+        })
+        await message.channel.send(`Toplantı kanalındaki (\`${MutedMembers.length}\`) adet kişinin susturması kaldırıldı!`)
+        break;
+      }
+      default: {
+        message.channel.send(meetingemb.setDescription(`
 ───────────────────
 • .toplantı katıldı Toplantı odasındaki üyelere katıldı permini verir.
 • .toplantı sustoplantı Toplantı odasındaki üyeleri susturur.
 • .toplantı konuspublic Toplantı odasındaki üyelerin susturmasını açar.
 ───────────────────
         `)).then(msg => msg.delete({ timeout: 10000 }));
+        break;
+      }
     }
   }
 }
