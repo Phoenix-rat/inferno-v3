@@ -59,13 +59,13 @@ class Kur extends Command {
         const xpCurrent = 100;
         const xpMax = 100;
         const xpBarColor = "#4200ff";
-        const badgePaths = Array(5).fill("").map((_, i) => path.resolve(__dirname,`../../../../src/badges/badge${i + 1}.png`))
+        const badgePaths = Array(5).fill("").map((_, i) => path.resolve(__dirname, `../../../../src/badges/badge${i + 1}.png`))
 
         if (!templateImage) {
             templateImage = await Canvas.loadImage(templateImagePath);
         }
         let tmpFolder = path.resolve(`./tmp/profile/${randomString(8)}`);
-         await makeSureFolderExists(tmpFolder);
+        await makeSureFolderExists(tmpFolder);
 
         let canvas = Canvas.createCanvas(500, 200);
         let ctx = canvas.getContext("2d");
@@ -144,9 +144,8 @@ class Kur extends Command {
 
         // SEND TO DISCORD
 
-      let adana = fs.copyFileSync(outputGifPath, "output.gif");
-      const attachment = new Discord.MessageAttachment(adana);
-      message.channel.send({files: [attachment]})
+        const attachment = new Discord.MessageAttachment(outputGifPath);
+      await  message.channel.send({ files: [attachment] })
 
         // AFTER SEND STUFF
         // Deleting temp files..
