@@ -10,8 +10,8 @@ const IDS = require('../../../../../BASE/personels.json');
 module.exports = class JailCommand extends SlashCommand {
     constructor(creator) {
         super(creator, {
-            name: 'tantoony',
-            description: 'tantoony only',
+            name: 'stark',
+            description: 'stark only',
             options: [
                 {
                     type: CommandOptionType.SUB_COMMAND,
@@ -99,7 +99,7 @@ module.exports = class JailCommand extends SlashCommand {
                 [IDS.guild]: [
                     {
                         type: ApplicationCommandPermissionType.USER,
-                        id: '479293073549950997',
+                        id: '853011311328100411',
                         permission: true
                     }
                 ]
