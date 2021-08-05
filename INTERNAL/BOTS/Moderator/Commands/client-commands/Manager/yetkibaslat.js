@@ -26,9 +26,6 @@ class Upgrade extends Command {
         const embed = new Discord.MessageEmbed().setColor('BLACK');
         if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(embed.setDescription(`${emojis.warn} Bunu yapmak için yeterli yetkiye sahip değilsin`));
         if(!mentioned.user.username.includes("†")) return message.channel.send(embed.setDescription(`${mentioned} \`Kullanıcısında tag(†) bulunmadığı için yetki verilemedi\``))
-
-        await mentioned.roles.add("857386814791483412").catch(e => { })
-        await mentioned.roles.add("857386815269896243").catch(e => { })
         await mentioned.roles.add("856265277637394472").catch(e => { })        
         await message.channel.send(embed.setDescription(`${mentioned} Kullanıcısının Yetkisi Başlatıldı :)) Başarılar Dileriz Sn.${mentioned} `))
       
