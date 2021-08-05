@@ -4,6 +4,8 @@ const Discord = require('discord.js');
 const { stripIndents } = require("common-tags");
 const chp = require("child_process");
 const VoiceChannels = require("../../../../../MODELS/Datalake/VoiceChannels");
+const nameData = require('../../../../../MODELS/Datalake/Registered');
+
 class Eval extends Command {
 
     constructor(client) {
