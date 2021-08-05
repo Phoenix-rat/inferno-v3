@@ -10,7 +10,7 @@ class Permal extends Command {
             usage: "permal @etiket/id",
             examples: ["permal 674565119161794560"],
             category: "Management",
-            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double"],
         });
     }
 
