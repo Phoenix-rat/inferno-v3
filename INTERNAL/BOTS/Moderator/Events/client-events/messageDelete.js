@@ -9,7 +9,7 @@ class MessageDelete {
     async run(message) {
         const client = this.client;
         if (!message.guild) return;
-        let prefix = message.content.startWith(config.prefix)
+        let prefix = message.content.startsWith(config.prefix)
         if (message.guild.id !== client.config.server) return;
         const entry = await message.guild.fetchAuditLogs({ type: 'MESSAGE_DELETE' }).then(logs => logs.entries.first());
         const utils = await low(client.adapters('utils'));
