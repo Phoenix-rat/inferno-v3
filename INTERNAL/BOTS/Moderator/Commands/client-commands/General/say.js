@@ -13,7 +13,7 @@ class Say2 extends Command {
             usage: "say",
             examples: ["say"],
             category: "Genel",
-            accaptedPerms: ["cmd-owner", "cmd-double", "cmd-single", "cmd-ceo"],
+            accaptedPerms: ["root","owner", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000
         });
     }
