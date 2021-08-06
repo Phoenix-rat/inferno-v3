@@ -22,7 +22,8 @@ class Permal extends Command {
 
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
-
+        if (mentioned.id == message.author.id) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kendi kendine işlem yapamazsın!`).setColor('BLACK'));
+        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         message.channel.send(new Discord.MessageEmbed().setColor("BLACK").setDescription(`${emojis.get("kullaniciyok").value()} Belirtilen yetkiliyi yetkiden almak istediğine eminmisin?`)).then(async msj => {
             await msj.react('✅');
             const kabul = (reaction, user) => {

@@ -67,3 +67,6 @@ client.on("guildMemberUpdate", async(oldMember, newMember) =>{
     await korpeamcik.findOneAndUpdate({_id: newMember.id}, {$push: {rolveridb: { staffID: rolveren.executor.id, tarih: Date.now(), rolid: `${role.id}`, type: aldiverdi }}}, {upsert:true})
     }
 })
+
+
+
