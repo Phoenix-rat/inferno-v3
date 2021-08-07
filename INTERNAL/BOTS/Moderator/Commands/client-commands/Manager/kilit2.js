@@ -4,9 +4,9 @@ const low = require('lowdb');
 class Lock extends Command {
     constructor(client) {
         super(client, {
-            name: "kilit",
+            name: "kilit2",
             description: "Mesajın atıldığı kanalı kilitler",
-            usage: "kilit",
+            usage: "kilit2",
             examples: ["lock"],
             cooldown: 300000,
             category: "Düzen",
