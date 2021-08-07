@@ -125,6 +125,6 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     if (newMessage.author.bot || !newMessage.guild)
     if (newMessage.guild.owner || messagnewMessage.member.hasPermission('ADMINISTRATOR')) return; 
     if (swear.some(cay=> `${newMessage.content.toLowerCase()}`.includes(`${cay}`))) { 
-    if (message && message.deletable) newMessage.delete({ timeout: 0150 }).catch() 
+    if (newMessage && newMessage.deletable) newMessage.delete({ timeout: 0150 }).catch() 
     return message.reply('Lütfen chat kurallarına uyalımım öhöm :d').then(x => x.delete({timeout: 6000}))
     }})
