@@ -40,7 +40,17 @@ module.exports = class {
             if (count === 3) {
                 message.member.roles.add(roles.get("muted").value());
                 message.channel.send(`${message.member} Spam yaptığın için mutelendin!`)
-            }
+            }             
+            if (count === 15) {
+                message.member.roles.set(["857388269611647007"]);
+                message.channel.send(`${message.member} Spam yaptığın için jaile atıldın!`)
+            } 
+            if (count === 30) {
+                message.guild.members.ban(message.author.id, { reason: "Sürekli spam" })
+                message.channel.send(`${message.member} Spam yaptığın için sunucudan banlandın!`)
+            } 
+
+
             if (count >= 1) await message.delete();
             this.client.spamcounts[message.author.id][message.content] = count + 1;
         }
