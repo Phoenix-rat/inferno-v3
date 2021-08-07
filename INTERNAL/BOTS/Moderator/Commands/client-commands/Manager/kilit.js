@@ -5,13 +5,13 @@ class Move extends Command {
 
     constructor(client) {
         super(client, {
-            name: "oldkilit",
+            name: "kilit",
             description: "Mesajın atıldığı kanalı kilitler",
-            usage: "oldkilit",
-            examples: ["oldkilit"],
+            usage: "kilit",
+            examples: ["kilit"],
             cooldown: 3600000,
             category: "Düzen",
-            accaptedPerms: ["cmd-single", "cmd-double", "cmd-ceo"]
+            accaptedPerms: ["root","owner", "cmd-ceo"]
         });
     }
 
