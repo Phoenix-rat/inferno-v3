@@ -23,10 +23,10 @@ class Meeting extends Command {
 
     switch (args[0]) {
       case "katıldı": {
-        let joined = message.member.voice.channel.members.filter(member => !member.roles.cache.has(roles.get("katıldı perm gelcek").value())).array();
+        let joined = message.member.voice.channel.members.filter(member => !member.roles.cache.has(roles.get("857410693959647282").value())).array();
         joined.forEach((member, fast) => {
           setTimeout(async () => {
-            member.roles.add(roles.get("katıldı perm gelcek").value()).catch();
+            member.roles.add(roles.get("857410693959647282").value()).catch();
           }, fast * 750)
         })
         message.channel.send(`Toplantı Odasında bulunan toplam \`${katıldı.size}\` kişiye rolü dağtımaya başaldım!`)
