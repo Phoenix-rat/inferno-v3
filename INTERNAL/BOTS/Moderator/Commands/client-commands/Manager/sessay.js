@@ -24,8 +24,11 @@ class CountByRole extends Command {
         const channels = await low(client.adapters('channels'));
         const mentionedRole = message.guild.roles.cache.get(args[0]) || message.mentions.roles.first()
         if(!mentionedRole) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
-        let sessay = mentionedRole.members.filter(a => a.voice.channel).size
-        message.channel.send(`\`\`\`${mentionedRole.name} Rolünün sesteki üye sayısı: ${sessay}\`\`\``)
+        let sessay = mentionedRole.members.filter(a => a.presence.status == "online" && !a.voice.channel).map(a => `${a.displayName} [${a.user.tag} (${a.user.id})]`).join("\n")
+        let sessaysize = mentionedRole.members.filter(a => a.presence.status == "online" && !a.voice.channel).size
+
+        let amsay = mentionedRole.members.filter(a => a.presence.status !== "online")
+        message.channel.send(`\`\`\`${mentionedRole.name} Rolünün istatistikleri. \n\n• Aktif olmayann üyeler: ${amsay} \n\n• Aktif olup seste olmayanlar (${sessaysize}) \n${sessay}\`\`\``)
     }
 
 }
