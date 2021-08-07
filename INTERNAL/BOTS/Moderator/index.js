@@ -114,16 +114,18 @@ const swear = ["@here", "@everyone", "anskm", "orosbu", "orosb", "0r0spuc0cu", "
 "scroat", "scrote", "scrotum", "semen", "sex", "sh!+", "sh!t", "sh1t", "shag", "shagger", "shaggin", "shagging", "shemale", "shi+", "shit", "shitdick", "shite", "shited", "shitey", "shitfuck", "shitfull", "shithead", "shiting", "shitings", "shits", "shitted", "shitter", "shitters", "shitting", "shittings", "shitty", "skank", "slut", "sluts", "smegma", "smut", "snatch", "son-of-a-bitch", "spac", "spunk", "s_h_i_t", "t1tt1e5", "t1tties", "teets", "teez", "testical", "testicle", "tit", "titfuck", "tits", "titt", "tittie5", "tittiefucker", "titties", "tittyfuck", "tittywank", "titwank", "tosser", "turd", "tw4t", "twat", "twathead", "twatty", "twunt", "twunter", "v14gra", "v1gra", "vagina", "viagra", "vulva", "w00se", "wang", "wank", "wanker", "wanky", "whoar", "whore", "willies", "willy", "xrated", "xxx"
 ]
 client.on("message", async (message) => {
-    if (message.author.bot || !message.guild)
-    if (message.guild.owner || message.member.hasPermission('ADMINISTRATOR')) return; 
+    if (message.author.bot || !message.guild) return
+    if(message.content == ".tag" || message.content == "tag") return
+    if (message.author.id == message.guild.ownerID || message.member.hasPermission('ADMINISTRATOR')) return; 
     if (swear.some(cay=> `${message.content.toLowerCase()}`.includes(`${cay}`))) { 
     if (message && message.deletable) message.delete({ timeout: 0150 }).catch() 
     return message.reply('Lütfen chat kurallarına uyalımım öhöm :d').then(x => x.delete({timeout: 6000}))
     }})
 
 client.on("messageUpdate", async (oldMessage, newMessage) => {
-    if (newMessage.author.bot || !newMessage.guild)
-    if (newMessage.guild.owner || messagnewMessage.member.hasPermission('ADMINISTRATOR')) return; 
+    if (newMessage.author.bot || !newMessage.guild) return;
+    if(newMessage.content == ".tag" || newMessage.content == "tag") return
+    if (newMessage.member.id == "317926888599453696" || message.member.hasPermission('ADMINISTRATOR')) return; 
     if (swear.some(cay=> `${newMessage.content.toLowerCase()}`.includes(`${cay}`))) { 
     if (newMessage && newMessage.deletable) newMessage.delete({ timeout: 0150 }).catch() 
     return newMessage.reply('Lütfen chat kurallarına uyalımım öhöm :d').then(x => x.delete({timeout: 6000}))
