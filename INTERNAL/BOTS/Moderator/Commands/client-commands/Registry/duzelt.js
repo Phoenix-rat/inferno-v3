@@ -36,7 +36,7 @@ class Duzelt extends Command {
             if (mentioned.roles.cache.has("854162990534623233")) {
                 await mentioned.roles.remove("854162990534623233");
                 await mentioned.roles.add("854162987619057665");
-            } else return;
+            };
         }
         if (adana) {
             const rawName = args[2]
