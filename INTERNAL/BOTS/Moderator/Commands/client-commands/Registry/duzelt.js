@@ -12,7 +12,7 @@ class Duzelt extends Command {
             examples: ["duzelt 674565119161794560 isim tantoony"],
             category: "Kayıt",
             aliases: ["dzlt", "düzelt"],
-            accaptedPerms: ["cmd-registry", "cmd-all","cmd-manager","cmd-rhode","cmd-authority","cmd-staff"],
+            accaptedPerms: ["cmd-registry", "cmd-all", "cmd-manager", "cmd-rhode", "cmd-authority", "cmd-staff"],
             cooldown: 10000,
         });
     };
@@ -27,8 +27,8 @@ class Duzelt extends Command {
         const data = await nameData.findOne({ _id: mentioned.user.id });
         if (!data) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${mentioned} kişisinin kaydı bulunamadı!`));
         if (args[1] === 'isim') {
-            const rawName = args[0]
-           let adana =  rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase()
+            const rawName = args[2]
+            let adana = rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase()
 
             await nameData.updateOne({ _id: mentioned.user.id }, { name: adana });
             await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], adana));
