@@ -39,7 +39,7 @@ class Duzelt extends Command {
             await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yaş));
         } else if (args[1] === 'cinsiyet') {
           let cins = args[2]
-          message.reply(cins)
+          message.reply(`${cins}`)
           
           
           
