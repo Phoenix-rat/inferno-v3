@@ -30,53 +30,36 @@ class Duzelt extends Command {
         let adana = args[1]
 
         if (adana == "isim") {
-            message.reply("isim")
+            const rawName = args[2]
+            let adana = rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase()
+            await nameData.updateOne({ _id: mentioned.user.id }, { name: adana });
+            await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], adana));
         }
         if (adana == "yaş") {
-            message.reply("yaş")
+            const yaş = args[2];
+            const age = Number(yaş);
+            if (!sayi(yaş)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
+            await nameData.updateOne({ _id: mentioned.user.id }, { age: age });
+            await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yaş));
         }
         if (adana == "cinsiyet") {
-            message.reply("cinsiyet")
+            let mersin = args[2]
+            if (mersin == "e") {
+                await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Male' });
+                await mentioned.roles.remove(roles.get("kiz").value());
+                await mentioned.roles.add(roles.get("erkek").value());
+
+            } else
+                if (mersin == "k") {
+                    await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Female' });
+                    await mentioned.roles.remove(roles.get("erkek").value());
+                    await mentioned.roles.add(roles.get("kiz").value());
+
+                } else return message.channel.send(`lütfen düzeltme türünü \`isim\`, \`yaş\` veya \`cinsiyet\` olarak belirtiniz.`);
+
         }
 
-
-
-
-
-
-
-        // if (args[1] === 'isim') {
-        //     const rawName = args[2]
-        //     let adana = rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase()
-        //     await nameData.updateOne({ _id: mentioned.user.id }, { name: adana });
-        //     await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], adana));
-        // } else if (args[1] === 'yaş') {
-        //     const yaş = args[2];
-        //     const age = Number(yaş);
-        //     if (!sayi(yaş)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
-        //     await nameData.updateOne({ _id: mentioned.user.id }, { age: age });
-        //     await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yaş));
-        // } else if (args[1] === 'cinsiyet') {
-        //     let cins = args[2]
-        //     message.reply(`${cins}`)
-        //}
-
-
-
-
-
-            /*   if (args[2] == "kadin") {
-                   await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Female' });
-                   await mentioned.roles.remove(roles.get("erkek").value());
-                   await mentioned.roles.add(roles.get("kiz").value());
-               }
-               if (args[2] == "erkek") {
-                   await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Male' });
-                   await mentioned.roles.remove(roles.get("kiz").value());
-                   await mentioned.roles.add(roles.get("erkek").value());
-               } */
-         //else return message.channel.send(`lütfen düzeltme türünü \`isim\`, \`yaş\` veya \`cinsiyet\` olarak belirtiniz.`);
-        //await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
+        await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
     }
 }
 module.exports = Duzelt;
