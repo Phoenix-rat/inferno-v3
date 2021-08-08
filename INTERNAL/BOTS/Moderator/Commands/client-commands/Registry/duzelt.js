@@ -48,7 +48,6 @@ class Duzelt extends Command {
                 await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Male' });
                 await mentioned.roles.remove("854162990534623233");
                 await mentioned.roles.add("854162987619057665");
-                854162990534623233
             } else
                 if (mersin == "k") {
                     await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Female' });
