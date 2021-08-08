@@ -27,7 +27,7 @@ class Duzelt extends Command {
         const data = await nameData.findOne({ _id: mentioned.user.id });
         if (!data) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${mentioned} kişisinin kaydı bulunamadı!`));
 
-        let adana = args[1]
+        const adana = args[1]
         if (!adana) {
             if (mentioned.roles.cache.has("854162987619057665")) {
                 await mentioned.roles.remove("854162987619057665");
@@ -39,14 +39,13 @@ class Duzelt extends Command {
             };
         }
         if (adana) {
-            const rawName = args[2]
-            if (rawName && !sayi(rawName)) {
-                let adana = rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase()
-                await nameData.updateOne({ _id: mentioned.user.id }, { name: adana });
-                await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], adana));
+            if (adana && !sayi(adana)) {
+                let ampul = adana.charAt(0).toUpperCase() + adana.slice(1).toLowerCase()
+                await nameData.updateOne({ _id: mentioned.user.id }, { name: ampul });
+                await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], ampul));
             }
-            if(rawName && sayi(rawName)) {
-                let yas = Number(rawName)
+            if(adana && sayi(adana)) {
+                let yas = Number(adana)
                 await nameData.updateOne({ _id: mentioned.user.id }, { age: yas });
                 await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yas));    
             }
