@@ -27,15 +27,11 @@ class Duzelt extends Command {
         const data = await nameData.findOne({ _id: mentioned.user.id });
         if (!data) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${mentioned} kişisinin kaydı bulunamadı!`));
         if (args[1] === 'isim') {
-            const rawName = args.slice(2);
-            let newName = [];
-            await rawName.forEach(a => {
-                a = a[0].toUpperCase() + a.slice(1).toLowercase();
-                newName.push(a);
-            });
-            const name = newName.join(' ');
-            await nameData.updateOne({ _id: mentioned.user.id }, { name: name });
-            await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], name));
+            const rawName = args[0]
+           let adana =  rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase()
+
+            await nameData.updateOne({ _id: mentioned.user.id }, { name: adana });
+            await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], adana));
         } else if (args[1] === 'yaş') {
             const yaş = args[2];
             const age = Number(yaş);
