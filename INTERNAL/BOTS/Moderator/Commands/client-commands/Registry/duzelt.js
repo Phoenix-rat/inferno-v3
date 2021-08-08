@@ -29,7 +29,6 @@ class Duzelt extends Command {
         if (args[1] === 'isim') {
             const rawName = args[2]
             let adana = rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase()
-
             await nameData.updateOne({ _id: mentioned.user.id }, { name: adana });
             await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], adana));
         } else if (args[1] === 'yaş') {
@@ -39,7 +38,7 @@ class Duzelt extends Command {
             await nameData.updateOne({ _id: mentioned.user.id }, { age: age });
             await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yaş));
         } else if (args[1] === 'cinsiyet') {
-            if ((args[2] !== 'k') || (args[1] !== 'e')) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`kadın için \`k\`, erkek için \`e\` olarak belirtmelisin..`));
+            if ((args[2] !== 'k') || (args[2] !== 'e')) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`kadın için \`k\`, erkek için \`e\` olarak belirtmelisin..`));
             if (args[2] === 'k') {
                 await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Female' });
                 await mentioned.roles.remove(roles.get("erkek").value());
