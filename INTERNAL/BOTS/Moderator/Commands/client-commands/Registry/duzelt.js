@@ -28,35 +28,65 @@ class Duzelt extends Command {
         if (!data) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${mentioned} kişisinin kaydı bulunamadı!`));
 
         let adana = args[1]
-
-        if (adana == "isim") {
-            const rawName = args[2]
-            let adana = rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase()
-            await nameData.updateOne({ _id: mentioned.user.id }, { name: adana });
-            await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], adana));
-        }
-        if (adana == "yaş") {
-            const yaş = args[2];
-            const age = Number(yaş);
-            if (!sayi(yaş)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
-            await nameData.updateOne({ _id: mentioned.user.id }, { age: age });
-            await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yaş));
-        }
-        if (adana == "cinsiyet") {
-            let mersin = args[2]
-            if (mersin == "e") {
-                await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Male' });
+        if (!adana) {
+            if (mentioned.roles.cache.has("854162987619057665")) {
+                await mentioned.roles.remove("854162987619057665");
+                await mentioned.roles.add("854162990534623233");
+            }
+            if (mentioned.roles.cache.has("854162990534623233")) {
                 await mentioned.roles.remove("854162990534623233");
                 await mentioned.roles.add("854162987619057665");
-            } else
-                if (mersin == "k") {
-                    await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Female' });
-                    await mentioned.roles.remove("854162987619057665");
-                    await mentioned.roles.add("854162990534623233");
-
-                } else return message.channel.send(`lütfen düzeltme türünü \`isim\`, \`yaş\` veya \`cinsiyet\` olarak belirtiniz.`);
-
+            } else return;
         }
+        if (adana) {
+            const rawName = args[2]
+            if (rawName && !sayi(rawName)) {
+                let adana = rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase()
+                await nameData.updateOne({ _id: mentioned.user.id }, { name: adana });
+                await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], adana));
+            }
+            if(rawName && sayi(rawName)) {
+                let yas = Number(rawName)
+                await nameData.updateOne({ _id: mentioned.user.id }, { age: yas });
+                await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yas));    
+            }
+        }
+
+
+
+
+
+
+
+
+        // if (adana == "isim") {
+        //     const rawName = args[2]
+        //     let adana = rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase()
+        //     await nameData.updateOne({ _id: mentioned.user.id }, { name: adana });
+        //     await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], adana));
+        // }
+        // if (adana == "yaş") {
+        //     const yaş = args[2];
+        //     const age = Number(yaş);
+        //     if (!sayi(yaş)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
+        //     await nameData.updateOne({ _id: mentioned.user.id }, { age: age });
+        //     await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yaş));
+        // }
+        // if (adana == "cinsiyet") {
+        //     let mersin = args[2]
+        //     if (mersin == "e") {
+        //         await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Male' });
+        //         await mentioned.roles.remove("854162990534623233");
+        //         await mentioned.roles.add("854162987619057665");
+        //     } else
+        //         if (mersin == "k") {
+        //             await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Female' });
+        //             await mentioned.roles.remove("854162987619057665");
+        //             await mentioned.roles.add("854162990534623233");
+
+        //         } else return message.channel.send(`lütfen düzeltme türünü \`isim\`, \`yaş\` veya \`cinsiyet\` olarak belirtiniz.`);
+
+        // }
 
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
     }
