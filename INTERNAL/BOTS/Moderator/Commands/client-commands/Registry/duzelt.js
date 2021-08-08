@@ -38,16 +38,23 @@ class Duzelt extends Command {
             await nameData.updateOne({ _id: mentioned.user.id }, { age: age });
             await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yaş));
         } else if (args[1] === 'cinsiyet') {
-            if (args[2] == 'kadin') {
+          let cins = args[2]
+          message.reply(cins)
+          
+          
+          
+          
+          
+         /*   if (args[2] == "kadin") {
                 await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Female' });
                 await mentioned.roles.remove(roles.get("erkek").value());
                 await mentioned.roles.add(roles.get("kiz").value());
             }
-            if (args[2] == 'erkek') {
+            if (args[2] == "erkek") {
                 await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Male' });
                 await mentioned.roles.remove(roles.get("kiz").value());
                 await mentioned.roles.add(roles.get("erkek").value());
-            } 
+            } */
         } else return message.channel.send(`lütfen düzeltme türünü \`isim\`, \`yaş\` veya \`cinsiyet\` olarak belirtiniz.`);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
     }
