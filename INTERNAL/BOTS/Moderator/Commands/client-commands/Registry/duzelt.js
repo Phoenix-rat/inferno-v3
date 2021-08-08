@@ -46,14 +46,14 @@ class Duzelt extends Command {
             let mersin = args[2]
             if (mersin == "e") {
                 await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Male' });
-                await mentioned.roles.remove(roles.get("kiz").value());
-                await mentioned.roles.add(roles.get("erkek").value());
-
+                await mentioned.roles.remove("854162990534623233");
+                await mentioned.roles.add("854162987619057665");
+                854162990534623233
             } else
                 if (mersin == "k") {
                     await nameData.updateOne({ _id: mentioned.user.id }, { sex: 'Female' });
-                    await mentioned.roles.remove(roles.get("erkek").value());
-                    await mentioned.roles.add(roles.get("kiz").value());
+                    await mentioned.roles.remove("854162987619057665");
+                    await mentioned.roles.add("854162990534623233");
 
                 } else return message.channel.send(`lütfen düzeltme türünü \`isim\`, \`yaş\` veya \`cinsiyet\` olarak belirtiniz.`);
 
