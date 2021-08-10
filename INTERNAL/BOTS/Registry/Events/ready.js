@@ -15,7 +15,7 @@ class Ready {
         const guild = client.guilds.cache.get(client.config.server);
         client.guild = guild;
         client.logger.log(`${client.user.tag}, ${client.users.cache.size} kişi için hizmet vermeye hazır!`, "ready");
-        //await client.user.setPresence({ activity: "Stark 🤍Kahve", status: "idle" });
+        await client.user.setPresence({ activity: "Kahverella 🤍", status: "idle" });
         client.owner = client.users.cache.get(client.config.owner);
         await wait(1000);
         await guild.fetchInvites().then(guildInvites => { client.invites[guild.id] = guildInvites });
