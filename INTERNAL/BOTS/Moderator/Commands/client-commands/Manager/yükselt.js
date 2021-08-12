@@ -13,6 +13,7 @@ class Upgrade extends Command {
             examples: ["yükselt 674565119161794560"],
             category: "Management",
             accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "yetkilialım"],
+            enabled: false
         });
     }
 
