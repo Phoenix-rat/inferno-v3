@@ -66,7 +66,7 @@ class Initialize {
             });
         });
     };
-    
+
     async buttons(path, bot) {
         let directories = await readdir(path);
         this.client.logger.log(`Loading a total of ${directories.length} categories.`, "category");
@@ -105,21 +105,28 @@ class Initialize {
     };
 
     async mongoLogin() {
-        require('mongoose').connect(`mongodb://${process.env.ipadress}:27017`, {
-            auth: {
-                user: this.client.config.username,
-                password: process.env.mongoDB
-            },
-            dbName: this.client.config.mongoDB,
-            authSource: this.client.config.auth,
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useFindAndModify: false
-        }).then(() => {
-            this.client.logger.log("Connected to the Mongodb database.", "mngdb");
-        }).catch((err) => {
-            this.client.logger.log("Unable to connect to the Mongodb database. Error: " + err, "error");
-        });
+        const mongoose = require('mongoose')
+
+        let mset = { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
+
+
+        mongoose.connect("mongodb+srv://savasmeral:savasmeral@cluster0.ef96s.mongodb.net/Inferno", mset).then(a => console.log("MongoDB Connected."))
+
+        /*  require('mongoose').connect(`mongodb://${process.env.ipadress}:27017`, {
+              auth: {
+                  user: this.client.config.username,
+                  password: process.env.mongoDB
+              },
+              dbName: this.client.config.mongoDB,
+              authSource: this.client.config.auth,
+              useNewUrlParser: true,
+              useUnifiedTopology: true,
+              useFindAndModify: false
+          }).then(() => {
+              this.client.logger.log("Connected to the Mongodb database.", "mngdb");
+          }).catch((err) => {
+              this.client.logger.log("Unable to connect to the Mongodb database. Error: " + err, "error");
+          });*/
     }
 
 }
