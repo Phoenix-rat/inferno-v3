@@ -110,7 +110,7 @@ class Initialize {
         let mset = { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
 
 
-        mongoose.connect("mongodb+srv://savasmeral:savasmeral@cluster0.ef96s.mongodb.net/Inferno", mset).then(a => console.log("MongoDB Connected."))
+        mongoose.connect("mongodb+srv://savasmeral:savasmeral@cluster0.ef96s.mongodb.net/inferno", mset).then(a => console.log("MongoDB Connected."))
 
         /*  require('mongoose').connect(`mongodb://${process.env.ipadress}:27017`, {
               auth: {
