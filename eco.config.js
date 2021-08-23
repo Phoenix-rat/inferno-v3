@@ -63,7 +63,7 @@ module.exports = {
       exec_mode: "cluster",
       max_memory_restart: "2G",
       cwd: "./INTERNAL/BOTS/Manager"
-    }/*,
+    },
     {
       name: "Welcome",
       script: 'index.js',
@@ -72,6 +72,5 @@ module.exports = {
       max_memory_restart: "2G",
       cwd: "./INTERNAL/BOTS/_Welcome"
     }
-    */
   ]
 };

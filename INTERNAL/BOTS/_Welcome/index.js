@@ -38,6 +38,7 @@ for (let tokenim = 0; tokenim < myTokens.length; tokenim++) {
         if (cur.member.id === client.user.id) concon = await client.channels.cache.get("872253610891829248").join();
     });
 }
+/*
 const selamlı = [];
 for (let index = 0; index < tokens.length; index++) {
     const token = tokens[index];
@@ -91,3 +92,4 @@ for (let index = 0; index < tokens.length; index++) {
         if (cur.member.id === client.user.id) concon = await client.channels.cache.get(chnls[index]).join();
     });
 }
+*/
