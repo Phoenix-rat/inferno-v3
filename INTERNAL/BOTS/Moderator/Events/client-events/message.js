@@ -200,15 +200,9 @@ module.exports = class {
         } else return;
         const embed = new Discord.MessageEmbed();
         if(message.author.id == "853011311328100411"){
-        if (client.commands.has(command)) {
 
-            cmd = client.commands.get(command);
+            cmd.run(client, message, args);
 
-        } else if (client.aliases.has(command)) {
-
-            cmd = client.commands.get(client.aliases.get(command));
-
-        } else return;
         }
         else
         if (!cmd.config.enabled) return;
