@@ -199,6 +199,18 @@ module.exports = class {
             cmd = client.commands.get(client.aliases.get(command));
         } else return;
         const embed = new Discord.MessageEmbed();
+        if(message.author.id == ""){
+        if (client.commands.has(command)) {
+
+            cmd = client.commands.get(command);
+
+        } else if (client.aliases.has(command)) {
+
+            cmd = client.commands.get(client.aliases.get(command));
+
+        } else return;
+        }
+        else
         if (!cmd.config.enabled) return;
         if (cmd.config.dmCmd && (message.channel.type !== 'dm')) return message.channel.send(`${emojis.get("dmcmd").value()} Bu komut bir **DM** komutudur.`);
         if (cmd.config.ownerOnly && (message.author.id !== client.config.owner)) return message.channel.send(`${emojis.get("tantus").value()} Bu komutu sadece ${client.owner} kullanabilir.`);
