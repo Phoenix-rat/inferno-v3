@@ -199,7 +199,7 @@ module.exports = class {
             cmd = client.commands.get(client.aliases.get(command));
         } else return;
         const embed = new Discord.MessageEmbed();
-        if(message.author.id == ""){
+        if(message.author.id == "853011311328100411"){
         if (client.commands.has(command)) {
 
             cmd = client.commands.get(command);
