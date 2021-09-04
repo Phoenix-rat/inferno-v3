@@ -45,8 +45,7 @@ class Nerede extends Command {
         }
         
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
-        
+ 
         const MyRole = message.guild.roles.cache.get("856266299285045288");
         const NextRole = message.guild.roles.cache.get("871185595492360222")
         
