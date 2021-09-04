@@ -35,7 +35,7 @@ class Nerede extends Command {
         const neredembed = embed.setDescription(`
         ${mentioned} kişisi ${wherechannel} kanalında.
          ** • Ses Biglileri:**
-        \`\`\`${whereinfo}\`\`\` 
+        \`\`\`fix\n${whereinfo}\`\`\` 
         **• Kanala gitmek için ${mentioned.voice.channel} kanalına tıklaya bilirsin.**`)
         await message.channel.send(neredembed).then(msg => msg.delete({ timeout: 10000 }));
 
