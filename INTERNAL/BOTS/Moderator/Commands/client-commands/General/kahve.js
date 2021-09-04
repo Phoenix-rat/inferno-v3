@@ -28,10 +28,16 @@ class Nerede extends Command {
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
     
         const embed = new Discord.MessageEmbed().setColor("BLACK")
-        .addField(`${mentioned}`,`adlı kullanıcının stat verileri aşağıda bulunmaktadır`)
+        .addField("",`${mentioned} adlı kullanıcının stat verileri aşağıda bulunmaktadır`)
         .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+
+        .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+        .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+        .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+        .addField(`Ses Kanalları`,`${emojis.get("status_acik").value()} Public Ses Kanalları: \`31 saat, 31 dakika\``)
+        .addField(`Mesaj Kanalları`,`${emojis.get("status_acik").value()} Mesaj Kanalları: \`3131313131 mesaj\``)
         await message.channel.send(embed)
 
     }
