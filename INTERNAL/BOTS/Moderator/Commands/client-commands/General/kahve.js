@@ -46,7 +46,10 @@ class Nerede extends Command {
         
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
-    
+        
+        const MyRole = message.guild.roles.cache.get("856266299285045288");
+        const NextRole = message.guild.roles.cache.get("871185595492360222")
+        
         const embed = new Discord.MessageEmbed().setColor("BLACK")
         .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
@@ -57,7 +60,9 @@ class Nerede extends Command {
         .addField("__**Toplam Yetkili**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField(`Ses Kanalları`,`${emojis.get("status_acik").value()} Public Ses Kanalları: \`31 saat, 31 dakika\``)
         .addField(`Mesaj Kanalları`,`${emojis.get("status_acik").value()} Mesaj Kanalları: \`31 mesaj\``)
-        .addField(`${emojis.get("status_acik").value()} Puan Durumu`,`${bar(10000, 25000)} \`10000/25000\``)
+        .addField(`${emojis.get("statstars").value()} Puan Durumu`,`${bar(10000, 25000)} \`10000/25000\``)
+        .addField(`${emojis.get("statstars").value()} Yetki Atlama Durumu`,`${MyRole} rolünden ${NextRole} rolüne yükselmek için \`15000\` Puana ihtiyacın var!`)
+
         await message.channel.send(embed)
 
     }
