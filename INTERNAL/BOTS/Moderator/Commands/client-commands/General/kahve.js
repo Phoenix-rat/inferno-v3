@@ -50,11 +50,10 @@ class Nerede extends Command {
         const MyRole = message.guild.roles.cache.get("856266299285045288");
         const NextRole = message.guild.roles.cache.get("871185595492360222")
         
-        const embed = new Discord.MessageEmbed().setColor("BLACK")
+        const embed = new Discord.MessageEmbed().setColor("BLACK").setTimestamp().setFooter(`• Kahve sizi seviyor 🌟`).setAuthor(message.author.avatarURL({ dynamic: true }), message.author.displayName,'Kullanıcının Stat Verileri')
         .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-
         .addField("__**Toplam Davet**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Taglı**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Yetkili**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
