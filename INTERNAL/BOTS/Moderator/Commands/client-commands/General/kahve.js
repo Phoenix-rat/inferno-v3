@@ -49,7 +49,7 @@ class Nerede extends Command {
         const MyRole = message.guild.roles.cache.get("856266299285045288");
         const NextRole = message.guild.roles.cache.get("871185595492360222")
         
-        const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin stat verileri aşşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 Kahve sizi seviyor ❤ ${message.guild.name}`)
+        const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin stat verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 Kahve sizi seviyor ❤ ${message.guild.name}`)
         .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
@@ -59,7 +59,7 @@ class Nerede extends Command {
         .addField(`Ses Kanalları`,`${emojis.get("status_acik").value()} Public Ses Kanalları: \`31 saat, 31 dakika\``)
         .addField(`Mesaj Kanalları`,`${emojis.get("status_acik").value()} Mesaj Kanalları: \`31 mesaj\``)
         .addField(`${emojis.get("statstars").value()} Puan Durumu`,`${bar(10000, 25000)} \`10000/25000\``)
-        .addField(`${emojis.get("statstars").value()} Yetki Atlama Durumu`,`${MyRole} rolünden ${NextRole} rolüne yükselmek için \`15000\` Puana ihtiyacın var!`)
+        .addField(`${emojis.get("statstars").value()} Yetki Atlama Durumu`,`${MyRole} rolünden ${NextRole} rolüne yükselmek için \`15000\` **Puana** ihtiyacın var!`)
 
         await message.channel.send(embed)
 
