@@ -32,9 +32,9 @@ class Nerede extends Command {
         let wherechannel = `${mentioned.voice.channel} (\`${mentioned.voice.channel.members.size}/${mentioned.voice.channel.userLimit}\`)`;
         
         const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor)
-        .addField("__**Toplam Ses**__", `\`\`fix\nVeri Bulunamadı\`\`\`\``, true)
-        .addField("__**Toplam Kayıt**__", `\`\`fix\nVeri Bulunamadı\`\`\`\``, true)
-        .addField("__**Toplam Mesaj**__", `\`\`fix\nVeri Bulunamadı\`\`\`\``, true)
+        .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+        .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+        .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         const neredembed = embed.setDescription(`
         ${mentioned} kişisi ${wherechannel} kanalında.
    
