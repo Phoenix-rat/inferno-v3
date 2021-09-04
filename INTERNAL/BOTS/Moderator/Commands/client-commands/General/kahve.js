@@ -50,7 +50,7 @@ class Nerede extends Command {
         const MyRole = message.guild.roles.cache.get("856266299285045288");
         const NextRole = message.guild.roles.cache.get("871185595492360222")
         
-        const embed = new Discord.MessageEmbed().setColor("BLACK").setTimestamp().setFooter(`🌟 Kahve sizi seviyor ❤ ${message.guild.name}`)
+        const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin stat verileri aşşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 Kahve sizi seviyor ❤ ${message.guild.name}`)
         .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
