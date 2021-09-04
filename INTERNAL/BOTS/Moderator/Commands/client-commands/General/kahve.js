@@ -6,11 +6,11 @@ class Nerede extends Command {
 
     constructor(client) {
         super(client, {
-            name: "nerede",
+            name: "kave",
             description: "etiketlenen kişinin nerede olduğunu gösterir.",
-            usage: "nerede @Kahve/ID",
+            usage: "kave @Kahve/ID",
             examples: ["nerede @Kahve/ID"],
-            aliases: ["bul", "n"],
+            aliases: ["kahpe", "allahukahve"],
             category: "Genel",
             cmdChannel: "bot-komut",
             cooldown: 300000
