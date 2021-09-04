@@ -28,7 +28,6 @@ class Nerede extends Command {
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
     
         const embed = new Discord.MessageEmbed().setColor("BLACK")
-        .addField("",`${mentioned} adlı kullanıcının stat verileri aşağıda bulunmaktadır`)
         .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
