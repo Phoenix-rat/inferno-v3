@@ -26,14 +26,12 @@ class Nerede extends Command {
         
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
-        if (!mentioned.voice.channelID) return message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} kişisi herhangi bir ses kanalında değil!`)).then(x => x.delete({ timeout: 10000 }));
-
-
+    
         const embed = new Discord.MessageEmbed().setColor("BLACK")
-        .addField(`${mentioned.toString()} adlı kullancının stat verileri aşağıda yer almaktadır!`, ' ')
+        .addField(`${mentioned}`,`adlı kullanıcının stat verileri aşağıda bulunmaktadır`)
         .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+        .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         await message.channel.send(embed)
 
     }
