@@ -28,19 +28,13 @@ class Nerede extends Command {
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
         if (!mentioned.voice.channelID) return message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} kişisi herhangi bir ses kanalında değil!`)).then(x => x.delete({ timeout: 10000 }));
 
-        let whereinfo = `• Mikrofonu: ${mentioned.voice.mute ? `Kapalı` : `Açık`} \n• Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}`
-        let wherechannel = `${mentioned.voice.channel} (\`${mentioned.voice.channel.members.size}/${mentioned.voice.channel.userLimit}\`)`;
-        
-        const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor)
+
+        const embed = new Discord.MessageEmbed().setColor("BLACK")
+        .addField(`${mentioned.toString()} adlı kullancının stat verileri aşağıda yer almaktadır!`, ' ')
         .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        const neredembed = embed.setDescription(`
-        ${mentioned} kişisi ${wherechannel} kanalında.
-   
-        \`\`\`Test Amaçalıdır\`\`\` 
-        **• Kanala gitmek için ${mentioned.voice.channel} kanalına tıklaya bilirsin.**`)
-        await message.channel.send(neredembed)
+        await message.channel.send(embed)
 
     }
 }
