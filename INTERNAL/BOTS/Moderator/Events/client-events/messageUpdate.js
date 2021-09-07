@@ -21,7 +21,7 @@ class MessageDelete {
         .addField("**Mesajın İlk Hali:**", `\`\`\`diff\n- ${oldmsg.content}\`\`\``)
         .addField("**Mesajın Yeni Hali:**", `\`\`\`diff\n- ${curmsg.content}\`\`\``)
         .addField("**Mesajı Yazan Kişi:**", `\`\`\`fix\n${curmsg.author.tag}\`\`\``, true)
-        .addField("**Mesajın Kanalı:**", `\`\`\`fix\n${curmsg.channel.name}\`\`\``, true)
+        .addField("**Mesaj Kanalı:**", `\`\`\`fix\n${curmsg.channel.name}\`\`\``, true)
         .addField("**İşlem Tarihi:**", `\`\`\`fix\n${moment(Date.now()).format("LLL")}\`\`\``, true)
         .setFooter(`🌟 Kahve sizi önemsiyor ❤ ${curmsg.guild.name}`);
         await curmsg.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed)

@@ -23,7 +23,7 @@ class MessageDelete {
         const embed = new MessageEmbed()
         .setColor("BLACK").setFooter(`🌟 Kahve sizi önemsiyor ❤ ${message.guild.name}`)
         .setDescription(`${message.author.toString()} tarafından bir mesaj silindi!`)
-        .addField("**Mesajın İçeriği:**", `\`\`\`diff\n- ${message.content}\`\`\``)
+        .addField("**Mesaj İçeriği:**", `\`\`\`diff\n- ${message.content}\`\`\``)
         .addField("**Mesajı Silen Kişi:**", `\`\`\`fix\n${message.author.tag}\`\`\``, true)
         .addField("**Mesaj Kanalı:**", `\`\`\`fix\n${message.channel.name}\`\`\``, true)
         .addField("**İşlem Tarihi:**", `\`\`\`fix\n${moment(Date.now()).format("LLL")}\`\`\``, true);
