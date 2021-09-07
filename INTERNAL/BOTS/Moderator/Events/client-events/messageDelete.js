@@ -25,8 +25,8 @@ class MessageDelete {
         .setDescription(`${message.author.toString()} tarafından bir mesaj silindi!`)
         .addField("**Mesajın İçeriği:**", `\`\`\`diff\n- ${message.content}\`\`\``)
         .addField("**Mesajı Silen Kişi:**", `\`\`\`fix\n${message.author.tag}\`\`\``, true)
-        .addField("**Mesajın Kanalı:**", `\`\`\`fix\n${message.channel.name}\`\`\``, true)
-        .addField("**Mesajın Silinme Tarihi:**", `\`\`\`fix\n${moment(Date.now()).format("LLL")}\`\`\``, true);
+        .addField("**Mesaj Kanalı:**", `\`\`\`fix\n${message.channel.name}\`\`\``, true)
+        .addField("**İşlem Tarihi:**", `\`\`\`fix\n${moment(Date.now()).format("LLL")}\`\`\``, true);
         if ((entry.createdTimestamp > Date.now() - 1000) && (entry.executor.id !== message.author.id)) {
             return message.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed.addField("**Mesajı Silen Kişi**",  `\`\`\`fix\n${entry.executor.name}\`\`\``, true).addField("**Mesajın Kanalı**", `\`\`\`fix\n${message.channel.name}\`\`\``, true));
         } else {

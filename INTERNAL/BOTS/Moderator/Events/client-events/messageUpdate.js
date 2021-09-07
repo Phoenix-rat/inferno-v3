@@ -22,7 +22,7 @@ class MessageDelete {
         .addField("**Mesajın Yeni Hali:**", `\`\`\`diff\n- ${curmsg.content}\`\`\``)
         .addField("**Mesajı Yazan Kişi:**", `\`\`\`fix\n${curmsg.author.tag}\`\`\``, true)
         .addField("**Mesajın Kanalı:**", `\`\`\`fix\n${curmsg.channel.name}\`\`\``, true)
-        .addField("**İşlemin Tarihi:**", `\`\`\`fix\n${moment(Date.now()).format("LLL")}\`\`\``, true)
+        .addField("**İşlem Tarihi:**", `\`\`\`fix\n${moment(Date.now()).format("LLL")}\`\`\``, true)
         .setFooter(`🌟 Kahve sizi önemsiyor ❤ ${curmsg.guild.name}`);
         await curmsg.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed)
         const elebaşı = ["discord.gg/", "discord.com/invite/", "discordapp.com/invite/", "discord.me/"];
