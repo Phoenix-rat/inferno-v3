@@ -1,6 +1,7 @@
 const low = require('lowdb');
 const { MessageEmbed } = require('discord.js');
 const moment = require('moment')
+moment.locale("tr")
 const msg_snipe = require("../../../../MODELS/Moderation/Snipe.js"); 
 const config  = require("../../../../HELPERS/config.js")
 class MessageDelete {
