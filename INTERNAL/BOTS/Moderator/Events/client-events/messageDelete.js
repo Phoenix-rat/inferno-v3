@@ -20,9 +20,9 @@ class MessageDelete {
         if (entry.executor.bot) return;
         await msg_snipe.findOneAndUpdate({ guildID: message.guild.id }, { $set: { author: message.author.id, content: message.content, date: Date.now(), channel: message.channel.id } }, { upsert: true })
         const embed = new MessageEmbed()
-        .setColor("BLACK")
+        .setColor("BLACK").setFooter(`🌟 Kahve sizi önemsiyor ❤ ${message.guild.name}`)
         .setDescription(`${message.author.toString()} tarafından bir mesaj silindi!`)
-        .addField("**Mesajın İçeriği:**", `\`\`\`fix\n${message.content}\`\`\``)
+        .addField("**Mesajın İçeriği:**", `\`\`\`diff\n- ${message.content}\`\`\``)
         .addField("**Mesajı Silen Kişi:**", `\`\`\`fix\n${message.author.tag}\`\`\``, true)
         .addField("**Mesajın Kanalı:**", `\`\`\`fix\n${message.channel.name}\`\`\``, true)
         .addField("**Mesajın Silinme Tarihi:**", `\`\`\`fix\n${moment(Date.now()).format("LLL")}\`\`\``, true);
