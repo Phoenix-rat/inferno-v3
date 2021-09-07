@@ -18,11 +18,11 @@ class MessageDelete {
         const channels = await low(client.adapters('channels'));
         if (entry.executor.bot) return;
         await msg_snipe.findOneAndUpdate({ guildID: message.guild.id }, { $set: { author: message.author.id, content: message.content, date: Date.now(), channel: message.channel.id } }, { upsert: true })
-        const embed = new MessageEmbed().setColor((entry.createdTimestamp < Date.now() - 1000) ? "#2f3136" : "RED").setDescription(`Mesajın içeriği:\n\`\`\`${message.content}\`\`\``).setTitle("Bir mesaj silindi").addField("Yazarı:", message.author, true);
+        const embed = new MessageEmbed().setColor((entry.createdTimestamp < Date.now() - 1000) ? "BLACK" : "BLACK").setDescription(`**Mesajın içeriği:**\n\`\`\`${message.content}\`\`\``).setTitle("Bir mesaj silindi").addField("Yazarı:", message.author, true);
         if ((entry.createdTimestamp > Date.now() - 1000) && (entry.executor.id !== message.author.id)) {
-            return message.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed.addField("Silen Kişi", entry.executor, true).addField("Kanal", message.channel, true));
+            return message.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed.addField("**Mesajı Silen Kişi**",  `\`\`\`fix\n${entry.executor.name}\`\`\``, true).addField("**Mesajın Kanalı**", `\`\`\`fix\n${message.channel.name}\`\`\``, true));
         } else {
-            return message.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed.addField("Kanal", message.channel, true));
+            return message.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed.addField("**Mesajın Kanalı**", `\`\`\`fix\n${message.channel.name}\`\`\``, true));
         }
     }
 }
