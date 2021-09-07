@@ -1,5 +1,6 @@
 const low = require('lowdb');
 const { MessageEmbed } = require('discord.js');
+const moment = require('moment')
 const msg_snipe = require("../../../../MODELS/Moderation/Snipe.js"); 
 const config  = require("../../../../HELPERS/config.js")
 class MessageDelete {
@@ -18,11 +19,16 @@ class MessageDelete {
         const channels = await low(client.adapters('channels'));
         if (entry.executor.bot) return;
         await msg_snipe.findOneAndUpdate({ guildID: message.guild.id }, { $set: { author: message.author.id, content: message.content, date: Date.now(), channel: message.channel.id } }, { upsert: true })
-        const embed = new MessageEmbed().setColor((entry.createdTimestamp < Date.now() - 1000) ? "BLACK" : "BLACK").setDescription(`**Mesajın içeriği:**\n\`\`\`${message.content}\`\`\``).setTitle("Bir mesaj silindi").addField("Yazarı:", message.author, true);
+        const embed = new MessageEmbed()
+        .setColor("BLACK")
+        .setDescription(`**Mesajın içeriği:**\n\`\`\`${message.content}\`\`\``)
+        .addField("**Mesajı Silen Kişi**", `\`\`\`fix\n${message.author.name}\`\`\``, true)
+        .addField("**Mesajın Kanalı**", `\`\`\`fix\n${message.channel.name}\`\`\``, true)
+        .addField("**Mesajın Silinme Tarihi**", `\`\`\`fix\n${Date.now()}\`\`\``, true);
         if ((entry.createdTimestamp > Date.now() - 1000) && (entry.executor.id !== message.author.id)) {
             return message.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed.addField("**Mesajı Silen Kişi**",  `\`\`\`fix\n${entry.executor.name}\`\`\``, true).addField("**Mesajın Kanalı**", `\`\`\`fix\n${message.channel.name}\`\`\``, true));
         } else {
-            return message.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed.addField("**Mesajın Kanalı**", `\`\`\`fix\n${message.channel.name}\`\`\``, true));
+            return message.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed);
         }
     }
 }
