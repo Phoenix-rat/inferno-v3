@@ -17,13 +17,13 @@ class MessageDelete {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const embed = new MessageEmbed().setColor("BLACK")
-        .setDescription(`${message.author.toString()} tarafından bir mesaj güncelendi [Mesaja erişmek için tıklaman yeterli](${curmsg.url})`)
+        .setDescription(`${curmsg.author.toString()} tarafından bir mesaj güncelendi [Mesaja erişmek için tıklaman yeterli](${curmsg.url})`)
         .addField("**Mesajın İlk Hali:**", `\`\`\`diff\n- ${oldmsg.content}\`\`\``)
         .addField("**Mesajın Yeni Hali:**", `\`\`\`diff\n- ${curmsg.content}\`\`\``)
-        .addField("**Mesajı Yazan Kişi:**", `\`\`\`fix\n${message.author.tag}\`\`\``, true)
-        .addField("**Mesajın Kanalı:**", `\`\`\`fix\n${message.channel.name}\`\`\``, true)
+        .addField("**Mesajı Yazan Kişi:**", `\`\`\`fix\n${curmsg.author.tag}\`\`\``, true)
+        .addField("**Mesajın Kanalı:**", `\`\`\`fix\n${curmsg.channel.name}\`\`\``, true)
         .addField("**İşlemin Tarihi:**", `\`\`\`fix\n${moment(Date.now()).format("LLL")}\`\`\``, true)
-        .setFooter(`🌟 Kahve sizi önemsiyor ❤ ${message.guild.name}`);
+        .setFooter(`🌟 Kahve sizi önemsiyor ❤ ${curmsg.author.guild.name}`);
         await curmsg.guild.channels.cache.get(channels.get("mesajlog").value()).send(embed.addField("SiliniKanal", curmsg.channel, true));
         const elebaşı = ["discord.gg/", "discord.com/invite/", "discordapp.com/invite/", "discord.me/"];
 
