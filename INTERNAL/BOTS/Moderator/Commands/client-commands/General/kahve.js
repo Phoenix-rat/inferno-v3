@@ -31,8 +31,8 @@ class Nerede extends Command {
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         
         const Veri = await Messages.findOne({ _id: mentioned.user.id });
-        const MesajVeri = Veri ? Veri.length : "Veri Bulunamadı";
-        
+        const MesajVeri = Veri ? Veri.records.length : "Veri Bulunamadı";
+
         const TVeri = await Register.find({ executor: mentioned.user.id });
         const KayıtVeri = TVeri ? TVeri.length : "Veri Bulunamadı";
 
@@ -46,8 +46,8 @@ class Nerede extends Command {
         .addField("__**Toplam Davet**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Taglı**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Yetkili**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField(`Ses Kanalları`,`${emojis.get("statssh").value()} **Public Ses Kanalları:** \`31 saat, 31 dakika\`\n
-        **Kayıt Ses Kanalları:** \`31 saat, 31 dakika\``)
+        .addField(`Ses Kanalları`,`${emojis.get("statssh").value()} **Public Ses Kanalları:** \`31 saat, 31 dakika\`
+        ${emojis.get("statssh").value()} **Kayıt Ses Kanalları:** \`31 saat, 31 dakika\``)
         .addField(`Mesaj Kanalları`,`${emojis.get("statssh").value()} **Mesaj Kanalları:** \`31 mesaj\``)
         .addField(`${emojis.get("statstars").value()} Puan Durumu`,`${bar(10000, 25000)} \`10000/25000\``)
         .addField(`${emojis.get("statstars").value()} Yetki Atlama Durumu`,`${MyRole} rolünden ${NextRole} rolüne yükselmek için \`15000\` **Puana** ihtiyacın var!`)
