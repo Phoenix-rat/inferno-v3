@@ -3,8 +3,7 @@ const Command = require("../../../Base/Command");
 const low = require('lowdb');
 const { stripIndent } = require('common-tags');
 const Messages = require('../../../../../MODELS/StatUses/stat_msg');
-const Registers = require('../../../../../MODELS/Datalake/Registered');
-const InvitesData = require('../../../../../MODELS/StatUses/Invites');
+const Register = require('../../../../../MODELS/Datalake/Registered');
 const Invites = require('../../../../../MODELS/StatUses/Invites');
 
 class Nerede extends Command {
@@ -32,13 +31,13 @@ class Nerede extends Command {
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         
         const Veri = await Messages.findOne({ _id: mentioned.user.id });
-        const MesajVeri = Veri ? Veri.records.length + "Mesaj" : "Veri Bulunamadı";
+        const MesajVeri = Veri ? Veri.records.length + " Mesaj" : "Veri Bulunamadı";
 
-        const TVeri = await Registers.findOne({ executor: mentioned.user.id });
-        const KayıtVeri = TVeri ? TVeri.length + "Kayıt" : "Veri Bulunamadı";
+        const TVeri = await Register.findOne({ executor: mentioned.user.id });
+        const KayıtVeri = TVeri ? TVeri.length + " Kayıt" : "Veri Bulunamadı";
 
         const DVeri = await Invites.findOne({ _id: mentioned.user.id });
-        const DavetVeri = DVeri ? DVeri.records.length + "Davet" : "Veri Bulunamadı";
+        const DavetVeri = DVeri ? DVeri.records.length + " Davet" : "Veri Bulunamadı";
   
         const MyRole = message.guild.roles.cache.get("856266299285045288");
         const NextRole = message.guild.roles.cache.get("856265230187102259")
