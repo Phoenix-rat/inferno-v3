@@ -33,7 +33,7 @@ class Nerede extends Command {
         const Veri = await Messages.findOne({ _id: mentioned.user.id });
         const MesajVeri = Veri ? Veri.records.length + " Mesaj" : "Veri Bulunamadı";
 
-        const TVeri = await Register.findOne({ executor: mentioned.user.id });
+        const TVeri = await Register.find({ executor: mentioned.user.id });
         const KayıtVeri = TVeri ? TVeri.length + " Kayıt" : "Veri Bulunamadı";
 
         const DVeri = await Invites.findOne({ _id: mentioned.user.id });
