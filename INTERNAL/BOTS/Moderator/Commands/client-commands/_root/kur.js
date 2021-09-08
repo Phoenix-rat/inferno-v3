@@ -14,13 +14,13 @@ class Kur extends Command {
 
     constructor(client) {
         super(client, {
-            name: "newstark",
+            name: "gifstat",
             description: "Açıklama Belirtilmemiş.",
             usage: "Kullanım Belirtilmemiş.",
             examples: ["Örnek Bulunmamakta"],
             category: "OWNER",
-            aliases: ["newstark"],
-            acceptedRoles: [],
+            aliases: ["gifstat"],
+            acceptedRoles: ["root"],
             cooldown: 5000,
             enabled: true,
             adminOnly: false,
