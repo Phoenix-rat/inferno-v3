@@ -2,6 +2,9 @@ const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
 const { stripIndent } = require('common-tags');
+const Messages = require('../../../../../MODELS/StatUses/stat_msg');
+const Register = require('../../../../../MODELS/Datalake/Registered');
+
 class Nerede extends Command {
 
     constructor(client) {
@@ -24,6 +27,33 @@ class Nerede extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
 
+
+        const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        
+        const Veri = await Messages.findOne({ _id: mentioned.user.id });
+        const MesajVeri = Veri ? Veri.length : "Veri Bulunamadı";
+        
+        const TVeri = await Register.find({ executor: mentioned.user.id });
+        const KayıtVeri = TVeri ? TVeri.length : "Veri Bulunamadı";
+
+        const MyRole = message.guild.roles.cache.get("856266299285045288");
+        const NextRole = message.guild.roles.cache.get("856265230187102259")
+        
+        const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin stat verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 Kahve sizi seviyor ❤ ${message.guild.name}`)
+        .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+        .addField("__**Toplam Mesaj**__", `\`\`\`fix\n${MesajVeri}\`\`\``, true)
+        .addField("__**Toplam Kayıt**__", `\`\`\`fix\n${KayıtVeri}\`\`\``, true)
+        .addField("__**Toplam Davet**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+        .addField("__**Toplam Taglı**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+        .addField("__**Toplam Yetkili**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+        .addField(`Ses Kanalları`,`${emojis.get("statssh").value()} **Public Ses Kanalları:** \`31 saat, 31 dakika\`\n
+        **Kayıt Ses Kanalları:** \`31 saat, 31 dakika\``)
+        .addField(`Mesaj Kanalları`,`${emojis.get("statssh").value()} **Mesaj Kanalları:** \`31 mesaj\``)
+        .addField(`${emojis.get("statstars").value()} Puan Durumu`,`${bar(10000, 25000)} \`10000/25000\``)
+        .addField(`${emojis.get("statstars").value()} Yetki Atlama Durumu`,`${MyRole} rolünden ${NextRole} rolüne yükselmek için \`15000\` **Puana** ihtiyacın var!`)
+
+        await message.channel.send(embed)
+
         function bar(point, maxPoint) {
             const deger = Math.trunc(point * 10 / maxPoint);
             let str = "";
@@ -44,25 +74,6 @@ class Nerede extends Command {
             return str;
         }
         
-        const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
- 
-        const MyRole = message.guild.roles.cache.get("856266299285045288");
-        const NextRole = message.guild.roles.cache.get("856265230187102259")
-        
-        const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin stat verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 Kahve sizi seviyor ❤ ${message.guild.name}`)
-        .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField("__**Toplam Mesaj**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField("__**Toplam Kayıt**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField("__**Toplam Davet**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField("__**Toplam Taglı**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField("__**Toplam Yetkili**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField(`Ses Kanalları`,`${emojis.get("status_acik").value()} Public Ses Kanalları: \`31 saat, 31 dakika\``)
-        .addField(`Mesaj Kanalları`,`${emojis.get("status_acik").value()} Mesaj Kanalları: \`31 mesaj\``)
-        .addField(`${emojis.get("statstars").value()} Puan Durumu`,`${bar(10000, 25000)} \`10000/25000\``)
-        .addField(`${emojis.get("statstars").value()} Yetki Atlama Durumu`,`${MyRole} rolünden ${NextRole} rolüne yükselmek için \`15000\` **Puana** ihtiyacın var!`)
-
-        await message.channel.send(embed)
-
     }
 }
 
