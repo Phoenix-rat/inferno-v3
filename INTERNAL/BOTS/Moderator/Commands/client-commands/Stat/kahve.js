@@ -30,6 +30,8 @@ class Nerede extends Command {
         
         const Veri = await Messages.findOne({ _id: mentioned.user.id });
         const MesajVeri = Veri ? Veri.records.length + " Mesaj" : "Veri Bulunamadı";
+        let messageChannelRoom;
+		Veri.records.length > 0 ? messageChannelRoom = Veri.splice(0, 5).map(kek => `<#${kek.channelID}>: \`${Number(kek.channelData).toLocaleString()} mesaj\``).join("\n") : messageChannelRoom = "Veri bulunmuyor.";
 
         const TVeri = await Register.find({ executor: mentioned.user.id });
         const KayıtVeri = TVeri ? TVeri.length + " Kayıt" : "Veri Bulunamadı";
@@ -51,7 +53,7 @@ class Nerede extends Command {
         ${emojis.get("statssh").value()} **Kayıt Odaları:** \`31 saat, 31 dakika\`
         ${emojis.get("statssh").value()} **Private Odaları:** \`31 saat, 31 dakika\`
         ${emojis.get("statssh").value()} **Eğlence Odaları:** \`31 saat, 31 dakika\``)
-        .addField(`Mesaj Kanalları`,`${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``)
+        .addField(`Mesaj Kanalları`,`${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${messageChannelRoom}\``)
         .addField(`${emojis.get("statstars").value()} Puan Durumu`,`${bar(10000, 25000)} \`10000/25000\``)
         .addField(`${emojis.get("statstars").value()} Yetki Atlama Durumu`,`${MyRole} rolünden ${NextRole} rolüne yükselmek için \`15000\` **Puana** ihtiyacın var!`)
 
