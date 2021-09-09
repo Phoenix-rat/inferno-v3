@@ -7,7 +7,6 @@ const Register = require('../../../../../MODELS/Datalake/Registered');
 const Invites = require('../../../../../MODELS/StatUses/Invites');
 
 class Nerede extends Command {
-
     constructor(client) {
         super(client, {
             name: "kave",
@@ -22,7 +21,6 @@ class Nerede extends Command {
     }
 
     async run(client, message, args, data) {
-
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
