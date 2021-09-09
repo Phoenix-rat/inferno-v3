@@ -31,7 +31,7 @@ class Nerede extends Command {
         const Veri = await Messages.findOne({ _id: mentioned.user.id });
         const MesajVeri = Veri ? Veri.records.length + " Mesaj" : "Veri Bulunamadı";
         let messageChannelRoom;
-		Veri.records.length > 0 ? messageChannelRoom = Veri.splice(0, 5).map(kek => `<#${kek.channelID}>: \`${Number(kek.channelData).toLocaleString()} mesaj\``).join("\n") : messageChannelRoom = "Veri bulunmuyor.";
+		Veri.records.length > 0 ? messageChannelRoom = Veri.records.splice(0, 5).map(kek => `<#${kek.channelID}>: \`${Number(kek.channelData).toLocaleString()} mesaj\``).join("\n") : messageChannelRoom = "Veri bulunmuyor.";
 
         const TVeri = await Register.find({ executor: mentioned.user.id });
         const KayıtVeri = TVeri ? TVeri.length + " Kayıt" : "Veri Bulunamadı";
