@@ -57,7 +57,8 @@ class Nerede extends Command {
         .addField(`${emojis.get("statstars").value()} Yetki Atlama Durumu`,`${MyRole} rolünden ${NextRole} rolüne yükselmek için \`15000\` **Puana** ihtiyacın var!`)
 
         await message.channel.send(embed)
-    
+
+        
     }
 }
 
