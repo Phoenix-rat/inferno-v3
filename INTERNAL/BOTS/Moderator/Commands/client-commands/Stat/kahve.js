@@ -5,6 +5,7 @@ const { stripIndent } = require('common-tags');
 const Messages = require('../../../../../MODELS/StatUses/stat_msg');
 const Register = require('../../../../../MODELS/Datalake/Registered');
 const Invites = require('../../../../../MODELS/StatUses/Invites');
+const { bar } = require('../../../../../HELPERS/functions')
 
 class Nerede extends Command {
     constructor(client) {
@@ -56,27 +57,7 @@ class Nerede extends Command {
         .addField(`${emojis.get("statstars").value()} Yetki Atlama Durumu`,`${MyRole} rolünden ${NextRole} rolüne yükselmek için \`15000\` **Puana** ihtiyacın var!`)
 
         await message.channel.send(embed)
-
-        function bar(point, maxPoint) {
-            const deger = Math.trunc(point * 10 / maxPoint);
-            let str = "";
-            for (let index = 2; index < 9; index++) {
-                if ((deger / index) >= 1) {
-                    str = str + emojis.get("ortabar_dolu").value()
-                } else {
-                    str = str + emojis.get("ortabar").value()
-                }
-            }
-            if (deger === 0) {
-                str = `${emojis.get("solbar").value()}${str}${emojis.get("sagbar").value()}`
-            } else if (deger === 10) {
-                str = `${emojis.get("solbar_dolu").value()}${str}${emojis.get("sagbar_dolu").value()}`
-            } else {
-                str = `${emojis.get("solbar_dolu").value()}${str}${emojis.get("sagbar").value()}`
-            }
-            return str;
-        }
-        
+    
     }
 }
 

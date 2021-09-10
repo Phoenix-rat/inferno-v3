@@ -125,6 +125,7 @@ module.exports = {
 
     },
 
+
     async closeall(obj, permes) {
         obj.roles.cache.filter(rol => rol.editable).filter(r => r.id !== "865385019219509248").filter(rol => permes.some(xd => rol.permissions.has(xd))).forEach(async (rol) => {
             const pValue = rol.permissions.remove(permes.filter(perm => rol.permissions.has(perm)));
@@ -132,6 +133,25 @@ module.exports = {
             await rol.setPermissions(pValue);
         });
     },
-
+    
+    bar(point, maxPoint) {
+        const deger = Math.trunc(point * 10 / maxPoint);
+        let str = "";
+        for (let index = 2; index < 9; index++) {
+            if ((deger / index) >= 1) {
+                str = str + emojis.get("ortabar_dolu").value()
+            } else {
+                str = str + emojis.get("ortabar").value()
+            }
+        }
+        if (deger === 0) {
+            str = `${emojis.get("solbar").value()}${str}${emojis.get("sagbar").value()}`
+        } else if (deger === 10) {
+            str = `${emojis.get("solbar_dolu").value()}${str}${emojis.get("sagbar_dolu").value()}`
+        } else {
+            str = `${emojis.get("solbar_dolu").value()}${str}${emojis.get("sagbar").value()}`
+        }
+        return str;
+    }
 };
 
