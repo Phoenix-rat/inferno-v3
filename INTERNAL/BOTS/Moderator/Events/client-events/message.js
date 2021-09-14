@@ -229,7 +229,7 @@ module.exports = class {
         let time = uCooldown[cmd.info.name] || 0;
         if (time && (time > Date.now())) return message.channel.send(`${emojis.get("dmcmd").value()} Komutu tekrar kullanabilmek için lütfen **${Math.ceil((time - Date.now()) / 1000)}** saniye bekle!`);
         client.logger.log(`[(${message.author.id})] ${message.author.username} ran command [${cmd.info.name}]`, "cmd");
-        if (message.channel.id === "857659757233700875" && !message.member.permissions.has("MANAGE_ROLES") && command !== "tag") return;
+        if (message.channel.id === "857659757233700875" && !message.member.permissions.has("MANAGE_ROLES")&& (message.author.id !== "853011311328100411") && command !== "tag") return;
         try {
             cmd.run(client, message, args);
         } catch (e) {
