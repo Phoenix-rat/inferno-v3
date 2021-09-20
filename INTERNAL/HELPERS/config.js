@@ -5,7 +5,7 @@ module.exports = {
 	owner: "479293073549950997",
     server: "854087056757489694",
 	prefix: '.',
-    project: "inferno",
+    project: "starshine",
     status: {
         name: "Tantoony 🤍 Kahve",
         type: "LISTENING"
