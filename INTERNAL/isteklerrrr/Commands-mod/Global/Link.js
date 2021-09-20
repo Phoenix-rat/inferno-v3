@@ -19,9 +19,9 @@ exports.conf = {
 async function linkKontrol(message) {
 
     if (message.guild.vanityURLCode) {
-        message.channel.send(`https://discord.gg/${message.guild.vanityURLCode}`)
+        message.channel.send(`https://discord.gg/${message.guild.vanityURLCode}`);
     } else {
-        let davet = await message.channel.createInvite({ maxUses: 1 })
-        message.channel.send(`${davet}`).catch(() => { })
+        let davet = await message.channel.createInvite({ maxUses: 1 });
+        message.channel.send(`${davet}`);
     }
 }
