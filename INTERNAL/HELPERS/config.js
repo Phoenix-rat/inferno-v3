@@ -1,14 +1,14 @@
 module.exports = {
-	mongoDB: "INFERNO",
+	mongoDB: "inferno",
     auth: "admin",
     username: "Tantoony",
 	owner: "479293073549950997",
-    server: "854087056757489694",
+    server: "889246195103457330",
 	prefix: '.',
-    project: "starshine",
+    project: "fero",
     status: {
-        name: "Tantoony 🤍 Pussies",
+        name: "Kaptan 🤍 Fero",
         type: "LISTENING"
     },
-    tag: ['†']
+    tag: ['岺']
 }
