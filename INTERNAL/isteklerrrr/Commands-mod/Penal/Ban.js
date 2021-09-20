@@ -11,7 +11,7 @@ const Cezalar = require("../../Datebase/Moderasyon/Cezalar")
 const tarihim = new Date()
 module.exports.execute = async (client, message, args) => {
 
-    const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+    const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
     //if (!member || !args[0]) return message.react(client.emoji("red")).catch(() => { })
 
     if (message.member.hasPermission("ADMINISTRATOR")) {
