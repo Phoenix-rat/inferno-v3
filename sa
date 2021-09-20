@@ -7,3 +7,30 @@ log türleri: kaldırınca, atınca, otomatik kaldırınca
 reklam
 
 jail: süre sayı olmadığında perma ve gerisi sebep
+
+
+
+
+
+
+
+
+
+
+
+
+
+loglar:
+
+
+1. jail (tempjail/perma)
+2. banbilgi
+3. reklam
+4. rol
+5. kayıt
+6. voice mute
+7. chat mute
+8. mesaj log
+9. ototag
+
+
