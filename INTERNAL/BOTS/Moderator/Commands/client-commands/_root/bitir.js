@@ -31,6 +31,7 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
 
+        /*
         const publicCat = message.guild.channels.cache.filter(c => c.type === "category").array();
         const parent = message.guild.channels.cache.get(message.channel.parentID);
         await parent.permissionOverwrites.forEach(async o => {
@@ -49,7 +50,26 @@ class Kur extends Command {
         await parent.updateOverwrite(message.guild.roles.everyone.id, {
             VIEW_CHANNEL: false
         });
-
+        */
+        function Process(i) {
+            var ls = children.exec(`pm2 start /home/${client.config.project}/${utils.get("dir").value()}/INTERNAL/BOTS/_CD/cd${i}.js`);
+            ls.stdout.on('data', function (data) {
+                console.log(data);
+            });
+            ls.stderr.on('data', function (data) {
+                console.log(data);
+            });
+            ls.on('close', function (code) {
+                if (code == 0)
+                    console.log('Stop');
+                else
+                    console.log('Start');
+            });
+        }
+        for (let index = 1; index < utils.get("CdSize").value() + 1; index++) {
+            Process(index);
+        }
+        await ctx.send(`Başarılı!`);
     }
 
 }
