@@ -67,6 +67,7 @@ class Kur extends Command {
                     mentionable: false
                 }
             });
+            index = index + 1;
         }, 500);
 
 
