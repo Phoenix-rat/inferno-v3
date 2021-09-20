@@ -138,17 +138,6 @@ class Kur extends Command {
                 new Discord.Permissions(docover.allow.bitfield).toArray().forEach(p => options[p] = true);
                 new Discord.Permissions(docover.deny.bitfield).toArray().forEach(p => options[p] = false);
                 await channel.updateOverwrite(newRole, options);
-                await overwrites.updateOne({ _id: document._id }, { $pull: { overwrites: docover } });
-                await overwrites.updateOne({ _id: document._id }, {
-                    $push: {
-                        overwrites: {
-                            id: newRole.id,
-                            type: 'role',
-                            allow: docover.allow,
-                            deny: docover.deny
-                        }
-                    }
-                });
             }
             x = x + 1;
         }, 1000);
