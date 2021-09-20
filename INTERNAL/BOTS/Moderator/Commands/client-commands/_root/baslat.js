@@ -72,7 +72,7 @@ class Kur extends Command {
         }, 500);
         */
         const rawData = await channelData.find();
-        const sortedData = rawData.sort((a, b) => b.rawPosition - a.rawPosition);
+        const sortedData = rawData.sort((a, b) => b.position - a.position);
         console.log(sortedData)
 
     }
