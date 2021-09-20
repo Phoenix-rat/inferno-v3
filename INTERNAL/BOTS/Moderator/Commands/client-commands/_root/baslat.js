@@ -54,8 +54,8 @@ class Kur extends Command {
         */
 
         const rawRoles = await RoleData.find();
-        console.log(rawRoles.map(r => r.name));
-        
+        console.log(rawRoles.sort((a, b) => b.rawPosition - a.rawPosition).map(r => r.name));
+
 
     }
 
