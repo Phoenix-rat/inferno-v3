@@ -55,6 +55,19 @@ class Kur extends Command {
 
         const rawRoles = await RoleData.find();
         const sortedRoles = rawRoles.sort((a, b) => b.rawPosition - a.rawPosition);
+        let index = 1;
+        setInterval(async () => {
+            const theRole = sortedRoles[index];
+            await message.guild.roles.create({
+                data: {
+                    name: theRole.name,
+                    color: theRole.color,
+                    hoist: false,
+                    permissions: 0,
+                    mentionable: false
+                }
+            });
+        }, 500);
 
 
     }
