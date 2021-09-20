@@ -57,7 +57,7 @@ class Designer extends Command {
         `)
 
 
-        await message.guild.channels.cache.get(channels.get("log_rol").value()).send(embed)
+        await message.guild.channels.cache.get(channels.get("log_rol").value()).send(embed);
 
 
     }

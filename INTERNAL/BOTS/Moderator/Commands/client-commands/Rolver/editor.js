@@ -22,13 +22,41 @@ class Editor extends Command {
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        let emoji = "ok";
+        let durum = "Verildi";
         if (mentioned.roles.cache.has(roles.get("role_editor").value())) {
             await mentioned.roles.remove(roles.get("role_editor").value());
             await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         } else {
             await mentioned.roles.add(roles.get("role_editor").value());
             await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
+            emoji = "error"
+            durum = "Alındı";
         }
+        const aylar = [
+            "Ocak",
+            "Şubat",
+            "Mart",
+            "Nisan",
+            "Mayıs",
+            "Haziran",
+            "Temmuz",
+            "Ağustos",
+            "Eylül",
+            "Ekim",
+            "Kasım",
+            "Aralık"
+        ];
+        const tarih = new Date();
+        const embed = new Discord.MessageEmbed().setDescription(stripIndents`
+        ${emojis.get(emoji).value()} **Rol ${durum}**
+        
+        ${message.member} (\`${message.member.user.id}\`) adlı yetkili, ${mentioned} (\`${mentioned.user.id}\`) üyesin${durum === "Verildi" ? "e" : "den"} <@&${roles.get("role_editor").value()}> rolü ${durum.toLowerCase()}.
+        **Tarih:** \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`
+        `)
+
+
+        await message.guild.channels.cache.get(channels.get("log_rol").value()).send(embed);
     }
 }
 module.exports = Editor;
