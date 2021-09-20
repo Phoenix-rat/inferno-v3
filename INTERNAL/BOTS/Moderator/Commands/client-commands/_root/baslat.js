@@ -2,6 +2,7 @@ const Command = require("../../../Base/Command");
 const low = require('lowdb');
 const Discord = require('discord.js');
 const izin = require('../../../../../MODELS/Temprorary/Permissions');
+const RoleData = require('../../../../../MODELS/Datalake/Roles');
 const keyz = require('shortid');
 class Kur extends Command {
 
@@ -30,7 +31,7 @@ class Kur extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-
+        /*
         const publicCat = message.guild.channels.cache.get(channels.get("st_public").value());
         const parent = message.guild.channels.cache.get(message.channel.parentID);
         await parent.setPosition(publicCat.position);
@@ -50,6 +51,12 @@ class Kur extends Command {
                 VIEW_CHANNEL: false
             });
         })
+        */
+
+        const rawRoles = await RoleData.find();
+        console.log(rawRoles.map(r => r.name));
+        
+
     }
 
 }
