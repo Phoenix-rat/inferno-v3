@@ -52,8 +52,8 @@ class Designer extends Command {
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
         ${emojis.get(emoji).value()} **Rol ${durum}**
         
-        ${message.member} (\`${message.member.user.id}\`) adlı yetkili, ${mentioned} (\`${mentioned.user.id}\`) üyesin${durum === "Verildi" ? "e" : "den"} <@&${roles.get("role_designer").value()}> rolü ${durum.toLowerCase()}
-        **Tarih:** \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`.
+        ${message.member} (\`${message.member.user.id}\`) adlı yetkili, ${mentioned} (\`${mentioned.user.id}\`) üyesin${durum === "Verildi" ? "e" : "den"} <@&${roles.get("role_designer").value()}> rolü ${durum.toLowerCase()}.
+        **Tarih:** \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`
         `)
 
 
