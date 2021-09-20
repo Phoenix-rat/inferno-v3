@@ -3,6 +3,7 @@ const low = require('lowdb');
 const Discord = require('discord.js');
 const izin = require('../../../../../MODELS/Temprorary/Permissions');
 const RoleData = require('../../../../../MODELS/Datalake/Roles');
+const channelData = require('../../../../../MODELS/Datalake/CatChannels');
 const keyz = require('shortid');
 class Kur extends Command {
 
@@ -52,7 +53,7 @@ class Kur extends Command {
             });
         })
         */
-
+        /*
         const rawRoles = await RoleData.find();
         const sortedRoles = rawRoles.sort((a, b) => b.rawPosition - a.rawPosition);
         let index = 1;
@@ -69,7 +70,10 @@ class Kur extends Command {
             });
             index = index + 1;
         }, 500);
-
+        */
+        const rawData = await channelData.find();
+        const sortedData = rawData.sort((a, b) => b.rawPosition - a.rawPosition);
+        console.log(sortedData)
 
     }
 
