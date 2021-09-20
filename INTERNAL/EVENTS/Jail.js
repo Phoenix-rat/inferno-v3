@@ -32,6 +32,13 @@ class JailEvent {
             await Jails.updateOne({ _id: member.user.id }, { $inc: { duration: Number(duration) || 0 } });
         }
         client.extention.emit('Record', member.user.id, executor, reason, "Jail", type, duration);
+        const embed = new Discord.MessageEmbed().setDescription(stripIndents`
+        **Cezalandıran yetkili:** ${guild.members.cache.get(executor)} (\`${executor}\`)
+        **Cezalandırılan kişi:** ${member} (\`${member.user.id}\`)
+        **Sebep:** ${reason || "Yok"}
+        **Süresi:** ${type === "perma" ? "Sınırsız" : `${duration} dakika`}
+        `);
+        await guild.channels.cache.get(channels.get("log_jail").value()).send(embed);
     }
 }
 

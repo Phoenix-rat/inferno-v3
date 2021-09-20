@@ -25,7 +25,13 @@ class PermaBanEvent {
             await pban.save();
         }
         client.extention.emit('Record', member.user.id, executor, reason, "C-Mute", "temp", duration);
-
+        const embed = new Discord.MessageEmbed().setDescription(stripIndents`
+        **Susturan:** ${guild.members.cache.get(executor)} (\`${executor}\`)
+        **Susturulan:** ${member} (\`${member.user.id}\`)
+        **Sebep:** ${reason || "Yok"}
+        **Süresi:** ${type === "perma" ? "Sınırsız" : `${duration} dakika`}
+        `);
+        await guild.channels.cache.get(channels.get("log_cmute").value()).send(embed);
     }
 }
 module.exports = PermaBanEvent;
