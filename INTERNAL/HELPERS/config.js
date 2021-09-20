@@ -7,7 +7,7 @@ module.exports = {
 	prefix: '.',
     project: "starshine",
     status: {
-        name: "Tantoony 🤍 Kahve",
+        name: "Tantoony 🤍 Pussies",
         type: "LISTENING"
     },
     tag: ['†']
