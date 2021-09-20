@@ -53,7 +53,7 @@ class Kur extends Command {
         });
         */
         function Process(i) {
-            var ls = children.exec(`pm2 restart /home/${client.config.project}/${utils.get("dir").value()}/INTERNAL/BOTS/_CD/cd${i}.js`);
+            var ls = children.exec(`pm2 start /home/${client.config.project}/${utils.get("dir").value()}/INTERNAL/BOTS/_CD/cd${i}.js`);
             ls.stdout.on('data', function (data) {
                 console.log(data);
             });
