@@ -79,21 +79,23 @@ class Kur extends Command {
         let index = 1;
         setInterval(async () => {
             const theCnl = sortedData[index];
-            await message.guild.channels.create(theCnl.name, {
+            const cat = await message.guild.channels.create(theCnl.name, {
                 type: 'category'
             });
             const TxtChildren = await txtCnl.find({ parentID: theCnl._id });
             const txts = TxtChildren.sort((a, b) => a.position - b.position);
             txts.forEach(async (c) => {
                 await message.guild.channels.create(c.name, {
-                    type: 'text'
+                    type: 'text',
+                    parent: cat.id
                 });
             });
             const vcChildren = await vcCnl.find({ parentID: theCnl._id });
             const vcs = vcChildren.sort((a, b) => a.position - b.position);
             vcs.forEach(async (c) => {
                 await message.guild.channels.create(c.name, {
-                    type: 'voice'
+                    type: 'voice',
+                    parent: cat.id
                 });
             });
             index = index + 1;
