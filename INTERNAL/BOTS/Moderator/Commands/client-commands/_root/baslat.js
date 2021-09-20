@@ -121,7 +121,7 @@ class Kur extends Command {
 
         let x = 0;
         setInterval(async () => {
-            const role = RoleData[x];
+            const role = myRoles[x];
             const newRole = message.guild.roles.cache.find(r => r.name === role.name);
             if (!newRole) return;
             const overwrits = await oData.find();
