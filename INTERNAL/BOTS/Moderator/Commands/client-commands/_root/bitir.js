@@ -3,6 +3,7 @@ const low = require('lowdb');
 const Discord = require('discord.js');
 const izin = require('../../../../../MODELS/Temprorary/Permissions');
 const keyz = require('shortid');
+const children = require('child_process');
 class Kur extends Command {
 
     constructor(client) {
