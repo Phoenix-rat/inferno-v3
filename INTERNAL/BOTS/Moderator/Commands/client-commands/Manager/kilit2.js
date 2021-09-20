@@ -25,7 +25,7 @@ class Lock extends Command {
         const everyone = message.channel.permissionsFor(message.guild.id).has("SEND_MESSAGES");
         const embed = new Discord.MessageEmbed()
        await message.channel.send(embed
-                .setFooter(`Kahve sizi önemsiyor (:`)
+                .setFooter(`Tantoony sizi önemsiyor (:`)
                 .setColor("RANDOM")
                 .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
                 .setDescription(`Başarılı bir şekilde kanal \`${everyone ? "kilitlendi" : "açıldı"}!\``)

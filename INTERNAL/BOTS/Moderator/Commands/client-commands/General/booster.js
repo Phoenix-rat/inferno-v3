@@ -8,8 +8,8 @@ class Booster extends Command {
         super(client, {
             name: "booster",
             description: "Belirtilen ismi adınız yapar",
-            usage: "booster Kahverella",
-            examples: ["booster Kahvrella"],
+            usage: "booster Tantoony",
+            examples: ["booster Tantoony"],
             category: "Genel",
             accaptedPerms: ["booster"],
             aliases: ["zengin", "bisim", "booserisim"],

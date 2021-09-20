@@ -11,9 +11,9 @@ class Nerede extends Command {
         super(client, {
             name: "kave",
             description: "etiketlenen kişinin nerede olduğunu gösterir.",
-            usage: "kave @Kahve/ID",
-            examples: ["nerede @Kahve/ID"],
-            aliases: ["kahpe", "allahukahve"],
+            usage: "kave @fero/ID",
+            examples: ["nerede @fero/ID"],
+            aliases: ["kahpe"],
             category: "Genel",
             cmdChannel: "bot-komut",
             cooldown: 300000
@@ -40,7 +40,7 @@ class Nerede extends Command {
         const MyRole = message.guild.roles.cache.get("856266299285045288");
         const NextRole = message.guild.roles.cache.get("856265230187102259")
         
-        const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin stat verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 Kahve sizi seviyor ❤ ${message.guild.name}`)
+        const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin stat verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 fero sizi seviyor ❤ ${message.guild.name}`)
         .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
         .addField("__**Toplam Mesaj**__", `\`\`\`fix\n${MesajVeri}\`\`\``, true)
         .addField("__**Toplam Kayıt**__", `\`\`\`fix\n${KayıtVeri}\`\`\``, true)

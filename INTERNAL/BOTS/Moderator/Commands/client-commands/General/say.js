@@ -29,7 +29,7 @@ class Say2 extends Command {
         let relax = await message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("booster").value())).size;
         let baby = await message.guild.voiceStates.cache.filter(v => v.channel).size;
 
-        const saranembed = new MessageEmbed().setColor("BLACK").setFooter(`• Kahve ❤ INFEЯИO †`, message.author.displayAvatarURL({ dynamic: true }));
+        const saranembed = new MessageEmbed().setColor("BLACK").setFooter(`• fero ❤ INFEЯИO †`, message.author.displayAvatarURL({ dynamic: true }));
         const obj = {};
         for (let index = 0; index < message.guild.channels.cache.filter(c => c.type === "voice").array().length; index++) {
             const myChannel = message.guild.channels.cache.filter(c => c.type === "voice").array()[index];

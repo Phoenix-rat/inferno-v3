@@ -7,8 +7,8 @@ class Vokal extends Command {
         super(client, {
             name: "dj",
             description: "Belirtilen kullanıcıya özel üye rolü verir.",
-            usage: "dj @Kahve/ID",
-            examples: ["dj @Kahve/ID"],
+            usage: "dj @fero/ID",
+            examples: ["dj @fero/ID"],
             category: "Genel",
             aliases: [],
             accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double"],

@@ -28,7 +28,7 @@ class BanSorgu extends Command {
         • Banlayan kullanıcı: ${message.guild.members.cache.get(banData ? banData.executor : "123") ? message.guild.members.cache.get(banData.executor) : `Sunucuda değil (${banData.executor})`}
         • Ban süresi: \`${banData ? banData.type : "Perma"}\`
         • Banın Açılacağı tarih: \`${banData && (banData.type === "temp") ? banData.duration - checkDays(banData.created) : "Açılmayacak"}\`
-        `).setColor('BLACK').setTimestamp().setFooter(`• İkinici bir şans? -Kahve 🌟`).setTitle("† Dante's INFEЯИO");
+        `).setColor('BLACK').setTimestamp().setFooter(`• İkinici bir şans? -allah(?) 🌟`).setTitle("† Dante's INFEЯИO");
         await message.channel.send(embed).then(msg => msg.delete({ timeout: 13000 }));
         client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
     }

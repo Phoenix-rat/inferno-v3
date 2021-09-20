@@ -19,7 +19,7 @@ class Meeting extends Command {
   async run(client, message, args) {
     const roles = await low(client.adapters('roles'));
 
-    const meetingemb = new Discord.MessageEmbed().setColor("BLACK").setTimestamp().setFooter(`• Kahve sizi seviyor 🌟`).setColor("BLACK").setTitle("† Dante's INFEЯИO");
+    const meetingemb = new Discord.MessageEmbed().setColor("BLACK").setTimestamp().setFooter(`• Şeytan sizi seviyor 🌟`).setColor("BLACK").setTitle("† Dante's INFEЯИO");
 
     switch (args[0]) {
       case "katıldı": {

@@ -13,8 +13,8 @@ class Sicil extends Command {
         super(client, {
             name: "sicil",
             description: "Belirtilen üyenin ceza geçmişini görüntüler",
-            usage: "sicil @Kahve/ID ",
-            examples: ["sicil @Kahve/ID"],
+            usage: "sicil @fero/ID ",
+            examples: ["sicil @fero/ID"],
             category: "Sorgu",
             aliases: ["sorgu","cezalar"],
             accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single"],
@@ -24,7 +24,7 @@ class Sicil extends Command {
 
     async run(client, message, args) {
         let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0] || message.member.user.id;
-        const patates = new Discord.MessageEmbed().setThumbnail(message.guild.iconURL({ dynamic: true })).setTimestamp().setFooter(`• Adam ol ceza yeme -Kahve 🌟`).setTitle("† Dante's INFEЯИO").setColor("BLACK")
+        const patates = new Discord.MessageEmbed().setThumbnail(message.guild.iconURL({ dynamic: true })).setTimestamp().setFooter(`• Adam ol ceza yeme 🌟`).setTitle("† Dante's INFEЯИO").setColor("BLACK")
         const whathefuck = await sicil.findOne({ _id: mentionedID });
         if (!whathefuck) return message.channel.send(new Discord.MessageEmbed().setColor("BLACK").setDescription("Kullancının herhangi bir ceza geçmişi bulunmamaktadır!"));
         let sth;

@@ -61,7 +61,7 @@ class Invites extends Command {
             const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
             ${mentioned} kişisine ait ${days} günlük ses bilgileri:
 
-               **Not:** Bu sistem test amaçlı yapılmıştır komutun daha güncel ve daha iyi hali gelene kadar bir süre bununla idare ediniz seviyiorsunuz kahvelendiz <3.
+               **Not:** Bu sistem test amaçlı yapılmıştır komutun daha güncel ve daha iyi hali gelene kadar bir süre bununla idare ediniz seviyiorsunuz <3.
             
             **Genel Bilgileri:**
             • ID: \`${mentioned.id}\`
@@ -79,7 +79,7 @@ class Invites extends Command {
             • Toplam ses: \`${msToTime(records.map(r => r.duration).reduce((a, b) => a + b, 0))}\`
             • Mikrofon kapalı: \`${msToTime(records.filter(r => r.selfMute).map(r => r.duration).reduce((a, b) => a + b, 0))}\`
             • Kulaklık kapalı: \`${msToTime(records.filter(r => r.selfDeaf).map(r => r.duration).reduce((a, b) => a + b, 0))}\`
-         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setFooter("• Kahve seni önemsiyor- vallaha önemsiyom abi").setTitle(message.guild.name);
+         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setFooter("• Tantoony seni önemsiyor- vallaha önemsiyom abi").setTitle(message.guild.name);
             return await message.channel.send(responseEmbed).then(msg => msg.delete({ timeout: 20000 }));
         }
 

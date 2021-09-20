@@ -9,8 +9,8 @@ class Erkek extends Command {
         super(client, {
             name: "erkek",
             description: "Kayıtsız bir üyeyi erkek olarak kayıt eder",
-            usage: "erkek @Kahve/ID İsim Yaş",
-            examples: ["erkek @Kahve/ID İsim Yaş"],
+            usage: "erkek @fero/ID İsim Yaş",
+            examples: ["erkek @fero/ID İsim Yaş"],
             category: "Kayıt",
             aliases: ["e", "man"],
             cmdChannel: "exe-registry",

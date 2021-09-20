@@ -8,8 +8,8 @@ class Nerede extends Command {
         super(client, {
             name: "nerede",
             description: "etiketlenen kişinin nerede olduğunu gösterir.",
-            usage: "nerede @Kahve/ID",
-            examples: ["nerede @Kahve/ID"],
+            usage: "nerede @Tantoony/ID",
+            examples: ["nerede @Tantoony/ID"],
             aliases: ["bul", "n"],
             category: "Genel",
             cmdChannel: "bot-komut",
@@ -31,7 +31,7 @@ class Nerede extends Command {
         let whereinfo = `• Mikrofonu: ${mentioned.voice.mute ? `Kapalı` : `Açık`} \n• Kulaklığı: ${mentioned.voice.deaf ? `Kapalı` : `Açık`}`
         let wherechannel = `${mentioned.voice.channel} (\`${mentioned.voice.channel.members.size}/${mentioned.voice.channel.userLimit}\`)`;
         
-        const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setTimestamp().setFooter(`• Kahve sizi seviyor 🌟`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
+        const embed = new Discord.MessageEmbed().setColor(mentioned.displayHexColor).setTimestamp().setFooter(`• Tantoony sizi seviyor 🌟`).setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }));
         const neredembed = embed.setDescription(`
         ${mentioned} kişisi ${wherechannel} kanalında.
          ** • Ses Biglileri:**

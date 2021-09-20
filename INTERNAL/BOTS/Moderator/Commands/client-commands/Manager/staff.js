@@ -6,8 +6,8 @@ class Staffver extends Command {
         super(client, {
             name: "staff",
             description: "Belirtilen roldeki üyeleri gösterir.",
-            usage: "staff @Kahve/ID",
-            examples: ["rolver @Kahve/ID"],
+            usage: "staff @fero/ID",
+            examples: ["rolver @fero/ID"],
             category: "Yetkili",
             aliases: ["permver", "yetkiver"],
             accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single"],
@@ -25,17 +25,17 @@ class Staffver extends Command {
         if (!mentioned) return await message.channel.send(new Discord.MessageEmbed().setColor("BLACK").setDescription(`Kullanıcı bulunamadı :(`)).then(msg => msg.delete({ timeout: 10000 }));
         
         const yetenekembed = new Discord.MessageEmbed().setColor("BLACK").setTimestamp()
-        .setFooter(`• Kahve sizi seviyor 🌟`).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
+        .setFooter(`• fero sizi seviyor 🌟`).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
         
         let select = args[1]
         if (!select || (select !== 'register' && select !== 'ability' && select !== 'jail' && select !== 'mute' && select !== 'gang')) 
         return message.channel.send(yetenekembed.setDescription(`
         ───────────────────
-        • .permver @Kahve/ID register (\`Gatekeeper †\`) permini verir.
-        • .permver @Kahve/ID ability (\`Ruby †\`) permini verir.
-        • .permver @Kahve/ID jail (\`Punisher †\`) permini verir.
-        • .permver @Kahve/ID mute (\`Silencer †\`) permini verir.
-        • .permver @Kahve/ID gang (\`Gang †\`) permini verir.
+        • .permver @fer/ID register (\`Gatekeeper †\`) permini verir.
+        • .permver @fero/ID ability (\`Ruby †\`) permini verir.
+        • .permver @fero/ID jail (\`Punisher †\`) permini verir.
+        • .permver @fero/ID mute (\`Silencer †\`) permini verir.
+        • .permver @fero/ID gang (\`Gang †\`) permini verir.
         ───────────────────
         `)).then(msg => msg.delete({ timeout: 10000 }));
 
