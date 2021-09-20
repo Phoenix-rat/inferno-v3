@@ -38,7 +38,7 @@ client.on('ready', async () => {
             } catch (error) {
                 console.log(error)
             }
-        }
+        } else await membr.roles.add('889423544545607681');
     }
 });
 client.on("error", (err) => { console.error(err); });
