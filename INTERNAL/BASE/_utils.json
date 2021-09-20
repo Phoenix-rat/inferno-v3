@@ -1,5 +1,5 @@
 {
-  "mongoDB": "Inferno",
+  "mongoDB": "inferno",
   "CdSize": 11,
   "vanityURL": "inferno",
   "mod": [
@@ -46,7 +46,7 @@
   "vanityUses": 153,
   "lastCrush": "860459349713354762",
   "taglıAlım": false,
-  "ohal": true,
+  "ohal": false,
   "dir": "inferno-v3",
   "perms": {
     "853669620124483605": "1610611408"
