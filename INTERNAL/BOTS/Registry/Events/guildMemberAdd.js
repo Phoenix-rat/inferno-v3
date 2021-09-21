@@ -148,8 +148,10 @@ class GuildMemberAdd {
         const channel = member.guild.channels.cache.filter(c => (c.parentID === channels.get("st_registry").value()) && (c.type === "voice")).find(c => c.members.array().filter(m => m.roles.cache.has(yetkili.id)).length > 0);
         const embed = stripIndents`
         **${emojis.get("pando1").value()} INFERNO'ya Hoş Geldin ${member} ${emojis.get("pando1").value()}**
+
         ${davetci && davetci.id ? `${member.guild.members.cache.get(davetci.id)} senin sayende **${count} davet** sayısına ulaştı,`: `Özel URL **${urlCcount} kullanıma** ulaştı,`} seninle beraber **${member.guild.memberCount}** kişi olduk!
         Hesabın **${checkDays(member.user.createdAt)} gün önce** oluşturulmuş, kayıt olmanda herhangi bir sakınca yok ❤️‍🔥
+        
         Unutma ${rules} toplumun düzenini sağlamak için var! Kurallarımıza göz atmayı unutma. Tekrardan **Hoş Geldin** :tada:
         `
         member.guild.channels.cache.get(channels.get("welcome").value()).send(embed);
