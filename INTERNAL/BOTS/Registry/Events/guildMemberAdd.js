@@ -152,7 +152,7 @@ class GuildMemberAdd {
         Hesabını **${checkDays(member.user.createdAt)} gün önce** oluşturduğundan dolayı \`Şüpheli Hesap\` engelimizi aştın!
         Unutma ${rules} toplumun düzenini sağlamak için var! Kurallarımıza göz atmayı unutma. Tekrardan **Hoş Geldin**
 
-        Görünüşe göre seni buraya getiren kişi: **${davetci ? (davetci.username || "Özel URL") : "ÖZEL URL"}** [\`Davet Sayısı: ${davetçi ? count : urlCcount}\`]
+        Görünüşe göre seni buraya getiren kişi: **${davetci ? (davetci.username || "Özel URL") : "ÖZEL URL"}** [\`Davet Sayısı: ${davetci ? count : urlCcount}\`]
         Kayıt olmak için Gates of Hell kanallarından herhangi birine girip __**${yetkili.name}**__ rolünü etiketleyebilirsin.
         `
         member.guild.channels.cache.get(channels.get("welcome").value()).send(embed);
