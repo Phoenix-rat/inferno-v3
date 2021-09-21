@@ -42,7 +42,7 @@ class Kiz extends Command {
         if (!age) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let nameAge = rawName.map(i => i[0].toUpperCase() + i.slice(1).toLowerCase());
         nameAge = nameAge.join(' ').replace(` ${age}`, '');
-        let point = '⸸';
+        let point = '•';
         if (client.config.tag.some(tag => mentioned.user.username.includes(tag))) {
             point = client.config.tag[0];
         }
