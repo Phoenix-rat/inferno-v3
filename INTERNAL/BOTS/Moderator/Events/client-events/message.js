@@ -4,9 +4,12 @@ const afkdata = require('../../../../MODELS/Temprorary/AfkData');
 const Points_config = require('../../../../MODELS/Economy/Points_config');
 const Points_profile = require('../../../../MODELS/Economy/Points_profile');
 const tagged = require('../../../../MODELS/Temprorary/tagged');
-const { comparedate, checkMins, checkHours } = require('../../../../HELPERS/functions');
+const { comparedate, checkMins, checkHours, checkSecs } = require('../../../../HELPERS/functions');
 const Tagli = require('../../../../MODELS/Datalake/Tagli');
-const stat_msg = require("../../../../MODELS/StatUses/stat_msg.js")
+const stat_msg = require("../../../../MODELS/StatUses/stat_msg.js");
+const moment = require("moment");
+require('moment-duration-format');
+moment.locale("tr");
 
 module.exports = class {
     constructor(client) {
@@ -57,8 +60,9 @@ module.exports = class {
             await message.member.roles.add(roles.get("otbmisafir").value());
         }
         let system = await afkdata.findOne({ _id: message.member.user.id });
-        if (system && checkMins(system.created) <= 1) {
-            await message.channel.send(new Discord.MessageEmbed().setDescription(`Seni tekrardan görmek ne güzel ${message.member}!\n${system.inbox.length > 0 ? `${system.inbox.length} yeni mesajın var!\n●▬▬▬▬▬▬▬▬▬●\n${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}` : "Hiç yeni mesajın yok!"}`));
+        if (system) { // ${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}
+            const afkMsg = await message.channel.send(`${message.member} Hoş geldin! ${checkMins(system.created) <= 1 ? "Biraz" : `**${moment.duration(new Date().getTime() - sytem.created.getTime()).format("D [Gün], H [Saat], m [Dakika]")}**`} önce afk olmuştun.${(system.inbox.length > 0) && ` Birkaç mesajın var eğer bakmak istersen emojiye basabilirsin.`}`);
+            await afkMsg.react(emojis.get("afk").value().split(':')[2].replace('>', ''));
             await afkdata.deleteOne({ _id: message.member.user.id });
         }
         if (message.mentions.members.first()) {
