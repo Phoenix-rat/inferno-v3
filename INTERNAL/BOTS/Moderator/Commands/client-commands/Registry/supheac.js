@@ -11,7 +11,7 @@ class Supheac extends Command {
             usage: "supheac etiket/id",
             examples: ["supheac 674565119161794560"],
             category: "Kayıt",
-            aliases: ["şüpheaç", "şüphemyok", "suphemyok"],
+            aliases: ["şüpheaç", "şüphemyok", "şüpheli"],
             cmdChannel: "suspicious",
             accaptedPerms: ["cmd-registry", "cmd-double", "cmd-single", "cmd-ceo"],
             cooldown: 10000
@@ -24,8 +24,8 @@ class Supheac extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
-        if (!mentioned.roles.cache.has(roles.get("suspicious").value())) return message.channel.send(new Discord.MessageEmbed().setDescription(`Etiketlediğin kişi şüpheli değil!`));
+        if (!mentioned) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (!mentioned.roles.cache.has(roles.get("suspicious").value())) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         await mentioned.roles.remove(roles.get("suspicious").value());
         await mentioned.roles.add(roles.get("welcome").value());
         const embed = new Discord.MessageEmbed()
