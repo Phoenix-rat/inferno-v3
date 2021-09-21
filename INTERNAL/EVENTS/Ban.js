@@ -32,11 +32,27 @@ class PermaBanEvent {
             });
             await pban.save();
         }
+        const aylar = [
+            "Ocak",
+            "Şubat",
+            "Mart",
+            "Nisan",
+            "Mayıs",
+            "Haziran",
+            "Temmuz",
+            "Ağustos",
+            "Eylül",
+            "Ekim",
+            "Kasım",
+            "Aralık"
+        ];
+        const tarih = new Date();
         client.extention.emit('Record', user.id, executor, reason, "Ban", "Perma", 0);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
-        **Banlayan:** ${guild.members.cache.get(executor)} (\`${executor}\`)
-        **Banlanan:** ${user} (\`${user.id}\`)
-        **Sebep:** ${reason || "Yok"}
+        **${user.tag}** (\`${user.id}\`) adlı kullanıcı sunucudan yasaklandı! 
+        \` • \` Yasaklayan : ${guild.members.cache.get(executor)} (\`${executor}\`)
+        \` • \` Sebep: \`${reason || "Yok"}\`
+        \` • \` Yasaklanma Tarihi: \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`
         `);
         await guild.channels.cache.get(channels.get("log_ban").value()).send(embed);
     }
