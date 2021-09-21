@@ -2,7 +2,7 @@ module.exports = {
 	mongoDB: "sexferno",
     auth: "admin",
     username: "Tantoony",
-	owner: "479293073549950997",
+	owner: "484873072164208640",
     server: "889246195103457330",
 	prefix: '.',
     project: "fero",
