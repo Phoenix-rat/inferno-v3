@@ -24,24 +24,12 @@ class Ban extends Command {
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 
-        let sebep = args.slice(1).join(" ")
-        let typo = "perma"
-        if (args[1] === 'perma') {
-            sebep = args.slice(2).join(" ");
-            typo = 'perma';
-            args[1] = 0;
-        } else {
-            typo = 'temp';
-        }
+        let sebep = args.slice(1).join(" ");
         if (!sebep) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (!mentioned.bannable) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-        if (!sayi(args[1])) {
-            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-            return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
-        }
         if (!mentioned.bannable) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-        client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep, typo, args[1]);
+        client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 
         

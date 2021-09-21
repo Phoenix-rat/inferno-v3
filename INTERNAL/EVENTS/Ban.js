@@ -8,7 +8,7 @@ class PermaBanEvent {
         this.client = client;
     };
 
-    async run(guild, user, executor, reason, type, duration) {
+    async run(guild, user, executor, reason) {
         const client = this.client;
         const utils = await low(client.adapters('utils'));
         const roles = await low(client.adapters('roles'));
@@ -27,18 +27,15 @@ class PermaBanEvent {
                 _id: user.id,
                 executor: executor,
                 reason: reason,
-                type: type,
-                duration: Number(duration) || 0,
                 created: new Date()
             });
             await pban.save();
         }
-        client.extention.emit('Record', user.id, executor, reason, "Ban", type, duration);
+        client.extention.emit('Record', user.id, executor, reason, "Ban", "Perma", 0);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
         **Banlayan:** ${guild.members.cache.get(executor)} (\`${executor}\`)
         **Banlanan:** ${user} (\`${user.id}\`)
         **Sebep:** ${reason || "Yok"}
-        **Süre:** ${type === "perma" ? "Sınırsız" : `${duration} gün`}
         `);
         await guild.channels.cache.get(channels.get("log_ban").value()).send(embed);
     }
