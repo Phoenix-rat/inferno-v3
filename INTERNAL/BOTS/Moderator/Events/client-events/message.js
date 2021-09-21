@@ -62,7 +62,7 @@ module.exports = class {
         let system = await afkdata.findOne({ _id: message.member.user.id });
         if (system) {
             await afkdata.deleteOne({ _id: message.member.user.id });
-            const afkMsg = await message.channel.send(`${message.member} Hoş geldin! ${checkMins(system.created) <= 1 ? "Biraz" : `**${moment.duration(new Date().getTime() - system.created.getTime()).format("D [Gün], H [Saat], m [Dakika]")}**`} önce afk olmuştun.${system.inbox.length > 0 ? ` Birkaç mesajın var eğer bakmak istersen emojiye basabilirsin.` : ""}`);
+            const afkMsg = await message.channel.send(`${message.member} Hoş geldin! ${checkMins(system.created) < 1 ? "**Biraz" : `**${moment.duration(new Date().getTime() - system.created.getTime()).format("D [Gün], H [Saat], m [Dakika]")}`} önce** afk olmuştun.${system.inbox.length > 0 ? ` Birkaç mesajın var eğer bakmak istersen emojiye basabilirsin.` : ""}`);
             if (system.inbox.length > 0) {
                 await afkMsg.react(emojis.get("afk").value().split(':')[2].replace('>', ''));
                 const filter = (reaction, user) => user.id !== this.client.user.id;
