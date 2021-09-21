@@ -49,8 +49,6 @@ class Supheac extends Command {
         await message.guild.channels.cache.get(channels.get("kayıt_log").value()).send(new Discord.MessageEmbed().setDescription(stripIndents`
         **Komutu kullanan:** ${message.member} (\`${message.member.user.id}\`)
         **Şüpheliden çıkarılan:** ${mentioned} (\`${mentioned.user.id}\`)
-        **İsim/Yaş:** \`${data ? data.name : "Bilinmiyor"} | ${data ? data.age : "Bilinmiyor"}\`
-        **Cinsiyet:** \`${data ? (data.sex === "Male" ? "Erkek" : "Kız") : "Bilinmiyor"}\`
         **Tag:** ${client.config.tag.some(t => mentioned.user.username.includes(t)) ? "\`Var\`" : "\`Yok\`"}
         **Tarih:** \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`
         `).setColor("#c27c0e").setAuthor(message.member.user.tag, message.member.user.displayAvatarURL({ dynamic: true })).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })));
