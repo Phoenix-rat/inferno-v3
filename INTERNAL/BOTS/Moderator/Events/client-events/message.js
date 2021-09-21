@@ -63,27 +63,29 @@ module.exports = class {
         if (system) {
             await afkdata.deleteOne({ _id: message.member.user.id });
             const afkMsg = await message.channel.send(`${message.member} Hoş geldin! ${checkMins(system.created) <= 1 ? "Biraz" : `**${moment.duration(new Date().getTime() - system.created.getTime()).format("D [Gün], H [Saat], m [Dakika]")}**`} önce afk olmuştun.${system.inbox.length > 0 ? ` Birkaç mesajın var eğer bakmak istersen emojiye basabilirsin.` : ""}`);
-            await afkMsg.react(emojis.get("afk").value().split(':')[2].replace('>', ''));
-            const filter = (reaction, user) => user.id !== this.client.user.id;
-            const collector = afkMsg.createReactionCollector(filter, {
-                time: 15000
-            });
-            collector.on("collect", async (reaction, user) => {
-                if (user.id !== mentioned.user.id) return reaction.users.remove(user);
-                collector.stop("ok");
-                if (reaction.emoji.id === emojis.get("afk").value().split(':')[2].replace('>', '')) {
-                    if (message.channel.id !== channels.get("bot_komut").value()) await afkMsg.edit(afkMsg.content + `\n[\`Daha temiz bir chat için <#${channels.get("bot_komut").value()}> kanalına gönderildi\`]`);
-                    await client.channel("bot_komut").send(`${message.member}, **${system.inbox.length}** yeni mesajın mevcut.`);
-                    await client.channel("bot_komut").send(new Discord.MessageEmbed().setColor(`${message.member.displayHexColor}`).setDescription(`${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}`));
-                }
-            });
-            collector.on("end", async (collected, reason) => {
-                if (reason === "ok") {
-                    return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutret").value().split(':')[2].replace('>', '')).remove();
-                } else {
-                    return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutonay").value().split(':')[2].replace('>', '')).remove();
-                }
-            });
+            if (system.inbox.length > 0) {
+                await afkMsg.react(emojis.get("afk").value().split(':')[2].replace('>', ''));
+                const filter = (reaction, user) => user.id !== this.client.user.id;
+                const collector = afkMsg.createReactionCollector(filter, {
+                    time: 15000
+                });
+                collector.on("collect", async (reaction, user) => {
+                    if (user.id !== mentioned.user.id) return reaction.users.remove(user);
+                    collector.stop("ok");
+                    if (reaction.emoji.id === emojis.get("afk").value().split(':')[2].replace('>', '')) {
+                        if (message.channel.id !== channels.get("bot_komut").value()) await afkMsg.edit(afkMsg.content + `\n[\`Daha temiz bir chat için <#${channels.get("bot_komut").value()}> kanalına gönderildi\`]`);
+                        await client.channel("bot_komut").send(`${message.member}, **${system.inbox.length}** yeni mesajın mevcut.`);
+                        await client.channel("bot_komut").send(new Discord.MessageEmbed().setColor(`${message.member.displayHexColor}`).setDescription(`${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}`));
+                    }
+                });
+                collector.on("end", async (collected, reason) => {
+                    if (reason === "ok") {
+                        return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutret").value().split(':')[2].replace('>', '')).remove();
+                    } else {
+                        return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutonay").value().split(':')[2].replace('>', '')).remove();
+                    }
+                });
+            }
         }
         if (message.mentions.members.first()) {
             const afksindata = await afkdata.find();
