@@ -2,6 +2,7 @@ const Command = require('../../../Base/Command');
 const Discord = require('discord.js');
 const nameData = require('../../../../../MODELS/Datalake/Registered');
 const low = require('lowdb');
+const { stripIndents } = require('common-tags');
 class KayitSil extends Command {
     constructor(client) {
         super(client, {
