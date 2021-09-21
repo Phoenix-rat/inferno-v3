@@ -74,8 +74,9 @@ module.exports = class {
                     collector.stop("ok");
                     if (reaction.emoji.id === emojis.get("afk").value().split(':')[2].replace('>', '')) {
                         if (message.channel.id !== channels.get("bot_komut").value()) await afkMsg.edit(afkMsg.content + `\n\`[\`Daha temiz bir chat için <#${channels.get("bot_komut").value()}> kanalına gönderildi\`]\``);
-                        await client.channel("bot_komut").send(`${message.member}, **${system.inbox.length}** yeni mesajın mevcut.`);
-                        await client.channel("bot_komut").send(new Discord.MessageEmbed().setColor(`${message.member.displayHexColor}`).setDescription(`${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}`));
+                        await message.guild.channels.cache.get(channels.get("bot_komut").value()).send(`${message.member}, **${system.inbox.length}** yeni mesajın mevcut.`, {
+                            embeds: [new Discord.MessageEmbed().setColor(`${message.member.displayHexColor}`).setDescription(`${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}`)]
+                        });
                     }
                 });
                 collector.on("end", async (collected, reason) => {
