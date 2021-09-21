@@ -2,7 +2,8 @@ const BanS = require('../MODELS/Moderation/Ban');
 const low = require('lowdb');
 const Discord = require('discord.js');
 const { stripIndents } = require('common-tags');
-
+const moment = require("moment");
+moment.locale("tr");
 class PermaBanEvent {
     constructor(client) {
         this.client = client;
@@ -32,27 +33,12 @@ class PermaBanEvent {
             });
             await pban.save();
         }
-        const aylar = [
-            "Ocak",
-            "Şubat",
-            "Mart",
-            "Nisan",
-            "Mayıs",
-            "Haziran",
-            "Temmuz",
-            "Ağustos",
-            "Eylül",
-            "Ekim",
-            "Kasım",
-            "Aralık"
-        ];
-        const tarih = new Date();
         client.extention.emit('Record', user.id, executor, reason, "Ban", "Perma", 0);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
         **${user.tag}** (\`${user.id}\`) adlı kullanıcı sunucudan yasaklandı! 
         \` • \` Yasaklayan : ${guild.members.cache.get(executor)} (\`${executor}\`)
         \` • \` Sebep: \`${reason || "Yok"}\`
-        \` • \` Yasaklanma Tarihi: \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3 >= 24 ? tarih.getHours() - 21 : tarih.getHours() + 3}:${tarih.getMinutes()}\`
+        \` • \` Yasaklanma Tarihi: \`${moment(Date.now()).format("LLL")}\`
         `).setColor("BLACK");
         await guild.channels.cache.get(channels.get("log_ban").value()).send(embed);
     }
