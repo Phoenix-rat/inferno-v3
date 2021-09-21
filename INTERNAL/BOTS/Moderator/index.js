@@ -53,8 +53,8 @@ client.fetchApplication().then((app) => {
     client.handler.events('/Events', __dirname, 'slash-events', creator);
     client.handler.slashCommands('./Commands/slash-commands/', creator);
 });
-
-const korpeamcik = require("../../MODELS/Moderation/Rollog.js")
+/*
+const korpeamcik = require("../../MODELS/Moderation/Rollog.js");
 client.on("guildMemberUpdate", async(oldMember, newMember) =>{
     const emojis = await low(client.adapters('emojis'));
     let aldiverdi;
@@ -75,3 +75,4 @@ client.on("guildMemberUpdate", async(oldMember, newMember) =>{
                      {upsert:true})
     }
 })
+*/
