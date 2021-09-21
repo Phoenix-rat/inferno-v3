@@ -41,7 +41,7 @@ class Ban extends Command {
             return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir gün girmelisin`)).then(msg => msg.delete({ timeout: 1000 }));
         }
         if (!mentioned.bannable) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-        client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep, typo);
+        client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep, typo, args[1]);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 
         
