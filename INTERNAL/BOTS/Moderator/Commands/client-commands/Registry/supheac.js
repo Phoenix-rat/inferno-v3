@@ -43,6 +43,7 @@ class Supheac extends Command {
         await message.guild.channels.cache.get(channels.get("welcome").value()).send(embed);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         await message.guild.channels.cache.get(channels.get("mod-registry").value()).send(new Discord.MessageEmbed().setDescription(`${message.member} yetkilisi ${mentioned} kullanıcısının şüphesini kaldırdı.`));
+        await message.channel.send(`${mentioned} adlı kullanıcı başarıyla şüpheliden çıkarıldı.`);
 
     }
 }
