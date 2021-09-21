@@ -4,8 +4,9 @@ const sicil = require('../../../../../MODELS/StatUses/Punishments');
 const stringTable = require('string-table');
 const { checkDays, sayi } = require('../../../../../HELPERS/functions');
 const { stripIndent } = require("common-tags");
-const moment = require("moment")
-moment.locale('tr')
+const { table } = require("table");
+const moment = require("moment");
+moment.locale("tr");
 
 class Sicil extends Command {
 
@@ -23,23 +24,76 @@ class Sicil extends Command {
     }
 
     async run(client, message, args) {
-        let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0] || message.member.user.id;
-        const patates = new Discord.MessageEmbed().setThumbnail(message.guild.iconURL({ dynamic: true })).setTimestamp().setFooter(`• Adam ol ceza yeme 🌟`).setTitle("† Dante's INFEЯИO").setColor("BLACK")
-        const whathefuck = await sicil.findOne({ _id: mentionedID });
-        if (!whathefuck) return message.channel.send(new Discord.MessageEmbed().setColor("BLACK").setDescription("Kullancının herhangi bir ceza geçmişi bulunmamaktadır!"));
-        let sth;
-        if (args[1] && args[1].includes('-')) {
-            sth = args[1].split('-')[1];
-            args[1] = args[1].split('-')[0];
-        }
-        if (!args[1]) args[1] = 1;
-        const scl = await whathefuck.get("records");
         
-        const embed = patates.setDescription(([`${message.guild.members.cache.get(mentionedID) || `Sunucuda değil (${mentionedID})`} kullanıcısının ceza geçmişi.\n`,
-                scl.map((punish) =>`• ${message.guild.members.cache.get(punish.executor) || "Bilinmiyor"} tarafından \`${moment(punish.created).format("LLL")}\` tarihinde \`"${punish.reason}"\` sebebiyle cezalandırılmış. (\`${punish.punish}\`)`)
-                 .slice(0, 15).join("\n───────────────────\n"),])
+    const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+    if (!member) return message.react(client.emoji("error"));
+    let data = await Sicil.find({ member: member.id })
+    if (!data) return message.channel.send(`${member} kullanıcısının sicil verisi bulunamadı.`)
+
+    let config = {
+        border: {
+            bodyLeft: ``,
+            bodyRight: ``,
+            bodyJoin: `│`,
+
+            bottomJoin: '',
+            bottomLeft: '',
+            bottomRight: '',
+            bottomBody: '',
+
+
+            joinJoin: '',
+            joinLeft: '',
+            joinRight: '',
+            joinBody: '',
+
+            topBody: '',
+            topJoin: '',
+            topLeft: '',
+            topRight: '',
+        }
+    };
+
+    let karebar = [
+        ["ID", "Ceza", "Tarih", "Yetkili", "Sebep"]
+    ];
+
+    const liste = data.map(st => { karebar.push([st.cno, st.type, `${moment(st.basla).format("LLL")}`, client.users.cache.get(st.auth).tag, `${st.reason ? st.reason : "Belirtilmedi"}`]) })
+    let page = 1;
+    const question = await message.channel.send(` ${member} kullanıcısının sicil bilgileri aşağıda belirtilmiştir. Tekli cezaya bakmak için \`.cezasorgu ID\` yazınız. \`\`\`${table(karebar.slice(page == 1 ? 0 : page * 10 - 10, page * 10), config)}\`\`\``)
+
+
+    if (data && data.length > 10) {
+        question.react("◀");
+        question.react("❌");
+        question.react("▶");
+
+        const collector = question.createReactionCollector(
+            (react, user) => ["◀", "❌", "▶"].some((e) => e == react.emoji.name) && user.id == message.author.id,
+            { time: 120000 }
         );
-        message.channel.send(embed);
+
+        collector.on("collect", async (react) => {
+            await react.users.remove(message.author.id).catch(() => undefined);
+            if (react.emoji.name == "▶") {
+                if (karebar.slice((page + 1) * 10 - 10, (page + 1) * 10).length <= 0) return;
+                page += 1;
+                let newList = table(karebar.slice(page == 1 ? 0 : page * 10 - 10, page * 10), config)
+                question.edit(` ${member} kullanıcısının sicil bilgileri aşağıda belirtilmiştir. Tekli cezaya bakmak için \`.cezasorgu ID\` yazınız. \`\`\`${newList}\`\`\``);
+            }
+            if (react.emoji.name == "❌") {
+                question.delete()
+            }
+            if (react.emoji.name == "◀") {
+                if (karebar.slice((page - 1) * 10 - 10, (page - 1) * 10).length <= 0) return;
+                page -= 1;
+                let newList = table(karebar.slice(page == 1 ? 0 : page * 10 - 10, page * 10), config)
+                question.edit(` ${member} kullanıcısının sicil bilgileri aşağıda belirtilmiştir. Tekli cezaya bakmak için \`.cezasorgu ID\` yazınız. \`\`\`${newList}\`\`\``);
+            }
+        });
+    }
+    message.react(client.emoji("ok"));
+
     }
 }
 module.exports = Sicil;

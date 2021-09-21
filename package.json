@@ -44,6 +44,7 @@
         "shortid": "^2.2.16",
         "slash-create": "^3.2.3",
         "string-table": "^0.1.5",
+        "table": "^6.7.1",
         "util": "^0.12.3"
     }
 }
