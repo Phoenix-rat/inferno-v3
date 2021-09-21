@@ -52,7 +52,7 @@ class PermaBanEvent {
         **${user.tag}** (\`${user.id}\`) adlı kullanıcı sunucudan yasaklandı! 
         \` • \` Yasaklayan : ${guild.members.cache.get(executor)} (\`${executor}\`)
         \` • \` Sebep: \`${reason || "Yok"}\`
-        \` • \` Yasaklanma Tarihi: \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`
+        \` • \` Yasaklanma Tarihi: \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3 >= 24 ? tarih.getHours() - 21 : tarih.getHours() + 3}:${tarih.getMinutes()}\`
         `).setColor("BLACK");
         await guild.channels.cache.get(channels.get("log_ban").value()).send(embed);
     }
