@@ -25,21 +25,21 @@ class Kiz extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
-        if (!mentioned.roles.cache.has(roles.get("welcome").value()) && (mentioned.roles.cache.size > 1)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Sanırım bu üye zaten kayıtlı!`));
-    /*    if (utils.get("taglıAlım").value() && !mentioned.user.username.includes(client.config.tag)) {
-            if (!mentioned.roles.cache.has(roles.get("vip").value()) && !mentioned.roles.cache.has(roles.get("booster").value())) {
-                return message.channel.send(new Discord.MessageEmbed()
-                    .setColor("#2f3136")
-                    .setDescription(`Üzgünüm, ama henüz taglı alımdayız. ${mentioned} kullanıcısında vip veya booster rolü olmadığı koşulda onu içeri alamam..`)
-                );
-            }
-        }*/
+        if (!mentioned) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (!mentioned.roles.cache.has(roles.get("welcome").value()) && (mentioned.roles.cache.size > 1)) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        /*    if (utils.get("taglıAlım").value() && !mentioned.user.username.includes(client.config.tag)) {
+                if (!mentioned.roles.cache.has(roles.get("vip").value()) && !mentioned.roles.cache.has(roles.get("booster").value())) {
+                    return message.channel.send(new Discord.MessageEmbed()
+                        .setColor("#2f3136")
+                        .setDescription(`Üzgünüm, ama henüz taglı alımdayız. ${mentioned} kullanıcısında vip veya booster rolü olmadığı koşulda onu içeri alamam..`)
+                    );
+                }
+            }*/
         if (mentioned.displayName.includes('|')) args = [mentioned.id].concat(mentioned.displayName.slice(2).replace('| ', '').split(' '));
         let rawName = args.slice(1);
-        if (args.length < 3) return message.channel.send(new Discord.MessageEmbed().setDescription(`Kullanım: \`${this.help.usage}\``));
+        if (args.length < 3) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let age = Number(args[args.length - 1]);
-        if (!age) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
+        if (!age) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let nameAge = rawName.map(i => i[0].toUpperCase() + i.slice(1).toLowerCase());
         nameAge = nameAge.join(' ').replace(` ${age}`, '');
         let point = '⸸';
@@ -68,14 +68,36 @@ class Kiz extends Command {
         const registryDatas = await nameData.find({ executor: message.member.user.id });
         if (registryDatas) aNumber = registryDatas.length;
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
+        await message.channel.send(`${mentioned} adlı kullanıcı başarıyla kayıt oldu.`);
         let publicRooms = message.guild.channels.cache.filter(c => c.parentID === "854087056757489696" && c.type === "voice" && c.id != "871460692321009715");
-        if(mentioned.voice) mentioned.voice.setChannel(publicRooms.random().id).catch(() => {})
+        if (mentioned.voice) mentioned.voice.setChannel(publicRooms.random().id).catch(() => { })
         await message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} kişisinin kaydı ${message.member} tarafından gerçekleştirildi.\nBu kişinin kayıt sayısı: \`${aNumber}\``)).then(async (msg) => await msg.delete({ timeout: 3000 }));
 
+        const aylar = [
+            "Ocak",
+            "Şubat",
+            "Mart",
+            "Nisan",
+            "Mayıs",
+            "Haziran",
+            "Temmuz",
+            "Ağustos",
+            "Eylül",
+            "Ekim",
+            "Kasım",
+            "Aralık"
+        ];
+        const tarih = new Date()
+        await message.guild.channels.cache.get(channels.get("kayıt_log").value()).send(new Discord.MessageEmbed().setDescription(stripIndents`
+        **Kayıt eden:** ${message.member} (\`${message.member.user.id}\`)
+        **Kayıt Edilen:** ${mentioned} (\`${mentioned.user.id}\`)
+        **Cinsiyet:** \`Kız\`
+        **Tag:** ${client.config.tag.some(t => mentioned.user.username.includes(t)) ? "\`Var\`" : "\`Yok\`"}
+        **Tarih:** \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`
+        `).setColor("#ffb0e6").setAuthor("INFERNO", message.member.user.displayAvatarURL({ dynamic: true })).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })));
     }
 }
 module.exports = Kiz;
 
 
-    
-    
+

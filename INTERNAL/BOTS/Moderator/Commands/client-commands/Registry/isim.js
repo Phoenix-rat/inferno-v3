@@ -23,12 +23,12 @@ class Isim extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
-        if (!mentioned.roles.cache.has(roles.get("welcome").value()) && (mentioned.roles.cache.size > 1)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Sanırım bu üye zaten kayıtlı!`));
+        if (!mentioned) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (!mentioned.roles.cache.has(roles.get("welcome").value()) && (mentioned.roles.cache.size > 1)) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let rawName = args.slice(1);
-        if (!rawName) return message.channel.send(new Discord.MessageEmbed().setDescription(`Bir isim girmelisin..`));
+        if (!rawName) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let age = args[args.length - 1];
-        if (!sayi(age)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
+        if (!sayi(age)) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let nameAge = rawName.map(i => i[0].toUpperCase() + i.slice(1).toLowerCase());
         nameAge = nameAge.join(' ').replace(` ${age}`, '');
         let point = '⸸';
