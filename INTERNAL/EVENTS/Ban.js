@@ -33,7 +33,7 @@ class PermaBanEvent {
         **Banlayan:** ${guild.members.cache.get(executor)} (\`${executor}\`)
         **Banlanan:** ${user} (\`${user.id}\`)
         **Sebep:** ${reason || "Yok"}
-        **Süresi:** ${type === "perma" ? "Sınırsız" : `${duration} gün`}
+        **Süre:** ${type === "perma" ? "Sınırsız" : `${duration} gün`}
         `);
         await guild.channels.cache.get(channels.get("log_ban").value()).send(embed);
     }

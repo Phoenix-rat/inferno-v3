@@ -24,7 +24,6 @@ module.exports = class {
         if (!myCooldown) {
             client.spamwait[message.author.id] = {};
             myCooldown = client.spamwait[message.author.id];
-
         };
         let mytime = myCooldown[message.content] || 0;
         if (mytime && (mytime > Date.now()) && !message.member.permissions.has("ADMINISTRATOR") && !message.author.bot && (message.channel.id !== '863118599026638868')) {
@@ -40,14 +39,6 @@ module.exports = class {
             if (count === 3) {
                 message.member.roles.add(roles.get("muted").value());
                 message.channel.send(`${message.member} Spam yaptığın için mutelendin!`)
-            }
-            if (count === 15) {
-                message.member.roles.set(["857388269611647007"]);
-                message.channel.send(`${message.member} Spam yaptığın için jaile atıldın!`)
-            }
-            if (count === 30) {
-                message.guild.members.ban(message.author.id, { reason: "Sürekli spam" })
-                message.channel.send(`${message.member} Spam yaptığın için sunucudan banlandın!`)
             }
 
 
@@ -66,8 +57,8 @@ module.exports = class {
             await message.member.roles.add(roles.get("otbmisafir").value());
         }
         let system = await afkdata.findOne({ _id: message.member.user.id });
-        if (system) {
-            message.channel.send(new Discord.MessageEmbed().setDescription(`Seni tekrardan görmek ne güzel ${message.member}!\n${system.inbox.length > 0 ? `${system.inbox.length} yeni mesajın var!\n●▬▬▬▬▬▬▬▬▬●\n${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}` : "Hiç yeni mesajın yok!"}`));
+        if (system && checkMins(system.created) <= 1) {
+            await message.channel.send(new Discord.MessageEmbed().setDescription(`Seni tekrardan görmek ne güzel ${message.member}!\n${system.inbox.length > 0 ? `${system.inbox.length} yeni mesajın var!\n●▬▬▬▬▬▬▬▬▬●\n${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}` : "Hiç yeni mesajın yok!"}`));
             await afkdata.deleteOne({ _id: message.member.user.id });
         }
         if (message.mentions.members.first()) {

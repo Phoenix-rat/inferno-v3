@@ -29,7 +29,7 @@ class PermaBanEvent {
         **Susturan:** ${guild.members.cache.get(executor)} (\`${executor}\`)
         **Susturulan:** ${member} (\`${member.user.id}\`)
         **Sebep:** ${reason || "Yok"}
-        **Süresi:** ${type === "perma" ? "Sınırsız" : `${duration} dakika`}
+        **Süre:** ${type === "perma" ? "Sınırsız" : `${duration} dakika`}
         `);
         await guild.channels.cache.get(channels.get("log_cmute").value()).send(embed);
     }
