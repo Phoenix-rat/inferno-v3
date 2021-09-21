@@ -75,14 +75,9 @@ module.exports = class {
                     if (reaction.emoji.id === emojis.get("afk").value().split(':')[2].replace('>', '')) {
                         if (message.channel.id !== channels.get("bot_komut").value()) await afkMsg.edit(`${message.member} Hoş geldin! Mesajların daha temiz bir chat için <#${channels.get("bot_komut").value()}> kanalına gönderildi.`);
                         await message.guild.channels.cache.get(channels.get("bot_komut").value()).send({
-                            content: `${message.member}, **${system.inbox.length}** yeni mesajın mevcut.`,
-                            embeds: [
-                                {
-                                    color: `${message.member.displayHexColor}`,
-                                    description: `${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}`
-                                }
-                            ]
+                            content: `${message.member}, **${system.inbox.length}** yeni mesajın mevcut.`
                         });
+                        await message.guild.channels.cache.get(channels.get("bot_komut").value()).send(new Discord.MessageEmbed().setColor(`${message.member.displayHexColor}`).setDescription(`${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}`).toJSON());
                     }
                 });
             }
