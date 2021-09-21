@@ -39,6 +39,7 @@ class Kur extends Command {
             m.roles.add(roles.get("crew").value());
             m.setNickname(client.config.tag[0] + m.displayName.slice(1));
         });
+        await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 
     }
 
