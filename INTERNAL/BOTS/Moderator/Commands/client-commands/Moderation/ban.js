@@ -33,9 +33,6 @@ class Ban extends Command {
         await message.channel.send(new Discord.MessageEmbed().setDescription(`**${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcı ${message.member} (\`${message.member.user.id}\`) tarafından ${sebep} sebebiyle sunucudan yasaklandı!`));
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 
-        
-
-
 
     }
 }
