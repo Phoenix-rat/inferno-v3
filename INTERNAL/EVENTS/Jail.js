@@ -1,6 +1,6 @@
 const Jails = require('../MODELS/Moderation/Jails');
 const low = require('lowdb');
-
+const Punishments = require('../MODELS/StatUses/Punishments');
 class JailEvent {
     constructor(client) {
         this.client = client;
@@ -31,13 +31,24 @@ class JailEvent {
         } else {
             await Jails.updateOne({ _id: member.user.id }, { $inc: { duration: Number(duration) || 0 } });
         }
-        client.extention.emit('Record', member.user.id, executor, reason, "Jail", type, duration);
+        const allthedata = await Punishments.find();
+        let alltherecords = 0;
+        allthedata.forEach(d => alltherecords = alltherecords + d.records.length);
+        function altilik(value) {
+            let number = value.toString();
+            while (number.length < 6) {
+                number = "0" + number
+            }
+            return number;
+        }
+        const srID = altilik(alltherecords);
+        client.extention.emit('Record', member.user.id, executor, reason, "Jail", type, duration, srID);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
         **Cezalandıran yetkili:** ${guild.members.cache.get(executor)} (\`${executor}\`)
         **Cezalandırılan kişi:** ${member} (\`${member.user.id}\`)
         **Sebep:** ${reason || "Yok"}
         **Süre:** ${type === "perma" ? "Sınırsız" : `${duration} dakika`}
-        `);
+        `).setFooter(`Ceza Numarası: ${srID}`);
         await guild.channels.cache.get(channels.get("log_jail").value()).send(embed);
     }
 }

@@ -5,20 +5,10 @@ class Record {
         this.client = client;
     };
 
-    async run(user, executor, reason, punish, type, duration) {
-        const allthedata = await Punishments.find()
-        let alltherecords = 0;
-        allthedata.forEach(d => alltherecords = alltherecords + d.records.length);
-        function altilik(value) {
-            let number = value.toString();
-            while (number.length < 6) {
-                number = "0" + number
-            }
-            return number;
-        }
+    async run(user, executor, reason, punish, type, duration, srID) {
         const records = await Punishments.findOne({ _id: user });
         const peer = {
-            id: `${altilik(alltherecords)}`,
+            id: srID,
             reason: reason,
             executor: executor,
             punish: punish,

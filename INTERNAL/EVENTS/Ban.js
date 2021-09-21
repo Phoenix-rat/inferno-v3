@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const { stripIndents } = require('common-tags');
 const moment = require("moment");
 moment.locale("tr");
+const Punishments = require('../MODELS/StatUses/Punishments');
 class PermaBanEvent {
     constructor(client) {
         this.client = client;
@@ -33,13 +34,24 @@ class PermaBanEvent {
             });
             await pban.save();
         }
-        client.extention.emit('Record', user.id, executor, reason, "Ban", "Perma", 0);
+        const allthedata = await Punishments.find();
+        let alltherecords = 0;
+        allthedata.forEach(d => alltherecords = alltherecords + d.records.length);
+        function altilik(value) {
+            let number = value.toString();
+            while (number.length < 6) {
+                number = "0" + number
+            }
+            return number;
+        }
+        const srID = altilik(alltherecords);
+        client.extention.emit('Record', user.id, executor, reason, "Ban", "Perma", 0, srID);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
         **${user.tag}** (\`${user.id}\`) adlı kullanıcı sunucudan yasaklandı! 
         \` • \` Yasaklayan : ${guild.members.cache.get(executor)} (\`${executor}\`)
         \` • \` Sebep: \`${reason || "Yok"}\`
         \` • \` Yasaklanma Tarihi: \`${moment(Date.now()).format("LLL")}\`
-        `).setColor("BLACK");
+        `).setColor("BLACK").setFooter(`Ceza Numarası: ${srID}`);
         await guild.channels.cache.get(channels.get("log_ban").value()).send(embed);
     }
 }
