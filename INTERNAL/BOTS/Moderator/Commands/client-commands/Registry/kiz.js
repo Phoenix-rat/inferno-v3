@@ -89,6 +89,7 @@ class Kiz extends Command {
         await message.guild.channels.cache.get(channels.get("kayıt_log").value()).send(new Discord.MessageEmbed().setDescription(stripIndents`
         **Kayıt eden:** ${message.member} (\`${message.member.user.id}\`)
         **Kayıt Edilen:** ${mentioned} (\`${mentioned.user.id}\`)
+        **İsim/Yaş:** ${nameAge} | ${age}
         **Cinsiyet:** \`Kız\`
         **Tag:** ${client.config.tag.some(t => mentioned.user.username.includes(t)) ? "\`Var\`" : "\`Yok\`"}
         **Tarih:** \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`
