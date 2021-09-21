@@ -29,8 +29,8 @@ class unBan extends Command {
         await message.guild.members.unban(args[0], `${message.author.username} tarafından kaldırıldı`);
         await message.channel.send(new MessageEmbed().setDescription(`${BanDoc && BanDoc.userTag ? `${BanDoc.userTag} (\`${BanDoc._id}\`) adlı` : `${args[0]} ID'li`} kullanıcının yasaklanması başarıyla kaldırıldı!`));
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-        const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
-        const embed = new MessageEmbed().setColor('BLACK').setDescription(stripIndents`
+        const logChannel = message.guild.channels.cache.get(channels.get("log_ban").value());
+        const embed = new MessageEmbed().setColor('RED').setDescription(stripIndents`
         ${BanDoc && BanDoc.userTag ? `${BanDoc.userTag} (\`${BanDoc._id}\`) adlı` : `${args[0]} ID'li`} kullanıcının yasaklanması kaldırıldı.
         \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
         \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``);
