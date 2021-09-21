@@ -44,7 +44,7 @@ class unBan extends Command {
         const srID = altilik(alltherecords);
         client.extention.emit('Record', args[0], message.member.user.id, "", "unban", "", 0, srID);
         const embed = new MessageEmbed().setColor('RED').setDescription(stripIndents`
-        ${BanDoc && BanDoc.userTag ? `${BanDoc.userTag} (\`${BanDoc._id}\`) adlı` : `${args[0]} ID'li`} kullanıcının yasaklanması kaldırıldı.
+        ${BanDoc && BanDoc.userTag ? `**${BanDoc.userTag}** (\`${BanDoc._id}\`) adlı` : `${args[0]} ID'li`} kullanıcının yasaklanması kaldırıldı.
         \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
         \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``).setFooter(`Ceza Numarası: ${srID}`);
         await logChannel.send(embed);
