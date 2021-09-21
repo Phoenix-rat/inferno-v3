@@ -31,6 +31,29 @@ class Supheac extends Command {
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         //await message.guild.channels.cache.get(channels.get("mod-registry").value()).send(new Discord.MessageEmbed().setDescription(`${message.member} yetkilisi ${mentioned} kullanıcısının şüphesini kaldırdı.`));
         await message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} adlı kullanıcı başarıyla şüpheliden çıkarıldı.`));
+        const aylar = [
+            "Ocak",
+            "Şubat",
+            "Mart",
+            "Nisan",
+            "Mayıs",
+            "Haziran",
+            "Temmuz",
+            "Ağustos",
+            "Eylül",
+            "Ekim",
+            "Kasım",
+            "Aralık"
+        ];
+        const tarih = new Date()
+        await message.guild.channels.cache.get(channels.get("kayıt_log").value()).send(new Discord.MessageEmbed().setDescription(stripIndents`
+        **Komutu kullanan:** ${message.member} (\`${message.member.user.id}\`)
+        **Şüpheliden çıkarılan:** ${mentioned} (\`${mentioned.user.id}\`)
+        **İsim/Yaş:** \`${data.name} | ${data.age}\`
+        **Cinsiyet:** \`${data.sex === "Male" ? "Erkek" : "Kız"}\`
+        **Tag:** ${client.config.tag.some(t => mentioned.user.username.includes(t)) ? "\`Var\`" : "\`Yok\`"}
+        **Tarih:** \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`
+        `).setColor("#c27c0e").setAuthor(message.member.user.tag, message.member.user.displayAvatarURL({ dynamic: true })).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })));
 
     }
 }

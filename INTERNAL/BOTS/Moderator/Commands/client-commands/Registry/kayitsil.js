@@ -48,7 +48,7 @@ class KayitSil extends Command {
         const tarih = new Date()
         await message.guild.channels.cache.get(channels.get("kayıt_log").value()).send(new Discord.MessageEmbed().setDescription(stripIndents`
         **Komutu kullanan:** ${message.member} (\`${message.member.user.id}\`)
-        **Kayıtsıza atılan::** ${mentioned} (\`${mentioned.user.id}\`)
+        **Kayıtsıza atılan:** ${mentioned} (\`${mentioned.user.id}\`)
         **İsim/Yaş:** \`${data.name} | ${data.age}\`
         **Cinsiyet:** \`${data.sex === "Male" ? "Erkek" : "Kız"}\`
         **Tag:** ${client.config.tag.some(t => mentioned.user.username.includes(t)) ? "\`Var\`" : "\`Yok\`"}
