@@ -73,7 +73,7 @@ module.exports = class {
                     if (user.id !== message.member.user.id) return reaction.users.remove(user);
                     collector.stop("ok");
                     if (reaction.emoji.id === emojis.get("afk").value().split(':')[2].replace('>', '')) {
-                        if (message.channel.id !== channels.get("bot_komut").value()) await afkMsg.edit(afkMsg.content + `\n[\`Daha temiz bir chat için <#${channels.get("bot_komut").value()}> kanalına gönderildi\`]`);
+                        if (message.channel.id !== channels.get("bot_komut").value()) await afkMsg.edit(afkMsg.content + `\n\`[\`Daha temiz bir chat için <#${channels.get("bot_komut").value()}> kanalına gönderildi\`]\``);
                         await client.channel("bot_komut").send(`${message.member}, **${system.inbox.length}** yeni mesajın mevcut.`);
                         await client.channel("bot_komut").send(new Discord.MessageEmbed().setColor(`${message.member.displayHexColor}`).setDescription(`${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}`));
                     }
