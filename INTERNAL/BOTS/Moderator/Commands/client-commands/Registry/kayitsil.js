@@ -23,7 +23,7 @@ class KayitSil extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`Kullanıcı bulunamadı!`).setColor('BLACK'));
+        if (!mentioned) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 
         const data = await nameData.findOne({ _id: mentioned.user.id });
         if (data) await nameData.deleteOne({ _id: mentioned.user.id });
