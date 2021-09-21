@@ -3,7 +3,7 @@ const Bans = require('../../../../../MODELS/Moderation/Ban');
 const low = require('lowdb');
 const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
-const Punishments = require('../MODELS/StatUses/Punishments');
+const Punishments = require('../../../../../MODELS/StatUses/Punishments');
 const moment = require("moment");
 moment.locale("tr");
 class unBan extends Command {
