@@ -6,8 +6,16 @@ class Record {
     };
 
     async run(user, executor, reason, punish, type, duration) {
+        function altilik(value) {
+            let number = value.toString();
+            while (number.length < 6) {
+                number = "0" + number
+            }
+            return number;
+        }
+        const records = await Punishments.findOne({ _id: user });
         const peer = {
-            id: gen.generate(),
+            id: `${altilik(records ? records.length : 0)}`,
             reason: reason,
             executor: executor,
             punish: punish,
