@@ -29,7 +29,7 @@ class KayitSil extends Command {
         if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(new Discord.MessageEmbed().setColor("BLACK").setDescription(`Bunu yapmak için yeterli yetkiye sahip değilsin`));
         await mentioned.roles.remove(mentioned.roles.cache.filter(r => r.editable).array());
         await mentioned.roles.add(roles.get('welcome').value());
-        await message.channel.send(new Discord.MessageEmbed().setDescription("Kullanıcının verileri başarıyla silindi").setColor("BLACK"));
+        await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
     }
 }
 module.exports = KayitSil;
