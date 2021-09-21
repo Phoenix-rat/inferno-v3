@@ -49,8 +49,8 @@ class KayitSil extends Command {
         await message.guild.channels.cache.get(channels.get("kayıt_log").value()).send(new Discord.MessageEmbed().setDescription(stripIndents`
         **Komutu kullanan:** ${message.member} (\`${message.member.user.id}\`)
         **Kayıtsıza atılan:** ${mentioned} (\`${mentioned.user.id}\`)
-        **İsim/Yaş:** \`${data.name} | ${data.age}\`
-        **Cinsiyet:** \`${data.sex === "Male" ? "Erkek" : "Kız"}\`
+        **İsim/Yaş:** \`${data ? data.name : "Bilinmiyor"} | ${data ? data.age : "Bilinmiyor"}\`
+        **Cinsiyet:** \`${data ? (data.sex === "Male" ? "Erkek" : "Kız") : "Bilinmiyor"}\`
         **Tag:** ${client.config.tag.some(t => mentioned.user.username.includes(t)) ? "\`Var\`" : "\`Yok\`"}
         **Tarih:** \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`
         `).setColor("#6be4a2").setAuthor(message.member.user.tag, message.member.user.displayAvatarURL({ dynamic: true })).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })));
