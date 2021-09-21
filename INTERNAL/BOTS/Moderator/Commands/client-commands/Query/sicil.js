@@ -27,7 +27,7 @@ class Sicil extends Command {
         
     const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
     if (!member) return message.react(client.emoji("error"));
-    let data = await Sicil.find({ member: member.id })
+    let data = await sicil.findOne({ _id: member.user.id })
     if (!data) return message.channel.send(`${member} kullanıcısının sicil verisi bulunamadı.`)
 
     let config = {
@@ -58,7 +58,7 @@ class Sicil extends Command {
         ["ID", "Ceza", "Tarih", "Yetkili", "Sebep"]
     ];
 
-    const liste = data.map(st => { karebar.push([st.cno, st.type, `${moment(st.basla).format("LLL")}`, client.users.cache.get(st.auth).tag, `${st.reason ? st.reason : "Belirtilmedi"}`]) })
+    data.records.map(st => { karebar.push([st.id, `${st.type} ${st.punish}`, `${moment(st.created.getTime()).format("LLL")}`, client.users.cache.get(st.executor).tag, `${st.reason ? st.reason : "Belirtilmedi"}`]) })
     let page = 1;
     const question = await message.channel.send(` ${member} kullanıcısının sicil bilgileri aşağıda belirtilmiştir. Tekli cezaya bakmak için \`.cezasorgu ID\` yazınız. \`\`\`${table(karebar.slice(page == 1 ? 0 : page * 10 - 10, page * 10), config)}\`\`\``)
 
