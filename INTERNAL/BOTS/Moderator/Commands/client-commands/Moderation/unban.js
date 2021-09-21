@@ -11,7 +11,7 @@ class unBan extends Command {
             examples: ["unban 674565119161794560"],
             category: "Moderasyon",
             aliases: ["af"],
-            accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double","cmd-single", "cmd-ban"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "cmd-ban"],
             cooldown: 10000
         })
     }
@@ -22,9 +22,9 @@ class unBan extends Command {
         if (!user) return message.channel.send(new MessageEmbed().setDescription(`${emojis.get("notfound").value()} Kullanıcı Bulunamadı!`));
         const BanDoc = await Bans.findOne({ _id: args[0] });
         if (BanDoc && message.guild.members.cache.get(BanDoc.executor).roles.highest.rawPosition > message.member.roles.highest.rawPosition) return message.channel.send(new MessageEmbed().setDescription(`${emojis.get("missingPerms").value()} Bu kullanıcının banını kaldıracak yetkiye sahip değilsin!`));
-        if (BanDoc) await Bans.deleteOne({_id: args[0]});
+        if (BanDoc) await Bans.deleteOne({ _id: args[0] });
         await message.guild.members.unban(args[0], `${message.author.username} tarafından kaldırıldı`);
-        await message.channel.send(`Kullanıcının banı başarıyla kaldırıldı!`)
+        await message.channel.send(`${BanDoc && BanDoc.userTag ? `${BanDoc.userTag} (\`${BanDoc._id}\`) adlı` : `${args[0]} ID'li`} kullanıcının yasaklanması başarıyla kaldırıldı!`)
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
         const embed = new MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("unban").value()} ${user} kullanıcısı banı ${message.member} tarafından kaldırıldı!`);

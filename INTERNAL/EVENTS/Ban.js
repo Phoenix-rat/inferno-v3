@@ -25,6 +25,7 @@ class PermaBanEvent {
         if (!Ban) {
             let pban = new BanS({
                 _id: user.id,
+                userTag: user.tag,
                 executor: executor,
                 reason: reason,
                 created: new Date()
