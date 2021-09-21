@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const low = require('lowdb');
 const nameData = require('../../../../../MODELS/Datalake/Registered');
 const { sayi } = require('../../../../../HELPERS/functions');
+const { stripIndents } = require('common-tags');
 class Kiz extends Command {
     constructor(client) {
 
