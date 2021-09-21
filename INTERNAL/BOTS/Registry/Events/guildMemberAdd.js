@@ -36,6 +36,7 @@ class GuildMemberAdd {
 
         let davetci = {};
         let count = 0;
+        let urlCcount;
         if (member.guild.vanityURLCode) {
             let aNumber = 0;
             await member.guild.fetchVanityData().then(data => { aNumber = data.uses }).catch(console.error);
@@ -44,6 +45,7 @@ class GuildMemberAdd {
                 davetci = {
                     username: "ÖZEL URL"
                 };
+                urlCcount = aNumber;
             }
         }
         await member.guild.fetchInvites().then(async gInvites => {
@@ -150,7 +152,7 @@ class GuildMemberAdd {
         Hesabını **${checkDays(member.user.createdAt)} gün önce** oluşturduğundan dolayı \`Şüpheli Hesap\` engelimizi aştın!
         Unutma ${rules} toplumun düzenini sağlamak için var! Kurallarımıza göz atmayı unutma. Tekrardan **Hoş Geldin**
 
-        Görünüşe göre seni buraya getiren kişi: **${davetci ? (davetci.username || "Özel URL") : "ÖZEL URL"}** [\`Davet Sayısı: ${count}\`]
+        Görünüşe göre seni buraya getiren kişi: **${davetci ? (davetci.username || "Özel URL") : "ÖZEL URL"}** [\`Davet Sayısı: ${davetçi ? count : urlCcount}\`]
         Kayıt olmak için Gates of Hell kanallarından herhangi birine girip __**${yetkili.name}**__ rolünü etiketleyebilirsin.
         `
         member.guild.channels.cache.get(channels.get("welcome").value()).send(embed);
