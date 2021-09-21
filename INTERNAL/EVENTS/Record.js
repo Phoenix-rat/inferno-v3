@@ -22,8 +22,7 @@ class Record {
             type: type || "temp",
             duration: duration || 0,
             created: new Date()
-        }
-        const records = await Punishments.findOne({ _id: user });
+        };
         if (!records) {
             const record = new Punishments({ _id: user, records: [] });
             await record.save();
