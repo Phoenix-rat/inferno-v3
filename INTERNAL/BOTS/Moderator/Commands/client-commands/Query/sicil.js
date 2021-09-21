@@ -92,7 +92,7 @@ class Sicil extends Command {
             }
         });
     }
-    message.react(client.emoji("ok"));
+    message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 
     }
 }
