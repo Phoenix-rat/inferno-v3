@@ -46,7 +46,7 @@ class UserUpdate {
                 const trc = new Tagli({ _id: newUser.id, created: new Date(), claimed: "false" });
                 await trc.dave();
             }
-            await member.setNickname(client.config.tag + member.displayName.slice(1));
+            await member.setNickname(client.config.tag[0] + member.displayName.slice(1));
             await member.roles.add(roles.get("crew").value());
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag aldı`);
         }
