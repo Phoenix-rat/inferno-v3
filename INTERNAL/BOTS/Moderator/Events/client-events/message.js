@@ -70,7 +70,7 @@ module.exports = class {
                     time: 15000
                 });
                 collector.on("collect", async (reaction, user) => {
-                    if (user.id !== mentioned.user.id) return reaction.users.remove(user);
+                    if (user.id !== message.member.user.id) return reaction.users.remove(user);
                     collector.stop("ok");
                     if (reaction.emoji.id === emojis.get("afk").value().split(':')[2].replace('>', '')) {
                         if (message.channel.id !== channels.get("bot_komut").value()) await afkMsg.edit(afkMsg.content + `\n[\`Daha temiz bir chat için <#${channels.get("bot_komut").value()}> kanalına gönderildi\`]`);
@@ -79,11 +79,7 @@ module.exports = class {
                     }
                 });
                 collector.on("end", async (collected, reason) => {
-                    if (reason === "ok") {
-                        return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutret").value().split(':')[2].replace('>', '')).remove();
-                    } else {
-                        return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutonay").value().split(':')[2].replace('>', '')).remove();
-                    }
+                    await afkMsg.reactions.removeAll();
                 });
             }
         }
