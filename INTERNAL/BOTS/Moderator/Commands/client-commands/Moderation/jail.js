@@ -11,7 +11,7 @@ class Jail extends Command {
             examples: ["jail 674565119161794560 10 gün botları kötü yapıyor"],
             category: "Moderasyon",
             aliases: ["hapis", "zindan"],
-            accaptedPerms: ["root", "owner", "cmd-ceo","cmd-double","cmd-single", "cmd-jail"],
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "cmd-jail"],
             cooldown: 10000
         })
     }
@@ -40,8 +40,8 @@ class Jail extends Command {
         if (mentioned.voice.channel) await mentioned.voice.kick();
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         //const logChannel = message.guild.channels.cache.get(channels.get("jaillog").value());
-//const embed = new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("ok").value()} ${mentioned} kullanıcısı ${message.member} tarafından ${sebep} sebebiyle ${args[1] === 0 ? "perma" : args[1]} günlüğüne zindana şutlandı!`);
-       // await logChannel.send(embed);
+        //const embed = new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("ok").value()} ${mentioned} kullanıcısı ${message.member} tarafından ${sebep} sebebiyle ${args[1] === 0 ? "perma" : args[1]} günlüğüne zindana şutlandı!`);
+        // await logChannel.send(embed);
     }
 }
 module.exports = Jail;
