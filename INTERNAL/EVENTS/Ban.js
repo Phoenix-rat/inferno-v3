@@ -17,8 +17,19 @@ class PermaBanEvent {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         if (!guild.members.cache.get(user.id).bannable) return;
+        const allthedata = await Punishments.find();
+        let alltherecords = 0;
+        allthedata.forEach(d => alltherecords = alltherecords + d.records.length);
+        function altilik(value) {
+            let number = value.toString();
+            while (number.length < 6) {
+                number = "0" + number
+            }
+            return number;
+        }
+        const srID = altilik(alltherecords);
         try {
-            await user.send(`**${guild.name}** sunucusundan \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından yasaklandın!`);
+            await user.send(`**${guild.name}** sunucusundan \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından yasaklandın! \`${srID}\``);
         } catch (e) {
             console.log(e);
         }
@@ -34,17 +45,6 @@ class PermaBanEvent {
             });
             await pban.save();
         }
-        const allthedata = await Punishments.find();
-        let alltherecords = 0;
-        allthedata.forEach(d => alltherecords = alltherecords + d.records.length);
-        function altilik(value) {
-            let number = value.toString();
-            while (number.length < 6) {
-                number = "0" + number
-            }
-            return number;
-        }
-        const srID = altilik(alltherecords);
         client.extention.emit('Record', user.id, executor, reason, "Ban", "Perma", 0, srID);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
         **${user.tag}** (\`${user.id}\`) adlı kullanıcı sunucudan yasaklandı! 
