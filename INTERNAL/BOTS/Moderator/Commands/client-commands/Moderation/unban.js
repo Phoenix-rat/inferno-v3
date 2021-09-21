@@ -3,6 +3,7 @@ const Bans = require('../../../../../MODELS/Moderation/Ban');
 const low = require('lowdb');
 const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
+const Punishments = require('../MODELS/StatUses/Punishments');
 const moment = require("moment");
 moment.locale("tr");
 class unBan extends Command {
@@ -30,10 +31,22 @@ class unBan extends Command {
         await message.channel.send(new MessageEmbed().setDescription(`${BanDoc && BanDoc.userTag ? `${BanDoc.userTag} (\`${BanDoc._id}\`) adlı` : `${args[0]} ID'li`} kullanıcının yasaklanması başarıyla kaldırıldı!`));
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         const logChannel = message.guild.channels.cache.get(channels.get("log_ban").value());
+        const allthedata = await Punishments.find();
+        let alltherecords = 0;
+        allthedata.forEach(d => alltherecords = alltherecords + d.records.length);
+        function altilik(value) {
+            let number = value.toString();
+            while (number.length < 6) {
+                number = "0" + number
+            }
+            return number;
+        }
+        const srID = altilik(alltherecords);
+        client.extention.emit('Record', member.user.id, messsage.member.user.id, "", "unban", "", duration, srID);
         const embed = new MessageEmbed().setColor('RED').setDescription(stripIndents`
         ${BanDoc && BanDoc.userTag ? `${BanDoc.userTag} (\`${BanDoc._id}\`) adlı` : `${args[0]} ID'li`} kullanıcının yasaklanması kaldırıldı.
         \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
-        \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``).setColor("BLACK");
+        \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``).setColor("BLACK").setFooter(`Ceza Numarası: ${srID}`);
         await logChannel.send(embed);
     }
 }
