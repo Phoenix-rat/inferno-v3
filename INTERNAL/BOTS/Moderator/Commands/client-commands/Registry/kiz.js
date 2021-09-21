@@ -68,8 +68,7 @@ class Kiz extends Command {
         const registryDatas = await nameData.find({ executor: message.member.user.id });
         if (registryDatas) aNumber = registryDatas.length;
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-        await message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} adlı kullanıcı başarıyla kayıt oldu.`));
-        await message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} kişisinin kaydı ${message.member} tarafından gerçekleştirildi.\nBu kişinin kayıt sayısı: \`${aNumber}\``)).then(async (msg) => await msg.delete({ timeout: 3000 }));
+        await message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} adlı kullanıcı başarıyla kayıt oldu.`).setColor("#ffb0e6"));
 
         const aylar = [
             "Ocak",
