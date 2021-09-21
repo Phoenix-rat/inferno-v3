@@ -6,6 +6,9 @@ class Record {
     };
 
     async run(user, executor, reason, punish, type, duration) {
+        const allthedata = await Punishments.find()
+        let alltherecords = 0;
+        allthedata.forEach(d => alltherecords = alltherecords + d.records.length);
         function altilik(value) {
             let number = value.toString();
             while (number.length < 6) {
@@ -15,7 +18,7 @@ class Record {
         }
         const records = await Punishments.findOne({ _id: user });
         const peer = {
-            id: `${altilik(records ? records.length : 0)}`,
+            id: `${altilik(alltherecords)}`,
             reason: reason,
             executor: executor,
             punish: punish,
