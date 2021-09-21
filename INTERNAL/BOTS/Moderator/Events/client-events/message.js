@@ -60,16 +60,36 @@ module.exports = class {
             await message.member.roles.add(roles.get("otbmisafir").value());
         }
         let system = await afkdata.findOne({ _id: message.member.user.id });
-        if (system) { // ${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}
+        if (system) {
             await afkdata.deleteOne({ _id: message.member.user.id });
             const afkMsg = await message.channel.send(`${message.member} Hoş geldin! ${checkMins(system.created) <= 1 ? "Biraz" : `**${moment.duration(new Date().getTime() - system.created.getTime()).format("D [Gün], H [Saat], m [Dakika]")}**`} önce afk olmuştun.${system.inbox.length > 0 ? ` Birkaç mesajın var eğer bakmak istersen emojiye basabilirsin.` : ""}`);
             await afkMsg.react(emojis.get("afk").value().split(':')[2].replace('>', ''));
+            const filter = (reaction, user) => user.id !== this.client.user.id;
+            const collector = afkMsg.createReactionCollector(filter, {
+                time: 15000
+            });
+            collector.on("collect", async (reaction, user) => {
+                if (user.id !== mentioned.user.id) return reaction.users.remove(user);
+                collector.stop("ok");
+                if (reaction.emoji.id === emojis.get("afk").value().split(':')[2].replace('>', '')) {
+                    if (message.channel.id !== channels.get("bot_komut").value()) await afkMsg.edit(afkMsg.content + `\n[\`Daha temiz bir chat için <#${channels.get("bot_komut").value()}> kanalına gönderildi\`]`);
+                    await client.channel("bot_komut").send(`${message.member}, **${system.inbox.length}** yeni mesajın mevcut.`);
+                    await client.channel("bot_komut").send(new Discord.MessageEmbed().setColor(`${message.member.displayHexColor}`).setDescription(`${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}`));
+                }
+            });
+            collector.on("end", async (collected, reason) => {
+                if (reason === "ok") {
+                    return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutret").value().split(':')[2].replace('>', '')).remove();
+                } else {
+                    return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutonay").value().split(':')[2].replace('>', '')).remove();
+                }
+            });
         }
         if (message.mentions.members.first()) {
             const afksindata = await afkdata.find();
             const afks = message.mentions.members.array().filter(m => afksindata.some(doc => doc._id === m.user.id));
             if (afks.length > 0) {
-                await message.channel.send(new Discord.MessageEmbed().setDescription(afks.map(afk => `${afk} \`${afksindata.find(data => data._id === afk.user.id).reason}\` sebebiyle, **${checkHours(afksindata.find(data => data._id === afk.user.id).created)}** saattir AFK!`).join('\n')));
+                await message.channel.send(afks.map(afk => `${afk},  ${afksindata.find(data => data._id === afk.user.id).reason ? `\`${afksindata.find(data => data._id === afk.user.id).reason}\` sebebiyle,` : ""} **${checkMins(afksindata.find(data => data._id === afk.user.id).created) < 1 ? "biraz" : moment.duration(new Date().getTime() - system.created.getTime()).format("D [Gün], H [Saat], m [Dakika]")}** önce AFK oldu.`, { allowedMentions: { repliedUser: false } }).join('\n'));
                 await afks.forEach(async afk => {
                     await afkdata.updateOne({ _id: afk.user.id }, {
                         $push: {
@@ -201,17 +221,17 @@ module.exports = class {
 
 
         if (!cmd.config.enabled) return;
-        if (cmd.config.dmCmd && (message.channel.type !== 'dm')) return message.channel.send(`${emojis.get("dmcmd").value()} Bu komut bir **DM** komutudur.`);
+        if (cmd.config.dmCmd && (message.channel.type !== 'dm')) return message.channel.send(`${emojis.get("dmcmd").value()} Bu komut bir ** DM ** komutudur.`);
         if (cmd.config.ownerOnly && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("tantus").value()} Bu komutu sadece ${client.owner} kullanabilir.`);
-        if (cmd.config.onTest && !utils.get("testers").value().includes(message.author.id) && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("ontest").value()} Bu komut henüz **test aşamasındadır**.`);
-        if (cmd.config.rootOnly && !utils.get("mod").value().includes(message.author.id) && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("rootonly").value()} Bu komutu sadece **yardımcılar** kullanabilir.`);
-        if (cmd.config.adminOnly && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("moddonly").value()} Bu komutu sadece **yöneticiler** kullanabilir.`);
+        if (cmd.config.onTest && !utils.get("testers").value().includes(message.author.id) && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("ontest").value()} Bu komut henüz ** test aşamasındadır **.`);
+        if (cmd.config.rootOnly && !utils.get("mod").value().includes(message.author.id) && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("rootonly").value()} Bu komutu sadece ** yardımcılar ** kullanabilir.`);
+        if (cmd.config.adminOnly && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("moddonly").value()} Bu komutu sadece ** yöneticiler ** kullanabilir.`);
         if (cmd.info.cmdChannel & message.guild && message.guild.channels.cache.get(channels.get(cmd.info.cmdChannel).value()) && (message.author.id !== client.config.owner) && (message.channel.id !== channels.get(cmd.info.cmdChannel).value())) return message.channel.send(`${emojis.get("text").value()} Bu komutu ${message.guild.channels.cache.get(channels.get(cmd.info.cmdChannel).value())} kanalında kullanmayı dene!`);
         if (message.guild && !cmd.config.dmCmd) {
             const requiredRoles = cmd.info.accaptedPerms || [];
             let allowedRoles = requiredRoles.filter(rolevalue => message.guild.roles.cache.get(roles.get(rolevalue).value())).map(rolevalue => message.guild.roles.cache.get(roles.get(rolevalue).value()))
             let deyim = `Bu komutu kullanabilmek için ${allowedRoles[0]} rolüne sahip olmalısın!`;
-            if (allowedRoles.length > 1) deyim = `Bu komutu kollanabilmek için aşağıdaki rollerden birisine sahip olmalısın:\n${allowedRoles.join(`, `)}`;
+            if (allowedRoles.length > 1) deyim = `Bu komutu kollanabilmek için aşağıdaki rollerden birisine sahip olmalısın: \n${allowedRoles.join(`, `)} `;
             if ((allowedRoles.length >= 1) && !allowedRoles.some(role => message.member.roles.cache.has(role.id)) && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) {
                 return await message.channel.send(embed.setDescription(deyim).setColor('BLACK')).then(msg => msg.delete({ timeout: 5000 }));
             }
@@ -222,8 +242,8 @@ module.exports = class {
             uCooldown = client.cmdCooldown[message.author.id];
         }
         let time = uCooldown[cmd.info.name] || 0;
-        if (time && (time > Date.now())) return message.channel.send(`${emojis.get("dmcmd").value()} Komutu tekrar kullanabilmek için lütfen **${Math.ceil((time - Date.now()) / 1000)}** saniye bekle!`);
-        client.logger.log(`[(${message.author.id})] ${message.author.username} ran command [${cmd.info.name}]`, "cmd");
+        if (time && (time > Date.now())) return message.channel.send(`${emojis.get("dmcmd").value()} Komutu tekrar kullanabilmek için lütfen ** ${Math.ceil((time - Date.now()) / 1000)}** saniye bekle!`);
+        client.logger.log(`[(${message.author.id})] ${message.author.username} ran command[${cmd.info.name}]`, "cmd");
         if (message.channel.id === "857659757233700875" && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== "853011311328100411") && command !== "tag") return;
         try {
             cmd.run(client, message, args);
