@@ -23,7 +23,10 @@ class Call extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const sebep = args.join(' ');
-        if (!sebep) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("warn").value()} Geçerli bir sebep girmedin!`));
+        if (sebep.includes("@everyone")) return message.react(client.emoji("error"));
+        if (sebep.includes("@here")) return message.react(client.emoji("error"));
+    
+        if (sebep.length > 50) return message.react(client.emoji("error"));
         const system = await afkdata.findOne({ _id: message.member.user.id });
         if (!system) {
             try {
@@ -37,7 +40,7 @@ class Call extends Command {
             } catch (error) {
                 console.log(error);
             }
-            await message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("pando1").value()} Başarıyla Ayarlandı!`));
+            await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         } else return;
     }
 }
