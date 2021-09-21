@@ -27,7 +27,7 @@ class KayitSil extends Command {
 
         const data = await nameData.findOne({ _id: mentioned.user.id });
         if (data) await nameData.deleteOne({ _id: mentioned.user.id });
-        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(new Discord.MessageEmbed().setColor("BLACK").setDescription(`Bunu yapmak için yeterli yetkiye sahip değilsin`));
+        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         await mentioned.roles.remove(mentioned.roles.cache.filter(r => r.editable).array());
         await mentioned.roles.add(roles.get('welcome').value());
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
