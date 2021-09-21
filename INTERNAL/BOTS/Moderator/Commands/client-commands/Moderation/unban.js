@@ -2,6 +2,9 @@ const Command = require('../../../Base/Command');
 const Bans = require('../../../../../MODELS/Moderation/Ban');
 const low = require('lowdb');
 const { MessageEmbed } = require('discord.js');
+const { stripIndents } = require('common-tags');
+const moment = require("moment");
+moment.locale("tr");
 class unBan extends Command {
     constructor(client) {
         super(client, {
@@ -27,7 +30,10 @@ class unBan extends Command {
         await message.channel.send(new MessageEmbed().setDescription(`${BanDoc && BanDoc.userTag ? `${BanDoc.userTag} (\`${BanDoc._id}\`) adlı` : `${args[0]} ID'li`} kullanıcının yasaklanması başarıyla kaldırıldı!`));
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
-        const embed = new MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("unban").value()} ${user} kullanıcısı banı ${message.member} tarafından kaldırıldı!`);
+        const embed = new MessageEmbed().setColor('BLACK').setDescription(stripIndents`
+        ${BanDoc && BanDoc.userTag ? `${BanDoc.userTag} (\`${BanDoc._id}\`) adlı` : `${args[0]} ID'li`} kullanıcının yasaklanması kaldırıldı.
+        \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
+        \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``);
         await logChannel.send(embed);
     }
 }
