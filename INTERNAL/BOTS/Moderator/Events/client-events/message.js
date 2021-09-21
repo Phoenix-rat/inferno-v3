@@ -77,7 +77,7 @@ module.exports = class {
                         await message.guild.channels.cache.get(channels.get("bot_komut").value()).send({
                             content: `${message.member}, **${system.inbox.length}** yeni mesajın mevcut.`
                         });
-                        await message.guild.channels.cache.get(channels.get("bot_komut").value()).send(new Discord.MessageEmbed().setColor(message.member.displayHexColor).setDescription(`${system.inbox.map(content => `[${message.guild.members.cache.get(content.userID) || "Bilinmiyor"}]: ${content.content} [🔗](${content.url})`).join('\n')}`));
+                        await message.guild.channels.cache.get(channels.get("bot_komut").value()).send(new Discord.MessageEmbed().setColor(message.member.displayHexColor).setDescription(`${system.inbox.map(content => `${message.guild.members.cache.get(content.userID) || "\`Bilinmiyor\`"}: ${content.content} [🔗](${content.url})`).join('\n')}`));
                     }
                 });
             }
