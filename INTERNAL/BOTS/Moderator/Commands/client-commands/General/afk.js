@@ -40,7 +40,7 @@ class Call extends Command {
             } catch (error) {
                 console.log(error);
             }
-            await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
+            await message.react(emojis.get("afk").value().split(':')[2].replace('>', ''));
         } else return;
     }
 }
