@@ -30,6 +30,7 @@ class Ban extends Command {
         if (!mentioned.bannable) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (!mentioned.bannable) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         client.extention.emit('Ban', message.guild, mentioned.user, message.author.id, sebep);
+        await message.channel.send(new Discord.MessageEmbed().setDescription(`**${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcı ${message.member} (\`${message.member.user.id}\`) tarafından ${sebep} sebebiyle sunucudan yasaklandı!`));
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 
         
