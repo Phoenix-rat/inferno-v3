@@ -1,5 +1,5 @@
 module.exports = {
-	mongoDB: "sexferno",
+	mongoDB: "inferno",
     auth: "admin",
     username: "Tantoony",
 	owner: "484873072164208640",
