@@ -28,10 +28,10 @@ class Sicil extends Command {
 
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!member) return message.react(client.emoji("error"));
-        let data = await sicil.findOne({ _id: member.user.id })
-        if (!data) return message.channel.send(`${member} kullanıcısının sicil verisi bulunamadı.`)
+        let data = await sicil.findOne({ _id: member.user.id });
+        if (!data) return message.channel.send(`${member} kullanıcısının sicil verisi bulunamadı.`);
 
         let config = {
             border: {

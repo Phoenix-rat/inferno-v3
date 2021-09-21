@@ -59,7 +59,7 @@ module.exports.execute = async (client, message, args) => {
                 if (karebar.slice((page + 1) * 10 - 10, (page + 1) * 10).length <= 0) return;
                 page += 1;
                 let newList = table(karebar.slice(page == 1 ? 0 : page * 10 - 10, page * 10), config)
-                question.edit(` ${member} kullanıcısının sicil bilgileri aşağıda belirtilmiştir. Tekli cezaya bakmak için \`.cezasorgu ID\` yazınız. \`\`\`${newList}\`\`\``);
+                question.edit(` ${member} kullanıcısının sicil bilgileri aşağıda belirtilmiştir. Tekli cezaya bakmak için \`.cezasorgu kullanıcıID cezaID\` yazınız. \`\`\`${newList}\`\`\``);
             }
             if (react.emoji.name == "❌") {
                 question.delete()
