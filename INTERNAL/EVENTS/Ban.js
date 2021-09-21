@@ -14,8 +14,9 @@ class PermaBanEvent {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        await user.send(`**${guild.name}** sunucusundan \`${reason}\` sebebiyle **${guild.members.cache.get(executor).name}** (\`${executor}\`) tarafından yasaklandın!-`)
-        await guild.members.ban(user, { reason: reason })
+        if (!guild.members.cache.get(user.id).bannable) return;
+        await user.send(`**${guild.name}** sunucusundan \`${reason}\` sebebiyle **${guild.members.cache.get(executor).name}** (\`${executor}\`) tarafından yasaklandın!-`);
+        await guild.members.ban(user, { reason: reason });
         const Ban = await BanS.findOne({ _id: user });
         if (!Ban) {
             let pban = new BanS({
