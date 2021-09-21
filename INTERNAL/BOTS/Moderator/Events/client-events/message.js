@@ -80,6 +80,13 @@ module.exports = class {
                         await message.guild.channels.cache.get(channels.get("bot_komut").value()).send(new Discord.MessageEmbed().setColor(message.member.displayHexColor).setDescription(`${system.inbox.map(content => `${message.guild.members.cache.get(content.userID) || "\`Bilinmiyor\`"}: ${content.content} [🔗](${content.url})`).join('\n')}`));
                     }
                 });
+                collector.on("end", async (collected, reason) => {
+                    if (reason === "ok") {
+                        return;
+                    } else {
+                        return await afkMsg.edit(`${message.member} Hoş geldin! ${checkMins(system.created) < 1 ? "**Biraz" : `**${moment.duration(new Date().getTime() - system.created.getTime()).format("D [Gün], H [Saat], m [Dakika]")}`} önce** afk olmuştun.`)
+                    }
+                });
             }
         }
         if (message.mentions.members.first()) {
