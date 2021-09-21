@@ -28,7 +28,6 @@ class Supheac extends Command {
         if (!mentioned.roles.cache.has(roles.get("suspicious").value())) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         await mentioned.roles.remove(roles.get("suspicious").value());
         await mentioned.roles.add(roles.get("welcome").value());
-        await message.guild.channels.cache.get(channels.get("welcome").value()).send(embed);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         //await message.guild.channels.cache.get(channels.get("mod-registry").value()).send(new Discord.MessageEmbed().setDescription(`${message.member} yetkilisi ${mentioned} kullanıcısının şüphesini kaldırdı.`));
         await message.channel.send(`${mentioned} adlı kullanıcı başarıyla şüpheliden çıkarıldı.`);
