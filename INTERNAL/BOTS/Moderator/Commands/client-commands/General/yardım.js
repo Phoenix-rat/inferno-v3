@@ -40,7 +40,7 @@ class Avatar extends Command {
             if (embed.fields.length === 0) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("error").value()} bir şeyler ters gitti..`).setColor('RED'));
             message.channel.send(embed.setTitle(args[0].toUpperCase() + " KOMUTLARI"));
         } else {
-            let acceptedroles = cmd.info.accaptedPerms.map(rolename => message.guild.roles.cache.get(roles.get(rolename).value()));
+            let acceptedroles = cmd.info.accaptedPerms.filter(rolename => message.guild.roles.cache.get(roles.get(rolename).value())).map(rolename => message.guild.roles.cache.get(roles.get(rolename).value()));
             if (acceptedroles.length < 1) acceptedroles = ["\`-Genel Komut-\`"];
             let allias = cmd.info.aliases.join(', ');
             if (cmd.info.aliases.length === 0) allias = ["\`EŞDEĞERİ YOK\`"]
