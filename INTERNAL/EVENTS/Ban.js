@@ -16,7 +16,7 @@ class PermaBanEvent {
         const channels = await low(client.adapters('channels'));
         if (!guild.members.cache.get(user.id).bannable) return;
         try {
-            await user.send(`**${guild.name}** sunucusundan \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından yasaklandın!-`);
+            await user.send(`**${guild.name}** sunucusundan \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından yasaklandın!`);
         } catch (e) {
             console.log(e);
         }
