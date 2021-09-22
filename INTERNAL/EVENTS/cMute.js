@@ -39,6 +39,11 @@ class PermaBanEvent {
             return number;
         }
         const srID = altilik(alltherecords);
+        try {
+            await user.send(`**${guild.name}** sunucusundaki metin kanallarına erişimin \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından kısıtlandı! \`${srID}\``);
+        } catch (e) {
+            console.log(e);
+        }
         client.extention.emit('Record', member.user.id, executor, reason, "C-Mute", "temp", duration, srID);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
         **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı \`Metin kanallarında\` susturuldu.

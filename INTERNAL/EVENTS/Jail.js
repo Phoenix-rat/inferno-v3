@@ -50,6 +50,11 @@ class JailEvent {
             return number;
         }
         const srID = altilik(alltherecords);
+        try {
+            await user.send(`**${guild.name}** sunucusunda \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından cezalıya atıldın! \`${srID}\``);
+        } catch (e) {
+            console.log(e);
+        }
         client.extention.emit('Record', member.user.id, executor, reason, "Jail", type, duration, srID);
         if (reason === "REKLAM") return member.guild.channels.cache.get(channels.get("log_reklam").value()).send(new Discord.MessageEmbed().setDescription(stripIndents`
         **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcının \`reklamcı\` olduğu tespit edildi!
