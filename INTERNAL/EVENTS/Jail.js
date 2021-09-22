@@ -51,7 +51,7 @@ class JailEvent {
         }
         const srID = altilik(alltherecords);
         try {
-            await member.user.send(`**${member.guild.name}** sunucusunda \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından${type.toLowerCase() === "temp" ? ` **${duration} gün boyunca**` : ""} cezalandırıldın! \`${srID}\``);
+            await member.user.send(`**${member.guild.name}** sunucusunda \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından${type.toLowerCase() === "temp" ? ` **${duration} gün** boyunca` : ""} cezalandırıldın! \`${srID}\``);
         } catch (e) {
             console.log(e);
         }
