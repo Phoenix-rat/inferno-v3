@@ -1,4 +1,5 @@
 const { Client, Collection } = require('discord.js');
+require('discord-reply');
 const FileSync = require('lowdb/adapters/FileSync');
 const events = require('events');
 class Tantoony extends Client {
