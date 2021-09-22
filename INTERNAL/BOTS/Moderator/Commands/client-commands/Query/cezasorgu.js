@@ -59,7 +59,7 @@ class BanSorgu extends Command {
         **Ceza Başlangıcı:**
         ${moment(data.created.getTime()).format("LLL")}
 
-        `)
+        `);
             message.channel.send(embed);
         } else return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 

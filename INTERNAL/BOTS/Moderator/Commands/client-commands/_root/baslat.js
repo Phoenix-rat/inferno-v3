@@ -20,7 +20,7 @@ class Kur extends Command {
             aliases: ["başlat"],
             acceptedRoles: ["root", "owner", "etkinlikyt"],
             cooldown: 5000,
-            enabled: true,
+            enabled: false,
             adminOnly: false,
             ownerOnly: false,
             onTest: false,
