@@ -13,7 +13,7 @@ let sorgu;
 if(!data) sorgu = `${member}, ${member.voice.channel} kanalında. \n \` • \` Mikrofon **:** ${member.voice.mute ? `${client.emoji("offmic")}`: `${client.emoji("onmic")}`} \n \` • \` Kulaklık **:** ${member.voice.deaf ? `:mute:`: `:loud_sound:`}`
 if(data) sorgu = `${member} kullanıcısı **${client.günsaat(Date.now(), data.time)}** ${member.voice.channel} kanalında. \n \` • \` Mikrofon **:** ${member.voice.mute ? `${client.emoji("offmic")}`: `${client.emoji("onmic")}`} \n \` • \` Kulaklık **:** ${member.voice.deaf ? `:mute:`: `:loud_sound:`}`
 let kembed = embed.setDescription(sorgu)
-message.inlineReply({ embed: kembed, allowedMentions: { repliedUser: false } })
+message.inlineReply({ embed: kembed, allowedMentions: { repliedUser: false } });
 }
 
 exports.conf = {
