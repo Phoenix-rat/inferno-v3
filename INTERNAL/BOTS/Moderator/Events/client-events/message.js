@@ -133,7 +133,7 @@ module.exports = class {
 
         const msgStat = await stat_msg.findOne({ _id: message.author.id });
         if (!msgStat) {
-            if (!message.guild || message.author.bot) return
+            if (!message.guild || message.author.bot) return;
             await stat_msg.create({
                 _id: message.author.id,
                 records: [
@@ -145,7 +145,7 @@ module.exports = class {
                 ]
             });
         } else {
-            if (!message.guild || message.author.bot) return
+            if (!message.guild || message.author.bot) return;
             await stat_msg.updateOne({ _id: message.author.id }, {
                 $push: {
                     records: {
