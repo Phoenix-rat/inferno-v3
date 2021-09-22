@@ -2,6 +2,8 @@ const Command = require('../../../Base/Command');
 const low = require('lowdb');
 const Discord = require('discord.js');
 const { sayi } = require('../../../../../HELPERS/functions');
+const moment = require("moment");
+moment.locale('tr');
 class vMute extends Command {
     constructor(client) {
         super(client, {
@@ -43,6 +45,11 @@ class vMute extends Command {
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
         const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("vmute").value()} ${mentioned} kullanıcısı ${message.member} tarafından susturuldu!`);
         //await logChannel.send(embed);
+        const embed = new Discord.MessageEmbed().setColor('YELLOW').setDescription(stripIndents`
+        **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının ses kanallarındaki susturulması kaldırıldı.
+        \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
+        \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``);
+        await message.guild.channels.cache.get(channels.get("log_cmute").value()).send(embed);
 
     }
 }

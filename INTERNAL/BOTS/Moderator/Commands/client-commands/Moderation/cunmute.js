@@ -2,6 +2,8 @@ const Command = require('../../../Base/Command');
 const low = require('lowdb');
 const Mute = require('../../../../../MODELS/Moderation/ChatMuted');
 const Discord = require('discord.js');
+const moment = require("moment");
+moment.locale('tr');
 class cunMute extends Command {
     constructor(client) {
         super(client, {
@@ -33,6 +35,11 @@ class cunMute extends Command {
         const embed = new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("cunmute").value()} ${mentioned} kullanıcısı susturulması ${message.member} tarafından kaldırıldı!`);
         await logChannel.send(embed);
         */
+        const embed = new Discord.MessageEmbed().setColor('YELLOW').setDescription(stripIndents`
+        **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının metin kanallarındaki susturulması kaldırıldı.
+        \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
+        \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``);
+        await message.guild.channels.cache.get(channels.get("log_cmute").value()).send(embed);
     }
 }
 module.exports = cunMute;

@@ -3,8 +3,8 @@ const low = require('lowdb');
 const { stripIndents } = require('common-tags');
 const Jails = require('../../../../../MODELS/Moderation/Jails');
 const { MessageEmbed } = require('discord.js');
-const moment = require("moment")
-moment.locale('tr')
+const moment = require("moment");
+moment.locale('tr');
 class unJail extends Command {
     constructor(client) {
         super(client, {
