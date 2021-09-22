@@ -1,6 +1,6 @@
 require('dotenv').config({ path: __dirname + '/../../../.env' });
 const { Intents } = require('discord.js');
-require('discord-reply');
+require("./Base/ExtendedMessage");
 const Tantoony = require('./../../BASE/Tantoony');
 const client = new Tantoony({
     ws: {
