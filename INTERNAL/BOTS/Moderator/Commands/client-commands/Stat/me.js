@@ -30,7 +30,7 @@ class Nerede extends Command {
         const channels = await low(client.adapters('channels'));
 
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
-        
+
         function msToTime(duration) {
             var milliseconds = Math.floor((duration % 1000) / 100),
                 seconds = Math.floor((duration / 1000) % 60),
@@ -57,7 +57,7 @@ class Nerede extends Command {
         const Data = await StatData.findOne({ _id: mentioned.user.id });
         const SesVeri = Data ? Data.records.filter(r => checkDays(r.enter) < days).map(r => r.exit.getTime() - r.enter.getTime()).reduce((a, b) => a + b, 0) : "Veri Bulunamadı";
 
-        const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin stat verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 fero sizi seviyor ❤ ${message.guild.name}`)
+        const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin son 7 günlük verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 fero sizi seviyor ❤ ${message.guild.name}`)
             .addField("__**Toplam Ses**__", `\`\`\`fix\n${msToTime(SesVeri)}\`\`\``, true)
             .addField("__**Toplam Mesaj**__", `\`\`\`fix\n${MesajVeri}\`\`\``, true)
             .addField("__**Toplam Kayıt**__", `\`\`\`fix\n${KayıtVeri}\`\`\``, true)
@@ -68,7 +68,7 @@ class Nerede extends Command {
         ${emojis.get("statssh").value()} **Kayıt Odaları:** \`31 saat, 31 dakika\`
         ${emojis.get("statssh").value()} **Private Odaları:** \`31 saat, 31 dakika\`
         ${emojis.get("statssh").value()} **Eğlence Odaları:** \`31 saat, 31 dakika\``)
-            .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``);
+            .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``).setTitle("Yetkili Stat Bilgi").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
 
         await message.channel.send(embed)
 
