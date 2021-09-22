@@ -43,7 +43,7 @@ class vMute extends Command {
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         //this.client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
         const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
-        const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("vmute").value()} ${mentioned} kullanıcısı ${message.member} tarafından susturuldu!`);
+        //const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("vmute").value()} ${mentioned} kullanıcısı ${message.member} tarafından susturuldu!`);
         //await logChannel.send(embed);
         const embed = new Discord.MessageEmbed().setColor('YELLOW').setDescription(stripIndents`
         **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının ses kanallarındaki susturulması kaldırıldı.
