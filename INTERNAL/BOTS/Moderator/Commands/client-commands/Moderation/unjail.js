@@ -1,5 +1,6 @@
 const Command = require('../../../Base/Command');
 const low = require('lowdb');
+const { stripIndents } = require('common-tags');
 const Jails = require('../../../../../MODELS/Moderation/Jails');
 const { MessageEmbed } = require('discord.js');
 class unJail extends Command {
