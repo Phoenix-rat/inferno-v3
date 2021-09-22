@@ -93,7 +93,8 @@ module.exports = class {
             const afksindata = await afkdata.find();
             const afks = message.mentions.members.array().filter(m => afksindata.some(doc => doc._id === m.user.id));
             if (afks.length > 0) {
-                await message.channel.send(afks.map(afk => `${afk},${afksindata.find(data => data._id === afk.user.id).reason ? ` \`${afksindata.find(data => data._id === afk.user.id).reason}\` sebebiyle` : ""} **${checkMins(afksindata.find(data => data._id === afk.user.id).created) < 1 ? "biraz" : moment.duration(new Date().getTime() - afksindata.find(data => data._id === afk.user.id).created.getTime()).format("D [Gün], H [Saat], m [Dakika]")} önce** AFK oldu.`, { allowedMentions: { repliedUser: false } }).join('\n'));
+                const msgWarn = await message.channel.send(afks.map(afk => `${afk},${afksindata.find(data => data._id === afk.user.id).reason ? ` \`${afksindata.find(data => data._id === afk.user.id).reason}\` sebebiyle` : ""} **${checkMins(afksindata.find(data => data._id === afk.user.id).created) < 1 ? "biraz" : moment.duration(new Date().getTime() - afksindata.find(data => data._id === afk.user.id).created.getTime()).format("D [Gün], H [Saat], m [Dakika]")} önce** AFK oldu.`, { allowedMentions: { repliedUser: false } }).join('\n'));
+                await msgWarn.react(emojis.get("afk").value().split(':')[2].replace('>', ''));
                 await afks.forEach(async afk => {
                     await afkdata.updateOne({ _id: afk.user.id }, {
                         $push: {
