@@ -46,7 +46,7 @@ class PermaBanEvent {
         \` • \` Susturan: ${member.guild.members.cache.get(executor)} (\`${executor}\`)
         \` • \` Susturulan: ${member} (\`${member.user.id}\`)
         \` • \` Sebep: ${reason || "Yok"}
-        \` • \` Süre:** ${duration} dakika
+        \` • \` Süre: ${duration} dakika
         \` • \` Susturulma Tarihi: \`${moment(Date.now()).format("LLL")}\`
         `).setFooter(`Ceza Numarası: ${srID}`).setColor("RED");
         await member.guild.channels.cache.get(channels.get("log_vmute").value()).send(embed);
