@@ -35,10 +35,10 @@ class Anonim extends Command {
         let TestVoice = mentioned.voice.channel ? `${mentioned.voice.channel} kanalında.` : "**Herhangi bir ses kanalında değil.**";
 
         let profstatus = mentioned.presence.status
-            .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
-            .replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>')
-            .replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>')
-            .replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>');
+            .replace('online', 'Çevrim İçi <:inferno_cervimici:883792952156102666>')
+            .replace('idle', 'Boşta <:inferno_bosta:883792952042872952>')
+            .replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:883792951807991820>')
+            .replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:883792952202231868>');
 
         const profildata = await vericik.findOne({ _id: mentioned.user.id });
 
