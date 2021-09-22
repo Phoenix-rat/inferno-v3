@@ -50,7 +50,7 @@ class JailEvent {
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
         **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı ${type.toLowerCase() === "temp" ? "süreli" : "kalıcı"} cezalandırıldı! 
         \` • \` Cezalandıran yetkili: ${member.guild.members.cache.get(executor)} (\`${executor}\`)
-        \` • \` Sebep: ${reason || "Yok"}
+        \` • \` Sebep: \`${reason || "Yok"}\`
         \` • \` Cezalandırılma Tarihi: \`${moment(Date.now()).format("LLL")}\`${type === "temp" ? `
         \` • \` Süre: \`${duration} Gün\`
         `: ""}
