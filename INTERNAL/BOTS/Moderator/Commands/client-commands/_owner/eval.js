@@ -20,9 +20,9 @@ class Eval extends Command {
             cooldown: 5000,
             enabled: true,
             adminOnly: false,
-            ownerOnly: true,
+            ownerOnly: false,
             onTest: false,
-            rootOnly: false,
+            rootOnly: true,
             dmCmd: false
         });
     }
