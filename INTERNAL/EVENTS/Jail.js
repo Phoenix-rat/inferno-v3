@@ -1,6 +1,9 @@
 const Jails = require('../MODELS/Moderation/Jails');
 const low = require('lowdb');
 const Punishments = require('../MODELS/StatUses/Punishments');
+const Discord = require('discord.js');
+const moment = require("moment");
+moment.locale("tr");
 class JailEvent {
     constructor(client) {
         this.client = client;
@@ -44,10 +47,10 @@ class JailEvent {
         const srID = altilik(alltherecords);
         client.extention.emit('Record', member.user.id, executor, reason, "Jail", type, duration, srID);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
-        **Cezalandıran yetkili:** ${guild.members.cache.get(executor)} (\`${executor}\`)
-        **Cezalandırılan kişi:** ${member} (\`${member.user.id}\`)
-        **Sebep:** ${reason || "Yok"}
-        **Süre:** ${type === "perma" ? "Sınırsız" : `${duration} dakika`}
+        **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı sunucuda ${type.toLowerCase() === "temp" ? "Süreli" : "Kalıcı"} olarak yasaklandı! 
+        \` • \` Cezalandıran yetkili: ${guild.members.cache.get(executor)} (\`${executor}\`)
+        \` • \` Sebep: ${reason || "Yok"}
+        \` • \` Cezalandırılma Tarihi: \`${moment(Date.now()).format("LLL")}\`
         `).setFooter(`Ceza Numarası: ${srID}`);
         await guild.channels.cache.get(channels.get("log_jail").value()).send(embed);
     }
