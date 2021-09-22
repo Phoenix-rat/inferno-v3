@@ -34,7 +34,7 @@ class Reload extends Command {
         let command = args[0];
         let i = 0;
         if (!args[0]) {
-            let directories = await readdir("../../Commands/");
+            let directories = await readdir("./Commands/client-commands/");
             await client.logger.log(`Loading a total of ${directories.length} categories.`, "category");
             directories.forEach(async (dir) => {
                 let commands = await readdir("./Commands/" + dir + "/");
