@@ -62,7 +62,7 @@ class Anonim extends Command {
          Kayıt olma tarihi: ${profildata ? checkDays(profildata.created) + " gün önce" : "Bilinmiyor"}
          Kayıt olma bilgileri: ${profildata ? `${profildata.name} ${profildata.age} - ${profildata.sex}` : "Bulunamadı"}
         `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
-        await message.channel.send(embedd).then(msg => msg.delete({ timeout: 5000 }));
+        
     }
 }
 
