@@ -37,7 +37,7 @@ class cunMute extends Command {
         await logChannel.send(embed);
         */
         const embed = new Discord.MessageEmbed().setColor('YELLOW').setDescription(stripIndents`
-        **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının metin kanallarındaki susturulması kaldırıldı.
+        **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının \`Metin kanallarındaki\` susturulması kaldırıldı.
         \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
         \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``);
         await message.guild.channels.cache.get(channels.get("log_cmute").value()).send(embed);

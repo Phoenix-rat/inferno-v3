@@ -34,7 +34,7 @@ class vunMute extends Command {
         //const embed = new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("vunmute").value()} ${mentioned} kullanıcısı susturulması ${message.member} tarafından kaldırıldı!`);
         //await logChannel.send(embed);
         const embed = new Discord.MessageEmbed().setColor('YELLOW').setDescription(stripIndents`
-        **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının ses kanallarındaki susturulması kaldırıldı.
+        **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının \`Ses kanallarındaki\` susturulması kaldırıldı.
         \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
         \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``);
         await message.guild.channels.cache.get(channels.get("log_vmute").value()).send(embed);
