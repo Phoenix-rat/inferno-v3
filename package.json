@@ -9,6 +9,7 @@
         "chartjs-node-canvas": "^3.1.0",
         "child_process": "^1.0.2",
         "common-tags": "^1.8.0",
+        "cron": "^1.8.2",
         "discord-oauth2-api": "^1.1.1",
         "discord.js": "12.5.1",
         "dotenv": "^8.2.0",
