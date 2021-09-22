@@ -31,14 +31,14 @@ class Anonim extends Command {
 
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
-        
+
         let TestVoice = mentioned.voice.channel ? `${mentioned.voice.channel} kanalında.` : "**Herhangi bir ses kanalında değil.**";
 
         let profstatus = mentioned.presence.status
-        .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
-        .replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>')
-        .replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>')
-        .replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>');
+            .replace('online', 'Çevrim İçi <:inferno_cervimici:866719561944662016>')
+            .replace('idle', 'Boşta <:inferno_bostaa:866719581493526549>')
+            .replace('dnd', 'Rahatsız Etmeyin <:inferno_rahatsizetmeyin:866719649865269268>')
+            .replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:866719610303414292>');
 
         const profildata = await vericik.findOne({ _id: mentioned.user.id });
 
@@ -61,7 +61,7 @@ class Anonim extends Command {
          Kayıt eden kullanıcı: ${profildata ? message.guild.members.cache.get(profildata.executor) : "Bulunamadı"}
          Kayıt olma tarihi: ${profildata ? checkDays(profildata.created) + " gün önce" : "Bilinmiyor"}
          Kayıt olma bilgileri: ${profildata ? `${profildata.name} ${profildata.age} - ${profildata.sex}` : "Bulunamadı"}
-        `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.displayHexColor).setTitle("† Dante's INFEЯИO");
+        `).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })).setColor(mentioned.roles.cache.array().filter(r => r.hoist).sort((a, b) => b.rawPosition - a.rawPosition)[0] ? mentioned.roles.cache.array().filter(r => r.hoist).sort((a, b) => b.rawPosition - a.rawPosition)[0].hexColor : "#ffffff").setTitle("† Dante's INFEЯИO");
         await message.channel.send(embedd);
     }
 }
