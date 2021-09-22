@@ -25,9 +25,9 @@ class unJail extends Command {
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         // if(mentioned) return message.reply(`${message.author.id}, ${mentioned.id}`)
 
-        if (!mentioned) return message.channel.send(new MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        if (!mentioned) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const Data = await Jails.findOne({ _id: mentioned.user.id });
-        if (!Data) return message.channel.send(new MessageEmbed().setDescription(`${emojis.get("notfound").value()} Kayıt Bulunamadı!`));
+        if (!Data) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         await mentioned.roles.add(Data.roles.map(rname => message.guild.roles.cache.find(role => role.name === rname)));
         await mentioned.roles.remove(roles.get("prisoner").value());
         await Jails.deleteOne({ _id: mentioned.user.id });
