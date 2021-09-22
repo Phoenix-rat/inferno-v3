@@ -43,8 +43,6 @@ module.exports = class {
                 message.member.roles.add(roles.get("muted").value());
                 message.channel.send(`${message.member} Spam yaptığın için mutelendin!`)
             }
-
-
             if (count >= 1) await message.delete();
             this.client.spamcounts[message.author.id][message.content] = count + 1;
         }
