@@ -34,7 +34,7 @@ class unJail extends Command {
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         // client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
         const embed = new MessageEmbed().setColor('YELLOW').setDescription(stripIndents`
-        **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının **${Data.type.toLowerCase() === "temp" ? "kalıcı" : "süresiz"}** cezası kaldırıldı.
+        **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının **${Data.type.toLowerCase() === "temp" ? "süreli" : "kalıcı"}** cezası kaldırıldı.
         \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
         \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``);
         await message.guild.channels.cache.get(channels.get("log_jail").value()).send(embed);
