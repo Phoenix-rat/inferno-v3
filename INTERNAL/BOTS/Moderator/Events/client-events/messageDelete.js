@@ -2,8 +2,7 @@ const low = require('lowdb');
 const { MessageEmbed } = require('discord.js');
 const moment = require('moment')
 moment.locale("tr")
-const msg_snipe = require("../../../../MODELS/Moderation/Snipe.js"); 
-const config  = require("../../../../HELPERS/config.js")
+const msg_snipe = require("../../../../MODELS/Temprorary/Snipe.js");
 
 class MessageDelete {
     constructor(client) {
@@ -12,7 +11,6 @@ class MessageDelete {
     async run(message) {
         const client = this.client;
         if (!message.guild) return;
-        let prefix = message.content.startsWith(config.prefix)
         if (message.guild.id !== client.config.server) return;
         const entry = await message.guild.fetchAuditLogs({ type: 'MESSAGE_DELETE' }).then(logs => logs.entries.first());
         const utils = await low(client.adapters('utils'));
@@ -20,7 +18,13 @@ class MessageDelete {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         if (entry.executor.bot) return;
-        await msg_snipe.findOneAndUpdate({ guildID: message.guild.id }, { $set: { author: message.author.id, content: message.content, date: Date.now(), channel: message.channel.id } }, { upsert: true })
+        await msg_snipe.create({
+            _id: message.id,
+            author: message.author.id,
+            content: message.content,
+            date: new Date(),
+            channel: message.channel.id
+        });
         const embed = new MessageEmbed()
         .setColor("BLACK").setFooter(`🌟 Tantoony sizi önemsiyor ❤ ${message.guild.name}`)
         .setDescription(`${message.author.toString()} tarafından bir mesaj silindi!`)

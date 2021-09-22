@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
-const msg_snipe = require("../../../../../MODELS/Temprorary/Snipe.js")
+const msg_snipe = require("../../../../../MODELS/Temprorary/Snipe.js");
 
 class Upgrade extends Command {
 
