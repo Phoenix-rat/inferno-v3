@@ -42,7 +42,7 @@ class PermaBanEvent {
         const srID = altilik(alltherecords);
         client.extention.emit('Record', member.user.id, executor, reason, "V-Mute", "temp", duration, srID);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
-        **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı \`ses kanallarında\` susturuldu.
+        **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı \`Ses kanallarında\` susturuldu.
         \` • \` Susturan: ${member.guild.members.cache.get(executor)} (\`${executor}\`)
         \` • \` Sebep: \`${reason || "Yok"}\`
         \` • \` Süre: \`${duration} dakika\`
