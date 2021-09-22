@@ -51,7 +51,7 @@ class JailEvent {
         }
         const srID = altilik(alltherecords);
         try {
-            await member.user.send(`**${guild.name}** sunucusunda \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından cezalıya atıldın! \`${srID}\``);
+            await member.user.send(`**${member.guild.name}** sunucusunda \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından cezalıya atıldın! \`${srID}\``);
         } catch (e) {
             console.log(e);
         }

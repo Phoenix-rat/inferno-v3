@@ -41,7 +41,7 @@ class PermaBanEvent {
         }
         const srID = altilik(alltherecords);
         try {
-            await member.user.send(`**${guild.name}** sunucusundaki ses kanallarına erişimin \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından kısıtlandı! \`${srID}\``);
+            await member.user.send(`**${member.guild.name}** sunucusundaki ses kanallarına erişimin \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından kısıtlandı! \`${srID}\``);
         } catch (e) {
             console.log(e);
         }
