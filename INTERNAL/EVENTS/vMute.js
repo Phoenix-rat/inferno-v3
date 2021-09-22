@@ -1,6 +1,10 @@
 const VoiceMuted = require('../MODELS/Moderation/VoiceMuted');
 const low = require('lowdb');
 const Punishments = require('../MODELS/StatUses/Punishments');
+const Discord = require('discord.js');
+const moment = require("moment");
+const { stripIndents } = require('common-tags');
+moment.locale("tr");
 class PermaBanEvent {
     constructor(client) {
         this.client = client;
@@ -38,10 +42,12 @@ class PermaBanEvent {
         const srID = altilik(alltherecords);
         client.extention.emit('Record', member.user.id, executor, reason, "V-Mute", "temp", duration, srID);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
-        **Susturan:** ${guild.members.cache.get(executor)} (\`${executor}\`)
-        **Susturulan:** ${member} (\`${member.user.id}\`)
-        **Sebep:** ${reason || "Yok"}
-        **Süre:** ${type === "perma" ? "Sınırsız" : `${duration} dakika`}
+        **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı sunucudaki ses kanallarından susturuldu.
+        \` • \` Susturan: ${member.guild.members.cache.get(executor)} (\`${executor}\`)
+        \` • \` Susturulan: ${member} (\`${member.user.id}\`)
+        \` • \` Sebep: ${reason || "Yok"}
+        \` • \` Süre:** ${duration} dakika
+        \` • \` Susturulma Tarihi: \`${moment(Date.now()).format("LLL")}\`
         `).setFooter(`Ceza Numarası: ${srID}`);
         await guild.channels.cache.get(channels.get("log_vmute").value()).send(embed);
 
