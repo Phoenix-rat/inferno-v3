@@ -3,16 +3,16 @@ const Discord = require("discord.js");
 const low = require('lowdb');
 const { checkSecs } = require("../../../../../HELPERS/functions");
 const { stripIndent } = require("common-tags");
-const tagged = require("../../../../../MODELS/StatUses/tagged");
+const tagged = require("../../../../../MODELS/StatUses/authorized");
 
 class CountByRole extends Command {
 
     constructor(client) {
         super(client, {
-            name: "taglı",
-            description: "kişinin taglı çektiğini veri tabanına işler.",
-            usage: "taglı @etiket/id(tag veren) id(tagı alan)",
-            examples: ["taglı @Tantoony 890344502433296404"],
+            name: "yetkili",
+            description: "kişinin yetkili çektiğini veri tabanına işler.",
+            usage: "yetkili @etiket/id(yetki veren) id(yetki alan)",
+            examples: ["yetkili @Tantoony 890344502433296404"],
             cooldown: 3600000,
             category: "Yetkili",
             accaptedPerms: ["cmd-ceo"]
