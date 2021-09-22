@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
-const msg_snipe = require("../../../../../MODELS/Moderation/Snipe.js")
+const msg_snipe = require("../../../../../MODELS/Temprorary/Snipe.js")
 
 class Upgrade extends Command {
 
@@ -9,8 +9,8 @@ class Upgrade extends Command {
         super(client, {
             name: "snipe",
             description: "Sunucuda silinen son mesajı gösterir.",
-            usage: "snipe",
-            examples: ["snipe"],
+            usage: "snipe @etiket/id",
+            examples: ["snipe 479293073549950997"],
             category: "Management",
             accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single"],
         });
@@ -21,11 +21,13 @@ class Upgrade extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        let embed = new Discord.MessageEmbed().setColor("#780580").setAuthor(message.author.username, message.author.avatarURL({ dynamics: true }))
-        let sData = await msg_snipe.findOne({ guildID: message.guild.id })
-        if (!sData) return message.channel.send(embed.setDescription(`**Sunucuda en son silinen mesaj bulunamadı.**`))
-        let channel = message.guild.channels.cache.get(sData.channel)
-        message.channel.send(embed.setDescription(`${message.author} adlı kullanıcı ${channel ? channel : "**__Bulunamayan Kanal__**"} kanalında en son silinen mesajı yakaladı. \n\n**Kullanıcı:** \n\`\`\`• ${message.guild.members.cache.get(sData.author).user.tag} (${sData.author})\`\`\` \n**Mesaj Iceriği** \n\`\`\`${sData.content ? sData.content : "Bulunamadı"}\`\`\``))
+        let embed = new Discord.MessageEmbed().setColor("#780580");
+        let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.channels.cache.get(args[0]);
+        if (!mentioned) await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        let sData = mentioned.user ? await msg_snipe.findOne({ author: mentioned.user.id }) : await msg_snipe.findOne({ channel: mentioned.id });
+        if (!sData) return message.channel.send(embed.setDescription(`**${mentioned.user ? "Kullanıcının" : "Kanaldaki"} en son silinen mesaj${mentioned.user ? "ı" : ""} bulunamadı.**`))
+        let channel = message.guild.channels.cache.get(sData.channel);
+        await message.channel.send(embed.setDescription(`<@${sData.author}> (\`${sData.author}\`) kullanıcısı ${channel ? channel : `[\`${sData.channel}\`]`} kanalında en son silinen mesajı yakaladı. \n\n**Kullanıcı:**\n**Mesaj Iceriği:**\n\`\`\`${sData.content ? sData.content : "Bulunamadı"}\`\`\``));
 
     }
 }
