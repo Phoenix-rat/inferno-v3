@@ -41,13 +41,12 @@ class PermaBanEvent {
         const srID = altilik(alltherecords);
         client.extention.emit('Record', member.user.id, executor, reason, "C-Mute", "temp", duration, srID);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
-        **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı sunucudaki metin kanallarından susturuldu.
-        \` • \` Susturan: ${member.guild.members.cache.get(executor)} (\`${executor}\`)
+        **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı \`metin kanallarında\` susturuldu.
         \` • \` Susturulan: ${member} (\`${member.user.id}\`)
-        \` • \` Sebep: ${reason || "Yok"}
-        \` • \` Süre: ${duration} dakika
+        \` • \` Sebep: \`${reason || "Yok"}\`
+        \` • \` Süre: \`${duration} dakika\`
         \` • \` Susturulma Tarihi: \`${moment(Date.now()).format("LLL")}\`
-        `).setFooter(`Ceza Numarası: ${srID}`).setColor("RED");
+        `).setFooter(`Ceza Numarası: ${srID}`).setColor("#ff0000");
         await member.guild.channels.cache.get(channels.get("log_cmute").value()).send(embed);
     }
 }
