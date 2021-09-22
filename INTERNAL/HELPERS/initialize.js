@@ -113,8 +113,7 @@ class Initialize {
               dbName: this.client.config.mongoDB,
               authSource: this.client.config.auth,
               useNewUrlParser: true,
-              useUnifiedTopology: true,
-              useFindAndModify: false
+              useUnifiedTopology: true
           }).then(() => {
               this.client.logger.log("Connected to the Mongodb database.", "mngdb");
           }).catch((err) => {
