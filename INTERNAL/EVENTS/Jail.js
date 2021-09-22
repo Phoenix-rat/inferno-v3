@@ -3,6 +3,7 @@ const low = require('lowdb');
 const Punishments = require('../MODELS/StatUses/Punishments');
 const Discord = require('discord.js');
 const moment = require("moment");
+const { stripIndents } = require('common-tags');
 moment.locale("tr");
 class JailEvent {
     constructor(client) {
