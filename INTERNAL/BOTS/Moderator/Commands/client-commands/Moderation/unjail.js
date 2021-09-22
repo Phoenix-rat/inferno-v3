@@ -30,8 +30,10 @@ class unJail extends Command {
         await Jails.deleteOne({ _id: mentioned.user.id });
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         // client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
-        const logChannel = message.guild.channels.cache.get(channels.get("cmd-mod").value());
-        const embed = new MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("unjail").value()} ${mentioned} kullanıcısı jail'i ${message.member} tarafından kaldırıldı!`);
+        const embed = new MessageEmbed().setColor('YELLOW').setDescription(stripIndents`
+        **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının **${Data.type.toLowerCase() === "temp" ? "süreli" : "süresiz"}** cezası kaldırıldı.
+        \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
+        \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``);
         await logChannel.send(embed);
     }
 }
