@@ -53,7 +53,7 @@ class JailEvent {
         \` • \` Sebep: ${reason || "Yok"}
         \` • \` Cezalandırılma Tarihi: \`${moment(Date.now()).format("LLL")}\`
         `).setFooter(`Ceza Numarası: ${srID}`);
-        await guild.channels.cache.get(channels.get("log_jail").value()).send(embed);
+        await member.guild.channels.cache.get(channels.get("log_jail").value()).send(embed);
     }
 }
 
