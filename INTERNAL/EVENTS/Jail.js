@@ -52,7 +52,8 @@ class JailEvent {
         \` • \` Cezalandıran yetkili: ${member.guild.members.cache.get(executor)} (\`${executor}\`)
         \` • \` Sebep: \`${reason || "Yok"}\`${type === "temp" ? `
         \` • \` Süre: \`${duration} Gün\``: ""}
-        \` • \` Cezalandırılma Tarihi: \`${moment(Date.now()).format("LLL")}\`
+        \` • \` Cezalandırılma Tarihi: \`${moment(Date.now()).format("LLL")}\`${type === "temp" ? `
+        \` • \` Bitiş Tarihi: \`${moment(new Date().getTime() + duration * 86400000).format("LLL")}\``: ""}
         `).setFooter(`Ceza Numarası: ${srID}`).setColor("RED");
         await member.guild.channels.cache.get(channels.get("log_jail").value()).send(embed);
     }
