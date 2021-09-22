@@ -51,7 +51,12 @@ class JailEvent {
         }
         const srID = altilik(alltherecords);
         client.extention.emit('Record', member.user.id, executor, reason, "Jail", type, duration, srID);
-        if (reason === "REKLAM") return member.guild.channels.cache.get(channels.get("log_reklam").value()).send(new Discord.MessageEmbed().setDescription(` **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcının \`reklamcı\` olduğu tespit edildi!`).setColor("#ff0000"));
+        if (reason === "REKLAM") return member.guild.channels.cache.get(channels.get("log_reklam").value()).send(new Discord.MessageEmbed().setDescription(stripIndents`
+        **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcının \`reklamcı\` olduğu tespit edildi!
+        \` • \` Cezalandıran yetkili: ${member.guild.members.cache.get(executor)} (\`${executor}\`)
+        \` • \` Sebep: \`${reason || "Yok"}\`
+        \` • \` Cezalandırılma Tarihi: \`${moment(Date.now()).format("LLL")}\`
+        `).setColor("#ff0000"));
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
         **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı \`${type.toLowerCase() === "temp" ? "süreli" : "kalıcı"}\` cezalandırıldı! 
         \` • \` Cezalandıran yetkili: ${member.guild.members.cache.get(executor)} (\`${executor}\`)

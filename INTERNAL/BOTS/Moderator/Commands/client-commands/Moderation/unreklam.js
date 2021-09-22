@@ -33,7 +33,11 @@ class unJail extends Command {
         await Jails.deleteOne({ _id: mentioned.user.id });
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
         // client.cmdCooldown[message.author.id][this.info.name] = Date.now() + this.info.cooldown;
-        await messsage.guild.channels.cache.get(channels.get("log_reklam").value()).send(new Discord.MessageEmbed().setDescription(` **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcının \`reklamcı\` olmadığı ortaya çıktı!`).setColor("YELLOW"));
+        await messsage.guild.channels.cache.get(channels.get("log_reklam").value()).send(new MessageEmbed().setDescription(stripIndents`
+        **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcının \`reklamcı\` olmadığı ortaya çıktı!
+        \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
+        \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\`
+        `).setColor("YELLOW"));
         
     }
 }
