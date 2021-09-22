@@ -1,5 +1,5 @@
 const low = require('lowdb');
-const private_channels = require('../../../MODELS/Temprorary/private_channels');
+const private_channels = require('../../../../MODELS/Temprorary/private_channels');
 
 class VoiceStateUpdate {
     constructor(client) {
