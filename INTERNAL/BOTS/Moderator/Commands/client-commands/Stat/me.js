@@ -5,18 +5,20 @@ const { stripIndent } = require('common-tags');
 const Messages = require('../../../../../MODELS/StatUses/stat_msg');
 const Register = require('../../../../../MODELS/Datalake/Registered');
 const Invites = require('../../../../../MODELS/StatUses/Invites');
+const StatData = require('../../../../../MODELS/StatUses/VoiceRecords');
 
 class Nerede extends Command {
     constructor(client) {
         super(client, {
-            name: "kave",
-            description: "etiketlenen kişinin nerede olduğunu gösterir.",
-            usage: "kave @fero/ID",
-            examples: ["nerede @fero/ID"],
-            aliases: ["kahpe"],
+            name: "me",
+            description: "etiketlenen kişinin yetkili statını gösterir.",
+            usage: "me @fero/ID",
+            examples: ["me"],
+            aliases: [],
             category: "Genel",
             cmdChannel: "bot-komut",
-            cooldown: 300000
+            cooldown: 300000,
+            accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "yetkilialım", "cmd-crew"],
         });
     }
 
@@ -27,33 +29,45 @@ class Nerede extends Command {
         const channels = await low(client.adapters('channels'));
 
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
-        
+
+        function msToTime(duration) {
+            var milliseconds = Math.floor((duration % 1000) / 100),
+                seconds = Math.floor((duration / 1000) % 60),
+                minutes = Math.floor((duration / (1000 * 60)) % 60),
+                hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+            /*
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            */
+            return hours + " saat, " + minutes + " dk, " + seconds + " sn";
+        }
+
+        let days = mentioned ? (args[1] || 7) : (args[0] || 7);
         const Veri = await Messages.findOne({ _id: mentioned.user.id });
-        const MesajVeri = Veri ? Veri.records.length + " Mesaj" : "Veri Bulunamadı";
+        const MesajVeri = Veri ? Veri.records.filter(r => checkDays(r.created) < days).length + " Mesaj" : "Veri Bulunamadı";
 
         const TVeri = await Register.find({ executor: mentioned.user.id });
-        const KayıtVeri = TVeri ? TVeri.length + " Kayıt" : "Veri Bulunamadı";
+        const KayıtVeri = TVeri ? TVeri.filter(r => checkDays(r.created) < days).length + " Kayıt" : "Veri Bulunamadı";
 
         const DVeri = await Invites.findOne({ _id: mentioned.user.id });
-        const DavetVeri = DVeri ? DVeri.records.length + " Davet" : "Veri Bulunamadı";
-  
-        const MyRole = message.guild.roles.cache.get("856266299285045288");
-        const NextRole = message.guild.roles.cache.get("856265230187102259")
-        
+        const DavetVeri = DVeri ? DVeri.records.filter(r => checkDays(r.created) < days).length + " Davet" : "Veri Bulunamadı";
+
+        const Data = await StatData.findOne({ _id: mentioned.user.id });
+        const SesVeri = Data ? Data.records.filter(r => checkDays(r.enter) < days).map(r => r.exit.getTime() - r.enter.getTime()).reduce((a, b) => a + b, 0) : "Veri Bulunamadı";
+
         const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin stat verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 fero sizi seviyor ❤ ${message.guild.name}`)
-        .addField("__**Toplam Ses**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField("__**Toplam Mesaj**__", `\`\`\`fix\n${MesajVeri}\`\`\``, true)
-        .addField("__**Toplam Kayıt**__", `\`\`\`fix\n${KayıtVeri}\`\`\``, true)
-        .addField("__**Toplam Davet**__", `\`\`\`fix\n${DavetVeri}\`\`\``, true)
-        .addField("__**Toplam Taglı**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField("__**Toplam Yetkili**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-        .addField(`Ses Kanalları`,`${emojis.get("statssh").value()} **Sohbet Odaları:** \`31 saat, 31 dakika\`
+            .addField("__**Toplam Ses**__", `\`\`\`fix\n${msToTime(SesVeri)}\`\`\``, true)
+            .addField("__**Toplam Mesaj**__", `\`\`\`fix\n${MesajVeri}\`\`\``, true)
+            .addField("__**Toplam Kayıt**__", `\`\`\`fix\n${KayıtVeri}\`\`\``, true)
+            .addField("__**Toplam Davet**__", `\`\`\`fix\n${DavetVeri}\`\`\``, true)
+            .addField("__**Toplam Taglı**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+            .addField("__**Toplam Yetkili**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+            .addField(`Ses Kanalları`, `${emojis.get("statssh").value()} **Sohbet Odaları:** \`31 saat, 31 dakika\`
         ${emojis.get("statssh").value()} **Kayıt Odaları:** \`31 saat, 31 dakika\`
         ${emojis.get("statssh").value()} **Private Odaları:** \`31 saat, 31 dakika\`
         ${emojis.get("statssh").value()} **Eğlence Odaları:** \`31 saat, 31 dakika\``)
-        .addField(`Mesaj Kanalları`,`${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``)
-        .addField(`${emojis.get("statstars").value()} Puan Durumu`,`${bar(10000, 25000)} \`10000/25000\``)
-        .addField(`${emojis.get("statstars").value()} Yetki Atlama Durumu`,`${MyRole} rolünden ${NextRole} rolüne yükselmek için \`15000\` **Puana** ihtiyacın var!`)
+            .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``);
 
         await message.channel.send(embed)
 
@@ -76,7 +90,7 @@ class Nerede extends Command {
             }
             return str;
         }
-        
+
     }
 }
 
