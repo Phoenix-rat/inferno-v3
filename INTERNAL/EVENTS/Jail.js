@@ -51,7 +51,7 @@ class JailEvent {
         }
         const srID = altilik(alltherecords);
         try {
-            await member.user.send(`**${member.guild.name}** sunucusunda \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından cezalıya atıldın! \`${srID}\``);
+            await member.user.send(`**${member.guild.name}** sunucusunda \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından${type.toLowerCase() === "temp" ? ` **${duration} gün boyunca**` : ""} cezalandırıldın! \`${srID}\``);
         } catch (e) {
             console.log(e);
         }
@@ -66,9 +66,9 @@ class JailEvent {
         **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı \`${type.toLowerCase() === "temp" ? "süreli" : "kalıcı"}\` cezalandırıldı! 
         \` • \` Cezalandıran yetkili: ${member.guild.members.cache.get(executor)} (\`${executor}\`)
         \` • \` Sebep: \`${reason || "Yok"}\`${type === "temp" ? `
-        \` • \` Süre: \`${duration} Gün\``: ""}
+        \` • \` Süre: \`${duration} Gün\`` : ""}
         \` • \` Cezalandırılma Tarihi: \`${moment(Date.now()).format("LLL")}\`${type === "temp" ? `
-        \` • \` Bitiş Tarihi: \`${moment(new Date().getTime() + duration * 86400000).format("LLL")}\``: ""}
+        \` • \` Bitiş Tarihi: \`${moment(new Date().getTime() + duration * 86400000).format("LLL")}\`` : ""}
         `).setFooter(`Ceza Numarası: ${srID}`).setColor("RED");
         await member.guild.channels.cache.get(channels.get("log_jail").value()).send(embed);
     }
