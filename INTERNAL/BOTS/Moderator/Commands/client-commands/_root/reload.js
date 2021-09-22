@@ -37,7 +37,7 @@ class Reload extends Command {
             let directories = await readdir("./Commands/client-commands/");
             await client.logger.log(`Loading a total of ${directories.length} categories.`, "category");
             directories.forEach(async (dir) => {
-                let commands = await readdir("./Commands/" + dir + "/");
+                let commands = await readdir("./Commands/client-commands/" + dir + "/");
                 commands.filter((cmd) => cmd.split(".").pop() === "js").forEach(async (cmd) => {
                     cmd = this.client.commands.get(cmd.replace('.js', ''));
                     await this.client.unloadCommand(cmd.config.location, cmd.info.name);
