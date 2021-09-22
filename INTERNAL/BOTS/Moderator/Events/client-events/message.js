@@ -180,6 +180,7 @@ module.exports = class {
                 $inc: { msgPoints: pointConfig.message }
             });
         }
+        /*
         if (message.content === 'onay') {
             const tagData = await tagged.find({ target: message.author.id });
             if (tagData && (tagData.length !== 0)) {
@@ -206,6 +207,7 @@ module.exports = class {
                 }
             }
         }
+        */
         if (!message.content.startsWith(client.config.prefix)) return;
         if (message.author.bot) return;
         let command = message.content.split(' ')[0].slice(client.config.prefix.length);
@@ -217,12 +219,6 @@ module.exports = class {
             cmd = client.commands.get(client.aliases.get(command));
         } else return;
         const embed = new Discord.MessageEmbed();
-
-
-
-
-
-
         if (!cmd.config.enabled) return;
         if (cmd.config.dmCmd && (message.channel.type !== 'dm')) return message.channel.send(`${emojis.get("dmcmd").value()} Bu komut bir ** DM ** komutudur.`);
         if (cmd.config.ownerOnly && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("tantus").value()} Bu komutu sadece ${client.owner} kullanabilir.`);

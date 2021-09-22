@@ -1,6 +1,6 @@
 const pjails = require('../../../MODELS/Moderation/Jails');
 const Discord = require('discord.js');
-const Tagli = require('../../../MODELS/Datalake/Tagli');
+const Tagli = require('../../../MODELS/StatUses/tagged');
 const low = require('lowdb');
 const gangs = require('../../../MODELS/Datalake/gangs');
 class UserUpdate {
@@ -41,11 +41,6 @@ class UserUpdate {
             }
         }
         if (!client.config.tag.some(tag => oldUser.username.includes(tag)) && client.config.tag.some(tag => newUser.username.includes(tag))) {
-            const tagrecord = await Tagli.findOne({ _id: newUser.id });
-            if (tagrecord) {
-                const trc = new Tagli({ _id: newUser.id, created: new Date(), claimed: "false" });
-                await trc.dave();
-            }
             await member.setNickname(client.config.tag[0] + member.displayName.slice(1));
             await member.roles.add(roles.get("crew").value());
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag aldı`);
