@@ -55,7 +55,7 @@ class Anonim extends Command {
          Sunucu takma adı: \`${mentioned.displayName}\`
          Sunucuya Katılma Tarihi: \`${moment(mentioned.joinedAt).format("LLL")}\`
          (\`${checkDays(mentioned.joinedAt)} Gün Önce\`)
-         Ayırıcı Rolü: ${mentioned.roles.cache.array().filter(r => r.hoist).sort((a, b) => b.rawPosition - a.rawPosition)[0]}
+         Ayırıcı Rolü: ${mentioned.roles.cache.array().filter(r => r.hoist).sort((a, b) => b.rawPosition - a.rawPosition)[0] || "Yok"}
 
          **❯ Kayıt Bilgisi**
          Kayıt eden kullanıcı: ${profildata ? message.guild.members.cache.get(profildata.executor) : "Bulunamadı"}
