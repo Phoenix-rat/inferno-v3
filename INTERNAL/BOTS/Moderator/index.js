@@ -1,7 +1,7 @@
 require('dotenv').config({ path: __dirname + '/../../../.env' });
 const { Intents } = require('discord.js');
+require('discord-reply');
 const Tantoony = require('./../../BASE/Tantoony');
-const low = require("lowdb")
 const client = new Tantoony({
     ws: {
         intents: new Intents(Intents.ALL).remove([
