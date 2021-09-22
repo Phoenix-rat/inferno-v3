@@ -6,6 +6,7 @@ const Messages = require('../../../../../MODELS/StatUses/stat_msg');
 const Register = require('../../../../../MODELS/Datalake/Registered');
 const Invites = require('../../../../../MODELS/StatUses/Invites');
 const StatData = require('../../../../../MODELS/StatUses/VoiceRecords');
+const { checkDays } = require('../../../../../HELPERS/functions');
 
 class Nerede extends Command {
     constructor(client) {
@@ -29,7 +30,7 @@ class Nerede extends Command {
         const channels = await low(client.adapters('channels'));
 
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
-
+        
         function msToTime(duration) {
             var milliseconds = Math.floor((duration % 1000) / 100),
                 seconds = Math.floor((duration / 1000) % 60),
