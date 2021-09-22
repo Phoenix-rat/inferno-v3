@@ -19,7 +19,7 @@ class Avatar extends Command {
         const emojis = await low(client.adapters('emojis'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('BLACK'));
-        let user = message.mentions.users.first() || await client.users.fetch(args[0]) || message.author;
+        let user = message.mentions.users.first() || await client.users.fetch(args[0] || message.member.user.id) || message.author;
         message.inlineReply(user.displayAvatarURL({ dynamic: true, size: 2048 }), { allowedMentions: { repliedUser: false } });
     }
 }
