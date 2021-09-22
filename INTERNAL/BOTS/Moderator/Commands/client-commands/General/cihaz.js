@@ -6,13 +6,13 @@ class Booster extends Command {
 
     constructor(client) {
         super(client, {
-            name: "booster",
+            name: "cihaz",
             description: "Belirtilen ismi adınız yapar",
-            usage: "booster Tantoony",
-            examples: ["booster Tantoony"],
+            usage: "cihaz",
+            examples: ["cihaz Tantoony"],
             category: "Genel",
-            accaptedPerms: ["booster"],
-            aliases: ["zengin", "bisim", "booserisim"],
+            accaptedPerms: [],
+            aliases: [],
             cooldown: 300000
         });
     }
