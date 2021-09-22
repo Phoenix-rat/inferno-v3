@@ -40,7 +40,7 @@ class PermaBanEvent {
         }
         const srID = altilik(alltherecords);
         try {
-            await member.user.send(`**${member.guild.name}** sunucusundaki metin kanallarına erişimin \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından **${duration} dakika** boyunca kısıtlandı! \`${srID}\``);
+            await member.user.send(`**${member.guild.name}** sunucusundaki \`metin kanallarına\` erişimin \`${reason}\` sebebiyle <@${executor}> (\`${executor}\`) tarafından **${duration} dakika** boyunca kısıtlandı! \`${srID}\``);
         } catch (e) {
             console.log(e);
         }
