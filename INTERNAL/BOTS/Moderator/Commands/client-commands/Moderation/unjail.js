@@ -34,7 +34,7 @@ class unJail extends Command {
         **${mentioned.user.tag}** (\`${mentioned.user.id}\`) adlı kullanıcının **${Data.type.toLowerCase() === "temp" ? "süreli" : "süresiz"}** cezası kaldırıldı.
         \` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`)
         \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\``);
-        await logChannel.send(embed);
+        await message.guild.channels.cache.get(channels.get("log_jail").value()).send(embed);
     }
 }
 module.exports = unJail;
