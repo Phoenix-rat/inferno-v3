@@ -20,7 +20,7 @@ class unJail extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        //     if(mentioned) return message.reply(`${message.author.id}, ${mentioned.id}`)
+        // if(mentioned) return message.reply(`${message.author.id}, ${mentioned.id}`)
 
         if (!mentioned) return message.channel.send(new MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
         const Data = await Jails.findOne({ _id: mentioned.user.id });
