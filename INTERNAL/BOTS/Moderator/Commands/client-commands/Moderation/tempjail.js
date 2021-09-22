@@ -22,10 +22,10 @@ class Jail extends Command {
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!mentioned) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let sebep = args.slice(3).join(" ");
-        if (!sebep) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("soru").value()} Bir sebep girmelisin`));
+        if (!sebep) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (!mentioned.bannable) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
-        if (!sayi(args[1])) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`${emojis.get("sayifalan").value()} Geçerli bir sayı girmelisin`));
+        if (!sayi(args[1])) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if ((args[2] !== 'gün') && (args[2] !== 'saat')) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (args[2] === 'saat') args[1] = args[1] / 24;
         client.extention.emit('Jail', mentioned, message.author.id, sebep, "temp", args[1]);

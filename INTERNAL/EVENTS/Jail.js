@@ -48,10 +48,12 @@ class JailEvent {
         const srID = altilik(alltherecords);
         client.extention.emit('Record', member.user.id, executor, reason, "Jail", type, duration, srID);
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
-        **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı sunucuda ${type.toLowerCase() === "temp" ? "süreli" : "kalıcı"} olarak cezalandırıldı! 
+        **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı ${type.toLowerCase() === "temp" ? "süreli" : "kalıcı"} cezalandırıldı! 
         \` • \` Cezalandıran yetkili: ${member.guild.members.cache.get(executor)} (\`${executor}\`)
         \` • \` Sebep: ${reason || "Yok"}
-        \` • \` Cezalandırılma Tarihi: \`${moment(Date.now()).format("LLL")}\`
+        \` • \` Cezalandırılma Tarihi: \`${moment(Date.now()).format("LLL")}\`${type === "temp" ? `
+        \` • \` Süre: ${duration} \`Gün\`
+        `: ""}
         `).setFooter(`Ceza Numarası: ${srID}`).setColor("RED");
         await member.guild.channels.cache.get(channels.get("log_jail").value()).send(embed);
     }
