@@ -18,7 +18,11 @@ class JailEvent {
         const channels = await low(client.adapters('channels'));
         const memberRoles = member.roles.cache.filter(r => r.id !== roles.get("booster").value()).filter(r => r.editable).array();
         await member.roles.remove(memberRoles);
-        await member.roles.add(roles.get("prisoner").value());
+        if (reason !== "REKLAM") {
+            await member.roles.add(roles.get("prisoner").value());
+        } else {
+            await member.roles.add(roles.get("reklamcı").value());
+        }
         let deletedRoles = await memberRoles.map(r => r.name);
         const Jail = await Jails.findOne({ _id: member.user.id });
         if (!Jail) {
@@ -47,6 +51,7 @@ class JailEvent {
         }
         const srID = altilik(alltherecords);
         client.extention.emit('Record', member.user.id, executor, reason, "Jail", type, duration, srID);
+        if (reason === "REKLAM") return member.guild.channels.cache.get(channels.get("log_reklam").value()).send(new Discord.MessageEmbed().setDescription(` **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcının \`reklamcı\` olduğu tespit edildi!`).setColor("#ff0000"));
         const embed = new Discord.MessageEmbed().setDescription(stripIndents`
         **${member.user.tag}** (\`${member.user.id}\`) adlı kullanıcı \`${type.toLowerCase() === "temp" ? "süreli" : "kalıcı"}\` cezalandırıldı! 
         \` • \` Cezalandıran yetkili: ${member.guild.members.cache.get(executor)} (\`${executor}\`)
