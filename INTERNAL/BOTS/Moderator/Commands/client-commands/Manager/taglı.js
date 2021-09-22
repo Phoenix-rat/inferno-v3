@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const low = require('lowdb');
 const { checkSecs } = require("../../../../../HELPERS/functions");
 const { stripIndent } = require("common-tags");
-const tagged = require("../../../../../MODELS/Temprorary/tagged");
+const tagged = require("../../../../../MODELS/StatUses/tagged");
 
 class CountByRole extends Command {
 
