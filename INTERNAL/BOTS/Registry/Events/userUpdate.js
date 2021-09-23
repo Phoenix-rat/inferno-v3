@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const Tagli = require('../../../MODELS/StatUses/tagged');
 const low = require('lowdb');
 const gangs = require('../../../MODELS/Datalake/gangs');
+const { stripIndents } = require('common-tags');
 class UserUpdate {
     constructor(client) {
         this.client = client;
@@ -54,6 +55,15 @@ class UserUpdate {
                 await member.roles.remove(member.roles.cache.filter(r => r.editable).array());
                 await member.roles.add(roles.get("welcome").value());
             }
+            await guild.channels.cache.get(channels.get("log_tag").value()).send(stripIndents`
+            ${member} tagımızı alarak ailemize katıldı, onunla birlikte \`${guild.members.cache.array().filter(m => m.user.username.includes(client.config.tag[0])).length}\` taglımız bulunmaktadır.
+
+            <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
+            `);
+            await guild.channels.cache.get(channels.get("genel_chat").value()).send(stripIndents`
+            ${member} ailemize hoş geldin <:inferno_kalp3:889588203198242840>
+            Gençler bir merhaba diyelim 😋
+            `);
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag saldı`);
         }
         const gangler = await gangs.find();
