@@ -50,6 +50,10 @@ class UserUpdate {
             <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
             `);
             await member.setNickname(client.config.tag[0] + member.displayName.slice(1));
+            await guild.channels.cache.get(channels.get("genel_chat").value()).send(stripIndents`
+            ${member} ailemize hoş geldin <:inferno_kalp3:889588203198242840>
+            Gençler bir merhaba diyelim 😋
+            `);
         }
         if (client.config.tag.some(tag => oldUser.username.includes(tag)) && !client.config.tag.some(tag => newUser.username.includes(tag))) {
             const tagrecord = await Tagli.findOne({ _id: newUser.id });
@@ -63,10 +67,6 @@ class UserUpdate {
             ${member} tagımızı çıkararak ailemizden ayrıldı :(, maalesef ki artık \`${guild.members.cache.array().filter(m => m.user.username.includes(client.config.tag[0])).length}\` taglımız bulunmaktadır.
 
             <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
-            `);
-            await guild.channels.cache.get(channels.get("genel_chat").value()).send(stripIndents`
-            ${member} ailemize hoş geldin <:inferno_kalp3:889588203198242840>
-            Gençler bir merhaba diyelim 😋
             `);
             await member.setNickname(`•` + member.displayName.slice(1));
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag saldı`);
