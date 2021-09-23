@@ -45,7 +45,7 @@ class UserUpdate {
             await member.roles.add(roles.get("crew").value());
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag aldı`);
             await guild.channels.cache.get(channels.get("log_tag").value()).send(stripIndents`
-            ${member} tagımızı çıkararak ailemizden ayrıldı :(, maalesef ki artık \`${guild.members.cache.array().filter(m => m.user.username.includes(client.config.tag[0])).length}\` taglımız bulunmaktadır.
+            ${member} tagımızı alarak ailemize katıldı, onunla birlikte \`${guild.members.cache.array().filter(m => m.user.username.includes(client.config.tag[0])).length}\` taglımız bulunmaktadır.
 
             <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
             `);
@@ -60,7 +60,7 @@ class UserUpdate {
                 await member.roles.add(roles.get("welcome").value());
             }
             await guild.channels.cache.get(channels.get("log_tag").value()).send(stripIndents`
-            ${member} tagımızı alarak ailemize katıldı, onunla birlikte \`${guild.members.cache.array().filter(m => m.user.username.includes(client.config.tag[0])).length}\` taglımız bulunmaktadır.
+            ${member} tagımızı çıkararak ailemizden ayrıldı :(, maalesef ki artık \`${guild.members.cache.array().filter(m => m.user.username.includes(client.config.tag[0])).length}\` taglımız bulunmaktadır.
 
             <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
             `);
