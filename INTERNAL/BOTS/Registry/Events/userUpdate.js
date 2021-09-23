@@ -42,7 +42,6 @@ class UserUpdate {
             }
         }
         if (!client.config.tag.some(tag => oldUser.username.includes(tag)) && client.config.tag.some(tag => newUser.username.includes(tag))) {
-            await member.setNickname(client.config.tag[0] + member.displayName.slice(1));
             await member.roles.add(roles.get("crew").value());
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag aldı`);
             await guild.channels.cache.get(channels.get("log_tag").value()).send(stripIndents`
@@ -50,11 +49,11 @@ class UserUpdate {
 
             <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
             `);
+            await member.setNickname(client.config.tag[0] + member.displayName.slice(1));
         }
         if (client.config.tag.some(tag => oldUser.username.includes(tag)) && !client.config.tag.some(tag => newUser.username.includes(tag))) {
             const tagrecord = await Tagli.findOne({ _id: newUser.id });
             if (tagrecord) await Tagli.deleteOne({ _id: newUser.id });
-            await member.setNickname(`•` + member.displayName.slice(1));
             await member.roles.remove(roles.get("crew").value());
             if (utils.get("taglıAlım").value() && !member.roles.cache.has(roles.get("vip").value() && !member.roles.cache.has(roles.get("booster").value()))) {
                 await member.roles.remove(member.roles.cache.filter(r => r.editable).array());
@@ -69,6 +68,7 @@ class UserUpdate {
             ${member} ailemize hoş geldin <:inferno_kalp3:889588203198242840>
             Gençler bir merhaba diyelim 😋
             `);
+            await member.setNickname(`•` + member.displayName.slice(1));
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag saldı`);
         }
         const gangler = await gangs.find();
