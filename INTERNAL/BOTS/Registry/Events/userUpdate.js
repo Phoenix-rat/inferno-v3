@@ -42,6 +42,7 @@ class UserUpdate {
             }
         }
         if (!client.config.tag.some(tag => oldUser.username.includes(tag)) && client.config.tag.some(tag => newUser.username.includes(tag))) {
+            if (!member.roles.cache.has(roles.get("Male")).value() && !member.roles.cache.has(roles.get("Female")).value()) return;
             await member.roles.add(roles.get("crew").value());
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag aldı`);
             await guild.channels.cache.get(channels.get("log_tag").value()).send(stripIndents`
@@ -56,6 +57,7 @@ class UserUpdate {
             `);
         }
         if (client.config.tag.some(tag => oldUser.username.includes(tag)) && !client.config.tag.some(tag => newUser.username.includes(tag))) {
+            if (!member.roles.cache.has(roles.get("Male")).value() && !member.roles.cache.has(roles.get("Female")).value()) return;
             const tagrecord = await Tagli.findOne({ _id: newUser.id });
             if (tagrecord) await Tagli.deleteOne({ _id: newUser.id });
             await member.roles.remove(roles.get("crew").value());
