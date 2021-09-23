@@ -219,19 +219,19 @@ module.exports = class {
         } else return;
         const embed = new Discord.MessageEmbed();
         if (!cmd.config.enabled) return;
-        if (cmd.config.dmCmd && (message.channel.type !== 'dm')) return message.channel.send(`${emojis.get("dmcmd").value()} Bu komut bir ** DM ** komutudur.`);
-        if (cmd.config.ownerOnly && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("tantus").value()} Bu komutu sadece ${client.owner} kullanabilir.`);
-        if (cmd.config.onTest && !utils.get("testers").value().includes(message.author.id) && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("ontest").value()} Bu komut henüz ** test aşamasındadır **.`);
-        if (cmd.config.rootOnly && !utils.get("mod").value().includes(message.author.id) && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("rootonly").value()} Bu komutu sadece ** yardımcılar ** kullanabilir.`);
-        if (cmd.config.adminOnly && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.channel.send(`${emojis.get("moddonly").value()} Bu komutu sadece ** yöneticiler ** kullanabilir.`);
-        if (cmd.info.cmdChannel & message.guild && message.guild.channels.cache.get(channels.get(cmd.info.cmdChannel).value()) && (message.author.id !== client.config.owner) && (message.channel.id !== channels.get(cmd.info.cmdChannel).value())) return message.channel.send(`${emojis.get("text").value()} Bu komutu ${message.guild.channels.cache.get(channels.get(cmd.info.cmdChannel).value())} kanalında kullanmayı dene!`);
+        if (cmd.config.dmCmd && (message.channel.type !== 'dm')) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (cmd.config.ownerOnly && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (cmd.config.onTest && !utils.get("testers").value().includes(message.author.id) && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (cmd.config.rootOnly && !utils.get("mod").value().includes(message.author.id) && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (cmd.config.adminOnly && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (cmd.info.cmdChannel & message.guild && message.guild.channels.cache.get(channels.get(cmd.info.cmdChannel).value()) && (message.author.id !== client.config.owner) && (message.channel.id !== channels.get(cmd.info.cmdChannel).value())) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (message.guild && !cmd.config.dmCmd) {
             const requiredRoles = cmd.info.accaptedPerms || [];
             let allowedRoles = requiredRoles.filter(rolevalue => message.guild.roles.cache.get(roles.get(rolevalue).value())).map(rolevalue => message.guild.roles.cache.get(roles.get(rolevalue).value()))
             let deyim = `Bu komutu kullanabilmek için ${allowedRoles[0]} rolüne sahip olmalısın!`;
             if (allowedRoles.length > 1) deyim = `Bu komutu kollanabilmek için aşağıdaki rollerden birisine sahip olmalısın: \n${allowedRoles.join(`, `)} `;
             if ((allowedRoles.length >= 1) && !allowedRoles.some(role => message.member.roles.cache.has(role.id)) && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== client.config.owner) && (message.author.id !== "853011311328100411")) {
-                return await message.channel.send(embed.setDescription(deyim).setColor('BLACK')).then(msg => msg.delete({ timeout: 5000 }));
+                return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             }
         }
         let uCooldown = client.cmdCooldown[message.author.id];
@@ -240,7 +240,7 @@ module.exports = class {
             uCooldown = client.cmdCooldown[message.author.id];
         }
         let time = uCooldown[cmd.info.name] || 0;
-        if (time && (time > Date.now())) return message.channel.send(`${emojis.get("dmcmd").value()} Komutu tekrar kullanabilmek için lütfen ** ${Math.ceil((time - Date.now()) / 1000)}** saniye bekle!`);
+        if (time && (time > Date.now())) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         client.logger.log(`[(${message.author.id})] ${message.author.username} ran command[${cmd.info.name}]`, "cmd");
         if (message.channel.id === "857659757233700875" && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== "853011311328100411") && command !== "tag") return;
         try {
