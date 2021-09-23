@@ -45,6 +45,11 @@ class UserUpdate {
             await member.setNickname(client.config.tag[0] + member.displayName.slice(1));
             await member.roles.add(roles.get("crew").value());
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag aldı`);
+            await guild.channels.cache.get(channels.get("log_tag").value()).send(stripIndents`
+            ${member} tagımızı çıkararak ailemizden ayrıldı :(, maalesef ki artık \`${guild.members.cache.array().filter(m => m.user.username.includes(client.config.tag[0])).length}\` taglımız bulunmaktadır.
+
+            <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
+            `);
         }
         if (client.config.tag.some(tag => oldUser.username.includes(tag)) && !client.config.tag.some(tag => newUser.username.includes(tag))) {
             const tagrecord = await Tagli.findOne({ _id: newUser.id });
