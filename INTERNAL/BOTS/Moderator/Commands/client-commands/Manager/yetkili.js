@@ -15,7 +15,7 @@ class CountByRole extends Command {
             examples: ["yetkili @Tantoony 890344502433296404"],
             cooldown: 3600000,
             category: "Yetkili",
-            accaptedPerms: ["cmd-ceo"]
+            accaptedPerms: ["yetkilitaglı"]
         });
     }
 
