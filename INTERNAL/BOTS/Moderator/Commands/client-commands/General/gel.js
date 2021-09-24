@@ -30,7 +30,7 @@ class Gel extends Command {
         if (message.member.roles.cache.has(roles.get("owner").value() && (mentioned.voice.channel.parentID !== channels.get("st_private").value()))) return await mentioned.voice.setChannel(message.member.voice.channel.id);
         if (kanal.id === mentioned.voice.channel.id) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         try {
-            await message.react(emojis.get("komutonay").value().split(':')[2].replace('>', ''));
+            await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
             await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         } catch (error) {
             console.error(error);
