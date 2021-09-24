@@ -59,10 +59,10 @@ class Nerede extends Command {
         const SesVeri = Data ? Data.records.filter(r => checkDays(r.enter) < days).map(r => r.exit.getTime() - r.enter.getTime()).reduce((a, b) => a + b, 0) : "Veri Bulunamadı";
 
         const TagliData = await TagData.find({ executor: mentioned.user.id });
-        const taglilar = TagliData && TagliData.length ? TagliData.filter(td => checkDays(td.created) < days).length + " Taglı": "Veri Bulunamadı";
+        const taglilar = TagliData && TagliData.length ? TagliData.filter(td => checkDays(td.created) < days).length + " Taglı" : "Veri Bulunamadı";
 
         const TagliAuth = await TagData.find({ executor: mentioned.user.id });
-        const yetkililerim = TagliAuth && TagliAuth.length ? TagliAuth.filter(td => checkDays(td.created) < days).length + " Yetkili": "Veri Bulunamadı";
+        const yetkililerim = TagliAuth && TagliAuth.length ? TagliAuth.filter(td => checkDays(td.created) < days).length + " Yetkili" : "Veri Bulunamadı";
 
         const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin son 7 günlük verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 fero sizi seviyor ❤ ${message.guild.name}`)
             .addField("__**Toplam Ses**__", `\`\`\`fix\n${msToTime(SesVeri)}\`\`\``, true)
@@ -71,11 +71,13 @@ class Nerede extends Command {
             .addField("__**Toplam Davet**__", `\`\`\`fix\n${DavetVeri}\`\`\``, true)
             .addField("__**Toplam Taglı**__", `\`\`\`fix\n${taglilar}\`\`\``, true)
             .addField("__**Toplam Yetkili**__", `\`\`\`fix\n${yetkililerim}\`\`\``, true)
-            .addField(`Ses Kanalları`, `${emojis.get("statssh").value()} **Sohbet Odaları:** \`31 saat, 31 dakika\`
-        ${emojis.get("statssh").value()} **Kayıt Odaları:** \`31 saat, 31 dakika\`
-        ${emojis.get("statssh").value()} **Private Odaları:** \`31 saat, 31 dakika\`
-        ${emojis.get("statssh").value()} **Eğlence Odaları:** \`31 saat, 31 dakika\``)
-            .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``).setTitle("Yetkili Stat Bilgi").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
+            //     .addField(`Ses Kanalları`, `${emojis.get("statssh").value()} **Sohbet Odaları:** \`31 saat, 31 dakika\`
+            // ${emojis.get("statssh").value()} **Kayıt Odaları:** \`31 saat, 31 dakika\`
+            // ${emojis.get("statssh").value()} **Private Odaları:** \`31 saat, 31 dakika\`
+            // ${emojis.get("statssh").value()} **Eğlence Odaları:** \`31 saat, 31 dakika\``)
+            .addField(`Ses Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
+            .addField(`Metin Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
+        // .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``).setTitle("Yetkili Stat Bilgi").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
 
         await message.channel.send(embed);
 
