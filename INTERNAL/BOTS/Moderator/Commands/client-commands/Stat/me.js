@@ -47,22 +47,22 @@ class Nerede extends Command {
 
         let days = mentioned ? (args[1] || 7) : (args[0] || 7);
         const Veri = await Messages.findOne({ _id: mentioned.user.id });
-        const MesajVeri = Veri ? Veri.records.filter(r => checkDays(r.created) < days).length + " Mesaj" : "Veri Bulunamadı";
+        const MesajVeri = Veri ? Veri.records.filter(r => checkDays(r.created) < days).length + " Mesaj" : "0 Mesaj";
 
         const TVeri = await Register.find({ executor: mentioned.user.id });
-        const KayıtVeri = TVeri ? TVeri.filter(r => checkDays(r.created) < days).length + " Kayıt" : "Veri Bulunamadı";
+        const KayıtVeri = TVeri ? TVeri.filter(r => checkDays(r.created) < days).length + " Kayıt" : "0 Kayıt";
 
         const DVeri = await Invites.findOne({ _id: mentioned.user.id });
-        const DavetVeri = DVeri ? DVeri.records.filter(r => checkDays(r.created) < days).length + " Davet" : "Veri Bulunamadı";
+        const DavetVeri = DVeri ? DVeri.records.filter(r => checkDays(r.created) < days).length + " Davet" : "0 Davet";
 
         const Data = await StatData.findOne({ _id: mentioned.user.id });
-        const SesVeri = Data ? Data.records.filter(r => checkDays(r.enter) < days).map(r => r.exit.getTime() - r.enter.getTime()).reduce((a, b) => a + b, 0) : "Veri Bulunamadı";
+        const SesVeri = Data ? Data.records.filter(r => checkDays(r.enter) < days).map(r => r.exit.getTime() - r.enter.getTime()).reduce((a, b) => a + b, 0) : "0 Dakika";
 
         const TagliData = await TagData.find({ executor: mentioned.user.id });
-        const taglilar = TagliData && TagliData.length ? TagliData.filter(td => checkDays(td.created) < days).length + " Taglı" : "Veri Bulunamadı";
+        const taglilar = TagliData && TagliData.length ? TagliData.filter(td => checkDays(td.created) < days).length + " Taglı" : "0 Taglı";
 
         const TagliAuth = await TagData.find({ executor: mentioned.user.id });
-        const yetkililerim = TagliAuth && TagliAuth.length ? TagliAuth.filter(td => checkDays(td.created) < days).length + " Yetkili" : "Veri Bulunamadı";
+        const yetkililerim = TagliAuth && TagliAuth.length ? TagliAuth.filter(td => checkDays(td.created) < days).length + " Yetkili" : "0 Yetkili";
 
         const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin son 7 günlük verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 fero sizi seviyor ❤ ${message.guild.name}`)
             .addField("__**Toplam Ses**__", `\`\`\`fix\n${msToTime(SesVeri)}\`\`\``, true)
