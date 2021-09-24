@@ -6,8 +6,9 @@ const Messages = require('../../../../../MODELS/StatUses/stat_msg');
 const Register = require('../../../../../MODELS/Datalake/Registered');
 const Invites = require('../../../../../MODELS/StatUses/Invites');
 const StatData = require('../../../../../MODELS/StatUses/VoiceRecords');
+const TagData = require('../../../../../MODELS/StatUses/tagged');
 const { checkDays } = require('../../../../../HELPERS/functions');
-
+//executor
 class Nerede extends Command {
     constructor(client) {
         super(client, {
@@ -57,13 +58,19 @@ class Nerede extends Command {
         const Data = await StatData.findOne({ _id: mentioned.user.id });
         const SesVeri = Data ? Data.records.filter(r => checkDays(r.enter) < days).map(r => r.exit.getTime() - r.enter.getTime()).reduce((a, b) => a + b, 0) : "Veri Bulunamadı";
 
+        const TagliData = await TagData.find({ executor: mentioned.user.id });
+        const taglilar = TagliData && TagliData.length ? TagliData.filter(td => checkDays(td.created) < days).length + " Taglı": "Veri Bulunamadı";
+
+        const TagliAuth = await TagData.find({ executor: mentioned.user.id });
+        const yetkililerim = TagliAuth && TagliAuth.length ? TagliAuth.filter(td => checkDays(td.created) < days).length + " Yetkili": "Veri Bulunamadı";
+
         const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin son 7 günlük verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 fero sizi seviyor ❤ ${message.guild.name}`)
             .addField("__**Toplam Ses**__", `\`\`\`fix\n${msToTime(SesVeri)}\`\`\``, true)
             .addField("__**Toplam Mesaj**__", `\`\`\`fix\n${MesajVeri}\`\`\``, true)
             .addField("__**Toplam Kayıt**__", `\`\`\`fix\n${KayıtVeri}\`\`\``, true)
             .addField("__**Toplam Davet**__", `\`\`\`fix\n${DavetVeri}\`\`\``, true)
-            .addField("__**Toplam Taglı**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
-            .addField("__**Toplam Yetkili**__", `\`\`\`fix\nVeri Bulunamadı\`\`\``, true)
+            .addField("__**Toplam Taglı**__", `\`\`\`fix\n${taglilar}\`\`\``, true)
+            .addField("__**Toplam Yetkili**__", `\`\`\`fix\n${yetkililerim}\`\`\``, true)
             .addField(`Ses Kanalları`, `${emojis.get("statssh").value()} **Sohbet Odaları:** \`31 saat, 31 dakika\`
         ${emojis.get("statssh").value()} **Kayıt Odaları:** \`31 saat, 31 dakika\`
         ${emojis.get("statssh").value()} **Private Odaları:** \`31 saat, 31 dakika\`
