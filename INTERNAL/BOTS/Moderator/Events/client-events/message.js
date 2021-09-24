@@ -214,7 +214,7 @@ module.exports = class {
         } else if (client.aliases.has(command)) {
             cmd = client.commands.get(client.aliases.get(command));
         } else return;
-        if (!message.member.roles.cache.some(rIDm => roles.get("Male").value().concat(roles.get("Female").value()).includes(rIDm))) return;
+       // if (!message.member.roles.cache.some(rIDm => roles.get("Male").value().concat(roles.get("Female").value()).includes(rIDm))) return;
         const embed = new Discord.MessageEmbed();
         if (!cmd.config.enabled) return;
         if (cmd.config.dmCmd && (message.channel.type !== 'dm')) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
