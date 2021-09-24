@@ -8,7 +8,7 @@ module.exports.execute = async (client, message, args) => {
     let aktifamasestedegil = rolesamca.members.filter(a => a.presence.status !== "offline" && !a.voice.channel).size
     let aktifamasestedegilmap = rolesamca.members.filter(a => a.presence.status !== "offline" && !a.voice.channel).map(a => a).join("\n")
 
-    if(aktif == 0) return message.channel.send(`\`\`\`${rolesamca.name} rolünde şuan aktif üye bulunmamakta.\`\`\``)
+    if(aktif == 0) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 
     let content; 
     if(aktifamasestedegil > 0) content= `\n**Sesli kanallarda olmayan kullanıcılar;** \n${aktifamasestedegilmap}`; else content= " "

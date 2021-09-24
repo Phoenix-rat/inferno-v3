@@ -33,7 +33,7 @@ class Meeting extends Command {
         break;
       }
       case "sustoplantı": {
-        if (!message.member.voice.channel.id) return message.channel.send(`Bir ses kanalında değilsin.`)
+        if (!message.member.voice.channel.id) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let MutedMembers = message.guild.channels.cache.get(message.member.voice.channel.id).members.array().filter(x => x.id !== message.member.id);
         MutedMembers.forEach((x, y) => {
           setTimeout(async () => {
@@ -43,7 +43,7 @@ class Meeting extends Command {
         break;
       }
       case "konuspublic": {
-        if (!message.member.voice.channel.id) return message.channel.send(`Bir ses kanalında değilsin.`)
+        if (!message.member.voice.channel.id) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let MutedMembers = message.guild.channels.cache.get(message.member.voice.channel.id).members.array().filter(x => x.id !== message.member.id);
         MutedMembers.forEach((x, y) => {
           setTimeout(async () => {

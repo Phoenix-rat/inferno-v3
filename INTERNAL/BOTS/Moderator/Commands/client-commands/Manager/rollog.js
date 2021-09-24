@@ -27,7 +27,7 @@ class CountByRole extends Command {
         if(!mentioned) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
         let rolelogs = await rol_log.findOne({_id: mentioned.id}).exec();
 
-        if(!rolelogs || rolelogs.length) return message.channel.send(`${client.emojis.cache.get(emojis.get("komutret").value().split(':')[2].replace('>', ''))} Kullanıcının verisi bulunamadı.`)
+        if(!rolelogs || rolelogs.length) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
     //    staffID: rolveren.executor.id, tarih: new Date.now(), rolid: role.id, type: aldiverdi
         const liste = rolelogs.rolveridb.map(a => `${client.emojis.cache.get(a.type)} Rol: <@&${a.rolid}> Yetkili: <@!${a.staffID}> \n**Tarih:** \`${moment(a.tarih).format("lll")}\` \n**─────────────────**`).reverse();
         let page = 1;

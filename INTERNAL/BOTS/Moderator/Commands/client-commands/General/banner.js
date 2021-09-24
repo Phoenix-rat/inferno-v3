@@ -57,12 +57,12 @@ async function avatar(client, message, member, token) {
         }
     })
     let json = await fetched.json();
-    if (json.banner == null) return message.channel.send(`\`${json.username}#${json.discriminator}\` adlı kullanıcı **banner** kullanmıyor.`)
+    if (json.banner == null) return mmessage.react(emojis.get("error").value().split(':')[2].replace('>', ''));
     let avatarGIF = `https://cdn.discordapp.com/banners/${userID}/${json.banner}.gif?size=1024`;
     let avatarPNG = `https://cdn.discordapp.com/banners/${userID}/${json.banner}.png?size=1024`;
     let avatarFetch = await fetch(avatarGIF);
     let isavatarGIF = avatarFetch.status == 200;
     let yarrak;
     if (isavatarGIF) yarrak = avatarGIF; else yarrak = avatarPNG
-    message.channel.send(yarrak)
+    message.inlineReply(yarrak)
 }

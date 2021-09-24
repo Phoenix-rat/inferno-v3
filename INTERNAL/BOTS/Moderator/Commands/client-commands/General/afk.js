@@ -23,10 +23,10 @@ class Call extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const sebep = args.join(' ');
-        if (sebep.includes("@everyone")) return message.react(client.emoji("error"));
-        if (sebep.includes("@here")) return message.react(client.emoji("error"));
+        if (sebep.includes("@everyone")) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (sebep.includes("@here")) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
     
-        if (sebep.length > 50) return message.react(client.emoji("error"));
+        if (sebep.length > 50) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const system = await afkdata.findOne({ _id: message.member.user.id });
         if (!system) {
             try {

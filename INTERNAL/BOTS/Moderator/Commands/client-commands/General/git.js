@@ -21,16 +21,16 @@ class Git extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
-        if (mentioned.user.id === message.member.user.id) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("pando1").value()} Kendi kendini etiketleme..`).setColor('#2f3136'));
+        if (!mentioned) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (mentioned.user.id === message.member.user.id) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let kanal = mentioned.voice.channel;
-        if (!kanal) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
-        if (!message.member.voice || !message.member.voice.channel) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
+        if (!kanal) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (!message.member.voice || !message.member.voice.channel) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (message.member.roles.cache.has(roles.get("owner").value() && (mentioned.voice.channel.parentID !== channels.get("st_private").value()))) return await message.member.voice.setChannel(mentioned.voice.channel.id);
-        if (kanal.id === message.member.voice.channel.id) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
+        if (kanal.id === message.member.voice.channel.id) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         try {
-            await message.react(emojis.get("komutonay").value().split(':')[2].replace('>', ''));
-            await message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
+            await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
+            await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         } catch (error) {
             console.error(error);
         }
@@ -43,14 +43,14 @@ class Git extends Command {
             kanal = mentioned.voice.channel;
             if (!kanal) {
                 collector.stop();
-                return message.channel.send("Hangi kanalda olduğunu bulamıyorum!");
+                return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             }
             switch (reaction.emoji.id) {
-                case emojis.get("komutonay").value().split(':')[2].replace('>', ''):
+                case emojis.get("ok").value().split(':')[2].replace('>', ''):
                     await message.member.voice.setChannel(kanal.id);
                     collector.stop("ok");
                     break;
-                case emojis.get("komutret").value().split(':')[2].replace('>', ''):
+                case emojis.get("eroor").value().split(':')[2].replace('>', ''):
                     collector.stop();
                     break;
                 default:
@@ -59,9 +59,9 @@ class Git extends Command {
         });
         collector.on("end", async (collected, reason) => {
             if (reason === "ok") {
-                return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutret").value().split(':')[2].replace('>', '')).remove();
+                return message.reactions.cache.find(r => r.emoji.id === emojis.get("error").value().split(':')[2].replace('>', '')).remove();
             } else {
-                return message.reactions.cache.find(r => r.emoji.id === emojis.get("komutonay").value().split(':')[2].replace('>', '')).remove();
+                return message.reactions.cache.find(r => r.emoji.id === emojis.get("ok").value().split(':')[2].replace('>', '')).remove();
             }
         });
     }

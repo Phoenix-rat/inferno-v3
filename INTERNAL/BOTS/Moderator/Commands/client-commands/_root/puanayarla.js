@@ -27,7 +27,7 @@ class Kur extends Command {
     async run(client, message, args, data) {
 
         const role = message.guild.roles.cache.find(r => r.name.toLowerCase().slice(2) === args[0]);
-        if (!role) return await message.channel.send("Böyle bir rol yok")
+        if (!role) return await message.react(client.emoji("error"));
         await Points_config.updateOne({ _id: role.id }, {
             $set: {
                 [args[1]]: args[2]

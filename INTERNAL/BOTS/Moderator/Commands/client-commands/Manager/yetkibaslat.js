@@ -13,6 +13,7 @@ class Upgrade extends Command {
             examples: ["yetkibaslat 853011311328100411"],
             category: "Management",
             accaptedPerms: ["root", "owner", "cmd-ceo", "cmd-double", "cmd-single", "yetkilialım"],
+            enabled: false
         });
     }
 
@@ -22,11 +23,11 @@ class Upgrade extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        if (!mentioned) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const embed = new Discord.MessageEmbed().setColor('BLACK');
-        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.channel.send(embed.setDescription(`${emojis.warn} Bunu yapmak için yeterli yetkiye sahip değilsin`));
-        if(!mentioned.user.username.includes("†")) return message.channel.send(embed.setDescription(`${mentioned} \`Kullanıcısında tag(†) bulunmadığı için yetki verilemedi\``))
-        await mentioned.roles.add("856265277637394472").catch(e => { })        
+        if (message.member.roles.highest.rawPosition <= mentioned.roles.highest.rawPosition) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if(!mentioned.user.username.includes("†")) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        await mentioned.roles.add("856265277637394472");
         await message.channel.send(embed.setDescription(`${mentioned} Kullanıcısının Yetkisi Başlatıldı :)) Başarılar Dileriz Sn.${mentioned} `))
       
 

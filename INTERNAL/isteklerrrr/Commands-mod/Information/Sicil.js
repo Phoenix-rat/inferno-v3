@@ -8,7 +8,7 @@ module.exports.execute = async (client, message, args) => {
     const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
     if (!member) return message.react(client.emoji("red")).catch(() => { })
     let data = await Sicil.find({ member: member.id })
-    if (!data) return message.channel.send(`${member} kullanıcısının sicil verisi bulunamadı.`)
+    if (!data) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 
     let config = {
         border: {

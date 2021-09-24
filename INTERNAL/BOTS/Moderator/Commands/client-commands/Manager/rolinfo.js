@@ -23,9 +23,7 @@ class RoleInfo extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let mentionedRole = message.mentions.roles.first() || message.guild.roles.cache.get(args[0])
-        if (!mentionedRole) return message.channel.send(new Discord.MessageEmbed()
-        .setColor("RANDOM")
-        .setDescription("Lütfen rolü etiketleyiniz veya ID sini giriniz!")).then(msg => msg.delete({ timeout: 5000 }));
+        if (!mentionedRole) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let mentionedRoleMembers = mentionedRole.members.map(role => `${message.guild.members.cache.get(role.id)} (\`${role.id}\`) `)
         message.channel.send(`• \`${mentionedRole.name}\` rolündeki üyeler.
 • Roldeki üye sayısı: \`${mentionedRole.members.size}\`

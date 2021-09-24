@@ -20,9 +20,9 @@ class JailSorgu extends Command {
     async run(client, message, args) {
         const emojis = await low(client.adapters('emojis'));
         let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0];
-        if (!mentionedID) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("warn").value()} Bir id veya kullanıocı belirtmelisin!`));
+        if (!mentionedID) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const jailData = await Jails.findOne({ _id: mentionedID });
-        if (!jailData) return message.channel.send(`${emojis.get("notfound").value()} Belirtilen kullanıcıya ait herhangi bir **Jail** kaydı bulunamadı!`)
+        if (!jailData) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const embed = new Discord.MessageEmbed().setTitle("Jail Bilgisi").setDescription(stripIndent`
         ${emojis.get("user").value()} **Kullanıcı:** ${message.guild.members.cache.get(mentionedID) || `Sunucuda değil (${mentionedID})`}
         ${emojis.get("reason").value()} **Jail sebebi:** ${jailData.reason}

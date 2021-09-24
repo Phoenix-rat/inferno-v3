@@ -59,7 +59,7 @@ class Reload extends Command {
 
             let cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
             if (!cmd) {
-                return message.channel.send(`\`Komut Bulunamadı\``)
+                return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             }
             await this.client.unloadCommand(cmd.config.location, cmd.info.name);
             await this.client.loadCommand(cmd.config.location, cmd.info.name);

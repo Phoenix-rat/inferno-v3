@@ -37,7 +37,7 @@ class Invites extends Command {
         let days = args[2] || 7;
 
         const Data = await StatData.findOne({ _id: mentioned.user.id });
-        if (!Data) return message.channel.send(`${emojis.get("kullaniciyok").value()} Data bulunamadı.`);
+        if (!Data) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const records = Data.records.filter(r => checkDays(r.enter) < days);
         const birim = [
             "Saat",

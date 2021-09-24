@@ -31,13 +31,13 @@ class Avatar extends Command {
             .addField(".yardım sorgu", "Sorgu komutları gösterir")
             .addField(".yardım stats", "Stat komutları gösterir")
             .addField(".yardım kayıt", "Kayıt komutlarını gösterir");
-        if (!args[0]) return message.channel.send(embedfst);
+        if (!args[0]) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let cmd = commands.get(args[0]) || commands.get(client.aliases.get(args[0]));
         if (!cmd) {
             commands.filter(cmdz => cmdz.info.category.toLowerCase() == args[0].toLowerCase()).forEach(async (command) => {
                 embed.addField(prx + command.info.name, command.info.description, true);
             });
-            if (embed.fields.length === 0) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("error").value()} bir şeyler ters gitti..`).setColor('RED'));
+            if (embed.fields.length === 0) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             message.channel.send(embed.setTitle(args[0].toUpperCase() + " KOMUTLARI"));
         } else {
             let acceptedroles = cmd.info.accaptedPerms.filter(rolename => message.guild.roles.cache.get(roles.get(rolename).value())).map(rolename => message.guild.roles.cache.get(roles.get(rolename).value()));

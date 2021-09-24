@@ -20,10 +20,10 @@ class MuteSorgu extends Command {
     async run(client, message, args) {
         const emojis = await low(client.adapters('emojis'));
         let mentionedID = message.mentions.members.first() ? message.mentions.members.first().user.id : args[0];
-        if (!mentionedID) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("warn").value()} Bir id veya kullanıocı belirtmelisin!`));
+        if (!mentionedID) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const vmData = await VMS.findOne({ _id: mentionedID });
         const cmData = await CMS.findOne({ _id: mentionedID });
-        if (!vmData && !cmData) return message.channel.send(`${emojis.get("notfound").value()} Belirtilen kullanıcıya ait herhangi bir **Mute** türünde kayıt bulunamadı!`)
+        if (!vmData && !cmData) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const embed = new Discord.MessageEmbed().setTitle("Mute Bilgisi").setDescription(stripIndent`
         ${emojis.get("user").value()} **Kullanıcı:** ${message.guild.members.cache.get(mentionedID) || `Sunucuda değil (${mentionedID})`}
         ${emojis.get("reason").value()} **Mute sebebi:** ${vmData && cmData ? stripIndent`

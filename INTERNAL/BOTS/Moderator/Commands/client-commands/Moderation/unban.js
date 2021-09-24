@@ -23,9 +23,9 @@ class unBan extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         const user = await message.guild.fetchBan(args[0]);
-        if (!user) return message.channel.send(new MessageEmbed().setDescription(`${emojis.get("notfound").value()} Kullanıcı Bulunamadı!`));
+        if (!user) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const BanDoc = await Bans.findOne({ _id: args[0] });
-        if (BanDoc && message.guild.members.cache.get(BanDoc.executor).roles.highest.rawPosition > message.member.roles.highest.rawPosition) return message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
+        if (BanDoc && message.guild.members.cache.get(BanDoc.executor).roles.highest.rawPosition > message.member.roles.highest.rawPosition) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (BanDoc) await Bans.deleteOne({ _id: args[0] });
         await message.guild.members.unban(args[0], `${message.author.username} tarafından kaldırıldı`);
         await message.channel.send(new MessageEmbed().setDescription(`${BanDoc && BanDoc.userTag ? `**${BanDoc.userTag}** (\`${BanDoc._id}\`) adlı` : `${args[0]} ID'li`} kullanıcının yasaklanması başarıyla kaldırıldı!`).setColor("BLACK"));

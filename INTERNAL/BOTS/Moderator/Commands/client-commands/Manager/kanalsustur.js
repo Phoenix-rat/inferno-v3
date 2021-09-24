@@ -21,7 +21,7 @@ class Move extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        if (!message.member.voice.channel) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("warn").value()} Bir kanalda bulunman gerek!`).setColor('#2f3136'));
+        if (!message.member.voice.channel) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const channel = message.guild.channels.cache.get(message.member.voice.channel.id);
         if (channel.permissionOverwrites.get(message.guild.roles.everyone.id).deny.toArray().includes("SPEAK")) {
             await channel.updateOverwrite(message.guild.roles.everyone.id, {

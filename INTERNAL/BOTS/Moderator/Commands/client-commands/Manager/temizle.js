@@ -25,20 +25,16 @@ class Avatar extends Command {
             return valid;
         }
 
-        if (!allah(args[0])) return message.channel.send('Böyle bir sayı yok!');
+        if (!allah(args[0])) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 
 
         const amount = args[0];
 
-        if (!amount) return message.channel.send("Kaç mesaj sileceğimi yazmalısın!").then(msg => msg.delete({ timeout: 10000 })),
-            message.delete({ timeout: 10000 });
-        if (isNaN(amount)) return message.channel.send('Sayı yazmalısın!').then(msg => msg.delete({ timeout: 10000 })),
-            message.delete({ timeout: 10000 });
+        if (!amount) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (isNaN(amount)) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 
-        if (amount > 100) return message.channel.send('100 mesajdan fazla silemezsin!').then(msg => msg.delete({ timeout: 10000 })),
-            message.delete({ timeout: 10000 });
-        if (amount < 1) return message.channel.send('En az bir mesajı silebilirsin..').then(msg => msg.delete({ timeout: 10000 })),
-            message.delete({ timeout: 10000 });
+        if (amount > 100) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (amount < 1) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 
         await message.channel.messages.fetch(
             { limit: amount }).then(messages => {

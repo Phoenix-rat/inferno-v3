@@ -25,7 +25,7 @@ class Upgrade extends Command {
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.channels.cache.get(args[0]);
         if (!mentioned) await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let sData = mentioned.user ? await msg_snipe.findOne({ author: mentioned.user.id }) : await msg_snipe.findOne({ channel: mentioned.id });
-        if (!sData) return message.channel.send(embed.setDescription(`**${mentioned.user ? "Kullanıcının" : "Kanaldaki"} en son silinen mesaj${mentioned.user ? "ı" : ""} bulunamadı.**`))
+        if (!sData) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let channel = message.guild.channels.cache.get(sData.channel);
         await message.channel.send(embed.setDescription(`<@${sData.author}> (\`${sData.author}\`) kullanıcısı ${channel ? channel : `[\`${sData.channel}\`]`} kanalında en son silinen mesajı yakaladı. \n\n**Kullanıcı:**\n**Mesaj Iceriği:**\n\`\`\`${sData.content ? sData.content : "Bulunamadı"}\`\`\``));
 

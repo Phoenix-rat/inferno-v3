@@ -7,7 +7,7 @@ module.exports.execute = async (client, message, args) => {
     if (!member) return message.react(client.emoji("okey"));
     let rolelogs = await rol_log.findOne({ _id: member.id }).exec();
 
-    if (!rolelogs || rolelogs.length) return message.channel.send(`${client.emoji("red")} Kullanıcının verisi bulunamadı.`)
+    if (!rolelogs || rolelogs.length) return mmessage.react(emojis.get("error").value().split(':')[2].replace('>', ''));
     //    staffID: rolveren.executor.id, tarih: new Date.now(), rolid: role.id, type: aldiverdi
     const liste = rolelogs.rolveridb.map(a => `${client.emojis.cache.get(a.type)} Rol: <@&${a.rolid}> Yetkili: <@!${a.staffID}> \n**Tarih:** \`${moment(a.tarih).format("lll")}\` \n**─────────────────**`).reverse();
     let page = 1;

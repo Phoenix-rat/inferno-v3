@@ -30,7 +30,7 @@ class Anonim extends Command {
         const embed = new Discord.MessageEmbed().setColor('#2f3136');
 
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        if (!mentioned) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 
         let TestVoice = mentioned.voice.channel ? `${mentioned.voice.channel} kanalında.` : "**Herhangi bir ses kanalında değil.**";
 

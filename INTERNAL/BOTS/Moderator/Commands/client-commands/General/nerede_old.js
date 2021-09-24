@@ -12,7 +12,8 @@ class Where extends Command {
             examples: ["tnerede 674565119161794560"],
             aliases: ["tbul", "tn"],
             category: "Genel",
-            cooldown: 300000
+            cooldown: 300000,
+            enabled: false
         });
     }
 

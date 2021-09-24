@@ -27,8 +27,7 @@ class Vip extends Command {
         const embed = new Discord.MessageEmbed().setColor("RANDOM")
         const mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed()
-        .setDescription(`${emojis.get("kullaniciyok").value()} Kişiyi bulunamadım.`).setColor('RANDOM'));
+        if (!mentioned) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (!mentioned.roles.cache.has(roleID)) {
             await message.channel.send(embed
                 .setDescription(`${mentioned} kişisine **${myRole.name}** adlı rolü başarıyla verdim!`));

@@ -37,10 +37,10 @@ class Avatar extends Command {
             }
         };
         const emojis = await low(client.adapters('emojis'));
-        if (!message.channel.permissionsFor(message.guild.me).has("CREATE_INSTANT_INVITE")) return message.channel.send(":x: | Gerekli izine sahip değilsin: Davet Oluştur");
-        if (!message.member.voice.channel) return message.channel.send("Bu komutu kullanmak için bir ses kanalına katılmalısınız.");
+        if (!message.channel.permissionsFor(message.guild.me).has("CREATE_INSTANT_INVITE")) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (!message.member.voice.channel) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const activity = ACTIVITIES[args[0] ? args[0].toLowerCase() : null];
-        if (!activity) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`Youtube, fishington, poker ve betrayal aktif.`));
+        if (!activity) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         fetch(`https://discord.com/api/v8/channels/${message.member.voice.channelID}/invites`, {
             method: "POST",
             body: JSON.stringify({
@@ -56,11 +56,11 @@ class Avatar extends Command {
                 "Content-Type": "application/json"
             }
         }).then(response => response.json()).then(data => {
-            message.channel.send(
+            message.inlineReply(
             `✅ **${message.member.voice.channel.name}** odasına kuruldu!\nℹ️ Partiye katılmak ve arkadaşlarınızı davet etmek için Yönlendirme bağlantısını kullanın.\n\nBağlantı: https://discord.gg/${data.code}`
             );
         }).catch(e => {
-            message.channel.send(`:x: | Başlatılamadı ${activity.name}!`);
+            message.inlineReply(`:x: | Başlatılamadı ${activity.name}!`);
         })
     }
 }

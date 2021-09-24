@@ -23,9 +23,9 @@ class Duzelt extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        if (!mentioned) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const data = await nameData.findOne({ _id: mentioned.user.id });
-        if (!data) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${mentioned} kişisinin kaydı bulunamadı!`));
+        if (!data) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 
         const adana = args[1]
         if (!adana) {
@@ -44,10 +44,10 @@ class Duzelt extends Command {
                 await nameData.updateOne({ _id: mentioned.user.id }, { name: ampul });
                 await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[0], ampul));
             }
-            if(adana && sayi(adana)) {
+            if (adana && sayi(adana)) {
                 let yas = Number(adana)
                 await nameData.updateOne({ _id: mentioned.user.id }, { age: yas });
-                await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yas));    
+                await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yas));
             }
         }
 

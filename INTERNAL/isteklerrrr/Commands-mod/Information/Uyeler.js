@@ -1,10 +1,10 @@
 const { MessageEmbed } = require("discord.js")
 module.exports.execute = async (client, message, args) => {
     let rolesamca = message.mentions.roles.first() || message.guild.roles.cache.get(args[0])
-    if (!rolesamca) return message.react(client.emoji("red")).catch(() => { })
+    if (!rolesamca) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
 
-    if(rolesamca.members.size > 400) return message.react(client.emoji("red")).catch(() => { }) 
-    if(rolesamca.members.size == 0) return message.channel.send(`\`\`\`${rolesamca.name} rolünde üye bulunmamakta.\`\`\``)
+    if(rolesamca.members.size > 400) return message.react(client.emoji("error")).catch(() => { }) 
+    if(rolesamca.members.size == 0) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
     let rolesuyes = rolesamca.members.map(a => a).join("\n")
 
 

@@ -22,10 +22,10 @@ class vunMute extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
         let mentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!mentioned) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("kullaniciyok").value()} Kullanıcı bulunamadı!`).setColor('#2f3136'));
+        if (!mentioned) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const vData = await Mute.findOne({ _id: mentioned.user.id });
-        if (!vData) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("notfound").value()} Kayıt Bulunamadı`));
-        if (message.guild.members.cache.get(vData.executor).roles.highest.rawPosition > message.member.roles.highest.rawPosition) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("missingPerms").value()} Bunu yapabilmek için yeterli yetkiye sahip değilsin!`));
+        if (!vData) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (message.guild.members.cache.get(vData.executor).roles.highest.rawPosition > message.member.roles.highest.rawPosition) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         await Mute.deleteOne({ _id: mentioned.user.id });
         if (mentioned.voice && mentioned.voice.channel) await mentioned.voice.setMute(false);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));

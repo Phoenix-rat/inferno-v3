@@ -22,7 +22,7 @@ class Anonim extends Command {
         const channels = await low(client.adapters('channels'));
         const embed = new Discord.MessageEmbed().setColor('#2f3136');
         let itiraf = args.join(' ');
-        if (!itiraf) return message.channel.send(embed.setDescription(`${emojis.get("warn").value()} Geçerli bir itiraf girmedin!`));
+        if (!itiraf) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const kanal = client.channels.cache.get(channels.get("itiraf").value());
         kanal.send(new Discord.MessageEmbed().setDescription("Anonim: " + itiraf));
         await message.channel.send("Başarıyla gönderildi.");

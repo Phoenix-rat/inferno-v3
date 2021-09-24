@@ -21,11 +21,11 @@ class Move extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        if (!message.member.voice.channel) return message.channel.send(new Discord.MessageEmbed().setDescription(`${emojis.get("warn").value()} Bir kanalda bulunman gerek!`).setColor('#2f3136'));
-        if (!args[0]) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("warn").value()} Bir kanal belirlemelisin.`));
+        if (!message.member.voice.channel) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (!args[0]) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         const channel = message.guild.channels.cache.get(message.member.voice.channel.id);
         const goingto = message.mentions.members.first() ? message.guild.channels.cache.get(message.mentions.members.first().voice.channel.id) : (message.guild.channels.cache.get(args[0]) || message.guild.channels.cache.get(message.guild.members.cache.get(args[0]).voice.channel.id));
-        if (!goingto) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("notfound").value()} Kanal bulunamadı.`));
+        if (!goingto) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         channel.members.forEach(async mem => {
             await mem.voice.setChannel(goingto.id);
         });

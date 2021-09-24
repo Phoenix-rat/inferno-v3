@@ -11,7 +11,8 @@ class Move extends Command {
             examples: ["kanaledit 718265023750996028"],
             cooldown: 3600000,
             category: "Düzen",
-            accaptedPerms: ["cmd-transport", "cmd-all"]
+            accaptedPerms: ["cmd-transport", "cmd-all"],
+            enabled: false
         });
     }
 
