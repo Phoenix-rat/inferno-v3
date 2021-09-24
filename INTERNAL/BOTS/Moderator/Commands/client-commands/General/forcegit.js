@@ -25,9 +25,9 @@ class Git extends Command {
         if (!mentioned) return message.channel.semessage.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (mentioned.user.id === message.member.user.id) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         let kanal = mentioned.voice.channel;
-        if (!kanal) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
-        if (!message.member.voice || !message.member.voice.channel) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
-        if (kanal.id === message.member.voice.channel.id) return message.react(emojis.get("komutret").value().split(':')[2].replace('>', ''));
+        if (!kanal) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (!message.member.voice || !message.member.voice.channel) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+        if (kanal.id === message.member.voice.channel.id) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if(!kanal) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         await message.member.voice.setChannel(kanal.id);
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''))
