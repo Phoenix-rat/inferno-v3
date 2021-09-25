@@ -71,12 +71,12 @@ class Nerede extends Command {
             .addField("__**Toplam Davet**__", `\`\`\`fix\n${DavetVeri}\`\`\``, true)
             .addField("__**Toplam Taglı**__", `\`\`\`fix\n${taglilar}\`\`\``, true)
             .addField("__**Toplam Yetkili**__", `\`\`\`fix\n${yetkililerim}\`\`\``, true)
-            //     .addField(`Ses Kanalları`, `${emojis.get("statssh").value()} **Sohbet Odaları:** \`31 saat, 31 dakika\`
+            // .addField(`Ses Kanalları`, `${emojis.get("statssh").value()} **Sohbet Odaları:** \`31 saat, 31 dakika\`
             // ${emojis.get("statssh").value()} **Kayıt Odaları:** \`31 saat, 31 dakika\`
             // ${emojis.get("statssh").value()} **Private Odaları:** \`31 saat, 31 dakika\`
             // ${emojis.get("statssh").value()} **Eğlence Odaları:** \`31 saat, 31 dakika\``)
-            .addField(`Ses Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
-            .addField(`Metin Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
+            // .addField(`Ses Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
+            // .addField(`Metin Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
         // .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``).setTitle("Yetkili Stat Bilgi").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
 
         await message.channel.send(embed);
