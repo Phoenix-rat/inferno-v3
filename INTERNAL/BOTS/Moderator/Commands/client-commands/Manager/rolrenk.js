@@ -25,7 +25,7 @@ class CountByRole extends Command {
         const mentionedRole = message.guild.roles.cache.get(args[0]) || message.mentions.roles.first() || message.guild.roles.cache.find(r => r.name.includes(args[0]))
         if(!mentionedRole) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         //Ana sikm ! koymayı unutmuşum aq ajklshdlasd
-        message.channel.send(`\`\`\`${mentionedRole.name} Rolünün rengi: ${mentionedRole.hexColor}\`\`\``)
+        message.inlineReply(`\`\`\`${mentionedRole.name} Rolünün rengi: ${mentionedRole.hexColor}\`\`\``)
     }
 
 }

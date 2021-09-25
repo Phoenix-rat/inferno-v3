@@ -79,7 +79,7 @@ class Nerede extends Command {
             // .addField(`Metin Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
         // .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``).setTitle("Yetkili Stat Bilgi").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
 
-        await message.channel.send(embed);
+        await message.inlineReply(embed);
 
         function bar(point, maxPoint) {
             const deger = Math.trunc(point * 10 / maxPoint);

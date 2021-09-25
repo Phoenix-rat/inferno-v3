@@ -40,7 +40,7 @@ module.exports.execute = async (client, message, args) => {
 
     const liste = data.map(st => { karebar.push([st.cno, st.type, `${moment(st.basla).format("LLL")}`, client.users.cache.get(st.auth).tag, `${st.reason ? st.reason : "Belirtilmedi"}`]) })
     let page = 1;
-    const question = await message.channel.send(` ${member} kullanıcısının sicil bilgileri aşağıda belirtilmiştir. Tekli cezaya bakmak için \`.cezasorgu ID\` yazınız. \`\`\`${table(karebar.slice(page == 1 ? 0 : page * 10 - 10, page * 10), config)}\`\`\``)
+    const question = await message.inlineReply(` ${member} kullanıcısının sicil bilgileri aşağıda belirtilmiştir. Tekli cezaya bakmak için \`.cezasorgu ID\` yazınız. \`\`\`${table(karebar.slice(page == 1 ? 0 : page * 10 - 10, page * 10), config)}\`\`\``)
 
 
     if (data && data.length > 10) {
@@ -90,5 +90,5 @@ exports.conf = {
 
     let cezadb = table(karebar.slice(0, 15), config)
 
-    message.channel.send(`🚫 ${member} kullanıcısının ceza bilgileri aşşağıda belirtilmiştir. Tekli cezaya bakmak için \`.ceza ID\` yazınız. \`\`\`${cezadb}\`\`\``)
+    message.inlineReply(`🚫 ${member} kullanıcısının ceza bilgileri aşşağıda belirtilmiştir. Tekli cezaya bakmak için \`.ceza ID\` yazınız. \`\`\`${cezadb}\`\`\``)
 */

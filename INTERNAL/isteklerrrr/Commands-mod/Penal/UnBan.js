@@ -17,7 +17,7 @@ module.exports.execute = async (client, message, args) => {
 
     if (kalkmaz && kalkmaz.kalkmazban) {
         let stark = ["853011311328100411", "484873072164208640", "317926888599453696"]
-        if (!stark.some(a => message.author.id == a)) return message.channel.send(`${message.member} Bu bir yargı banıdır. Sunucu sahipleri ve botcu harici kimse kaldıramaz.`)
+        if (!stark.some(a => message.author.id == a)) return message.inlineReply(`${message.member} Bu bir yargı banıdır. Sunucu sahipleri ve botcu harici kimse kaldıramaz.`)
         await KalkmazBan.deleteOne({ _id: member })
         client.channel("bannedLOG").send(cembed.setDescription(`**${kember.tag}** (\`${kember.id}\`) kullanıcısının **sunucudan yasaklanması** kaldırıldı. \n\` • \` Kaldıran Yetkili: ${message.member} (\`${message.author.id}\`) \n \` • \` Kaldırılma Tarihi: \`${moment(Date.now()).format("LLL")}\` `).setFooter(`Ceza Numarası: ${a}`))
         await Sicil.findOneAndUpdate({  cno: a }, { member: member, type: "UnYargı", auth: message.author.id, basla: Date.now(), reason: reason }, { upsert: true })

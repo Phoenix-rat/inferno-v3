@@ -30,7 +30,7 @@ module.exports.execute = async (client, message, args) => {
 **Kayıt eden kullanıcı:** Yapılmadı.
 **Kayıt olma tarihi:** ${moment(member.joinedTimestamp).format('DD.MM.YYYY H:mm')} (**\`${client.amcik(Date.now(), member.joinedTimestamp)} önce\`**) 
 **Kayıt olma bilgileri:** ${member.displayName}`)
-    await message.channel.send(embed)
+    await message.inlineReply(embed)
 
 }
 exports.conf = {

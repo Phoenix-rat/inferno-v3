@@ -63,7 +63,7 @@ class stark extends Command {
             .filter(r => r.id !== roles.get("booster").value())
             .sort((a, b) => a.rawPosition - b.rawPosition).array().find(role => role.rawPosition > myRole.rawPosition);*/
 
-        message.channel.send(new Discord.MessageEmbed().setDescription(`
+        message.inlineReply(new Discord.MessageEmbed().setDescription(`
         **Dante's INFEЯИO** puan bilgileri
         ${message.member} kullanıcısının puan bilgileri
         Yetkisi: ${myRole}
@@ -92,7 +92,7 @@ class stark extends Command {
             .filter(r => r.id !== roles.get("booster").value())
             .sort((a, b) => a.rawPosition - b.rawPosition).array().find(role => role.rawPosition > myRole.rawPosition);
 
-        message.channel.send(new Discord.MessageEmbed().setDescription(`
+        message.inlineReply(new Discord.MessageEmbed().setDescription(`
         **Dante's INFEЯИO** puan bilgileri
         ${message.member} kullanıcısının puan bilgileri
         Yetkisi: ${myRole}

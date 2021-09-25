@@ -16,7 +16,7 @@ class Link extends Command {
     async run(client, message, args) {
         if (!message.guild.vanityURLCode) return;
         const emojis = await low(client.adapters('emojis'));
-        message.channel.send(`discord.gg/${message.guild.vanityURLCode}`);
+        message.inlineReply(`discord.gg/${message.guild.vanityURLCode}`);
         function bar(point, maxPoint) {
             const deger = Math.trunc(point * 10 / maxPoint);
             let str = "";

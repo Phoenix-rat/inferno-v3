@@ -10,7 +10,7 @@ module.exports.execute = async (client, message, args) => {
 
 
 
-    message.channel.send(embed.setDescription(`
+    message.inlineReply(embed.setDescription(`
     ${rolesamca} rolünün bilgileri:
 
     Rol Rengi: \`${rolesamca.hexColor}\`

@@ -67,7 +67,7 @@ class Duzelt extends Command {
         // if (adana == "yaş") {
         //     const yaş = args[2];
         //     const age = Number(yaş);
-        //     if (!sayi(yaş)) return message.channel.send(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
+        //     if (!sayi(yaş)) return message.inlineReply(new Discord.MessageEmbed().setDescription(`Geçerli bir yaş girmelisin!`));
         //     await nameData.updateOne({ _id: mentioned.user.id }, { age: age });
         //     await mentioned.setNickname(mentioned.displayName.replace(mentioned.displayName.slice(2).split(' | ')[1], yaş));
         // }
@@ -83,7 +83,7 @@ class Duzelt extends Command {
         //             await mentioned.roles.remove("854162987619057665");
         //             await mentioned.roles.add("854162990534623233");
 
-        //         } else return message.channel.send(`lütfen düzeltme türünü \`isim\`, \`yaş\` veya \`cinsiyet\` olarak belirtiniz.`);
+        //         } else return message.inlineReply(`lütfen düzeltme türünü \`isim\`, \`yaş\` veya \`cinsiyet\` olarak belirtiniz.`);
 
         // }
 

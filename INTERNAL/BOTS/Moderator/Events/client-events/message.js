@@ -37,10 +37,10 @@ module.exports = class {
             };
             let count = myCount[message.content] || 0;
             //console.log(uCount);
-            if (count === 1) message.channel.send(`Spamlamaya devam edersen muteleneceksin! ${message.author}`);
+            if (count === 1) message.inlineReply(`Spamlamaya devam edersen muteleneceksin! ${message.author}`);
             if (count === 3) {
                 message.member.roles.add(roles.get("muted").value());
-                message.channel.send(`${message.member} Spam yaptığın için mutelendin!`)
+                message.inlineReply(`${message.member} Spam yaptığın için mutelendin!`)
             }
             if (count >= 1) await message.delete();
             this.client.spamcounts[message.author.id][message.content] = count + 1;
@@ -59,7 +59,7 @@ module.exports = class {
         let system = await afkdata.findOne({ _id: message.member.user.id });
         if (system) {
             await afkdata.deleteOne({ _id: message.member.user.id });
-            const afkMsg = await message.channel.send(`${message.member} Hoş geldin! ${checkMins(system.created) < 1 ? "**Biraz" : `**${moment.duration(new Date().getTime() - system.created.getTime()).format("D [Gün], H [Saat], m [Dakika]")}`} önce** afk olmuştun.${system.inbox.length > 0 ? ` Birkaç mesajın var eğer bakmak istersen emojiye basabilirsin.` : ""}`);
+            const afkMsg = await message.inlineReply(`${message.member} Hoş geldin! ${checkMins(system.created) < 1 ? "**Biraz" : `**${moment.duration(new Date().getTime() - system.created.getTime()).format("D [Gün], H [Saat], m [Dakika]")}`} önce** afk olmuştun.${system.inbox.length > 0 ? ` Birkaç mesajın var eğer bakmak istersen emojiye basabilirsin.` : ""}`);
             if (system.inbox.length > 0) {
                 await afkMsg.react(emojis.get("afk").value().split(':')[2].replace('>', ''));
                 const filter = (reaction, user) => user.id !== this.client.user.id;
@@ -90,7 +90,7 @@ module.exports = class {
             const afksindata = await afkdata.find();
             const afks = message.mentions.members.array().filter(m => afksindata.some(doc => doc._id === m.user.id));
             if (afks.length > 0) {
-                const msgWarn = await message.channel.send(afks.map(afk => `${afk},${afksindata.find(data => data._id === afk.user.id).reason ? ` \`${afksindata.find(data => data._id === afk.user.id).reason}\` sebebiyle` : ""} **${checkMins(afksindata.find(data => data._id === afk.user.id).created) < 1 ? "biraz" : moment.duration(new Date().getTime() - afksindata.find(data => data._id === afk.user.id).created.getTime()).format("D [Gün], H [Saat], m [Dakika]")} önce** AFK oldu.`, { allowedMentions: { repliedUser: false } }).join('\n'));
+                const msgWarn = await message.inlineReply(afks.map(afk => `${afk},${afksindata.find(data => data._id === afk.user.id).reason ? ` \`${afksindata.find(data => data._id === afk.user.id).reason}\` sebebiyle` : ""} **${checkMins(afksindata.find(data => data._id === afk.user.id).created) < 1 ? "biraz" : moment.duration(new Date().getTime() - afksindata.find(data => data._id === afk.user.id).created.getTime()).format("D [Gün], H [Saat], m [Dakika]")} önce** AFK oldu.`, { allowedMentions: { repliedUser: false } }).join('\n'));
                 await msgWarn.react(emojis.get("afk").value().split(':')[2].replace('>', ''));
                 await afks.forEach(async afk => {
                     await afkdata.updateOne({ _id: afk.user.id }, {

@@ -7,7 +7,7 @@ exports.execute = async (client, message, args) => {
 
     let embed = new Discord.MessageEmbed().setColor("#780580")
 
-    message.channel.send(embed.setDescription(`<@${sData.author}>: ${sData.content ? sData.content : "Bulunamadı"}`))
+    message.inlineReply(embed.setDescription(`<@${sData.author}>: ${sData.content ? sData.content : "Bulunamadı"}`))
 
 };
 exports.conf = {

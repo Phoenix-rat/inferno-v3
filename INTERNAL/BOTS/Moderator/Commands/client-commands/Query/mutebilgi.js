@@ -41,7 +41,7 @@ class MuteSorgu extends Command {
         C-Mute: ${cmData.duration || 'yok'}
         `: (vmData || cmData).duration}
         `).setColor('#2f3136').setFooter("İnferno Forever <3");
-        await message.channel.send(embed);
+        await message.inlineReply(embed);
     }
 }
 module.exports = MuteSorgu;

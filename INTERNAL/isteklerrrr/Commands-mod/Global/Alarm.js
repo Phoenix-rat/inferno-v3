@@ -15,7 +15,7 @@ exports.execute = async (client, message, args) => {
     if (message.content.includes("@here")) return message.react(client.emoji("red")).catch(() => { })
     await alarm.findOneAndUpdate({ _id: message.author.id }, { $set: { alarm: true, reason: reason, sahte: sahtezaman,kanal: message.channel.id, date: Date.now() + ms(sahtezaman) } }, { upsert: true })
     let zamanim = moment(Date.now() + ms(sahtezaman)).fromNow()
-    message.channel.send(`${message.member} sana **${sahtezaman.replace(`s`, ` Saniye`).replace(`m`, ` Dakika`).replace(`h`, ` Saat`).replace(`d`, ` Gün`)}** sonra hatırlatacağım.`).catch(() => { })
+    message.inlineReply(`${message.member} sana **${sahtezaman.replace(`s`, ` Saniye`).replace(`m`, ` Dakika`).replace(`h`, ` Saat`).replace(`d`, ` Gün`)}** sonra hatırlatacağım.`).catch(() => { })
     await message.react("⏰").catch(() => { })
 
 }

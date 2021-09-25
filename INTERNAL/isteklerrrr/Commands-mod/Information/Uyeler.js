@@ -8,7 +8,7 @@ module.exports.execute = async (client, message, args) => {
     let rolesuyes = rolesamca.members.map(a => a).join("\n")
 
 
-    message.channel.send(`\`\`\`${rolesamca.name} rolünde ${rolesamca.members.size} üye bulunmakta.\`\`\`\n${rolesuyes}`)
+    message.inlineReply(`\`\`\`${rolesamca.name} rolünde ${rolesamca.members.size} üye bulunmakta.\`\`\`\n${rolesuyes}`)
     message.react(client.emoji("okey")).catch(() => { })
 
 }

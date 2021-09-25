@@ -13,7 +13,7 @@ module.exports = {
     } catch (error) {
       console.error(`Kanala Bağlanamadım: ${error}`);
       await shem.deleteOne({ _id: client.user.id });
-      return message.channel.send(emm.setDescription(`Bir hata oluştu!`)).catch(console.error);
+      return message.inlineReply(emm.setDescription(`Bir hata oluştu!`)).catch(console.error);
     };
     const queueConstruct = {
       textChannel: message.channel,

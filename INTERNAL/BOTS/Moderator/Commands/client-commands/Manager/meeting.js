@@ -29,7 +29,7 @@ class Meeting extends Command {
             member.roles.add(roles.get("857410693959647282").value()).catch();
           }, fast * 750)
         })
-        message.channel.send(`Toplantı Odasında bulunan toplam \`${katıldı.size}\` kişiye rolü dağtımaya başaldım!`)
+        message.inlineReply(`Toplantı Odasında bulunan toplam \`${katıldı.size}\` kişiye rolü dağtımaya başaldım!`)
         break;
       }
       case "sustoplantı": {
@@ -50,11 +50,11 @@ class Meeting extends Command {
             x.voice.setMute(false)
           }, y * 200)
         })
-        await message.channel.send(`Toplantı kanalındaki (\`${MutedMembers.length}\`) adet kişinin susturması kaldırıldı!`)
+        await message.inlineReply(`Toplantı kanalındaki (\`${MutedMembers.length}\`) adet kişinin susturması kaldırıldı!`)
         break;
       }
       default: {
-        message.channel.send(meetingemb.setDescription(`
+        message.inlineReply(meetingemb.setDescription(`
 ───────────────────
 • .toplantı katıldı Toplantı odasındaki üyelere katıldı permini verir.
 • .toplantı sustoplantı Toplantı odasındaki üyeleri susturur.

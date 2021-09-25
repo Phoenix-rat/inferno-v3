@@ -28,14 +28,14 @@ class CountByRole extends Command {
         for (let index = 0; index < Math.floor(mentionedRole.members.array().length / 40); index++) {
             setTimeout(async () => {
                 console.log(index);
-                await message.channel.send(new Discord.MessageEmbed().setTitle(`BÖLÜM ${index + 1}:`).setDescription(mentionedRole.members.array().slice(index * 40, (index + 1) * 40).join(', ')));
+                await message.inlineReply(new Discord.MessageEmbed().setTitle(`BÖLÜM ${index + 1}:`).setDescription(mentionedRole.members.array().slice(index * 40, (index + 1) * 40).join(', ')));
             }, 250);
 
         }
-        await message.channel.send(`\`\`\`${mentionedRole.name} Rolüne Sahip Online Olan ${mentionedRole.members.size} Kişi Bulunmaktadır \`\`\``);
+        await message.inlineReply(`\`\`\`${mentionedRole.name} Rolüne Sahip Online Olan ${mentionedRole.members.size} Kişi Bulunmaktadır \`\`\``);
 
     } else {
-        await message.channel.send(`\`\`\`${mentionedRole.name} Rolüne Sahip Online Olan ${mentionedRole.members.size} Kişi Bulunmaktadır \`\`\``);
+        await message.inlineReply(`\`\`\`${mentionedRole.name} Rolüne Sahip Online Olan ${mentionedRole.members.size} Kişi Bulunmaktadır \`\`\``);
     }
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 

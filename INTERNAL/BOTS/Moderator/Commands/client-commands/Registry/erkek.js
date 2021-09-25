@@ -30,7 +30,7 @@ class Erkek extends Command {
         if (!mentioned.roles.cache.has(roles.get("welcome").value()) && (mentioned.roles.cache.size > 1)) return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         /*     if (utils.get("taglıAlım").value() && !mentioned.user.username.includes(client.config.tag)) {
                  if (!mentioned.roles.cache.has(roles.get("vip").value()) && !mentioned.roles.cache.has(roles.get("booster").value())) {
-                     return message.channel.send(new Discord.MessageEmbed()
+                     return message.inlineReply(new Discord.MessageEmbed()
                          .setColor("#2f3136")
                          .setDescription(`Üzgünüm, ama henüz taglı alımdayız. ${mentioned} kullanıcısında vip veya booster rolü olmadığı koşulda onu içeri alamam..`)
                      );
@@ -69,7 +69,7 @@ class Erkek extends Command {
         const registryDatas = await nameData.find({ executor: message.member.user.id });
         if (registryDatas) aNumber = registryDatas.length;
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
-        await message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} adlı kullanıcı başarıyla kayıt oldu.`)).setColor("#7fc2ff");
+        await message.inlineReply(new Discord.MessageEmbed().setDescription(`${mentioned} adlı kullanıcı başarıyla kayıt oldu.`)).setColor("#7fc2ff");
         
         const aylar = [
             "Ocak",

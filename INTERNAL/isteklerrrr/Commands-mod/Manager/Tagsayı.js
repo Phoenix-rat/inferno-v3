@@ -11,7 +11,7 @@ module.exports.execute = async (client, message, args) => {
 
     const filter = (reaction, user) => { return [`${client.emoji("soru").name}`].includes(reaction.emoji.name) && user.id === message.author.id; };
 
-    message.channel.send(`**${tag}** tagında ki kullanıcı sayısı: \`${tagsayi}\``).then(amc => {
+    message.inlineReply(`**${tag}** tagında ki kullanıcı sayısı: \`${tagsayi}\``).then(amc => {
 
         amc.react(client.emoji("soru")).catch(() => { });
         amc.awaitReactions(filter, { max: 1, time: 15000, errors: ['time'] })

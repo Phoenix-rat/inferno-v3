@@ -62,7 +62,7 @@ let option2 = new MessageMenuOption().setLabel('Çekiliş').setEmoji('8448945351
 let option3 = new MessageMenuOption().setLabel('VK').setEmoji('844894233080496128').setValue('rol_menu_vk').setDescription('VK rolü verir.')
 let option4 = new MessageMenuOption().setLabel('DC').setEmoji('889974485665611788').setValue('rol_menu_dc').setDescription('DC rolü verir.')    
 let select = new MessageMenu().setID('rol_menu').setPlaceholder('Rol seç!').setMaxValues(4).setMinValues(1).addOptions([option1, option2, option3, option4])
-return await message.channel.send("**Etkinlik Rollerinizi Almak İçin Buttonu Kullanınız.**", {
+return await message.inlineReply("**Etkinlik Rollerinizi Almak İçin Buttonu Kullanınız.**", {
 component: select
 });
 } else  if(message.content === ".buton4") {
@@ -77,7 +77,7 @@ let option13 = new MessageMenuOption().setLabel('Rust').setEmoji('83809218819286
 let option14 = new MessageMenuOption().setLabel('GTA V').setEmoji('838092437959475231').setValue('rol_menu_oyun_gtv').setDescription('Oyun rolünü verir.')    
 let option15 = new MessageMenuOption().setLabel('Mobile Legends').setEmoji('🎮').setValue('rol_menu_oyun_mobillol').setDescription('Oyun rolünü verir.')   
 let select = new MessageMenu().setID('rol_menu_oyun').setPlaceholder('Rol seç!').setMaxValues(7).setMinValues(1).addOptions([option14,option15, option13, option8, option7, option5,option4,option3,option2  ])
-return await message.channel.send("**Oyun Rollerinizi Almak İçin Buttonu Kullanınız.**", {
+return await message.inlineReply("**Oyun Rollerinizi Almak İçin Buttonu Kullanınız.**", {
 component: select
 });
 } else  if(message.content === ".buton3") {
@@ -101,7 +101,7 @@ let meyve16 = new MessageMenuOption().setLabel('Karpuz').setEmoji('🍉').setVal
 let meyve17 = new MessageMenuOption().setLabel('Şeftali').setEmoji('🍑').setValue('rol_menu_meyve_şeftali').setDescription('Meyve Rolünüz Verildi.')   
 let select = new MessageMenu().setID('rol_menu_meyve').setPlaceholder('Rol seç!').setMaxValues(7).setMinValues(1)
 .addOptions([meyve1, meyve2, meyve3, meyve4,meyve5,meyve6,meyve7,meyve8,meyve9,meyve10,meyve11,meyve12,meyve13,meyve14,meyve15,meyve16,meyve17])
-return await message.channel.send("**Oyun Rollerinizi Almak İçin Buttonu Kullanınız.**", {
+return await message.inlineReply("**Oyun Rollerinizi Almak İçin Buttonu Kullanınız.**", {
 component: select
 });
 } else  if(message.content === ".buton5") {
@@ -119,7 +119,7 @@ let hayvan10 = new MessageMenuOption().setLabel('Aslan').setEmoji('🦁').setVal
 let hayvan11 = new MessageMenuOption().setLabel('İnek').setEmoji('🐄').setValue('rol_menu_hayvan_inek').setDescription('Hayvan Rolünüz Verildi.')  
 let select = new MessageMenu().setID('rol_menu_hayvan').setPlaceholder('Rol seç!').setMaxValues(7).setMinValues(1)
 .addOptions([hayvan1, hayvan2, hayvan3, hayvan4,hayvan5,hayvan6,hayvan7,hayvan8,hayvan9,hayvan10,hayvan11])
-return await message.channel.send("**Oyun Rollerinizi Almak İçin Buttonu Kullanınız.**", {
+return await message.inlineReply("**Oyun Rollerinizi Almak İçin Buttonu Kullanınız.**", {
 component: select
 });
 } else  if(message.content === ".buton") {
@@ -129,7 +129,7 @@ let option1 = new MessageMenuOption().setLabel('Sevgilim Yok').setEmoji('8902334
 let option2 = new MessageMenuOption().setLabel('Sevgilim Var').setEmoji('862041019876114442').setValue('gf_menu_couple').setDescription('Sevgilisi olanlar için.')       
 let option3 = new MessageMenuOption().setLabel('Sevgili Yapmıyorum').setEmoji('862041021433380864').setValue('gf_menu_nocouple').setDescription('Sevgilisi olanlar için.')            
 let select = new MessageMenu().setID('gf_menu').setPlaceholder('Rol seç!').setMaxValues(1).setMinValues(1).addOptions([option1, option2,option3])
-return await message.channel.send("**İlişki Durumunuzu Seçmek İçin Buttona Tıklayınız.**", {
+return await message.inlineReply("**İlişki Durumunuzu Seçmek İçin Buttona Tıklayınız.**", {
 component: select
 });
 

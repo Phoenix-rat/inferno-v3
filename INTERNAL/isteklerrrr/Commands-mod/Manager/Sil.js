@@ -7,7 +7,7 @@ exports.execute = async (client, message, args) => {
     if (!member) {
         if (!args[0] || (args[0] && isNaN(args[0])) || Number(args[0]) < 1 || Number(args[0]) > 100) return message.react(client.emoji("red")).catch(() => { })
 
-        message.channel.bulkDelete(Number(args[0])).then(msg => message.channel.send(`${message.channel} Kanalından **${msg.size}** adet mesaj temizlendi!`)).catch(() => { })
+        message.channel.bulkDelete(Number(args[0])).then(msg => message.inlineReply(`${message.channel} Kanalından **${msg.size}** adet mesaj temizlendi!`)).catch(() => { })
         await message.delete({ timeout: 400 }).catch(() => { })
     } else {
 
@@ -17,7 +17,7 @@ exports.execute = async (client, message, args) => {
 
         let memberMessage = (await messages).filter((s) => s.author.id === member.id)
 
-        await message.channel.bulkDelete(memberMessage).then(msg => message.channel.send(`${member} Kullanıcısına ait **${msg.size}** adet mesaj temizlendi!`)).catch(() => { })
+        await message.channel.bulkDelete(memberMessage).then(msg => message.inlineReply(`${member} Kullanıcısına ait **${msg.size}** adet mesaj temizlendi!`)).catch(() => { })
         await message.delete({ timeout: 400 }).catch(() => { })
 
     }

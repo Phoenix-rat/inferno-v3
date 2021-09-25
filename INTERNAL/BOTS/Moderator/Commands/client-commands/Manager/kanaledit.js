@@ -22,7 +22,7 @@ class Move extends Command {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        if (!args[0]) return message.channel.send(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("warn").value()} Bir kanal belirlemelisin.`));
+        if (!args[0]) return message.inlineReply(new Discord.MessageEmbed().setColor('#2f3136').setDescription(`${emojis.get("warn").value()} Bir kanal belirlemelisin.`));
         const channel = message.guild.channels.cache.get(message.member.voice.channel.id);
         
         

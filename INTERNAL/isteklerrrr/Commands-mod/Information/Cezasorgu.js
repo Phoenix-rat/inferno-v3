@@ -34,7 +34,7 @@ module.exports.execute = async (client, message, args) => {
     **Ceza Bitiş:**
     ${moment(data.bitis).format("LLL") ? moment(data.bitis).format("LLL") : "Kalıcı"}
     `)
-    message.channel.send(embed).catch(() => {}) 
+    message.inlineReply(embed).catch(() => {}) 
     } else return message.react(client.emoji("red")).catch(() => { })
 
 

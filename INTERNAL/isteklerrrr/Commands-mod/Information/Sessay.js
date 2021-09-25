@@ -14,7 +14,7 @@ module.exports.execute = async (client, message, args) => {
     if(aktifamasestedegil > 0) content= `\n**Sesli kanallarda olmayan kullanıcılar;** \n${aktifamasestedegilmap}`; else content= " "
 
 
-    message.channel.send(`\`\`\`${rolesamca.name} rolünde şuan ${aktif} kullanıcı aktif, ${aktifamasestedegil} kullanıcı sesli kanallarda değil!\`\`\`${content}`)
+    message.inlineReply(`\`\`\`${rolesamca.name} rolünde şuan ${aktif} kullanıcı aktif, ${aktifamasestedegil} kullanıcı sesli kanallarda değil!\`\`\`${content}`)
     message.react(client.emoji("okey")).catch(() => { })
 
 

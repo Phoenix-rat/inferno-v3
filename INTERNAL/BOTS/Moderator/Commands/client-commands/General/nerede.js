@@ -39,7 +39,7 @@ class Nerede extends Command {
          ** • Ses Biglileri:**
         \`\`\`${whereinfo}\`\`\`
         **• Kanala gitmek için ${mentioned.voice.channel} kanalına tıklaya bilirsin.**`)
-        await message.channel.send(neredembed).then(msg => msg.delete({ timeout: 10000 }));
+        await message.inlineReply(neredembed).then(msg => msg.delete({ timeout: 10000 }));
         */
         function msToTime(duration) {
             var milliseconds = Math.floor((duration % 1000) / 100),

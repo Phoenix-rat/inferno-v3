@@ -33,7 +33,7 @@ class Kur extends Command {
                 [args[1]]: args[2]
             }
         });
-        await message.channel.send(new Discord.MessageEmbed().setDescription(`${role} rolü için gereken görev yapılandırması oluşturuldu.`));
+        await message.inlineReply(new Discord.MessageEmbed().setDescription(`${role} rolü için gereken görev yapılandırması oluşturuldu.`));
 
 
     }

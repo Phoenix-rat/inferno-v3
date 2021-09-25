@@ -50,7 +50,7 @@ class Call extends Command {
         • Cezalı üye sayısı: \`${message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("prisoner").value())).size}\`
         ───────────────────
         `);
-        await message.channel.send(embed.setColor('BLACK').setTimestamp().setFooter(`• Şeytan sizi seviyor 🌟`).setThumbnail(message.guild.iconURL({ dynamic: true })).setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true }), "https://tantoony.net/")).then(msg => msg.delete({ timeout: 100000 }));
+        await message.inlineReply(embed.setColor('BLACK').setTimestamp().setFooter(`• Şeytan sizi seviyor 🌟`).setThumbnail(message.guild.iconURL({ dynamic: true })).setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true }), "https://tantoony.net/")).then(msg => msg.delete({ timeout: 100000 }));
     }
 }
 

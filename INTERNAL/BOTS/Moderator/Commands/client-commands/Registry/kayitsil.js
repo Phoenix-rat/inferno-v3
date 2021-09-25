@@ -54,7 +54,7 @@ class KayitSil extends Command {
         **Tag:** ${client.config.tag.some(t => mentioned.user.username.includes(t)) ? "\`Var\`" : "\`Yok\`"}
         **Tarih:** \`${tarih.getDate()} ${aylar[tarih.getMonth()]} ${tarih.getFullYear()} ${tarih.getHours() + 3}:${tarih.getMinutes()}\`
         `).setColor("#6be4a2").setAuthor(message.member.user.tag, message.member.user.displayAvatarURL({ dynamic: true })).setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true })));
-        await message.channel.send(new Discord.MessageEmbed().setDescription(`${mentioned} adlı kullanıcı başarıyla kayıtsız olarak ayarlandı.`).setColor("#6be4a2"));
+        await message.inlineReply(new Discord.MessageEmbed().setDescription(`${mentioned} adlı kullanıcı başarıyla kayıtsız olarak ayarlandı.`).setColor("#6be4a2"));
     }
 }
 module.exports = KayitSil;
