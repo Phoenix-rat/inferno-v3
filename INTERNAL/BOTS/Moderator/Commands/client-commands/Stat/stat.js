@@ -46,8 +46,6 @@ class Invites extends Command {
         ];
         const responseEmbed = new Discord.MessageEmbed().setDescription(stripIndent`
         ${mentioned} kişisine ait ${days} günlük ses bilgileri:
-
-           **Not:** Bu sistem test amaçlı yapılmıştır komutun daha güncel ve daha iyi hali gelene kadar bir süre bununla idare ediniz seviyiorsunuz
         **Genel Bilgileri:**
         • ID: \`${mentioned.id}\`
         • Kullanıcı: ${mentioned}
