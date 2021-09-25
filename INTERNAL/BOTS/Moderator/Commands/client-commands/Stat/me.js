@@ -77,7 +77,7 @@ class Nerede extends Command {
             // ${emojis.get("statssh").value()} **Eğlence Odaları:** \`31 saat, 31 dakika\``)
             // .addField(`Ses Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
             // .addField(`Metin Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
-        // .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``).setTitle("Yetkili Stat Bilgi").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
+            // .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``).setTitle("Yetkili Stat Bilgi").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
 
         await message.inlineReply(embed);
 
