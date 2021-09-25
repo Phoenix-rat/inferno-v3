@@ -14,13 +14,14 @@ module.exports = class {
         const roles = await low(client.adapters('roles'));
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
-        let command = ctx.customID;
+        let command = ctx.customID.split(":")[0];
         let cmd;
         if (client.buttons.has(command)) {
             cmd = client.buttons.get(command);
         } else return;
         const embed = new Discord.MessageEmbed();
         const member = client.guild.members.cache.get(ctx.user.id);
+        const args = ctx.customID.split(":").slice(1);
         if (!cmd.config.enabled) return;
         if (cmd.config.ownerOnly && (ctx.user.id !== client.config.owner)) return await ctx.send(`Bu butonu sadece ${client.owner} kullanabilir.`, {
             ephemeral: true
@@ -62,7 +63,7 @@ module.exports = class {
 
         client.logger.log(`[(${ctx.user.id})] ${ctx.user.username} ran BUTTON [${cmd.info.name}]`, "cmd");
         try {
-            cmd.run(ctx);
+            cmd.run(ctx, args);
         } catch (e) {
             console.log(e);
         }
