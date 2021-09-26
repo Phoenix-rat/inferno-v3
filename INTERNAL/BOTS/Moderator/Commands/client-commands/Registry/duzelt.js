@@ -29,14 +29,15 @@ class Duzelt extends Command {
 
         const adana = args[1]
         if (!adana) {
-            if (mentioned.roles.cache.has("854162987619057665")) {
-                await mentioned.roles.remove("854162987619057665");
-                await mentioned.roles.add("854162990534623233");
+            if (mentioned.roles.cache.has(roles.get("Male").value())) {
+                await mentioned.roles.remove(roles.get("Male").value());
+                await mentioned.roles.add(roles.get("Female").value());
             }
-            if (mentioned.roles.cache.has("854162990534623233")) {
-                await mentioned.roles.remove("854162990534623233");
-                await mentioned.roles.add("854162987619057665");
+            if (mentioned.roles.cache.has(roles.get("Female").value())) {
+                await mentioned.roles.remove(roles.get("Female").value());
+                await mentioned.roles.add(roles.get("Male").value());
             };
+            return;
         }
         if (adana) {
             if (adana && !sayi(adana)) {
