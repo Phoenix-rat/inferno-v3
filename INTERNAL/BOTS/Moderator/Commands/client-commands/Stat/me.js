@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const Command = require("../../../Base/Command");
 const low = require('lowdb');
-const { stripIndent } = require('common-tags');
+const { stripIndent, stripIndents } = require('common-tags');
 const Messages = require('../../../../../MODELS/StatUses/stat_msg');
 const Register = require('../../../../../MODELS/Datalake/Registered');
 const Invites = require('../../../../../MODELS/StatUses/Invites');
@@ -42,7 +42,7 @@ class Nerede extends Command {
             minutes = (minutes < 10) ? "0" + minutes : minutes;
             seconds = (seconds < 10) ? "0" + seconds : seconds;sasasasalim
             */
-            return hours + " saat, " + minutes + " dk, " + seconds + " sn";
+            return (hours = 0 ? "" : hours + " saat,") + (minutes = 0 ? "" : minutes + " dk,") + (seconds = 0 ? "" : seconds + " sn");
         }
 
         let days = mentioned ? (args[1] || 7) : (args[0] || 7);
@@ -64,6 +64,18 @@ class Nerede extends Command {
         const TagliAuth = await TagData.find({ executor: mentioned.user.id });
         const yetkililerim = TagliAuth && TagliAuth.length ? TagliAuth.filter(td => checkDays(td.created) < days).length + " Yetkili" : "0 Yetkili";
 
+        let kanallarim = {};
+        if (Data) Data.records.filter(r => checkDays(r.enter) < days).forEach((r, i) => {
+            kanallarim[r.channelID] = kanallarim[r.channelID] ? kanallarim[r.channelID] + r.exit.getTime() - r.enter.getTime() : 0
+        });
+
+        const sesSira = Object.keys(kanallarim).sort((a, b) => kanallarim[b] - kanallarim[a]).slice(0, 5).map(k => {
+            return {
+                id: k,
+                duration: kanallarim[k]
+            }
+        });
+
         const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin son 7 günlük verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 fero sizi seviyor ❤ ${message.guild.name}`)
             .addField("__**Toplam Ses**__", `\`\`\`fix\n${msToTime(SesVeri)}\`\`\``, true)
             .addField("__**Toplam Mesaj**__", `\`\`\`fix\n${MesajVeri}\`\`\``, true)
@@ -71,13 +83,13 @@ class Nerede extends Command {
             .addField("__**Toplam Davet**__", `\`\`\`fix\n${DavetVeri}\`\`\``, true)
             .addField("__**Toplam Taglı**__", `\`\`\`fix\n${taglilar}\`\`\``, true)
             .addField("__**Toplam Yetkili**__", `\`\`\`fix\n${yetkililerim}\`\`\``, true)
-            // .addField(`Ses Kanalları`, `${emojis.get("statssh").value()} **Sohbet Odaları:** \`31 saat, 31 dakika\`
-            // ${emojis.get("statssh").value()} **Kayıt Odaları:** \`31 saat, 31 dakika\`
-            // ${emojis.get("statssh").value()} **Private Odaları:** \`31 saat, 31 dakika\`
-            // ${emojis.get("statssh").value()} **Eğlence Odaları:** \`31 saat, 31 dakika\``)
-            // .addField(`Ses Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
-            // .addField(`Metin Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
-            // .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``).setTitle("Yetkili Stat Bilgi").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
+        // .addField(`Ses Kanalları`, `${emojis.get("statssh").value()} **Sohbet Odaları:** \`31 saat, 31 dakika\`
+        // ${emojis.get("statssh").value()} **Kayıt Odaları:** \`31 saat, 31 dakika\`
+        // ${emojis.get("statssh").value()} **Private Odaları:** \`31 saat, 31 dakika\`
+        // ${emojis.get("statssh").value()} **Eğlence Odaları:** \`31 saat, 31 dakika\``)
+        if (sesSira.length > 1) embed.addField(`Ses Kanalları`, stripIndents`${sesSira.map(sr => `<#${sr.id}> kanalında ${msToTime(sr.duration)}`).join('\n')}`)
+        // .addField(`Metin Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
+        // .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``).setTitle("Yetkili Stat Bilgi").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
 
         await message.inlineReply(embed);
 
