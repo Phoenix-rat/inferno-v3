@@ -239,7 +239,6 @@ module.exports = class {
         let time = uCooldown[cmd.info.name] || 0;
         if (time && (time > Date.now())) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         client.logger.log(`[(${message.author.id})] ${message.author.username} ran command[${cmd.info.name}]`, "cmd");
-        if (message.channel.id === "857659757233700875" && !message.member.permissions.has("MANAGE_ROLES") && (message.author.id !== "853011311328100411") && command !== "tag") return;
         try {
             cmd.run(client, message, args);
         } catch (e) {
