@@ -42,7 +42,7 @@ class Nerede extends Command {
             minutes = (minutes < 10) ? "0" + minutes : minutes;
             seconds = (seconds < 10) ? "0" + seconds : seconds;sasasasalim
             */
-            return (hours !== 0 ? "" : hours + " saat,") + (minutes !== 0 ? "" : minutes + " dk,") + (seconds !== 0 ? "" : seconds + " sn");
+            return (hours === 0 ? "" : hours + " saat,") + (minutes == 0 ? "" : minutes + " dk,") + (seconds === 0 ? "" : seconds + " sn");
         }
 
         let days = mentioned ? (args[1] || 7) : (args[0] || 7);
