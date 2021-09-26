@@ -31,11 +31,11 @@ class Kur extends Command {
         const emojis = await low(client.adapters('emojis'));
         const channels = await low(client.adapters('channels'));
 
-        message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("crew").value()) && !client.config.tag.some(t => m.user.username.includes(t))).forEach(m => {
+        message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("crew").value()) && !client.config.tag.some(t => m.user.username.includes(t)) && !m.user.bot).forEach(m => {
             m.roles.remove(roles.get("crew").value());
             m.setNickname(`•` + m.displayName.slice(1));
         });
-        message.guild.members.cache.filter(m => !m.roles.cache.has(roles.get("crew").value()) && client.config.tag.some(t => m.user.username.includes(t))).forEach(m => {
+        message.guild.members.cache.filter(m => !m.roles.cache.has(roles.get("crew").value()) && client.config.tag.some(t => m.user.username.includes(t)) && !m.user.bot).forEach(m => {
             m.roles.add(roles.get("crew").value());
             m.setNickname(client.config.tag[0] + m.displayName.slice(1));
         });
