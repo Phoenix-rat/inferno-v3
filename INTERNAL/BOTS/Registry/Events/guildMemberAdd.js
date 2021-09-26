@@ -40,12 +40,12 @@ class GuildMemberAdd {
         if (member.guild.vanityURLCode) {
             let aNumber = 0;
             await member.guild.fetchVanityData().then(data => { aNumber = data.uses }).catch(console.error);
+            urlCcount = aNumber;
             if (utils.get("vanityUses").value() < aNumber) {
                 await member.guild.fetchVanityData().then(data => { utils.update("vanityUses", n => data.uses).write(); }).catch(console.error());
                 davetci = {
                     username: "ÖZEL URL"
                 };
-                urlCcount = aNumber;
             }
         }
         await member.guild.fetchInvites().then(async gInvites => {
