@@ -33,11 +33,11 @@ class Kur extends Command {
 
         message.guild.members.cache.filter(m => m.roles.cache.has(roles.get("crew").value()) && !client.config.tag.some(t => m.user.username.includes(t)) && !m.user.bot).forEach(m => {
             m.roles.remove(roles.get("crew").value());
-            m.setNickname(`•` + m.displayName.slice(1));
+            m.setNickname(m.displayName.replace(`•`, client.config.tag[0]));
         });
         message.guild.members.cache.filter(m => !m.roles.cache.has(roles.get("crew").value()) && client.config.tag.some(t => m.user.username.includes(t)) && !m.user.bot).forEach(m => {
             m.roles.add(roles.get("crew").value());
-            m.setNickname(client.config.tag[0] + m.displayName.slice(1));
+            m.setNickname(m.displayName.replace(client.config.tag[0], '•'));
         });
         await message.react(emojis.get("ok").value().split(':')[2].replace('>', ''));
 

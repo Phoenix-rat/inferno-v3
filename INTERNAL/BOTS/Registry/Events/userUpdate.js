@@ -50,7 +50,7 @@ class UserUpdate {
 
             <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
             `);
-            await member.setNickname(client.config.tag[0] + member.displayName.slice(1));
+            await member.setNickname(member.displayName.replace(`•`, client.config.tag[0]));
             await guild.channels.cache.get(channels.get("genel_chat").value()).send(stripIndents`
             ${member} ailemize hoş geldin <:inferno_kalp3:889588203198242840>
             Gençler bir merhaba diyelim 😋
@@ -71,7 +71,7 @@ class UserUpdate {
 
             <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
             `);
-            await member.setNickname(`•` + member.displayName.slice(1));
+            await member.setNickname(member.displayName.replace(client.config.tag[0], '•'));
         }
         const gangler = await gangs.find();
         const taglar = gangler.map(doc => doc._id);
