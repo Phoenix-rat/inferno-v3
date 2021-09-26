@@ -8,7 +8,7 @@ class Link extends Command {
             description: "sunucunun linkini gönderir",
             usage: "link",
             examples: ["link"],
-            cmmChannel: "bot-komut",
+            //cmmChannel: "bot-komut",
             cooldown: 300000,
         });
     }
