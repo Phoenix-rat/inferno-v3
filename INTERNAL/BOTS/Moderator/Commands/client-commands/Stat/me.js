@@ -7,6 +7,7 @@ const Register = require('../../../../../MODELS/Datalake/Registered');
 const Invites = require('../../../../../MODELS/StatUses/Invites');
 const StatData = require('../../../../../MODELS/StatUses/VoiceRecords');
 const TagData = require('../../../../../MODELS/StatUses/tagged');
+const Auth = require('../../../../../MODELS/StatUses/authorized');
 const { checkDays } = require('../../../../../HELPERS/functions');
 //executor
 class Nerede extends Command {
@@ -61,7 +62,7 @@ class Nerede extends Command {
         const TagliData = await TagData.find({ executor: mentioned.user.id });
         const taglilar = TagliData && TagliData.length ? TagliData.filter(td => checkDays(td.created) < days).length + " Taglı" : "0 Taglı";
 
-        const TagliAuth = await TagData.find({ executor: mentioned.user.id });
+        const TagliAuth = await Auth.find({ executor: mentioned.user.id });
         const yetkililerim = TagliAuth && TagliAuth.length ? TagliAuth.filter(td => checkDays(td.created) < days).length + " Yetkili" : "0 Yetkili";
 
         let kanallarim = {};
