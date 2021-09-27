@@ -10,8 +10,8 @@ class Avatar extends Command {
             usage: "ysay @etiket/id",
             examples: ["ysay 674565119161794560"],
             category: "Düzen",
-            aliases: [],
-            accaptedPerms: ["cmd-all", "cmd-manager", "cmd-rhode", "üyeler"],
+            aliases: ["üyeler"],
+            accaptedPerms: ["cmd-all", "cmd-manager", "cmd-rhode"],
             cooldown: 10000
         });
     }
