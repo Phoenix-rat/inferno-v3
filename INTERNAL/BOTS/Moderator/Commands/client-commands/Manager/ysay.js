@@ -27,7 +27,7 @@ class Avatar extends Command {
         const members = rol.members.filter(member => member.user.presence.status !== 'offline').filter(m => !m.voice.channel).map(m => `<@${m.user.id}>`);
         await message.inlineReply(`\`\`\`${rol.name} Rolüne Sahip Online Olan ${members.length} Kişi Bulunmaktadır \`\`\``);
         for (let index = 0; index < Math.floor(members.length / 40) + 1; index++) {
-            await message.inlineReply(`BÖLÜM ${index + 1}:` + `\`\`\`${members.slice(index * 40, (index + 1) * 40).join(', ')}\`\`\``);
+            await message.inlineReply(`BÖLÜM ${index + 1}:` + `${members.slice(index * 40, (index + 1) * 40).join(', ')}`);
         }
 
 
