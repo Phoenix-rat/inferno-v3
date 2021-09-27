@@ -24,9 +24,9 @@ class Avatar extends Command {
         let rol = message.guild.roles.cache.get(args[0]);
         if (!rol) rol = message.guild.roles.cache.get(roles.get("cmd-crew").value());
         if (!rol) return await message.inlineReply(`Böyle bir rol bulunmamaktadır.`);
-        const members = rol.members.filter(member => member.user.presence.status !== 'offline').filter(m => !m.voice.channel).map(m => `<@${m.user.id}>`);
+        const members = rol.members.array();
         await message.inlineReply(`\`\`\`${rol.name} Rolüne Sahip Online Olan ${members.length} Kişi Bulunmaktadır \`\`\``);
-        for (let index = 0; index < Math.floor(members.length / 40); index++) {
+        for (let index = 0; index < Math.floor(members.length / 40) + 1; index++) {
             await message.inlineReply(`BÖLÜM ${index + 1}:` + `${members.slice(index * 40, (index + 1) * 40).join(', ')}`);
         }
 
