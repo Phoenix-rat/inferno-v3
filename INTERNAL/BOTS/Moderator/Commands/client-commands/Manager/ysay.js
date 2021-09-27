@@ -11,7 +11,7 @@ class Avatar extends Command {
             examples: ["ysay 674565119161794560"],
             category: "Düzen",
             aliases: [],
-            accaptedPerms: ["cmd-all", "cmd-manager", "cmd-rhode"],
+            accaptedPerms: ["cmd-all", "cmd-manager", "cmd-rhode", "üyeler"],
             cooldown: 10000
         });
     }
@@ -25,7 +25,7 @@ class Avatar extends Command {
         if (!rol) rol = message.guild.roles.cache.get(roles.get("cmd-crew").value());
         if (!rol) return await message.inlineReply(`Böyle bir rol bulunmamaktadır.`);
         const members = rol.members.array();
-        await message.inlineReply(`\`\`\`${rol.name} Rolüne Sahip Online Olan ${members.length} Kişi Bulunmaktadır \`\`\``);
+        await message.inlineReply(`\`\`\`${rol.name} Rolüne Sahip Olan ${members.length} Kişi Bulunmaktadır \`\`\``);
         for (let index = 0; index < Math.floor(members.length / 40) + 1; index++) {
             await message.inlineReply(`BÖLÜM ${index + 1}:` + `${members.slice(index * 40, (index + 1) * 40).join(', ')}`);
         }
