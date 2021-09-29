@@ -44,13 +44,13 @@ class UserUpdate {
         if (!client.config.tag.some(tag => oldUser.username.includes(tag)) && client.config.tag.some(tag => newUser.username.includes(tag))) {
             await member.roles.add(roles.get("crew").value());
             client.extention.emit('Logger', 'KDE', newUser.id, "AUTO_TAG", `Tag aldı`);
-            if (!member.roles.cache.some(rIDm => roles.get("Male").value().concat(roles.get("Female").value()).includes(rIDm))) return;
             await guild.channels.cache.get(channels.get("log_tag").value()).send(stripIndents`
             ${member} tagımızı alarak ailemize katıldı, onunla birlikte \`${guild.members.cache.array().filter(m => m.user.username.includes(client.config.tag[0])).length}\` taglımız bulunmaktadır.
 
             <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
             `);
             await member.setNickname(member.displayName.replace(`•`, client.config.tag[0]));
+            if (!member.roles.cache.some(rIDm => roles.get("Male").value().concat(roles.get("Female").value()).includes(rIDm))) return;
             await guild.channels.cache.get(channels.get("genel_chat").value()).send(stripIndents`
             ${member} ailemize hoş geldin <:inferno_kalp3:889588203198242840>
             Gençler bir merhaba diyelim 😋
@@ -65,12 +65,12 @@ class UserUpdate {
                 await member.roles.remove(member.roles.cache.filter(r => r.editable).array());
                 await member.roles.add(roles.get("welcome").value());
             }
-            if (!member.roles.cache.some(rIDm => roles.get("Male").value().concat(roles.get("Female").value()).includes(rIDm))) return;
             await guild.channels.cache.get(channels.get("log_tag").value()).send(stripIndents`
             ${member} tagımızı çıkararak ailemizden ayrıldı :(, maalesef ki artık \`${guild.members.cache.array().filter(m => m.user.username.includes(client.config.tag[0])).length}\` taglımız bulunmaktadır.
 
             <@&${roles.get("yetkilitaglı").value()}> ilgilenmenizi tavsiye ederim.
             `);
+            if (!member.roles.cache.some(rIDm => roles.get("Male").value().concat(roles.get("Female").value()).includes(rIDm))) return;
             await member.setNickname(member.displayName.replace(client.config.tag[0], '•'));
         }
         const gangler = await gangs.find();
