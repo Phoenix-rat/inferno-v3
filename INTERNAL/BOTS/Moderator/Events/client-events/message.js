@@ -225,7 +225,7 @@ module.exports = class {
         if (message.guild && !cmd.config.dmCmd) {
             const requiredRoles = cmd.info.accaptedPerms || [];
             let allowedRoles = requiredRoles.filter(rolevalue => message.guild.roles.cache.get(roles.get(rolevalue).value())).map(rolevalue => message.guild.roles.cache.get(roles.get(rolevalue).value()));
-            if ((allowedRoles.length >= 1) && !allowedRoles.some(role => message.member.roles.cache.has(role.id)) && !message.member.permissions.has("MANAGE_ROLES")) {
+            if ((allowedRoles.length >= 1) && allowedRoles.some(role => !message.member.roles.cache.has(role.id)) && !message.member.permissions.has("MANAGE_ROLES")) {
                 return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             }
         }
