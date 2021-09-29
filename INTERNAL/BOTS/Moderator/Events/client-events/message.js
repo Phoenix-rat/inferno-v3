@@ -224,9 +224,12 @@ module.exports = class {
         if (cmd.info.cmdChannel & message.guild && message.guild.channels.cache.get(channels.get(cmd.info.cmdChannel).value()) && (message.author.id !== client.config.owner) && (message.channel.id !== channels.get(cmd.info.cmdChannel).value())) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (message.guild && !cmd.config.dmCmd) {
             const requiredRoles = cmd.info.accaptedPerms || [];
-            let allowedRoles = requiredRoles.filter(rolevalue => message.guild.roles.cache.get(roles.get(rolevalue).value())).map(rolevalue => message.guild.roles.cache.get(roles.get(rolevalue).value()));
-            if ((allowedRoles.length >= 1) && allowedRoles.some(role => !message.member.roles.cache.has(role.id)) && !message.member.permissions.has("MANAGE_ROLES")) {
-                return await message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
+            let allowedRoles = [];
+            await requiredRoles.forEach(rolValue => {
+                allowedRoles.push(message.guild.roles.cache.get(roles.get(rolValue).value()))
+            });
+            if ((allowedRoles.length >= 1) && !allowedRoles.some(role => message.member.roles.cache.has(role.id)) && !message.member.permissions.has("ADMINISTRATOR")) {
+                return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
             }
         }
         let uCooldown = client.cmdCooldown[message.author.id];
