@@ -62,6 +62,7 @@ class Nerede extends Command {
         let p = 0;
         durRecords.forEach((r, i) => {
             if (p < i) return;
+            console.log(r);
             if (r.enter.getTime() - 1000 < durRecords[i + 1].exit.getTime()) return;
             duration = duration + r.duration;
             p = p + 1;
