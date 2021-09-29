@@ -53,6 +53,11 @@ class Nerede extends Command {
             */
             return hours + " saat, " + minutes + " dk, " + seconds + " sn";
         }
+        const birim = [
+            "Saat",
+            "Dakika",
+            "Saniye"
+        ];
         const embed = new Discord.MessageEmbed().setColor("#000000");
         const entry = await Entries.findOne({ _id: mentioned.id });
         const record = await Records.findOne({ _id: mentioned.id });
