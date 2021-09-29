@@ -65,11 +65,11 @@ class Nerede extends Command {
         const durRecords = lastRecords.filter(r => r.channelID === mentioned.voice.channel.id);
         let duration = new Date().getTime() - entry.created.getTime();
         let p = 0;
-        if (durRecords[0] && (lastRecords[0].channelID === mentioned.voice.channel.id) && (new Date().getTime() - duration > durRecords[0].exit.getTime())) durRecords.forEach((r, i) => {
+        if (durRecords[1] && (lastRecords[0].channelID === mentioned.voice.channel.id) && (new Date().getTime() - duration > durRecords[0].exit.getTime())) durRecords.forEach((r, i) => {
             if (p < i) return;
             console.log(r);
             //320                           //375
-            if (r.exit.getTime() + 100 > durRecords[i].enter.getTime()) return;
+            if (r.exit.getTime() + 100 > durRecords[i + 1].enter.getTime()) return;
             duration = duration + r.duration;
             p = p + 1;
         });
