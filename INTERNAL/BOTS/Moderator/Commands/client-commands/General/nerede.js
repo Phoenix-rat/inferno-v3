@@ -70,7 +70,7 @@ class Nerede extends Command {
             if (!durRecords[i + 1]) return;
             console.log(r);
             //320                           //375
-            if (r.exit.getTime() < durRecords[i + 1].enter.getTime() - 1000) return;
+            if (r.exit.getTime() < durRecords[i].enter.getTime() - 1000) return;
             duration = duration + r.duration;
             p = p + 1;
         });
