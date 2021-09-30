@@ -58,6 +58,7 @@ class Nerede extends Command {
             "Dakika",
             "Saniye"
         ];
+        // değişiklik
         const embed = new Discord.MessageEmbed().setColor("#000000");
         const entry = await Entries.findOne({ _id: mentioned.id });
         const record = await Records.findOne({ _id: mentioned.id });
