@@ -238,6 +238,7 @@ module.exports = class {
             uCooldown = client.cmdCooldown[message.author.id];
         }
         let time = uCooldown[cmd.info.name] || 0;
+        if (cmd.info.category.toLowerCase() === "genel" && message.channel.id !== channels.get("botkomut").value()) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         if (time && (time > Date.now())) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
         client.logger.log(`[(${message.author.id})] ${message.author.username} ran command[${cmd.info.name}]`, "cmd");
         try {
