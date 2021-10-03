@@ -49,9 +49,9 @@ class Nerede extends Command {
             /*
             hours = (hours < 10) ? "0" + hours : hours;
             minutes = (minutes < 10) ? "0" + minutes : minutes;
-            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;sasasasalim
             */
-            return hours + " saat, " + minutes + " dk, " + seconds + " sn";
+            return `${hours ? hours + " Saat, " : ""} ${minutes ? minutes + " Dakika, " : ""} ${seconds ? seconds + " Saniye" : ""}`;
         }
         const birim = [
             "Saat",
@@ -74,7 +74,7 @@ class Nerede extends Command {
         });
         let sorgu;
         if (!entry) sorgu = `${mentioned}, ${mentioned.voice.channel} kanalında. \n \` • \` Mikrofon **:** ${mentioned.voice.mute ? `${emojis.get("offmic").value()}` : `${emojis.get("onmic").value()}`} \n \` • \` Kulaklık **:** ${mentioned.voice.deaf ? `:mute:` : `:loud_sound:`}`
-        if (entry) sorgu = `${mentioned} kullanıcısı **${new Date(duration).toISOString().substr(11, 8).toString().split(':').map((v, i) => v > 0 ? `${v} ${birim[i]}` : "").filter(str => str.length > 1).join(' ')}** öncesinden beridir** ${mentioned.voice.channel} kanalında. \n \` • \` Mikrofon **:** ${mentioned.voice.mute ? `${emojis.get("offmic").value()}` : `${emojis.get("onmic").value()}`} \n \` • \` Kulaklık **:** ${mentioned.voice.deaf ? `:mute:` : `:loud_sound:`}`
+        if (entry) sorgu = `${mentioned} kullanıcısı **${msToTime(new Date(duration))}** öncesinden beridir ${mentioned.voice.channel} kanalında. \n \` • \` Mikrofon **:** ${mentioned.voice.mute ? `${emojis.get("offmic").value()}` : `${emojis.get("onmic").value()}`} \n \` • \` Kulaklık **:** ${mentioned.voice.deaf ? `:mute:` : `:loud_sound:`}`
         let kembed = embed.setDescription(sorgu)
         message.inlineReply({ embed: kembed, allowedMentions: { repliedUser: false } });
     }
