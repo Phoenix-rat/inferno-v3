@@ -67,7 +67,7 @@ class Nerede extends Command {
 
         let kanallarim = {};
         if (Data) Data.records.filter(r => checkDays(r.enter) < days).forEach((r, i) => {
-            kanallarim[r.channelID] = kanallarim[r.channelID] ? kanallarim[r.channelID] + r.exit.getTime() - r.enter.getTime() : 0
+            kanallarim[r.channelID] = kanallarim[r.channelID] ? (kanallarim[r.channelID] + r.exit.getTime() - r.enter.getTime()) : 0
         });
         console.log(kanallarim);
         const sesSira = Object.keys(kanallarim).sort((a, b) => kanallarim[b] - kanallarim[a]).slice(0, 5).map(k => {
