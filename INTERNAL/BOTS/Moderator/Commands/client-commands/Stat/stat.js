@@ -34,7 +34,7 @@ class Invites extends Command {
             .replace('offline', 'Çevrim Dışı <:inferno_cevrimdisi:883792952202231868>');
 
         if (mentioned.user.id !== message.author.id) args = args.slice(1);
-        let days = args[2] || 7;
+        let days = args[1] || 7;
 
         const Data = await StatData.findOne({ _id: mentioned.user.id });
         if (!Data) return message.react(emojis.get("error").value().split(':')[2].replace('>', ''));
