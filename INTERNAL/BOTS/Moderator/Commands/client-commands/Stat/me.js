@@ -84,7 +84,7 @@ class Nerede extends Command {
             "Saniye"
         ];
         const embed = new Discord.MessageEmbed().setDescription(`${mentioned} adlı yetkilinin son 7 günlük verileri aşağıda yer almaktadır!`).setColor("BLACK").setTimestamp().setFooter(`🌟 fero sizi seviyor ❤ ${message.guild.name}`)
-            .addField("__**Toplam Ses**__", `\`\`\`fix\n${msToTime(SesVeri)}\`\`\``, true)
+            .addField("__**Toplam Ses**__", `\`\`\`fix\n${msToTime(SesVeri).replace('Dakika', 'Dk').replace('Saniye', 'sn')}\`\`\``, true)
             .addField("__**Toplam Mesaj**__", `\`\`\`fix\n${MesajVeri}\`\`\``, true)
             .addField("__**Toplam Kayıt**__", `\`\`\`fix\n${KayıtVeri}\`\`\``, true)
             .addField("__**Toplam Davet**__", `\`\`\`fix\n${DavetVeri}\`\`\``, true)
