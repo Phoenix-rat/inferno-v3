@@ -43,7 +43,7 @@ class Nerede extends Command {
             minutes = (minutes < 10) ? "0" + minutes : minutes;
             seconds = (seconds < 10) ? "0" + seconds : seconds;sasasasalim
             */
-            return hours + " saat, " + minutes + " dk, " + seconds + " sn";
+            return hours + " Saat, " + minutes + " Dakika, " + seconds + " Saniye";
         }
 
         let days = mentioned ? (args[1] || 7) : (args[0] || 7);
@@ -94,7 +94,7 @@ class Nerede extends Command {
         // ${emojis.get("statssh").value()} **Kayıt Odaları:** \`31 saat, 31 dakika\`
         // ${emojis.get("statssh").value()} **Private Odaları:** \`31 saat, 31 dakika\`
         // ${emojis.get("statssh").value()} **Eğlence Odaları:** \`31 saat, 31 dakika\``)
-        if (sesSira.length > 1) embed.addField(`Ses Kanalları`, stripIndents`${sesSira.map(sr => `<#${sr.id}> kanalında \`${new Date(sr.duration).toISOString().substr(11, 8).toString().split(':').map((v, i) => v > 0 ? `${v} ${birim[i]}` : "").filter(str => str.length > 1).join(' ')}\``).join('\n')}`)
+        if (sesSira.length > 1) embed.addField(`Ses Kanalları`, stripIndents`${sesSira.map(sr => `<#${sr.id}> kanalında \`${msToTime(new Date(sr.duration))}\``).join('\n')}`)
             // .addField(`Metin Kanalları`, `\`\`\`Burası Bakımda\`\`\``)
             .addField(`Mesaj Kanalları`, `${emojis.get("statssh").value()} **Mesaj Kanalları:** \`${MesajVeri}\``).setTitle("Yetkili Stat Bilgi").setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }));
 
