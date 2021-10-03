@@ -76,7 +76,7 @@ class Nerede extends Command {
                 duration: kanallarim[k]
             }
         });
-
+        console.log(sesSira);
         const birim = [
             "Saat",
             "Dakika",
