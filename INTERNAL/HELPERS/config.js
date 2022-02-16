@@ -2,12 +2,12 @@ module.exports = {
 	mongoDB: "infernoV2",
     auth: "admin",
     username: "Tantoony",
-	owner: "484873072164208640",
-    server: "889246195103457330",
+	owner: "479293073549950997",
+    server: "910221564883124285",
 	prefix: '.',
     project: "fero",
     status: {
-        name: "Kaptan 🤍 Fero",
+        name: "Ko",
         type: "LISTENING"
     },
     tag: ['岺']
