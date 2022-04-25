@@ -28,7 +28,7 @@
         "moment": "2.29.0",
         "moment-duration-format": "^2.3.2",
         "mongoose": "^5.10.7",
-        "node-fetch": "^2.6.1",
+        "node-fetch": "^2.6.7",
         "node-opus": "^0.3.3",
         "node-pre-gyp": "^0.17.0",
         "opusscript": "0.0.8",
